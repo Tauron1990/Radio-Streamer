@@ -1,0 +1,140 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tauron.Application.RadioStreamer.Views</RootNamespace>
+    <AssemblyName>Tauron.Application.RadioStreamer.Views</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>..\build\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\build\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Elysium, Version=2.0.1042.4, Culture=neutral, PublicKeyToken=afa220db249e5b15, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Elysium.Theme.2.0.4\lib\net45\Elysium.dll</HintPath>
+    </Reference>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="WindowsFormsIntegration" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helper\FavoriteColorConverter.cs" />
+    <Compile Include="Helper\LocalizeLabelTextConverter.cs" />
+    <Compile Include="Helper\MaxHeightExpanderSetter.cs" />
+    <Compile Include="Helper\StaticPackUrihelper.cs" />
+    <Compile Include="MedadataView\MetadataWindow.xaml.cs">
+      <DependentUpon>MetadataWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="MedadataView\MetadataWindowViewModel.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadioPlayer\Controls\EqProfileManager.xaml.cs">
+      <DependentUpon>EqProfileManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioPlayer\Controls\EqualizerTemplate.xaml.cs">
+      <DependentUpon>EqualizerTemplate.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioPlayer\Controls\RadioEqProfileManagerViewModel.cs" />
+    <Compile Include="RadioPlayer\RadioPlayerView.xaml.cs">
+      <DependentUpon>RadioPlayerView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioPlayer\RadioPlayerViewModel.cs" />
+    <Compile Include="RadioManager\RadioManagerViewModel.cs" />
+    <Compile Include="RadioManager\RadioManager.xaml.cs">
+      <DependentUpon>RadioManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ViewModule.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="MedadataView\MetadataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\Controls\EqProfileManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\Controls\EqualizerTemplate.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\EqualizerResources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\RadioPlayerView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioManager\RadioManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj">
+      <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
+      <Name>JetBrains.Annotations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
+      <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
+      <Name>Tauron.Application.Common.Wpf.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
+      <Project>{18cfd078-d183-46a3-a83b-65c33d5152fe}</Project>
+      <Name>Tauron.Application.Common.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj">
+      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
+      <Name>Tauron.Application.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
+      <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
+      <Name>Tauron.Application.RadioStreamer.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
+      <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>
+      <Name>Tauron.Application.RadioStreamer.Contracts</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

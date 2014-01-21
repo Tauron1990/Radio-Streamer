@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>Ukadc.Diagnostics</id>
+    <version>1.0.61915.0</version>
+    <title>Ukadc.Diagnostics Unofficial</title>
+    <authors>joshtwist, morgan, sleeks</authors>
+    <owners>joshtwist, morgan, sleeks</owners>
+    <licenseUrl>http://ukadcdiagnostics.codeplex.com/license</licenseUrl>
+    <projectUrl>http://ukadcdiagnostics.codeplex.com/</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>This package was written by Josh Twist, et al.  I'm just exercising my MS-PL rights to extend it by creating a nuget package.</description>
+    <summary>Unofficial Nuget package for Ukadc.Diagnostics, an exension to System.Diagnostics.</summary>
+    <releaseNotes>This is changeset 61915. I verified all unit tests pass.</releaseNotes>
+    <copyright>(c) Microsoft</copyright>
+    <tags>System.Diagnostics</tags>
+  </metadata>
+</package>

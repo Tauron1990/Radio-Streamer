@@ -1,0 +1,96 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{E45A701F-0B24-4986-8183-B4F5C1270539}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tauron.Application.RadioStreamer.Contracts</RootNamespace>
+    <AssemblyName>Tauron.Application.RadioStreamer.Contracts</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="AppConstants.cs" />
+    <Compile Include="Core\PlayerViewVisibleChanged.cs" />
+    <Compile Include="Core\Attributes\ExportRadioPlayer.cs" />
+    <Compile Include="Core\Attributes\RadioEniromentExport.cs" />
+    <Compile Include="Core\IEqProfileDatabase.cs" />
+    <Compile Include="Core\IEqualizer.cs" />
+    <Compile Include="Core\IRadioEnvironment.cs" />
+    <Compile Include="Core\Attributes\StatusBarItemExport.cs" />
+    <Compile Include="Player\IRadioPlayer.cs" />
+    <Compile Include="Data\Attributes\RadioDatabaseExport.cs" />
+    <Compile Include="Data\Enttitis\IQualityQuery.cs" />
+    <Compile Include="Data\Enttitis\IRadioEntryFactory.cs" />
+    <Compile Include="Data\Enttitis\Metadatascope.cs" />
+    <Compile Include="Data\Enttitis\RadioCache.cs" />
+    <Compile Include="Data\Enttitis\RadioEntry.cs" />
+    <Compile Include="Data\Enttitis\RadioQuality.cs" />
+    <Compile Include="Data\Enttitis\RadioQualityFactory.cs" />
+    <Compile Include="Data\IRadioDatabase.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Data\IRadioDataBaseInterface.cs" />
+    <Compile Include="Player\PlayRadioEvent.cs" />
+    <Compile Include="Player\PlayRadioEventArgs.cs" />
+    <Compile Include="Player\RadioPlayerDownloadStopped.cs" />
+    <Compile Include="Player\RadioPlayerPlay.cs" />
+    <Compile Include="Player\RadioPlayerStop.cs" />
+    <Compile Include="Player\RadioPlayerTitleRecived.cs" />
+    <Compile Include="Player\StopRadioEvent.cs" />
+    <Compile Include="Scripts\IEngineManager.cs" />
+    <Compile Include="Scripts\IScript.cs" />
+    <Compile Include="Scripts\IScriptEngine.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj">
+      <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
+      <Name>JetBrains.Annotations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj">
+      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
+      <Name>Tauron.Application.Common</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup />
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>
