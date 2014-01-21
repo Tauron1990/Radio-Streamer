@@ -1,0 +1,113 @@
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\EqualizerResources.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.cache
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.lref
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\build\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\build\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\build\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.baml
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.resources
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.de.resources
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csproj.GenerateResource.Cache
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\documents\visual studio 2012\Projects\RadioStreamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\EqualizerResources.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.lref
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\build\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\build\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\build\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\build\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\build\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\build\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\EqualizerResources.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\QualityStatus.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.lref
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\CreationView.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\CreationView\UpdateWindow.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.Resources.RadioStreamerResources.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\de\Tauron.Application.RadioStreamer.Views.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio Streamer Mark 3\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\EqualizerResources.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqualizerTemplate.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views_MarkupCompile.lref
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\build\Debug\Tauron.Application.RadioStreamer.Views.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\build\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\MedadataView\MetadataWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Controls\EqProfileManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\RadioPlayerView.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.baml
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
