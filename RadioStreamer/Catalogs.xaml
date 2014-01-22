@@ -1,0 +1,4 @@
+﻿<CatalogCollection xmlns="http://schemas.Tauron-Hobby-Studio.org/xaml/composition"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ApplicationCatalog/>
+</CatalogCollection>

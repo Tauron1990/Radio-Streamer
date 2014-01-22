@@ -1,0 +1,51 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.MedadataView.MetadataWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"		
+			 xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+			 Title="Radio Streamer" ShowInTaskbar="False"
+			 ResizeMode="CanResize" Width="350" Height="400" Icon="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico">
+    <DockPanel>
+		<Grid DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="Black">
+				<StackPanel Margin="10 0" HorizontalAlignment="Left">
+					<TextBlock x:Name="TxtHeading" Foreground="White" FontSize="22">
+				<Bold FontWeight="ExtraBold" Foreground="LightGray">
+					Metadata</Bold><Run FontWeight="ExtraBold" FontSize="25" Foreground="Red">V</Run><Italic>iewer</Italic>
+					</TextBlock>
+					<Rectangle Height="15" Width="140">
+						<Rectangle.Fill>
+							<VisualBrush Visual="{Binding ElementName=TxtHeading}"/>
+						</Rectangle.Fill>
+						<Rectangle.LayoutTransform>
+							<TransformGroup>
+								<SkewTransform AngleX="-15"/>
+								<ScaleTransform ScaleY="-1"/>
+							</TransformGroup>
+						</Rectangle.LayoutTransform>
+						<Rectangle.OpacityMask>
+							<LinearGradientBrush EndPoint="0 1">
+								<GradientStop Color="Transparent" Offset="0"/>
+								<GradientStop Color="#66FFFFFF" Offset="1"/>
+							</LinearGradientBrush>
+						</Rectangle.OpacityMask>
+					</Rectangle>
+				</StackPanel>
+			</Grid>
+		<Button DockPanel.Dock="Bottom" Margin="5" Content="{hlp:SimpleLocalize Name=CloseButton}" HorizontalAlignment="Center" Padding="30,5" Click="CloseClick"/>
+		<ItemsControl Margin="20" DockPanel.Dock="Top" ItemsSource="{Binding Metadata}">
+			<ItemsControl.Template>
+				<ControlTemplate>
+					<ScrollViewer>
+						<ItemsPresenter/>
+					</ScrollViewer>
+				</ControlTemplate>
+			</ItemsControl.Template>
+			<ItemsControl.ItemTemplate>
+				<DataTemplate>
+					<Border BorderThickness="2" BorderBrush="Gray" Margin="3">
+						<TextBlock Text="{Binding}" TextWrapping="Wrap" Margin="3"/>
+					</Border>
+				</DataTemplate>
+			</ItemsControl.ItemTemplate>
+		</ItemsControl>
+	</DockPanel>
+</Window>

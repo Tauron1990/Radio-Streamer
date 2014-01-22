@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2011/08/nuspec.xsd">
+  <metadata>
+    <id>NDatabase</id>
+    <version>3.6.0</version>
+    <title>NDatabase - C# Lightweight Object Database</title>
+    <authors>Jacek Spólnik</authors>
+    <owners>Jacek Spólnik</owners>
+    <licenseUrl>http://www.gnu.org/licenses/lgpl.html</licenseUrl>
+    <projectUrl>http://ndatabase.wix.com/home</projectUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>NDatabase is a simple .Net Object Database. To avoid impedance mismatch overhead between Object and Relational worlds, give a try to NDatabase. NDatabase is a new generation Object Database: a real native and transparent persistence layer for .Net.
+
+ - Object because the basic persistent unit is an object, not a table.
+
+ - Native and Transparent because it directly persists objects the way they exist in the native programming language, without any conversion.
+
+Using NDatabase as your persistence layer will let you focus on your business logic allowing storing and retrieving native objects in a single line of code. No more Relational to Object mapping is necessary, NDatabase just persists objects the way they are, no matter their complexity.</description>
+    <summary>C# Lightweight Object Database</summary>
+    <releaseNotes>(+) - Add multithreading and multiprocess support to NDatabase (Isolation Level - serializable)
+(+) - NDatabase is strongly signed assembly now</releaseNotes>
+    <copyright>NDatabase Copyright ©  2013</copyright>
+    <language />
+    <tags>C# Embedded Object Database</tags>
+    <references>
+      <reference file="NDatabase3.dll" />
+    </references>
+  </metadata>
+</package>
