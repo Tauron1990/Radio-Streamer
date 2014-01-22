@@ -65,3 +65,6 @@ C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\RadioSt
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\RadioStreamer\obj\Debug\Core\MainWindow.baml
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\RadioStreamer\obj\Debug\Core\DefaultContent.g.cs
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\RadioStreamer\obj\Debug\Core\MainWindow.g.cs
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\RadioStreamer.exe.config
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.exe
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.pdb

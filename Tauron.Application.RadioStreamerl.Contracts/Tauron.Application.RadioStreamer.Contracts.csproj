@@ -73,6 +73,7 @@
     <Compile Include="Scripts\IScript.cs" />
     <Compile Include="Scripts\IScriptEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\IHeaderBinding.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj">

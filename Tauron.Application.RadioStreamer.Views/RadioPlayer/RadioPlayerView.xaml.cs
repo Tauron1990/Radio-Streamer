@@ -10,7 +10,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 	/// <summary>
 	/// Interaktionslogik für RadioPlayerView.xaml
 	/// </summary>
-	[ExportView(AppConstants.RadioView)]
+	[ExportView(AppConstants.RadioView, Order = 200)]
 	public partial class RadioPlayerView
 	{
 		private Window _window;

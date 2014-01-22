@@ -7,7 +7,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 	/// <summary>
 	/// Interaktionslogik für RadioManager.xaml
 	/// </summary>
-	[ExportView(AppConstants.RadioManagerView)]
+	[ExportView(AppConstants.RadioManagerView, Order = 100)]
 	public partial class RadioManagerView : UserControl
 	{
         public RadioManagerView()

@@ -13,6 +13,11 @@
 		<ContentControl Content="{StaticResource MainLabel}" DockPanel.Dock="Top"/>
 		<StatusBar DockPanel.Dock="Bottom" MinHeight="30" MaxHeight="30" ItemsSource="{Binding StatusBarItems}"/>
 		<TabControl Name="RadioSelector" SelectionChanged="TabControlSelectionChanged" x:FieldModifier="private">
+        <TabControl.Resources>
+            <Style TargetType="{x:Type TabItem}">
+                <Setter Property="Header" Value="{}"/>
+            </Style>
+        </TabControl.Resources>
 			<TabItem Header="Radio Manager" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioManagerView}"/>
 			<TabItem Header="Radio Player" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioView}"/>
 		</TabControl>

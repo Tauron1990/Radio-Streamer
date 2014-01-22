@@ -1,0 +1,268 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>SuperConsole</name>
+    </assembly>
+    <members>
+        <member name="T:SuperConsole.CmdArgs">
+            <summary>
+            Class for parsing command line arguments. The arguments must start with either '-' or '/'.
+            </summary>
+        </member>
+        <member name="M:SuperConsole.CmdArgs.ParseArgs(System.String[])">
+            <summary>
+            Parses out command line arguments into a Dictionary with the keys being the arg
+            and the value being the followup to the argument, if any. Use this if you don't care
+            what arguments are being used.
+            </summary>
+            <param name="args">Command line arguments</param>
+            <returns>Dictionary of args(keys) and followups(values)</returns>
+        </member>
+        <member name="M:SuperConsole.CmdArgs.TryParseArgs(System.String[],System.Collections.Generic.IEnumerable{System.String},System.Collections.Generic.Dictionary{System.String,System.String}@)">
+            <summary>
+            Tries to parse out the command line arguments validating them with the given args
+            </summary>
+            <param name="args">Command line arguments</param>
+            <param name="validArgs">Valid arguments</param>
+            <param name="parsedArgs">Dictionary of args(keys) and followups(values)</param>
+            <returns>true if successful and all args are valid; otherwise false</returns>
+        </member>
+        <member name="T:SuperConsole.Point">
+            <summary>
+            System.Drawing.Point equivalent class for Console programs
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Point.#ctor(System.Int32,System.Int32)">
+            <summary>
+            Initializes a new Point object
+            </summary>
+            <param name="x">X-coordinate</param>
+            <param name="y">Y-coordinate</param>
+        </member>
+        <member name="M:SuperConsole.Point.#ctor">
+            <summary>
+            Initializes a new empty Point object
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Point.IsEmpty">
+            <summary>
+            Determines if Point is empty
+            </summary>
+            <returns>True if X-coordinate and Y-coordinate are 0; otherwise false</returns>
+        </member>
+        <member name="M:SuperConsole.Point.Offset(SuperConsole.Point)">
+            <summary>
+            Offsets the Point by the given Point's values
+            </summary>
+            <param name="point">Point used for offset</param>
+        </member>
+        <member name="M:SuperConsole.Point.Offset(System.Int32,System.Int32)">
+            <summary>
+            Offsets the Point by the given x- and y-coordinates
+            </summary>
+            <param name="x">X offset</param>
+            <param name="y">Y offset</param>
+        </member>
+        <member name="P:SuperConsole.Point.X">
+            <summary>
+            X-coordinate
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Point.Y">
+            <summary>
+            Y-coordinate
+            </summary>
+        </member>
+        <member name="T:SuperConsole.Rectangle">
+            <summary>
+            System.Drawing.Rectangle equivalent class for Console programs
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Rectangle.#ctor(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Initializes a new Rectangle at the given X/Y-coordinates
+            and Width and Height
+            </summary>
+            <param name="x">X-coordinate</param>
+            <param name="y">Y-coordinate</param>
+            <param name="width">Width</param>
+            <param name="height">Height</param>
+        </member>
+        <member name="M:SuperConsole.Rectangle.#ctor">
+            <summary>
+            Initializes a new Rectangle with X/Y-coordinates, Width, and Height set to 0
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Rectangle.Transform(System.Int32,System.Int32)">
+            <summary>
+            Changes the Rectangles Width and Height by the given x and y values
+            </summary>
+            <param name="x">Width change</param>
+            <param name="y">Height change</param>
+        </member>
+        <member name="M:SuperConsole.Rectangle.Move(System.Int32,System.Int32)">
+            <summary>
+            Changes the Rectangles X- and Y-coordinates by the given x and y values
+            </summary>
+            <param name="x">X-coordinate change</param>
+            <param name="y">Y-coordinate change</param>
+        </member>
+        <member name="M:SuperConsole.Rectangle.IsEmpty">
+            <summary>
+            Determines if Rectangle is empty
+            </summary>
+            <returns>True if Width and Height are 0</returns>
+        </member>
+        <member name="M:SuperConsole.Rectangle.Offset(SuperConsole.Rectangle)">
+            <summary>
+            Offsets the Rectangle by the given Rectangle's values
+            </summary>
+            <param name="rectangle">Rectangle for offset</param>
+        </member>
+        <member name="M:SuperConsole.Rectangle.Offset(System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Offsets the Rectangle by the given x/y-coordinates, Width, and Height
+            </summary>
+            <param name="x">X offset</param>
+            <param name="y">Y offset</param>
+            <param name="width">Width offset</param>
+            <param name="height">Height offset</param>
+        </member>
+        <member name="P:SuperConsole.Rectangle.X">
+            <summary>
+            X-coordinate (Left)
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Rectangle.Y">
+            <summary>
+            Y-coordinate (Top)
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Rectangle.Width">
+            <summary>
+            Width
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Rectangle.Height">
+            <summary>
+            Height
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Rectangle.Right">
+            <summary>
+            Right-coordinate
+            </summary>
+        </member>
+        <member name="P:SuperConsole.Rectangle.Bottom">
+            <summary>
+            Bottom-coordinate
+            </summary>
+        </member>
+        <member name="T:SuperConsole.Cmd">
+            <summary>
+            Custom methods for reading and manipulating the standard console window
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Cmd.CenterConsoleToScreen">
+            <summary>
+            Centers the console window on the primary monitor
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Cmd.Fill(System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Fills the entire console window with the specified background color
+            and changes color of all characters to specified foreground color then
+            resets the background and foreground colors to previous values
+            </summary>
+            <param name="bgColor">ConsoleColor to set background to</param>
+            <param name="fgColor">ConsoleColor to set foreground to</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.Fill(System.ConsoleColor,System.ConsoleColor,SuperConsole.Rectangle)">
+            <summary>
+            Fills an area of the console window with the specified background color
+            and changes color of all characters to specified foreground color then
+            resets the background and foreground colors to previous values
+            </summary>
+            <param name="bgColor">ConsoleColor to set background to</param>
+            <param name="fgColor">ConsoleColor to set foreground to</param>
+            <param name="area">Rectangle of area to fill</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.Fill(System.ConsoleColor,System.ConsoleColor,System.Int32,System.Int32,System.Int32,System.Int32)">
+            <summary>
+            Fills an area of the console window with the specified background color
+            and changes color of all characters to specified foreground color then
+            resets the background and foreground colors to previous values
+            </summary>
+            <param name="bgColor">ConsoleColor to set background to</param>
+            <param name="fgColor">ConsoleColor to set foreground to</param>
+            <param name="x">left coordinate</param>
+            <param name="y">top coordinate</param>
+            <param name="right">right coordinate</param>
+            <param name="bottom">bottom coordinate</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.ReadCharAt(SuperConsole.Point)">
+            <summary>
+            Gets nullable char at console position
+            </summary>
+            <param name="point">coordinates</param>
+            <returns>character at coordinates or null if blank</returns>
+        </member>
+        <member name="M:SuperConsole.Cmd.ReadCharAt(System.Int32,System.Int32)">
+            <summary>
+            Gets nullable char at console position
+            </summary>
+            <param name="x">left coordinate</param>
+            <param name="y">top coordinate</param>
+            <returns>character at coordinates or null if blank</returns>
+        </member>
+        <member name="M:SuperConsole.Cmd.SetCharAt(System.Char,System.Int32,System.Int32)">
+            <summary>
+            Writes a character at the specified location
+            </summary>
+            <param name="c">character to write</param>
+            <param name="x">left coordinate</param>
+            <param name="y">top coordinate</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.SetCharAt(System.Char,System.Int32,System.Int32,System.ConsoleColor,System.ConsoleColor)">
+            <summary>
+            Writes a character at the specified location using the given background and foreground colors
+            </summary>
+            <param name="c">character to write</param>
+            <param name="x">left coordinate</param>
+            <param name="y">top coordinate</param>
+            <param name="bgColor">background color</param>
+            <param name="fgColor">foreground color</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.ClearConsoleChar(SuperConsole.Point)">
+            <summary>
+            Clears the character from the console at the given point
+            </summary>
+            <param name="point">coordinates</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.ClearConsoleChar(System.Int32,System.Int32)">
+            <summary>
+            Clears the character from the console at the given x,y coordinates
+            </summary>
+            <param name="x">left coordinate</param>
+            <param name="y">top coordinate</param>
+        </member>
+        <member name="M:SuperConsole.Cmd.ClearConsoleRow">
+            <summary>
+            Clears the current row of the Console window
+            </summary>
+        </member>
+        <member name="M:SuperConsole.Cmd.ClearConsoleRow(System.Int32)">
+            <summary>
+            Clears the specified row of the Console window
+            </summary>
+            <param name="row"></param>
+        </member>
+        <member name="M:SuperConsole.Cmd.EnterPassword">
+            <summary>
+            Prompts user to "Enter Password: " then allows user to
+            enter password masking characters with "*".
+            </summary>
+            <returns>StringBuilder of password</returns>
+        </member>
+    </members>
+</doc>
