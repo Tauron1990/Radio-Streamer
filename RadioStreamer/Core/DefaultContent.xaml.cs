@@ -2,6 +2,7 @@
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.Views;
 using Tauron.JetBrains.Annotations;
 
@@ -15,9 +16,8 @@ namespace Tauron.Application.RadioStreamer.Core
 	{
 		private readonly PlayerViewVisibleChanged _playerVisibleEvent;
 		private bool _isPlayerVisible;
-		private const string RadioPlayerHeader = "Radio Player";
 
-		public DefaultContent()
+	    public DefaultContent()
 		{
 			IEventAggregator aggregator = EventAggregator.Aggregator;
 
@@ -33,14 +33,14 @@ namespace Tauron.Application.RadioStreamer.Core
 
 	    private void TabControlSelectionChanged([NotNull] object sender, [NotNull] SelectionChangedEventArgs e)
 		{
-		    var str = (string) ((TabItem) ((TabControl) sender).SelectedItem).Header;
+		    var str = (string) ((IHeaderBinding) ((TabControl) sender).SelectedItem).Header;
 
-		    if (str == RadioPlayerHeader && !_isPlayerVisible)
+		    if (str == AppConstants.RadioPlayerHeader && !_isPlayerVisible)
 		    {
 		        _playerVisibleEvent.Publish(true);
 		        _isPlayerVisible = true;
 		    }
-		    else if (str != RadioPlayerHeader && _isPlayerVisible)
+		    else if (str != AppConstants.RadioPlayerHeader && _isPlayerVisible)
 		    {
 		        _playerVisibleEvent.Publish(false);
 		        _isPlayerVisible = false;

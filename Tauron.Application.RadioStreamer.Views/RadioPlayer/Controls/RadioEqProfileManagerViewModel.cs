@@ -1,6 +1,7 @@
 ﻿using System;
 using System.ComponentModel;
 using System.Windows.Data;
+using Tauron.JetBrains.Annotations;
 using Tauron.Application.Composition;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 
@@ -173,6 +174,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls
         }
 
         private ICollectionView _profiles;
+
+        [NotNull]
         public ICollectionView Profiles
         {
             get { return _profiles; }
@@ -186,6 +189,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls
         }
 
         private IEqualizer _equalizer;
+
+        [NotNull]
         public IEqualizer Equalizer
         {
             get { return _equalizer; }
@@ -199,6 +204,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls
         }
 
         private string _profileName;
+
+        [CanBeNull]
         public string ProfileName
         {
             get { return _profileName; }
@@ -212,6 +219,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls
         }
 
         private string _currentSaveLabel;
+
+        [NotNull]
         public string CurrentSaveLabel
         {
             get { return _currentSaveLabel; }
@@ -225,6 +234,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls
         }
 
         private string _currentItem;
+
+        [CanBeNull]
         public string CurrentItem
         {
             get { return _currentItem; }

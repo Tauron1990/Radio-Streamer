@@ -127,6 +127,10 @@
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Files\Tauron.Application.Files.csproj">
+      <Project>{e714d32e-1f12-47a5-a671-15ec83d85e75}</Project>
+      <Name>Tauron.Application.Files</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Database\Tauron.Application.RadioStreamer.Database.csproj">
       <Project>{04359b61-d252-4f63-ad43-c27437b3b74c}</Project>
       <Name>Tauron.Application.RadioStreamer.Database</Name>
