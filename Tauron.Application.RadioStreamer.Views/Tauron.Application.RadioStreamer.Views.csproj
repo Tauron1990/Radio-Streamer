@@ -101,22 +101,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj">
-      <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
-      <Name>JetBrains.Annotations</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
-      <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
-      <Name>Tauron.Application.Common.Wpf.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
-      <Project>{18cfd078-d183-46a3-a83b-65c33d5152fe}</Project>
-      <Name>Tauron.Application.Common.Wpf</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj">
-      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
-      <Name>Tauron.Application.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
       <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
       <Name>Tauron.Application.RadioStreamer.Resources</Name>

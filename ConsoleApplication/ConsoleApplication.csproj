@@ -55,10 +55,6 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj">
-      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
-      <Name>Tauron.Application.Common</Name>
-    </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Database\Tauron.Application.RadioStreamer.Database.csproj">
       <Project>{04359b61-d252-4f63-ad43-c27437b3b74c}</Project>
       <Name>Tauron.Application.RadioStreamer.Database</Name>
