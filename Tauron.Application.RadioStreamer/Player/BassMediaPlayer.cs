@@ -8,6 +8,7 @@ using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
+using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Mix;
 using Un4seen.Bass.AddOn.Tags;
@@ -27,7 +28,7 @@ namespace Tauron.Application.RadioStreamer.Player
         private RadioPlayerTitleRecived _titleRecived;
 
         [Inject]
-        public BassMediaPlayer(IEventAggregator aggregator)
+        public BassMediaPlayer([NotNull] IEventAggregator aggregator)
         {
             _play = aggregator.GetEvent<RadioPlayerPlay, EventArgs>();
             _stop = aggregator.GetEvent<RadioPlayerStop, EventArgs>();
@@ -74,7 +75,7 @@ namespace Tauron.Application.RadioStreamer.Player
         private IScript _script;
         private string _sourceUrl;
 
-        public bool Play(RadioQuality url, IScript script)
+        public bool Play(RadioQuality url, [NotNull] IScript script)
         {
             if (_handle != 0) return true;
 
@@ -82,8 +83,8 @@ namespace Tauron.Application.RadioStreamer.Player
             _sourceUrl = url.SourceUrl;
 
             _handle = Bass.BASS_StreamCreateURL(url.Url, 0,
-                                                BASSFlag.BASS_SAMPLE_FX | BASSFlag.BASS_STREAM_DECODE |
-                                                BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
+                BASSFlag.BASS_SAMPLE_FX | BASSFlag.BASS_STREAM_DECODE |
+                BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
             _mixer = BassMix.BASS_Mixer_StreamCreate(44100, 2, BASSFlag.BASS_SAMPLE_SOFTWARE);
             bool ok = BassMix.BASS_Mixer_StreamAddChannel(_mixer, _handle, BASSFlag.BASS_SAMPLE_FX);
 

@@ -3,14 +3,6 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{295E4B1E-FFB3-43CB-B837-A201F82FDC7A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common", "..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj", "{0D50EE98-A718-41B2-A1B6-57D23FDF5223}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBrains.Annotations", "..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj", "{DF97133F-565A-4D1A-AFE3-4155B31A89E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf", "..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj", "{18CFD078-D183-46A3-A83B-65C33D5152FE}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf.Controls", "..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj", "{2CC827C8-5084-4334-8A68-0515DA46465E}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.RadioStreamer.Contracts", "Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj", "{E45A701F-0B24-4986-8183-B4F5C1270539}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.RadioStreamer.Resources", "Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj", "{403C6920-9AD7-4B61-B920-1705E4A87EED}"
@@ -27,28 +19,22 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.RadioStreamer.Views", "Tauron.Application.RadioStreamer.Views\Tauron.Application.RadioStreamer.Views.csproj", "{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBrains.Annotations", "..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj", "{DF97133F-565A-4D1A-AFE3-4155B31A89E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common", "..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj", "{0D50EE98-A718-41B2-A1B6-57D23FDF5223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf", "..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj", "{03F1490A-9173-4E75-9D6E-FBE5A37AA649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf.Controls", "..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj", "{2CC827C8-5084-4334-8A68-0515DA46465E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Files", "..\Tauron-Application-Common\Tauron.Application.Files\Tauron.Application.Files.csproj", "{E714D32E-1F12-47A5-A671-15EC83D85E75}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Release|Any CPU.Build.0 = Release|Any CPU
-		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Release|Any CPU.Build.0 = Release|Any CPU
-		{18CFD078-D183-46A3-A83B-65C33D5152FE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{18CFD078-D183-46A3-A83B-65C33D5152FE}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{18CFD078-D183-46A3-A83B-65C33D5152FE}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{18CFD078-D183-46A3-A83B-65C33D5152FE}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2CC827C8-5084-4334-8A68-0515DA46465E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2CC827C8-5084-4334-8A68-0515DA46465E}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2CC827C8-5084-4334-8A68-0515DA46465E}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2CC827C8-5084-4334-8A68-0515DA46465E}.Release|Any CPU.Build.0 = Release|Any CPU
 		{E45A701F-0B24-4986-8183-B4F5C1270539}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{E45A701F-0B24-4986-8183-B4F5C1270539}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E45A701F-0B24-4986-8183-B4F5C1270539}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -77,15 +63,36 @@ Global
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0D50EE98-A718-41B2-A1B6-57D23FDF5223}.Release|Any CPU.Build.0 = Release|Any CPU
+		{03F1490A-9173-4E75-9D6E-FBE5A37AA649}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{03F1490A-9173-4E75-9D6E-FBE5A37AA649}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{03F1490A-9173-4E75-9D6E-FBE5A37AA649}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{03F1490A-9173-4E75-9D6E-FBE5A37AA649}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2CC827C8-5084-4334-8A68-0515DA46465E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2CC827C8-5084-4334-8A68-0515DA46465E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2CC827C8-5084-4334-8A68-0515DA46465E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2CC827C8-5084-4334-8A68-0515DA46465E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{0D50EE98-A718-41B2-A1B6-57D23FDF5223} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{DF97133F-565A-4D1A-AFE3-4155B31A89E5} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
-		{18CFD078-D183-46A3-A83B-65C33D5152FE} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
+		{0D50EE98-A718-41B2-A1B6-57D23FDF5223} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
+		{03F1490A-9173-4E75-9D6E-FBE5A37AA649} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{2CC827C8-5084-4334-8A68-0515DA46465E} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
+		{E714D32E-1F12-47A5-A671-15EC83D85E75} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{B0CA582B-6A76-472C-BF6F-78DC31C1769C} = {A9C1AD90-4550-479C-9943-D0A2D8EEC363}
 	EndGlobalSection
 EndGlobal

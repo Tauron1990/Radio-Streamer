@@ -7,6 +7,7 @@
 			 xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
 			 xmlns:controls="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls"
 			 xmlns:integration="clr-namespace:System.Windows.Forms.Integration;assembly=WindowsFormsIntegration"
+			 xmlns:equalizer="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
 			 hlp:DataContextServices.Activate="True"
 			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.RadioViewModelName}"
 			 mc:Ignorable="d" Loaded="RadioLoaded"
@@ -84,7 +85,7 @@
 						<CheckBox VerticalAlignment="Center" Content="{hlp:SimpleLocalize Name=EqualizerActivate}" IsChecked="{Binding Enabled}"/>
 						<ComboBox Margin="100,0,0,0" MinWidth="100" IsEnabled="{Binding Enabled}" ItemsSource="{Binding Profiles}"/>
 					</StackPanel>
-					<controls:EqualizerTemplate/>
+					<equalizer:EqualizerTemplate/>
 				</DockPanel>
 			</TabItem>
 			<TabItem Header="Option">

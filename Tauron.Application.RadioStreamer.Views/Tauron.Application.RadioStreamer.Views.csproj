@@ -60,10 +60,14 @@
     <Compile Include="RadioPlayer\Controls\EqProfileManager.xaml.cs">
       <DependentUpon>EqProfileManager.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadioPlayer\Controls\EqualizerTemplate.xaml.cs">
+    <Compile Include="RadioPlayer\Controls\RadioEqProfileManagerViewModel.cs" />
+    <Compile Include="RadioPlayer\Equalizer\EqManager.xaml.cs">
+      <DependentUpon>EqManager.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioPlayer\Equalizer\EqManagerViewModel.cs" />
+    <Compile Include="RadioPlayer\Equalizer\EqualizerTemplate.xaml.cs">
       <DependentUpon>EqualizerTemplate.xaml</DependentUpon>
     </Compile>
-    <Compile Include="RadioPlayer\Controls\RadioEqProfileManagerViewModel.cs" />
     <Compile Include="RadioPlayer\RadioPlayerView.xaml.cs">
       <DependentUpon>RadioPlayerView.xaml</DependentUpon>
     </Compile>
@@ -83,9 +87,13 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="RadioPlayer\Controls\EqualizerTemplate.xaml">
+    <Page Include="RadioPlayer\Equalizer\EqManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\Equalizer\EqualizerTemplate.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="RadioPlayer\EqualizerResources.xaml">
       <SubType>Designer</SubType>
@@ -101,19 +109,15 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\JetBrains.Annotations\JetBrains.Annotations.csproj">
+    <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
       <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
       <Name>JetBrains.Annotations</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
-      <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
-      <Name>Tauron.Application.Common.Wpf.Controls</Name>
-    </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
-      <Project>{18cfd078-d183-46a3-a83b-65c33d5152fe}</Project>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
+      <Project>{03f1490a-9173-4e75-9d6e-fbe5a37aa649}</Project>
       <Name>Tauron.Application.Common.Wpf</Name>
     </ProjectReference>
-    <ProjectReference Include="..\..\X-Force-Rewrite\X-Force-Rewrite\Tauron.Application.Common\Tauron.Application.Common.csproj">
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
     </ProjectReference>

@@ -5,7 +5,8 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
 			 xmlns:Rcon="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls"
 			 xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             mc:Ignorable="d" Initialized="RadioProfileManager_Initialized_1"
+			 xmlns:equalizer="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
+			 mc:Ignorable="d" Initialized="RadioProfileManager_Initialized_1"
 			 hlp:DataContextServices.Activate="true"
              d:DesignHeight="200" d:DesignWidth="490">
 	<DockPanel>
@@ -15,6 +16,6 @@
 			<ComboBox IsEditable="False" IsReadOnly="True" ItemsSource="{Binding Profiles}" Margin="75, 10, 10, 10" Width="100" SelectedItem="{Binding CurrentItem, Mode=TwoWay}"/>
 			<Button hlp:CommandBinder.Command="Save:Save"  Content="{Binding CurrentSaveLabel, FallbackValue=Unkown}" Margin="10"/>
 		</StackPanel>
-		<Rcon:EqualizerTemplate DataContext="{Binding Equalizer}" Margin="10"/>
+		<equalizer:EqualizerTemplate DataContext="{Binding Equalizer}" Margin="10"/>
 	</DockPanel>
 </UserControl>
