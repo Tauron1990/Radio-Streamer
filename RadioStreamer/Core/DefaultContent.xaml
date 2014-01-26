@@ -11,7 +11,7 @@
 			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.DefaultContentViewModel}">
 	<DockPanel>
 		<ContentControl Content="{StaticResource MainLabel}" DockPanel.Dock="Top"/>
-		<StatusBar DockPanel.Dock="Bottom" MinHeight="30" MaxHeight="30" ItemsSource="{Binding StatusBarItems}"/>
+		<StatusBar DockPanel.Dock="Bottom" MinHeight="30" MaxHeight="30" ItemsSource="{Binding StatusBarItems}" Background="Transparent"/>
 		<TabControl Name="RadioSelector" SelectionChanged="TabControlSelectionChanged" x:FieldModifier="private" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.DefaultContentTab}">
         <TabControl.Resources>
             <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">

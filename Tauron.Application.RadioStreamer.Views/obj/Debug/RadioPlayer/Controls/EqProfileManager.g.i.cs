@@ -32,6 +32,7 @@ using System.Windows.Shapes;
 using System.Windows.Shell;
 using Tauron.Application;
 using Tauron.Application.Composition;
+using Tauron.Application.Controls;
 using Tauron.Application.Converter;
 using Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls;
 using Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer;

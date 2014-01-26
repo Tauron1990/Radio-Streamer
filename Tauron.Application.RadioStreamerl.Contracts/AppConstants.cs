@@ -15,5 +15,9 @@
 
         public const string AppName = "RadioStreamer";
         public const string RadioPlayerHeader = "Radio Player";
+
+        public const string EqManagerViewModel = "EqManagerViewModel";
+
+        public const string RadioPlayerExtenionViews = "RadioPlayerExtensionViews";
     }
 }

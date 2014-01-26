@@ -42,32 +42,6 @@
 				<ColumnDefinition MinWidth="410" Width="410" MaxWidth="410"/>
 			</Grid.ColumnDefinitions>
 	    <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="False">
-			<Label DockPanel.Dock="Top" Background="Black">
-					<StackPanel Margin="10 0" HorizontalAlignment="Left">
-						<TextBlock Name="TextRV" Foreground="#FFFFFFFF" FontSize="15">
-					<Bold FontWeight="ExtraBold" Foreground="#FFA9A9A9">Radio</Bold>
-					<Run FontWeight="ExtraBold" FontSize="18" Foreground="#FFFF0000">V</Run>
-					<Italic>erwaltung:</Italic>
-					</TextBlock>
-					<Rectangle Height="15" Width="100">
-						<Rectangle.Fill>
-							<VisualBrush Visual="{Binding ElementName=TextRV}" />
-						</Rectangle.Fill>
-						<Rectangle.LayoutTransform>
-							<TransformGroup>
-								<SkewTransform AngleX="-15" />
-								<ScaleTransform ScaleY="-1" />
-							</TransformGroup>
-						</Rectangle.LayoutTransform>
-						<Rectangle.OpacityMask>
-							<LinearGradientBrush EndPoint="0 1">
-								<GradientStop Color="Transparent" Offset="0" />
-								<GradientStop Color="#66FFFFFF" Offset="1" />
-							</LinearGradientBrush>
-						</Rectangle.OpacityMask>
-					</Rectangle>
-				</StackPanel>
-			</Label>
 			<StackPanel MinWidth="100" DockPanel.Dock="Left" Margin="20">
 				<Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Play:Play">
                     <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/play.png"/>
@@ -76,7 +50,7 @@
                     <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/stop.png"/>
 				</Button>			
 			</StackPanel>
-			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0">
 				<CheckBox Content="{hlp:SimpleLocalize Name=FavoritesLabel}" Margin="4" VerticalAlignment="Top" IsChecked="{Binding OnlyFavorites}"/>
 				<TextBlock Text="{hlp:SimpleLocalize Name=SearchLabel}" Margin="3"/>
 				<TextBox MinWidth="100" MaxWidth="200" Margin="5,0,0,30" Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"/>
@@ -99,11 +73,11 @@
 			</StackPanel>
 		</DockPanel>
 		<DockPanel Grid.Column="1" Grid.Row="0">
-			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10">
 				<TextBlock Text="{hlp:SimpleLocalize Name=LanguageLabel}" Margin="5" HorizontalAlignment="Center"/>
 				<ComboBox Margin="5" MinWidth="150" ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage}"/>
 			</StackPanel>
-			<ListBox DockPanel.Dock="Top" ItemsSource="{Binding Radios}" IsSynchronizedWithCurrentItem="True" Margin="10"/>
+			<ListBox DockPanel.Dock="Top" ItemsSource="{Binding Radios}" IsSynchronizedWithCurrentItem="True" Margin="10,0,10,10"/>
 		</DockPanel>
 	</Grid>
 </UserControl>

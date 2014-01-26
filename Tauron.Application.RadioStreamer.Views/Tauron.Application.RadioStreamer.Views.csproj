@@ -16,7 +16,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\build\Debug\</OutputPath>
+    <OutputPath>bin\Debug\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -46,6 +46,24 @@
     <Reference Include="System.Xml" />
     <Reference Include="WindowsBase" />
     <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="Xceed.Wpf.AvalonDock">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Aero">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Aero.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.Metro">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.Metro.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.AvalonDock.Themes.VS2010">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.AvalonDock.Themes.VS2010.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.DataGrid">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.DataGrid.dll</HintPath>
+    </Reference>
+    <Reference Include="Xceed.Wpf.Toolkit">
+      <HintPath>..\packages\Extended.Wpf.Toolkit.2.0.0\lib\net40\Xceed.Wpf.Toolkit.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helper\FavoriteColorConverter.cs" />
@@ -57,13 +75,11 @@
     </Compile>
     <Compile Include="MedadataView\MetadataWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="RadioPlayer\Controls\EqProfileManager.xaml.cs">
-      <DependentUpon>EqProfileManager.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="RadioPlayer\Controls\RadioEqProfileManagerViewModel.cs" />
     <Compile Include="RadioPlayer\Equalizer\EqManager.xaml.cs">
       <DependentUpon>EqManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RadioPlayer\Equalizer\EqManagerPresent.cs" />
+    <Compile Include="RadioPlayer\Equalizer\EqManagerPresetType.cs" />
     <Compile Include="RadioPlayer\Equalizer\EqManagerViewModel.cs" />
     <Compile Include="RadioPlayer\Equalizer\EqualizerTemplate.xaml.cs">
       <DependentUpon>EqualizerTemplate.xaml</DependentUpon>
@@ -80,10 +96,6 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MedadataView\MetadataWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="RadioPlayer\Controls\EqProfileManager.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -112,6 +124,10 @@
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
       <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
       <Name>JetBrains.Annotations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
+      <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
+      <Name>Tauron.Application.Common.Wpf.Controls</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
       <Project>{03f1490a-9173-4e75-9d6e-fbe5a37aa649}</Project>

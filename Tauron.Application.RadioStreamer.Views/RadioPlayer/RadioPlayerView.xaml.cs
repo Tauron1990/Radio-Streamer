@@ -2,8 +2,8 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
+using Tauron.Application.Controls;
 using Tauron.Application.RadioStreamer.Contracts;
-using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.Views;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
@@ -12,7 +12,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 	/// Interaktionslogik für RadioPlayerView.xaml
 	/// </summary>
 	[ExportView(AppConstants.DefaultContentTab, Order = 200)]
-	public partial class RadioPlayerView : IHeaderBinding
+	public partial class RadioPlayerView : IHeaderProvider
 	{
 		private Window _window;
 

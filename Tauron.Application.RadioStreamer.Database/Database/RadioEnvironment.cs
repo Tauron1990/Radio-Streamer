@@ -297,8 +297,6 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 					float[] bands;
 					if (_profiles.TryGetValue(name, out bands))
 					{
-						equlizer.Enabled = true;
-
 						equlizer.Band0 = bands[0];
 						equlizer.Band1 = bands[1];
 						equlizer.Band2 = bands[2];
@@ -315,8 +313,6 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 				public void NewProfile(string name, IEqualizer equlizer)
 				{
-					if(!equlizer.Enabled) return;
-
 					_isChanged = true;
 
 					var bands = new float[10];

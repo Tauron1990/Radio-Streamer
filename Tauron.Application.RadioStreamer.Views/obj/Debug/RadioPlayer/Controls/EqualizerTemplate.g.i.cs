@@ -30,6 +30,7 @@ using System.Windows.Media.TextFormatting;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Shell;
+using Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls;
 
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Controls {
