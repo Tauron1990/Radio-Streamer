@@ -16,5 +16,5 @@ DEBUG;TRACE
 19-1382131583
 MedadataView\MetadataWindow.xaml;RadioPlayer\Controls\EqProfileManager.xaml;RadioPlayer\Equalizer\EqManager.xaml;RadioPlayer\Equalizer\EqualizerTemplate.xaml;RadioPlayer\EqualizerResources.xaml;RadioPlayer\RadioPlayerView.xaml;RadioManager\RadioManager.xaml;
 
-True
+False
 
