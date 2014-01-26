@@ -5,8 +5,14 @@ namespace Tauron.Application.RadioStreamer.Player
 {
     public class Equalizer : ObservableObject, IEqualizer
     {
+        private class BandValue
+        {
+            public int Handle { get; set; }
+            public float Gain { get; set; }
+        }
+
         private int _handle = -1;
-        private int[] _bands = new int[10];
+        private BandValue[] _bands = new BandValue[10];
         private float[] _cenders =
         {
             31,
@@ -20,6 +26,14 @@ namespace Tauron.Application.RadioStreamer.Player
             8000,
             16000
         };
+
+        public Equalizer()
+        {
+            for (int i = 0; i < _bands.Length; i++)
+            {
+                _bands[i] = new BandValue();
+            }
+        }
 
         private bool _enabled;
         public bool Enabled
@@ -57,11 +71,11 @@ namespace Tauron.Application.RadioStreamer.Player
 
             for (int i = 0; i < _bands.Length; i++)
             {
-                _bands[i] = Bass.BASS_ChannelSetFX(_handle, BASSFXType.BASS_FX_DX8_PARAMEQ, 0);
+                _bands[i].Handle = Bass.BASS_ChannelSetFX(_handle, BASSFXType.BASS_FX_DX8_PARAMEQ, 0);
 
                 eq.fCenter = _cenders[i];
 				
-                Bass.BASS_FXSetParameters(_bands[i], eq);
+                Bass.BASS_FXSetParameters(_bands[i].Handle, eq);
             }
 
             OnPropertyChangedExplicit("Band0");
@@ -79,16 +93,21 @@ namespace Tauron.Application.RadioStreamer.Player
         {
             if (_handle == -1) return;
 
-            foreach (int t in _bands)
+            foreach (var t in _bands)
             {
-                Bass.BASS_ChannelRemoveFX(_handle, t);
+                Bass.BASS_ChannelRemoveFX(_handle, t.Handle);
             }
         }
 
         private void UpdateGain(int band, float gain)
         {
             var eq = new BASS_DX8_PARAMEQ();
-            int handle = _bands[band];
+            var bandVal = _bands[band];
+            bandVal.Gain = gain;
+
+            if(!_enabled) return;
+
+            int handle = bandVal.Handle;
 
             if (!Bass.BASS_FXGetParameters(handle, eq)) return;
 
@@ -97,11 +116,14 @@ namespace Tauron.Application.RadioStreamer.Player
         }
         private float GetGain(int band)
         {
-            if (!_enabled) return 0;
+            var bandValue = _bands[band];
+
+            if (!_enabled) return bandValue.Gain;
 
             var eq = new BASS_DX8_PARAMEQ();
-            int handle = _bands[band];
-            return Bass.BASS_FXGetParameters(handle, eq) ? eq.fGain : 0;
+
+            int handle = bandValue.Handle;
+            return Bass.BASS_FXGetParameters(handle, eq) ? eq.fGain : bandValue.Gain;
         }
 
         public float Band0 

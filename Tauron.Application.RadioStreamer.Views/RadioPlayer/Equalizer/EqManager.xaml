@@ -4,9 +4,13 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:Eq="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
-             mc:Ignorable="d" 
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
+             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
+             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.EqManagerViewModel}"
              d:DesignHeight="300" d:DesignWidth="600">
-    <Grid>
+    <Grid Width="600">
           <Grid.RowDefinitions>
               <RowDefinition Height="50"/>
               <RowDefinition Height="40"/>
@@ -17,6 +21,17 @@
               <ColumnDefinition MaxWidth="200"/>
               <ColumnDefinition/>
           </Grid.ColumnDefinitions>
-        <Eq:EqualizerTemplate Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3"/>
+        <Eq:EqualizerTemplate Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="3" HorizontalAlignment="Center" 
+                              DataContext="{Binding Equalizer}" Margin="10"/>
+        <Button Content="{hlp:SimpleLocalize SaveLabel}" hlp:CommandBinder.Command="Save:Save" Grid.Row="0" Grid.Column="2" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="70"/>
+        <Button Content="{hlp:SimpleLocalize DeleteLabel}" hlp:CommandBinder.Command="Delete:Delete" Grid.Row="1" Grid.Column="2" 
+                VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="70"/>
+        <xctk:WatermarkTextBox Watermark="Name" Text="{Binding CurrentPresentName, UpdateSourceTrigger=PropertyChanged}" 
+                               Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10, 0" />
+        <ComboBox ItemsSource="{Binding Presets}" SelectedItem="{Binding CurrentPresent}" Grid.Column="0" Grid.Row="0" 
+                  VerticalAlignment="Center" Margin="10, 0" DisplayMemberPath="Name"/>
+        <CheckBox Margin="10,0" Grid.Column="0" Grid.Row="1" Content="{hlp:SimpleLocalize EqualizerActivate}" VerticalAlignment="Center" 
+                  HorizontalAlignment="Left" IsChecked="{Binding Equalizer.Enabled, Converter={hlp:NullableToBoolConverter}}"/>
     </Grid>
 </UserControl>

@@ -1,8 +1,8 @@
 ﻿using System.Windows.Controls;
+using Tauron.Application.Controls;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Player;
-using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.Views;
 using Tauron.JetBrains.Annotations;
 
@@ -33,7 +33,7 @@ namespace Tauron.Application.RadioStreamer.Core
 
 	    private void TabControlSelectionChanged([NotNull] object sender, [NotNull] SelectionChangedEventArgs e)
 		{
-		    var str = (string) ((IHeaderBinding) ((TabControl) sender).SelectedItem).Header;
+		    var str = (string) ((IHeaderProvider) ((TabControl) sender).SelectedItem).Header;
 
 		    if (str == AppConstants.RadioPlayerHeader && !_isPlayerVisible)
 		    {

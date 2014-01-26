@@ -20,3 +20,13 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Debug\Tauron.Application.RadioStreamer.Resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Debug\Tauron.Application.RadioStreamer.Resources.pdb
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.g.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.RadioStreamerResources.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.RadioStreamerResources.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.pdb

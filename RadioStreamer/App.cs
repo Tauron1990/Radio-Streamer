@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Windows;
 using System.Windows.Input;
+using Elysium;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.Views;
@@ -23,7 +24,7 @@ namespace Tauron.Application.RadioStreamer
 
 	    protected override void ConfigSplash()
 	    {
-            var dic = new Implementation.PackUriHelper().Load<ResourceDictionary>("LabelResources.xaml");
+            var dic = new Implementation.PackUriHelper().Load<ResourceDictionary>("StartResources.xaml");
 
 	        CurrentWpfApplication.Resources = dic;
 
@@ -37,6 +38,7 @@ namespace Tauron.Application.RadioStreamer
             };
 
 	        SplashMessageListener.CurrentListner.SplashContent = control;
+	        SplashMessageListener.CurrentListner.MainLabelForeground = "Black";
             SplashMessageListener.CurrentListner.MainLabelBackground = dic["MainLabelbackground"];
 	    }
 
@@ -51,10 +53,11 @@ namespace Tauron.Application.RadioStreamer
 			CommandBinder.Register(MediaCommands.Stop);
 			CommandBinder.Register(MediaCommands.Record);
 			CommandBinder.Register(MediaCommands.MuteVolume);
+		    CommandBinder.AutoRegister = true;
 		}
 		protected override void LoadResources()
 		{
-			Elysium.Manager.Apply(CurrentWpfApplication, Elysium.Theme.Dark);
+			CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Violet, null);
 		}
 	}
 }

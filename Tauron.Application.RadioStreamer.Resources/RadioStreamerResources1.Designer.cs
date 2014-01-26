@@ -70,15 +70,6 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Finishing Update. ähnelt.
-        /// </summary>
-        public static string AfterCreationMessage {
-            get {
-                return ResourceManager.GetString("AfterCreationMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die An Error has Occured.\n The Error Code is: {0} ähnelt.
         /// </summary>
         public static string BassErrorMessage {
@@ -93,15 +84,6 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string BassInitErrorMessage {
             get {
                 return ResourceManager.GetString("BassInitErrorMessage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Prepating for Update. ähnelt.
-        /// </summary>
-        public static string BeforeCreationMessage {
-            get {
-                return ResourceManager.GetString("BeforeCreationMessage", resourceCulture);
             }
         }
         
@@ -124,20 +106,20 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Database is Upadating; ähnelt.
-        /// </summary>
-        public static string CreationProcessTitle {
-            get {
-                return ResourceManager.GetString("CreationProcessTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete Database File: {0} ähnelt.
         /// </summary>
         public static string DeleteDatabaseFilesMessage {
             get {
                 return ResourceManager.GetString("DeleteDatabaseFilesMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete ähnelt.
+        /// </summary>
+        public static string DeleteLabel {
+            get {
+                return ResourceManager.GetString("DeleteLabel", resourceCulture);
             }
         }
         
@@ -151,20 +133,20 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
-        ///   Sucht eine lokalisierte Zeichenfolge, die Profile: ähnelt.
-        /// </summary>
-        public static string EqualazerControlProfileLabel {
-            get {
-                return ResourceManager.GetString("EqualazerControlProfileLabel", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Activate Equalizer ähnelt.
         /// </summary>
         public static string EqualizerActivate {
             get {
                 return ResourceManager.GetString("EqualizerActivate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Equalizer ähnelt.
+        /// </summary>
+        public static string EqualizerLabel {
+            get {
+                return ResourceManager.GetString("EqualizerLabel", resourceCulture);
             }
         }
         

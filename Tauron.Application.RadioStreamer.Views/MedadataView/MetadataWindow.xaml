@@ -5,7 +5,7 @@
 			 Title="Radio Streamer" ShowInTaskbar="False"
 			 ResizeMode="CanResize" Width="350" Height="400" Icon="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico">
     <DockPanel>
-		<Grid DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="Black">
+		<Grid DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="Transparent">
 				<StackPanel Margin="10 0" HorizontalAlignment="Left">
 					<TextBlock x:Name="TxtHeading" Foreground="White" FontSize="22">
 				<Bold FontWeight="ExtraBold" Foreground="LightGray">

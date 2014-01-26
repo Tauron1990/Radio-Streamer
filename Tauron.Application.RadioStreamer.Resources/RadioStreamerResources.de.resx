@@ -120,17 +120,11 @@
   <data name="AddFavoritesLabel" xml:space="preserve">
     <value>Zu Favoriten Hinzufügen</value>
   </data>
-  <data name="AfterCreationMessage" xml:space="preserve">
-    <value>Update wird Fertig gestellt.</value>
-  </data>
   <data name="BassErrorMessage" xml:space="preserve">
     <value>Ein Fehler ist Aufgetreten. \n Der Fehler Code Lautet: {0}</value>
   </data>
   <data name="BassInitErrorMessage" xml:space="preserve">
     <value>Bass Konnte nicht Initialisiert  werden.\n Der Fehler Code lautet: {0}</value>
-  </data>
-  <data name="BeforeCreationMessage" xml:space="preserve">
-    <value>Vorbereiten des Updates.</value>
   </data>
   <data name="BufferPercentageInvalid" xml:space="preserve">
     <value>Kein Radio</value>
@@ -138,17 +132,11 @@
   <data name="CloseButton" xml:space="preserve">
     <value>Schlißen</value>
   </data>
-  <data name="CreationProcessTitle" xml:space="preserve">
-    <value>Datenbank wird Aktualisiert:</value>
-  </data>
   <data name="DeleteDatabaseFilesMessage" xml:space="preserve">
     <value>Lösche Datenbank: {0}</value>
   </data>
   <data name="ElapsedTime" xml:space="preserve">
     <value>Vergangene Zeit: </value>
-  </data>
-  <data name="EqualazerControlProfileLabel" xml:space="preserve">
-    <value>Profile:</value>
   </data>
   <data name="EqualizerActivate" xml:space="preserve">
     <value>Aktiviere Equalizer</value>
@@ -233,5 +221,11 @@
   </data>
   <data name="ViewMetadataLebel" xml:space="preserve">
     <value>Metadaten</value>
+  </data>
+  <data name="DeleteLabel" xml:space="preserve">
+    <value>Löschen</value>
+  </data>
+  <data name="EqualizerLabel" xml:space="preserve">
+    <value>Equalizer</value>
   </data>
 </root>
