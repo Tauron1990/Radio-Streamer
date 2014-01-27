@@ -13,6 +13,87 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
     [ExportViewModel(AppConstants.EqManagerViewModel)]
     public class EqManagerViewModel : ViewModelBase
     {
+        private class EqalizerTest : ObservableObject, IEqualizer
+        {
+            private float _band0;
+            private float _band1;
+            private float _band2;
+            private float _band3;
+            private float _band4;
+            private float _band5;
+            private float _band6;
+            private float _band7;
+            private float _band8;
+            private float _band9;
+            private bool _enabled;
+
+            public float Band0
+            {
+                get { return _band0; }
+                set { _band0 = value; OnPropertyChanged();}
+            }
+
+            public float Band1
+            {
+                get { return _band1; }
+                set { _band1 = value; OnPropertyChanged(); }
+            }
+
+            public float Band2
+            {
+                get { return _band2; }
+                set { _band2 = value; OnPropertyChanged(); }
+            }
+
+            public float Band3
+            {
+                get { return _band3; }
+                set { _band3 = value; OnPropertyChanged(); }
+            }
+
+            public float Band4
+            {
+                get { return _band4; }
+                set { _band4 = value; OnPropertyChanged();}
+            }
+
+            public float Band5
+            {
+                get { return _band5; }
+                set { _band5 = value; OnPropertyChanged();}
+            }
+
+            public float Band6
+            {
+                get { return _band6; }
+                set { _band6 = value; OnPropertyChanged();}
+            }
+
+            public float Band7
+            {
+                get { return _band7; }
+                set { _band7 = value; OnPropertyChanged(); }
+            }
+
+            public float Band8
+            {
+                get { return _band8; }
+                set { _band8 = value; OnPropertyChanged(); }
+            }
+
+            public float Band9
+            {
+                get { return _band9; }
+                set { _band9 = value; OnPropertyChanged(); }
+            }
+
+            public bool Enabled
+            {
+                get { return _enabled; }
+                set { _enabled = value; OnPropertyChanged(); }
+            }
+        }
+
         public class PresetCollection : UISyncObservableCollection<EqManagerPresent>
         {
             private readonly EqManagerPresent _newPresent = new EqManagerPresent("<-" + RadioStreamerResources.NewLabel + "->")
@@ -34,7 +115,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
 
                 if (Items.Count == index) Remove(_newPresent);
                 base.InsertItem(index - 1, item);
-                Add(_newPresent);
+                base.InsertItem(index,  _newPresent);
             }
         }
 
@@ -43,7 +124,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [Inject]
         public EqManagerViewModel([NotNull] IRadioEnvironment environment, [NotNull] IRadioPlayer player)
         {
-            Equalizer = player.GetEqualizer();
+            //TODO Equalizer = player.GetEqualizer();
+            Equalizer = new EqalizerTest();
             _equalizerProfileDatabase = environment.OpenSettings().EqualizerDatabase;
 
             Presets =
@@ -80,14 +162,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         }
 
         [NotNull]
-        public UISyncObservableCollection<EqManagerPresent> Presets
-        {
-            get { return _presets; }
-            private set { _presets = value; }
-        }
+        public UISyncObservableCollection<EqManagerPresent> Presets { get; private set; }
 
         private EqManagerPresent _currentPresent;
-        private UISyncObservableCollection<EqManagerPresent> _presets;
 
         [CanBeNull]
         public EqManagerPresent CurrentPresent
@@ -97,9 +174,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
             {
                 if (Equals(_currentPresent, value)) return;
 
-                _currentPresent = value;
-
                 UpdatePreset(value);
+                _currentPresent = value;
 
                 OnPropertyChanged();
             }
@@ -109,7 +185,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         {
             if (value == null || value.PresetType == EqManagerPresetType.Newlabel)
             {
-                CurrentPresentName = string.Empty;
+                if(_currentPresent != null && CurrentPresentName == _currentPresent.Name)
+                    CurrentPresentName = string.Empty;
                 return;
             }
 

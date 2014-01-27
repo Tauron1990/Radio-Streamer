@@ -31,5 +31,10 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         }
 
         public EqManagerPresetType PresetType { get; set; }
+
+        public override string ToString()
+        {
+            return OriginalName;
+        }
     }
 }

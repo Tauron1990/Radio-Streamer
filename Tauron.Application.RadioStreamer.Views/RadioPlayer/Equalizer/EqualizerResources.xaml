@@ -8,9 +8,9 @@
 	<Color x:Key="ContentAreaColorLight">#FFC5CBF9</Color>
 	<Color x:Key="ContentAreaColorDark">#FF7381F9</Color>
 
-	<Color x:Key="DisabledControlLightColor">#FFD8DDE9</Color>
-	<Color x:Key="DisabledControlDarkColor">#FFB5BBE9</Color>
-	<Color x:Key="DisabledForegroundColor">#FF888888</Color>
+	<Color x:Key="DisabledControlLightColor">#FFD6DBE7</Color>
+	<Color x:Key="DisabledControlDarkColor">#FFB3BAE7</Color>
+	<Color x:Key="DisabledForegroundColor">#FF666666</Color>
 
 	<Color x:Key="SelectedBackgroundColor">#FFC5CBF9</Color>
 	<Color x:Key="SelectedUnfocusedColor">#FFDDDDDD</Color>
@@ -399,5 +399,6 @@
 						<Style TargetType="TextBlock">
 							<Setter Property="DockPanel.Dock" Value="Bottom"/>
 							<Setter Property="TextAlignment" Value="Center"/>
+                            <Setter Property="Foreground" Value="White"/>
 						</Style>
 </ResourceDictionary>

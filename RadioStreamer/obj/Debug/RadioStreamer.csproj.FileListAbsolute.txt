@@ -69,7 +69,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.exe
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csprojResolveAssemblyReference.cache
-C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\LabelResources.baml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer_MarkupCompile.cache
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Core\DefaultContent.baml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Core\MainWindow.baml
@@ -96,7 +95,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.Controls.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.dll
-C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Files.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Contracts.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Database.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.dll
@@ -108,7 +106,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Castle.Core.dll
-C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Ionic.Zip.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Mono.CSharp.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\HtmlAgilityPack.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Bass.Net.dll
@@ -117,7 +114,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.Controls.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.pdb
-C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Files.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Database.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Resources.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Views.pdb
@@ -129,7 +125,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.Logging.xml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Castle.Core.xml
-C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Ionic.Zip.xml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\HtmlAgilityPack.xml
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Bass.Net.xml
@@ -219,3 +214,20 @@ C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\StartResources.baml
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.DataGrid.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.Toolkit.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\StartResources.baml
