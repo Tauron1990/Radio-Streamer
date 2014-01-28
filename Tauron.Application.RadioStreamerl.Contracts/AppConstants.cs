@@ -19,5 +19,7 @@
         public const string EqManagerViewModel = "EqManagerViewModel";
 
         public const string RadioPlayerExtenionViews = "RadioPlayerExtensionViews";
+
+        public const string SprectrumViewModel = "SprectrumViewModel";
     }
 }

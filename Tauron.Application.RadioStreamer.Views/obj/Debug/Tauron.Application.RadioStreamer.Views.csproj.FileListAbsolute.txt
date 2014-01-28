@@ -249,3 +249,5 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Sprectrum\SprectrumView.baml
+C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Sprectrum\SprectrumView.g.cs

@@ -13,86 +13,86 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
     [ExportViewModel(AppConstants.EqManagerViewModel)]
     public class EqManagerViewModel : ViewModelBase
     {
-        private class EqalizerTest : ObservableObject, IEqualizer
-        {
-            private float _band0;
-            private float _band1;
-            private float _band2;
-            private float _band3;
-            private float _band4;
-            private float _band5;
-            private float _band6;
-            private float _band7;
-            private float _band8;
-            private float _band9;
-            private bool _enabled;
+        //private class EqalizerTest : ObservableObject, IEqualizer
+        //{
+        //    private float _band0;
+        //    private float _band1;
+        //    private float _band2;
+        //    private float _band3;
+        //    private float _band4;
+        //    private float _band5;
+        //    private float _band6;
+        //    private float _band7;
+        //    private float _band8;
+        //    private float _band9;
+        //    private bool _enabled;
 
-            public float Band0
-            {
-                get { return _band0; }
-                set { _band0 = value; OnPropertyChanged();}
-            }
+        //    public float Band0
+        //    {
+        //        get { return _band0; }
+        //        set { _band0 = value; OnPropertyChanged();}
+        //    }
 
-            public float Band1
-            {
-                get { return _band1; }
-                set { _band1 = value; OnPropertyChanged(); }
-            }
+        //    public float Band1
+        //    {
+        //        get { return _band1; }
+        //        set { _band1 = value; OnPropertyChanged(); }
+        //    }
 
-            public float Band2
-            {
-                get { return _band2; }
-                set { _band2 = value; OnPropertyChanged(); }
-            }
+        //    public float Band2
+        //    {
+        //        get { return _band2; }
+        //        set { _band2 = value; OnPropertyChanged(); }
+        //    }
 
-            public float Band3
-            {
-                get { return _band3; }
-                set { _band3 = value; OnPropertyChanged(); }
-            }
+        //    public float Band3
+        //    {
+        //        get { return _band3; }
+        //        set { _band3 = value; OnPropertyChanged(); }
+        //    }
 
-            public float Band4
-            {
-                get { return _band4; }
-                set { _band4 = value; OnPropertyChanged();}
-            }
+        //    public float Band4
+        //    {
+        //        get { return _band4; }
+        //        set { _band4 = value; OnPropertyChanged();}
+        //    }
 
-            public float Band5
-            {
-                get { return _band5; }
-                set { _band5 = value; OnPropertyChanged();}
-            }
+        //    public float Band5
+        //    {
+        //        get { return _band5; }
+        //        set { _band5 = value; OnPropertyChanged();}
+        //    }
 
-            public float Band6
-            {
-                get { return _band6; }
-                set { _band6 = value; OnPropertyChanged();}
-            }
+        //    public float Band6
+        //    {
+        //        get { return _band6; }
+        //        set { _band6 = value; OnPropertyChanged();}
+        //    }
 
-            public float Band7
-            {
-                get { return _band7; }
-                set { _band7 = value; OnPropertyChanged(); }
-            }
+        //    public float Band7
+        //    {
+        //        get { return _band7; }
+        //        set { _band7 = value; OnPropertyChanged(); }
+        //    }
 
-            public float Band8
-            {
-                get { return _band8; }
-                set { _band8 = value; OnPropertyChanged(); }
-            }
+        //    public float Band8
+        //    {
+        //        get { return _band8; }
+        //        set { _band8 = value; OnPropertyChanged(); }
+        //    }
 
-            public float Band9
-            {
-                get { return _band9; }
-                set { _band9 = value; OnPropertyChanged(); }
-            }
+        //    public float Band9
+        //    {
+        //        get { return _band9; }
+        //        set { _band9 = value; OnPropertyChanged(); }
+        //    }
 
-            public bool Enabled
-            {
-                get { return _enabled; }
-                set { _enabled = value; OnPropertyChanged(); }
-            }
-        }
+        //    public bool Enabled
+        //    {
+        //        get { return _enabled; }
+        //        set { _enabled = value; OnPropertyChanged(); }
+        //    }
+        //}
 
         public class PresetCollection : UISyncObservableCollection<EqManagerPresent>
         {
@@ -124,8 +124,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [Inject]
         public EqManagerViewModel([NotNull] IRadioEnvironment environment, [NotNull] IRadioPlayer player)
         {
-            //TODO Equalizer = player.GetEqualizer();
-            Equalizer = new EqalizerTest();
+            Equalizer = player.GetEqualizer();
+            //Equalizer = new EqalizerTest();
             _equalizerProfileDatabase = environment.OpenSettings().EqualizerDatabase;
 
             Presets =
@@ -185,8 +185,19 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         {
             if (value == null || value.PresetType == EqManagerPresetType.Newlabel)
             {
-                if(_currentPresent != null && CurrentPresentName == _currentPresent.Name)
-                    CurrentPresentName = string.Empty;
+                if (_currentPresent == null || CurrentPresentName != _currentPresent.Name) return;
+                
+                CurrentPresentName = string.Empty;
+                Equalizer.Band0 = 0;
+                Equalizer.Band1 = 0;
+                Equalizer.Band2 = 0;
+                Equalizer.Band3 = 0;
+                Equalizer.Band4 = 0;
+                Equalizer.Band5 = 0;
+                Equalizer.Band6 = 0;
+                Equalizer.Band7 = 0;
+                Equalizer.Band8 = 0;
+                Equalizer.Band9 = 0;
                 return;
             }
 
@@ -209,6 +220,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
             switch (CurrentPresent.PresetType)
             {
                 case EqManagerPresetType.Preset:
+                    _equalizerProfileDatabase.DeleteProfile(CurrentPresent.OriginalName);
                     _equalizerProfileDatabase.NewProfile(CurrentPresentName, Equalizer);
                     CurrentPresent.Name = CurrentPresentName;
                     CurrentPresent.OriginalName = CurrentPresentName;
@@ -233,8 +245,11 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [CommandTarget]
         private void Delete()
         {
-            if (CurrentPresent != null)   
+            if (CurrentPresent != null)
+            {
                 _equalizerProfileDatabase.DeleteProfile(CurrentPresent.Name);
+                Presets.Remove(CurrentPresent);
+            }
             CurrentPresent = null;
         }
     }

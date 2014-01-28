@@ -228,4 +228,7 @@
   <data name="EqualizerLabel" xml:space="preserve">
     <value>Equalizer</value>
   </data>
+  <data name="SprectumHeaderLabel" xml:space="preserve">
+    <value>Sprectum</value>
+  </data>
 </root>

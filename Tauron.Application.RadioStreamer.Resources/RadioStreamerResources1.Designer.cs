@@ -358,6 +358,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sprectum ähnelt.
+        /// </summary>
+        public static string SprectumHeaderLabel {
+            get {
+                return ResourceManager.GetString("SprectumHeaderLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Unkown ähnelt.
         /// </summary>
         public static string UnkownString {

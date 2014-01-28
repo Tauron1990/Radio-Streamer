@@ -332,7 +332,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 				public void DeleteProfile(string name)
 				{
-					_profiles.Remove(name);
+				    if (_profiles.Remove(name))
+				        _isChanged = true;
 				}
 
 				protected override string EncodeImpl()
@@ -414,21 +415,21 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 			}
 
-			private const string ParallelCountQualityTasksKey = "ParallelCountQualityTasks";
-			public int ParallelCountQualityTasks
-			{
-				get
-				{
-					return Int32.Parse(GetValue(ParallelCountQualityTasksKey, "5"));
-				}
-				set
-				{
-					SetVaue(ParallelCountQualityTasksKey, value);
-				}
-			}
+            //private const string ParallelCountQualityTasksKey = "ParallelCountQualityTasks";
+            //public int ParallelCountQualityTasks
+            //{
+            //    get
+            //    {
+            //        return Int32.Parse(GetValue(ParallelCountQualityTasksKey, "5"));
+            //    }
+            //    set
+            //    {
+            //        SetVaue(ParallelCountQualityTasksKey, value);
+            //    }
+            //}
 
-			private const string LastUpdateKey = "LastUpdate";
-			private const string DownloadLocationKey = "DownloadLocation";
+            //private const string LastUpdateKey = "LastUpdate";
+            //private const string DownloadLocationKey = "DownloadLocation";
 
 
 			public override void Save()
@@ -457,11 +458,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		public const int BufferSize = 4096;
 
-		public const string RadioPlayer = "RadioPlayer";
-		public const string DataBaseUpdater = "DataBaseUpdater";
-		public const string RadioStationManager = "RadioStationManager";
-		public const string RadioConfigurationManager = "RadioConfigurationManager";
-		public const string QualityManager = "QualityManager";
+		//public const string RadioPlayer = "RadioPlayer";
+		//public const string DataBaseUpdater = "DataBaseUpdater";
+		//public const string RadioStationManager = "RadioStationManager";
+		//public const string RadioConfigurationManager = "RadioConfigurationManager";
+		//public const string QualityManager = "QualityManager";
 
         [Inject]
 	    private ITauronEnviroment _enviroment;

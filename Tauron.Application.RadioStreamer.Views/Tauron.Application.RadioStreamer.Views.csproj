@@ -92,6 +92,10 @@
     <Compile Include="RadioManager\RadioManager.xaml.cs">
       <DependentUpon>RadioManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="RadioPlayer\Sprectrum\SprectrumView.xaml.cs">
+      <DependentUpon>SprectrumView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioPlayer\Sprectrum\SprecturmViewModel.cs" />
     <Compile Include="ViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -116,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="RadioManager\RadioManager.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioPlayer\Sprectrum\SprectrumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -149,6 +157,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

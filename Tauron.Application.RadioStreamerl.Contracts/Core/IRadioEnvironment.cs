@@ -68,7 +68,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         [NotNull]
         IEqualizerProfileDatabase EqualizerDatabase { get; }
-		int ParallelCountQualityTasks { get; set; }
+		//int ParallelCountQualityTasks { get; set; }
 
 		void Save();
 	}

@@ -1,68 +1,21 @@
 ﻿using System;
 using System.Text;
-using System.Windows;
-using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
-using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.Helper;
 using Tauron.JetBrains.Annotations;
-using SprectrumPictureBox = System.Windows.Forms.PictureBox;
-using SprectrumPicture = System.Drawing.Bitmap;
-using Picture = System.Drawing.Image;
 using System.Diagnostics;
-using System.ComponentModel;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 {
-	public sealed class EffectManager : ObservableObject
-	{
-		public EffectManager([NotNull] IEqualizer eq, [NotNull] IRadioSettings settings)
-		{
-		    Equalizer = eq;
-		    _eqDatabase = settings.EqualizerDatabase;
-		    _profiles = CurrentDispatcher.Invoke(() => CollectionViewSource.GetDefaultView(_eqDatabase.Profiles));
-
-		    _profiles.CurrentChanged += EqualizerCurrentChanged;
-		}
-
-	    #region Equalizer
-		private IEqualizerProfileDatabase _eqDatabase;
-
-	    [NotNull]
-	    public IEqualizer Equalizer { get; set; }
-
-		private ICollectionView _profiles;
-
-	    [NotNull]
-	    public ICollectionView Profiles
-		{
-			get { return _profiles; }
-			set
-			{
-			    if (_profiles == value) return;
-
-			    _profiles = value;
-			    OnPropertyChanged();
-			}
-		}
-
-		private void EqualizerCurrentChanged([NotNull] object sender, [NotNull] EventArgs e)
-		{
-		    _eqDatabase.SetProfil((string) Profiles.CurrentItem, Equalizer);
-		}
-
-	    #endregion
-	}
-
 	[ExportViewModel(AppConstants.RadioViewModelName)]
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
 	public class RadioPlayerViewModel : ViewModelBase, IDisposable, INotifyBuildCompled
@@ -187,28 +140,18 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		private IRadioPlayer _player;
 		[Inject]
 		private IEventAggregator _events;
-		[InjectRadioEnviroment]
-		private IRadioEnvironment _enviroment;
 
 		private DispatcherTimer _bufferTimer;
-		private DispatcherTimer _sprectrumTimer;
 
         private static readonly string ResourceAssembly = "Tauron.Application.RadioStreamer.Resources";
 
         void INotifyBuildCompled.BuildCompled()
 		{
-			_effectManager = new EffectManager(_player.GetEqualizer(), _enviroment.OpenSettings());
-
 			_events.GetEvent<PlayRadioEvent, PlayRadioEventArgs>().Subscribe(PlayRadioEventHandler);
-			_events.GetEvent<PlayerViewVisibleChanged, bool>().Subscribe(PlayerVisibleChanged);
 
 			CurrentTitle = new RadioTitle();
 			_bufferTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, UpdateRadioStade, SystemDispatcher);
 			_bufferTimer.Start();
-
-            _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(250), DispatcherPriority.Normal, UpdateSprectrum, SystemDispatcher);
-			_sprectrumTimer.Stop();
-			CurrentDispatcher.Invoke(() => SprectrumPicture = new SprectrumPictureBox());
 
 			UpdateRecordingImage();
             ResetVolume();
@@ -216,63 +159,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
 		#region RadioStade
 
-		private void PlayerVisibleChanged(bool obj)
-		{
-		    IsVisble = obj ? Visibility.Visible : Visibility.Hidden;
-		}
 
-	    public Visibility IsVisble
-		{
-			get { return _sprectrumHost.Visibility; }
-			set
-			{
-				_sprectrumHost.Visibility = value;
-				UpdateSprectrum(null, null);
-			}
-		}
-
-		private System.Windows.Forms.Integration.WindowsFormsHost _sprectrumHost;
-		[CanBeNull,ControlTarget]
-		public System.Windows.Forms.Integration.WindowsFormsHost SprectrumHost
-		{
-			get { return _sprectrumHost; }
-			set
-			{
-			    if (_sprectrumPicture != null) if (value != null) value.Child = _sprectrumPicture;
-			    _sprectrumHost = value;
-			}
-		}
-
-
-		private string _currentSpectrum = "Balken";
-
-		private SprectrumPictureBox _sprectrumPicture;
-
-	    [NotNull]
-	    public SprectrumPictureBox SprectrumPicture
-		{
-			get { return _sprectrumPicture; }
-			set
-			{
-			    if (_sprectrumPicture == value) return;
-
-			    _sprectrumPicture = value;
-			    if (SprectrumHost != null) SprectrumHost.Child = value;
-			    OnPropertyChanged();
-			}
-		}
-
-	    private void UpdateSprectrum([CanBeNull] object sender, [CanBeNull] EventArgs e)
-	    {
-	        Picture pic = _sprectrumPicture.Image;
-
-	        _sprectrumPicture.Image = IsVisble == Visibility.Visible
-	                                      ? _player.CreateSprectrum(_currentSpectrum, _sprectrumPicture.Width,
-	                                                                _sprectrumPicture.Height)
-	                                      : null;
-
-	        if (pic != null) pic.Dispose();
-	    }
 
 	    private Stopwatch _time = new Stopwatch();
 
@@ -371,7 +258,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			{
 				ResetVolume();
 				CurrentTitle.State = PlayerStade.Playing;
-				_sprectrumTimer.Start();
 				_time.Start();
 			}
 			else
@@ -410,7 +296,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		[CommandTarget]
 		private void Stop()
 		{
-			_sprectrumTimer.Stop();
 			_time.Stop();
 
 			_player.Stop();
@@ -566,26 +451,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 				IsNotMuted = true;
 			}
 		}
-		#endregion
-
-		#region Effects
-
-		private EffectManager _effectManager;
-
-	    [NotNull]
-	    public EffectManager EffectManager
-		{
-			get { return _effectManager; }
-			set
-			{
-			    if (_effectManager == value) return;
-
-			    _effectManager = value;
-			    OnPropertyChanged();
-			}
-		}
-		
-
 		#endregion
 
 		public void Dispose()
