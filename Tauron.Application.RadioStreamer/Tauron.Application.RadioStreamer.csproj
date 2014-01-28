@@ -44,6 +44,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Player\Core\AdvancedChannel.cs" />
+    <Compile Include="Player\Core\BASSEngine.cs" />
+    <Compile Include="Player\Core\BASSException.cs" />
+    <Compile Include="Player\Core\Channel.cs" />
+    <Compile Include="Player\Core\ChannelBase.cs" />
+    <Compile Include="Player\Core\Delegates.cs" />
+    <Compile Include="Player\Core\Enums.cs" />
+    <Compile Include="Player\Core\Helper.cs" />
+    <Compile Include="Player\Core\Structs.cs" />
+    <Compile Include="Player\Core\WMAStream.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />
     <Compile Include="Player\MemoryManager.cs" />
@@ -99,7 +109,11 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Player\Core\BASSEngine.resx">
+      <DependentUpon>BASSEngine.cs</DependentUpon>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

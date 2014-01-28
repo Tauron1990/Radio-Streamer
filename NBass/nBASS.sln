@@ -1,0 +1,51 @@
+Microsoft Visual Studio Solution File, Format Version 7.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "nBASS", "nBASS\nBASS.csproj", "{92F8D588-5DFF-4327-95F9-C71E38EE692C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CDTest", "CDTest\CDTest.csproj", "{794B5AE2-4F95-48C9-9E23-21183D63D57C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ModTest", "ModTest\ModTest.csproj", "{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StreamTest", "StreamTest\StreamTest.csproj", "{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMATest", "WMATest\WMATest.csproj", "{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WMAEncoderTest", "WMAEncoderTest\WMAEncoderTest.csproj", "{C3473A46-54DF-4D72-875F-B538A9974BD7}"
+EndProject
+Global
+	GlobalSection(SolutionConfiguration) = preSolution
+		ConfigName.0 = Debug
+		ConfigName.1 = Release
+	EndGlobalSection
+	GlobalSection(ProjectDependencies) = postSolution
+	EndGlobalSection
+	GlobalSection(ProjectConfiguration) = postSolution
+		{92F8D588-5DFF-4327-95F9-C71E38EE692C}.Debug.ActiveCfg = Debug|.NET
+		{92F8D588-5DFF-4327-95F9-C71E38EE692C}.Debug.Build.0 = Debug|.NET
+		{92F8D588-5DFF-4327-95F9-C71E38EE692C}.Release.ActiveCfg = Release|.NET
+		{92F8D588-5DFF-4327-95F9-C71E38EE692C}.Release.Build.0 = Release|.NET
+		{794B5AE2-4F95-48C9-9E23-21183D63D57C}.Debug.ActiveCfg = Debug|.NET
+		{794B5AE2-4F95-48C9-9E23-21183D63D57C}.Debug.Build.0 = Debug|.NET
+		{794B5AE2-4F95-48C9-9E23-21183D63D57C}.Release.ActiveCfg = Release|.NET
+		{794B5AE2-4F95-48C9-9E23-21183D63D57C}.Release.Build.0 = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.ActiveCfg = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.Build.0 = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.ActiveCfg = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.Build.0 = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.ActiveCfg = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.Build.0 = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.ActiveCfg = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.Build.0 = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.ActiveCfg = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Debug.Build.0 = Debug|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.ActiveCfg = Release|.NET
+		{96F6737D-DFCA-49A6-B129-0FD1DCFFF9A4}.Release.Build.0 = Release|.NET
+		{C3473A46-54DF-4D72-875F-B538A9974BD7}.Debug.ActiveCfg = Debug|.NET
+		{C3473A46-54DF-4D72-875F-B538A9974BD7}.Debug.Build.0 = Debug|.NET
+		{C3473A46-54DF-4D72-875F-B538A9974BD7}.Release.ActiveCfg = Release|.NET
+		{C3473A46-54DF-4D72-875F-B538A9974BD7}.Release.Build.0 = Release|.NET
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+	EndGlobalSection
+	GlobalSection(ExtensibilityAddIns) = postSolution
+	EndGlobalSection
+EndGlobal
