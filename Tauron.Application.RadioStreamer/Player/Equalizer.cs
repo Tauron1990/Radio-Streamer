@@ -5,14 +5,8 @@ namespace Tauron.Application.RadioStreamer.Player
 {
     public class Equalizer : ObservableObject, IEqualizer
     {
-        private class BandValue
-        {
-            public int Handle { get; set; }
-            public float Gain { get; set; }
-        }
-
-        private int _handle = -1;
         private BandValue[] _bands = new BandValue[10];
+
         private float[] _cenders =
         {
             31,
@@ -27,6 +21,9 @@ namespace Tauron.Application.RadioStreamer.Player
             16000
         };
 
+        private bool _enabled;
+        private int _handle = -1;
+
         public Equalizer()
         {
             for (int i = 0; i < _bands.Length; i++)
@@ -35,11 +32,10 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
-        private bool _enabled;
         public bool Enabled
         {
             get { return _enabled; }
-            set 
+            set
             {
                 if (value && !_enabled)
                     Activate();
@@ -51,12 +47,113 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
+        public float Band0
+        {
+            get { return GetGain(0); }
+            set
+            {
+                UpdateGain(0, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band1
+        {
+            get { return GetGain(1); }
+            set
+            {
+                UpdateGain(1, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band2
+        {
+            get { return GetGain(2); }
+            set
+            {
+                UpdateGain(2, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band3
+        {
+            get { return GetGain(3); }
+            set
+            {
+                UpdateGain(3, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band4
+        {
+            get { return GetGain(4); }
+            set
+            {
+                UpdateGain(4, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band5
+        {
+            get { return GetGain(5); }
+            set
+            {
+                UpdateGain(5, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band6
+        {
+            get { return GetGain(6); }
+            set
+            {
+                UpdateGain(6, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band7
+        {
+            get { return GetGain(7); }
+            set
+            {
+                UpdateGain(7, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band8
+        {
+            get { return GetGain(8); }
+            set
+            {
+                UpdateGain(8, value);
+                OnPropertyChanged();
+            }
+        }
+
+        public float Band9
+        {
+            get { return GetGain(9); }
+            set
+            {
+                UpdateGain(9, value);
+                OnPropertyChanged();
+            }
+        }
+
         internal void Init(int handle)
         {
             _handle = handle;
             if (Enabled)
                 Activate();
         }
+
         internal void Free()
         {
             _handle = -1;
@@ -74,7 +171,7 @@ namespace Tauron.Application.RadioStreamer.Player
                 _bands[i].Handle = Bass.BASS_ChannelSetFX(_handle, BASSFXType.BASS_FX_DX8_PARAMEQ, 0);
 
                 eq.fCenter = _cenders[i];
-				
+
                 Bass.BASS_FXSetParameters(_bands[i].Handle, eq);
             }
 
@@ -89,11 +186,12 @@ namespace Tauron.Application.RadioStreamer.Player
             OnPropertyChangedExplicit("Band8");
             OnPropertyChangedExplicit("Band9");
         }
+
         private void Deactivate()
         {
             if (_handle == -1) return;
 
-            foreach (var t in _bands)
+            foreach (BandValue t in _bands)
             {
                 Bass.BASS_ChannelRemoveFX(_handle, t.Handle);
             }
@@ -102,10 +200,10 @@ namespace Tauron.Application.RadioStreamer.Player
         private void UpdateGain(int band, float gain)
         {
             var eq = new BASS_DX8_PARAMEQ();
-            var bandVal = _bands[band];
+            BandValue bandVal = _bands[band];
             bandVal.Gain = gain;
 
-            if(!_enabled) return;
+            if (!_enabled) return;
 
             int handle = bandVal.Handle;
 
@@ -114,9 +212,10 @@ namespace Tauron.Application.RadioStreamer.Player
             eq.fGain = gain;
             Bass.BASS_FXSetParameters(handle, eq);
         }
+
         private float GetGain(int band)
         {
-            var bandValue = _bands[band];
+            BandValue bandValue = _bands[band];
 
             if (!_enabled) return bandValue.Gain;
 
@@ -126,55 +225,10 @@ namespace Tauron.Application.RadioStreamer.Player
             return Bass.BASS_FXGetParameters(handle, eq) ? eq.fGain : bandValue.Gain;
         }
 
-        public float Band0 
+        private class BandValue
         {
-            get { return GetGain(0); }
-            set { UpdateGain(0, value); OnPropertyChanged(); } 
-        }
-        public float Band1
-        {
-            get { return GetGain(1); }
-            set { UpdateGain(1, value); OnPropertyChanged(); }
-        }
-        public float Band2
-        {
-            get { return GetGain(2); }
-            set { UpdateGain(2, value); OnPropertyChanged(); }
-        }
-        public float Band3
-        {
-            get { return GetGain(3); }
-            set { UpdateGain(3, value); OnPropertyChanged(); }
-        }
-        public float Band4
-        {
-            get { return GetGain(4); }
-            set { UpdateGain(4, value); OnPropertyChanged(); }
-        }
-        public float Band5
-        {
-            get { return GetGain(5); }
-            set { UpdateGain(5, value); OnPropertyChanged(); }
-        }
-        public float Band6
-        {
-            get { return GetGain(6); }
-            set { UpdateGain(6, value); OnPropertyChanged(); }
-        }
-        public float Band7
-        {
-            get { return GetGain(7); }
-            set { UpdateGain(7, value); OnPropertyChanged(); }
-        }
-        public float Band8
-        {
-            get { return GetGain(8); }
-            set { UpdateGain(8, value); OnPropertyChanged(); }
-        }
-        public float Band9
-        {
-            get { return GetGain(9); }
-            set { UpdateGain(9, value); OnPropertyChanged(); }
+            public int Handle { get; set; }
+            public float Gain { get; set; }
         }
     }
 }

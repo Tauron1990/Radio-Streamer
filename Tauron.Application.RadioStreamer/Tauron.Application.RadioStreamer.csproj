@@ -48,9 +48,12 @@
     <Compile Include="Player\Core\BASSEngine.cs" />
     <Compile Include="Player\Core\BASSException.cs" />
     <Compile Include="Player\Core\Channel.cs" />
+    <Compile Include="Player\Core\Channel3DAttributes.cs" />
+    <Compile Include="Player\Core\ChannelAttributes.cs" />
     <Compile Include="Player\Core\ChannelBase.cs" />
     <Compile Include="Player\Core\Delegates.cs" />
     <Compile Include="Player\Core\Enums.cs" />
+    <Compile Include="Player\Core\FX.cs" />
     <Compile Include="Player\Core\Helper.cs" />
     <Compile Include="Player\Core\Structs.cs" />
     <Compile Include="Player\Core\WMAStream.cs" />

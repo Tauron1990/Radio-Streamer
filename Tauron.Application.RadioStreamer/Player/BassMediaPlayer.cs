@@ -2,6 +2,7 @@
 using System.Drawing;
 using System.IO;
 using System.Net;
+using System.Text.RegularExpressions;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
@@ -19,9 +20,9 @@ namespace Tauron.Application.RadioStreamer.Player
     [ExportRadioPlayer]
     public sealed class BassMediaPlayer : IDisposable, IRadioPlayer
     {
-        private SYNCPROC _newMetaDelegate;
         private SYNCPROC _downlodCompledDelegate;
         private MemoryManager _memoryManager;
+        private SYNCPROC _newMetaDelegate;
 
         private RadioPlayerPlay _play;
         private RadioPlayerStop _stop;
@@ -45,6 +46,12 @@ namespace Tauron.Application.RadioStreamer.Player
 
         #region Implementation of IRadioPlayer
 
+        private readonly Visuals _visuals;
+        private Equalizer _eq = new Equalizer();
+        private int _handle;
+        private int _mixer;
+        private IScript _script;
+        private string _sourceUrl;
         private bool _supportRecording = true;
 
         public bool Activate()
@@ -55,7 +62,7 @@ namespace Tauron.Application.RadioStreamer.Player
             if (flag)
             {
                 Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                           "DLL".CombinePath("PlugIns")));
+                    "DLL".CombinePath("PlugIns")));
             }
 
             return flag;
@@ -68,12 +75,6 @@ namespace Tauron.Application.RadioStreamer.Player
 
             Bass.BASS_Free();
         }
-
-        private int _handle;
-        private int _mixer;
-        private readonly Visuals _visuals;
-        private IScript _script;
-        private string _sourceUrl;
 
         public bool Play(RadioQuality url, [NotNull] IScript script)
         {
@@ -122,6 +123,39 @@ namespace Tauron.Application.RadioStreamer.Player
             _stop.Publish(EventArgs.Empty);
         }
 
+        public double GetBufferPercentage()
+        {
+            double progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_WMA_BUFFER);
+            if (progress == -1) // not a WMA stream, fallback to default...
+                progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_BUFFER)
+                           *100d/Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END);
+
+            return progress;
+
+            //return Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END) / 100d
+            //* Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD);
+        }
+
+        public void SetVolume(double volume)
+        {
+            if (_mixer >= 0) return;
+
+            if (volume < 0) volume = 0;
+            if (volume > 100) volume = 100;
+
+            Bass.BASS_ChannelSetAttribute(_mixer, BASSAttribute.BASS_ATTRIB_VOL, (float) (volume/100));
+        }
+
+        public IEqualizer GetEqualizer()
+        {
+            return _eq;
+        }
+
+        public string GetLastError()
+        {
+            return Bass.BASS_ErrorGetCode().ToString();
+        }
+
         private void DownlodCompled(int handle, int channel, int data, IntPtr user)
         {
             //bool breaked = _handle != 0;
@@ -130,13 +164,92 @@ namespace Tauron.Application.RadioStreamer.Player
 
         #region Recording
 
+        private static readonly Color Main = Color.Black;
+        private static readonly Color Sub1 = Color.DarkRed;
+        private static readonly Color Sub2 = Color.LightGray;
+        private WebClient _client = new WebClient();
+        private string _currentName;
+        private string _ilegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
         private bool _isRecording;
         private bool _isRecordingEnabled;
         private BaseEncoder _lameencoder;
 
-        private string _currentName;
-        private string _recordingName;
         private string _location;
+        private string _recordingName;
+
+        private TAG_INFO _tag;
+
+        public bool SupportRecording
+        {
+            get { return _supportRecording; }
+        }
+
+        public bool IsRecording
+        {
+            get { return _isRecording; }
+        }
+
+        public void StartRecording(string location)
+        {
+            _location = location;
+            _isRecordingEnabled = true;
+
+            Switch();
+        }
+
+        public void StopRecording()
+        {
+            if (!_isRecordingEnabled) return;
+
+            _isRecordingEnabled = false;
+            _isRecording = false;
+
+            _lameencoder.Stop(true);
+        }
+
+        public Bitmap CreateSprectrum(string playerCode, int width, int height)
+        {
+            switch (playerCode)
+            {
+                case "Graph":
+                    return (_visuals.CreateSpectrum(_mixer, width, height, Main, Sub1, Sub2, false, true, true));
+                case "Balken":
+                    return (_visuals.CreateSpectrumBean(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
+                case "Punkt":
+                    return
+                        (_visuals.CreateSpectrumDot(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
+                case "Elipse":
+                    return
+                        (_visuals.CreateSpectrumEllipse(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
+                case "Linie":
+                    return
+                        (_visuals.CreateSpectrumLine(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
+                case "Linien-Spitze":
+                    return
+                        (_visuals.CreateSpectrumLinePeak(_mixer, width, height, Main, Sub1, Color.DarkOrange, Sub2, 5, 3,
+                            3, 3, false, true, true));
+                case "Welle":
+                    return (_visuals.CreateSpectrumWave(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
+                default:
+                    return
+                        (_visuals.CreateSpectrumText(_mixer, width, height, Main, Sub1, Sub2, "Unknow", false, true,
+                            true));
+            }
+        }
+
+        public string[] GetSpectrumCodes()
+        {
+            return new[]
+            {
+                "Graph",
+                "Balken",
+                "Punkt",
+                "Elipse",
+                "Linie",
+                "Linien-Spitze",
+                "Welle"
+            };
+        }
 
         private void InitEncode()
         {
@@ -152,10 +265,6 @@ namespace Tauron.Application.RadioStreamer.Player
                 LAME_Quality = EncoderLAME.LAMEQuality.Quality
             };
         }
-
-        private WebClient _client = new WebClient();
-
-        private TAG_INFO _tag;
 
         private void Switch()
         {
@@ -183,8 +292,8 @@ namespace Tauron.Application.RadioStreamer.Player
 
             _currentName = title;
 
-            if(_tag == null)
-                _tag = new TAG_INFO { title = title, artist = "Unkown" };
+            if (_tag == null)
+                _tag = new TAG_INFO {title = title, artist = "Unkown"};
 
             _tag.comment = "Encoded by Bass.Net and Lame";
             _tag.encodedby = "Bass.Net and Lame";
@@ -220,11 +329,9 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
-        private string _ilegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
-
         private string VerifyPath(string name)
         {
-            name = System.Text.RegularExpressions.Regex.Replace(name, _ilegalFileNamePattern, string.Empty).Trim();
+            name = Regex.Replace(name, _ilegalFileNamePattern, string.Empty).Trim();
 
             string location = Path.GetFullPath(Path.Combine(_location, name + ".mp3"));
             var info = new DirectoryInfo(Path.GetDirectoryName(location));
@@ -240,110 +347,7 @@ namespace Tauron.Application.RadioStreamer.Player
             Switch();
         }
 
-        public bool SupportRecording
-        {
-            get { return _supportRecording; }
-        }
-
-        public bool IsRecording
-        {
-            get { return _isRecording; }
-        }
-
-        public void StartRecording(string location)
-        {
-            _location = location;
-            _isRecordingEnabled = true;
-
-            Switch();
-        }
-
-        public void StopRecording()
-        {
-            if (!_isRecordingEnabled) return;
-            
-            _isRecordingEnabled = false;
-            _isRecording = false;
-
-            _lameencoder.Stop(true);
-        }
-
-        private static readonly Color Main = Color.Black;
-        private static readonly Color Sub1 = Color.DarkRed;
-        private static readonly Color Sub2 = Color.LightGray;
-
-        public Bitmap CreateSprectrum(string playerCode, int width, int height)
-        {
-            switch (playerCode)
-            {
-                case "Graph":
-                    return (_visuals.CreateSpectrum(_mixer, width, height, Main, Sub1, Sub2, false, true, true));
-                case "Balken":
-                    return (_visuals.CreateSpectrumBean(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
-                case "Punkt":
-                    return (_visuals.CreateSpectrumDot(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Elipse":
-                    return (_visuals.CreateSpectrumEllipse(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Linie":
-                    return (_visuals.CreateSpectrumLine(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Linien-Spitze":
-                    return (_visuals.CreateSpectrumLinePeak(_mixer, width, height, Main, Sub1, Color.DarkOrange, Sub2, 5, 3, 3, 3, false, true, true));
-                case "Welle":
-                    return (_visuals.CreateSpectrumWave(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
-                default:
-                    return (_visuals.CreateSpectrumText(_mixer, width, height, Main, Sub1, Sub2, "Unknow", false, true, true));
-            }
-        }
-
-        public string[] GetSpectrumCodes()
-        {
-            return new[]
-			       	{
-						"Graph",
-						"Balken",
-						"Punkt",
-						"Elipse",
-						"Linie",
-						"Linien-Spitze",
-						"Welle"
-			       	};
-        }
-
         #endregion
-
-        public double GetBufferPercentage()
-        {
-            double progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_WMA_BUFFER);
-            if (progress == -1) // not a WMA stream, fallback to default...
-                progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_BUFFER)
-                           *100d/Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END);
-
-            return progress;
-
-            //return Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END) / 100d
-            //* Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD);
-        }
-
-        public void SetVolume(double volume)
-        {
-            if (_mixer >= 0) return;
-
-            if (volume < 0) volume = 0;
-            if (volume > 100) volume = 100;
-
-            Bass.BASS_ChannelSetAttribute(_mixer, BASSAttribute.BASS_ATTRIB_VOL, (float) (volume/100));
-        }
-
-        private Equalizer _eq = new Equalizer();
-        public IEqualizer GetEqualizer()
-        {
-            return _eq;
-        }
-
-        public string GetLastError()
-        {
-            return Bass.BASS_ErrorGetCode().ToString();
-        }
 
         #endregion
 
