@@ -2,6 +2,7 @@ using System;
 using System.ComponentModel;
 using System.Runtime.InteropServices;
 using Tauron.JetBrains.Annotations;
+using Un4seen.Bass;
 
 namespace Tauron.Application.RadioStreamer.Player.Core
 {
@@ -32,7 +33,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         ///     you should still set the other arguments as you would do
         ///     normally.
         /// </remarks>
-        public BASSEngine(int device, int freq, DeviceSetupFlags flags, [CanBeNull] IWindow window)
+        public BASSEngine(int device, int freq, BASSInit flags, [CanBeNull] IWindow window)
         {
             Init(device, freq, flags, window != null ? window.Handle : IntPtr.Zero);
             _window = window;
@@ -672,14 +673,14 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         ///     paramaters for each Global Const, simply pass the BASSEAXPreset value to this function
         ///     instead of BASS_SetEasParamaets as you would to in C++
         /// </summary>
-        public BASSEAXPreset EAXPreset
+        public EAXPreset EAXPreset
         {
             set
             {
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                if (SetEAXParametersEx(value) == 0) throw new BASSException();
+                if (!SetEAXParametersEx(value)) throw new BASSException();
             }
         }
 
@@ -689,14 +690,14 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         ///     created or loaded samples/streams/musics, not those that already exist.
         ///     Requires DirectX 7 or above.
         /// </summary>
-        public Algorithm3DMode Algorithm3D
+        public BASS3DAlgorithm Algorithm3D
         {
             set
             {
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                _Set3DAlgorithm((int) value);
+                Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_3DALGORITHM, (int)value);
             }
         }
 
@@ -707,12 +708,12 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         {
             get
             {
-                if (_disposed)
-                    throw new ObjectDisposedException("BASSEngine");
+                if (_disposed) throw new ObjectDisposedException("BASSEngine");
 
-                float distf, rollf, doppf;
-                if (_Get3DFactors(out distf, out rollf, out doppf) == 0)
-                    throw new BASSException();
+                float distf = 0;
+                float rollf = 0;
+                float doppf = 0;
+                if (!Bass.BASS_Get3DFactors(ref distf, ref rollf, ref doppf)) throw new BASSException();
                 return new BASS3DFactors(distf, rollf, doppf);
             }
             set
@@ -720,11 +721,11 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                float distf = value.distf;
-                float rollf = value.rollf;
-                float doppf = value.doppf;
+                float distf = value.Distf;
+                float rollf = value.Rollf;
+                float doppf = value.Doppf;
 
-                if (_Set3DFactors(ref distf, ref rollf, ref doppf) == 0)
+                if (!Bass.BASS_Set3DFactors(distf, rollf, doppf))
                     throw new BASSException();
             }
         }
@@ -739,12 +740,11 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                Vector3D pos, vel, front, top;
-                //Vector3D pos = new Vector3D();
-                //Vector3D vel  = new Vector3D();
-                //Vector3D front = new Vector3D();
-                //Vector3D top = new Vector3D();;
-                if (_Get3DPosition(out pos, out vel, out front, out top) == 0)
+                var pos = new BASS_3DVECTOR();
+                var vel = new BASS_3DVECTOR();
+                var front = new BASS_3DVECTOR();
+                var top = new BASS_3DVECTOR(); ;
+                if (!Bass.BASS_Get3DPosition(pos, vel, front, top))
                     throw new BASSException();
                 return new BASS3DPosition(pos, vel, top, front);
             }
@@ -753,11 +753,11 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                Vector3D pos = value.pos;
-                Vector3D vel = value.vel;
-                Vector3D front = value.front;
-                Vector3D top = value.top;
-                if (_Set3DPosition(ref pos, ref vel, ref front, ref top) == 0)
+                BASS_3DVECTOR pos = value.Pos;
+                BASS_3DVECTOR vel = value.Vel;
+                BASS_3DVECTOR front = value.Front;
+                BASS_3DVECTOR top = value.Top;
+                if (!Bass.BASS_Set3DPosition(pos, vel, front, top))
                     throw new BASSException();
             }
         }
@@ -789,7 +789,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             }
         }
 
-        private int SetEAXParametersEx(BASSEAXPreset preset) //object refPreset
+        private bool SetEAXParametersEx(EAXPreset preset) //object refPreset
         {
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
@@ -797,7 +797,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             //  
             switch (preset)
             {
-                case BASSEAXPreset.Generic:
+                case EAXPreset.EAX_PRESET_GENERIC:
                     return _SetEAXParameters((int) EAXEnvironment.Generic, 0.5F, 1.493F, 0.5F);
                 case BASSEAXPreset.PaddedCell:
                     return _SetEAXParameters((int) EAXEnvironment.PaddedCell, 0.25F, 0.1F, 0F);

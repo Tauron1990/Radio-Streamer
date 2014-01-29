@@ -1,47 +1,44 @@
 #define TESTING
 
 using System;
+using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Fx;
 
 namespace Tauron.Application.RadioStreamer.Player.Core
 {
 	/// <summary>
 	/// Summary description for FX.
 	/// </summary>
+	[PublicAPI]
 	public class FX
 	{
-		private int _handle;
-		private ChannelFX _type;
+	    public int Priority { get; set; }
+	    private readonly int _handle;
+		private readonly BASSFXType _type;
 
-		internal FX(int handle, ChannelFX type)
+        internal FX(int handle, BASSFXType type, int priority)
 		{
-			_handle = handle;
+            Priority = priority;
+            _handle = handle;
 			_type = type;
 		}
 
 		/// <summary>
 		/// Gets the _type of effect that has been applied
 		/// </summary>
-		public ChannelFX FXType 
+		public BASSFXType FXType 
 		{
 			get {return _type;}
 		}
 
 		internal int Handle 
 		{
-			get { return this._handle;}
+			get { return _handle;}
 		}
 
 
 
-		public enum FXPhase 
-		{
-			Negative180 = 0,
-			Negative90 = 1,
-			Zero = 2,
-			Positive90 = 3,
-			Positive180 = 4,
-		}
 		
         //// Set the parameters of a DX8 effect.
         //// _handle : FX _handle
@@ -55,41 +52,84 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         //[DllImport("bass.dll", EntryPoint = "BASS_FXGetParameters")]
         //static extern int _GetParameters(IntPtr handle, IntPtr fxparam); //return bool
 
-		public object Parameters 
+	    [CanBeNull]
+	    public object Parameters 
 		{
 			get 
 			{
-				object param = null;
-				switch (FXType)
-				{
-					case ChannelFX.Chorus:
-						param = new BASS_DX8_CHORUS();
-						break;
-					case ChannelFX.Compressor:
-						param = new BASS_DX8_COMPRESSOR();
-						break;
-					case ChannelFX.Distortion:
-						param = new BASS_DX8_DISTORTION();
-						break;
-					case ChannelFX.Echo:
-						param = new BASS_DX8_ECHO();
-						break;
-					case ChannelFX.Flanger:
-						param = new BASS_DX8_FLANGER();
-						break;
-					case ChannelFX.Gargle:
-						param = new BASS_DX8_GARGLE();
-						break;
-					case ChannelFX.I3DL2Reverb:
-						param = new BASS_DX8_I3DL2REVERB();
-						break;
-					case ChannelFX.ParametricEQ:
-						param = new BASS_DX8_PARAMEQ();
-						break;
-					case ChannelFX.Reverb:
-						param = new BASS_DX8_REVERB();
-						break;
-				}
+				object param;
+
+			    switch (FXType)
+			    {
+                    case BASSFXType.BASS_FX_DX8_CHORUS:
+                        param = new BASS_DX8_CHORUS();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_COMPRESSOR:
+                        param = new BASS_DX8_COMPRESSOR();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_DISTORTION:
+                        param = new BASS_DX8_DISTORTION();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_ECHO:
+                        param = new BASS_DX8_ECHO();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_FLANGER:
+                        param = new BASS_DX8_FLANGER();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_GARGLE:
+                        param = new BASS_DX8_GARGLE();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_I3DL2REVERB:
+                        param = new BASS_DX8_I3DL2REVERB();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_PARAMEQ:
+                        param = new BASS_DX8_PARAMEQ();
+                        break;
+                    case BASSFXType.BASS_FX_DX8_REVERB:
+                        param = new BASS_DX8_REVERB();
+                        break;
+			        case BASSFXType.BASS_FX_BFX_ROTATE:
+			            param = new BASS_BFX_ROTATE();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_VOLUME:
+			            param = new BASS_BFX_VOLUME();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_PEAKEQ:
+			            param = new BASS_BFX_PEAKEQ();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_MIX:
+			            param = new BASS_BFX_MIX();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_DAMP:
+			            param = new BASS_BFX_DAMP();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_AUTOWAH:
+			            param = new BASS_BFX_AUTOWAH();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_PHASER:
+			            param = new BASS_BFX_PHASER();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_CHORUS:
+			            param = new BASS_BFX_CHORUS();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_DISTORTION:
+			            param = new BASS_BFX_DISTORTION();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_COMPRESSOR2:
+			            param = new BASS_BFX_COMPRESSOR2();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_VOLUME_ENV:
+			            param = new BASS_BFX_VOLUME_ENV();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_BQF:
+			            param = new BASS_BFX_BQF();
+			            break;
+			        case BASSFXType.BASS_FX_BFX_ECHO4:
+			            param = new BASS_BFX_ECHO4();
+			            break;
+			        default:
+			            throw new NotSupportedException();
+			    }
 
 			    if(!Bass.BASS_FXGetParameters(_handle, param))
                     throw new BASSException();
@@ -105,18 +145,18 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 //Marshal.FreeHGlobal(alloc);
 				return param;
 			}
-			set 
-			{
-                //IntPtr paramptr = Marshal.AllocHGlobal(Marshal.SizeOf(value));
-                //Marshal.StructureToPtr(value, paramptr, true);
-                //if (_SetParameters( this._handle, paramptr) == 0)
-                //{
-                //    Marshal.FreeHGlobal(paramptr);
-                //    throw new BASSException();
-                //} else Marshal.FreeHGlobal(paramptr);
+	        set
+	        {
+	            //IntPtr paramptr = Marshal.AllocHGlobal(Marshal.SizeOf(value));
+	            //Marshal.StructureToPtr(value, paramptr, true);
+	            //if (_SetParameters( this._handle, paramptr) == 0)
+	            //{
+	            //    Marshal.FreeHGlobal(paramptr);
+	            //    throw new BASSException();
+	            //} else Marshal.FreeHGlobal(paramptr);
 
-            Bass.BASS_ChannelSetFX()
-			}
+	            if (!Bass.BASS_FXSetParameters(_handle, value)) throw new BASSException();
+	        }
 		}
 
 

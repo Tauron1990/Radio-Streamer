@@ -9,59 +9,15 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     /// </summary>
     public class BASSException : Exception
     {
-        public enum Error
-        {
-            BASSOk = 0, // all is OK
-            MEM = 1, // memory error
-            FILEOPEN = 2, // can// t open the file
-            DRIVER = 3, // can// t find a free sound driver
-            BUFLOST = 4, // the sample buffer was lost - please report this!
-            HANDLE = 5, // invalid handle
-            FORMAT = 6, // unsupported format
-            POSITION = 7, // invalid playback position
-            INIT = 8, // BASS_Init has not been successfully called
-            START = 9, // BASS_Start has not been successfully called
-            INITCD = 10, // can// t initialize CD
-            CDINIT = 11, // BASS_CDInit has not been successfully called
-            NOCD = 12, // no CD in drive
-            CDTRACK = 13, // can// t play the selected CD track
-            ALREADY = 14, // already initialized
-            CDVOL = 15, // CD has no volume control
-            NOPAUSE = 16, // not paused
-            NOTAUDIO = 17, // not an audio track
-            NOCHAN = 18, // can// t get a free channel
-            ILLTYPE = 19, // an illegal type was specified
-            ILLPARAM = 20, // an illegal parameter was specified
-            NO3D = 21, // no 3D support
-            NOEAX = 22, // no EAX support
-            DEVICE = 23, // illegal device number
-            NOPLAY = 24, // not playing
-            FREQ = 25, // illegal sample rate
-            NOA3D = 26, // A3D.DLL is not installed
-            NOTFILE = 27, // the stream is not a file stream (WAV/MP3)
-            NOHW = 29, // no hardware voices available
-            EMPTY = 31, // the MOD music has no sequence data
-            NONET = 32, // no internet connection could be opened
-            CREATE = 33, // couldn// t create the file
-            NOFX = 34, // effects are not enabled
-            PLAYING = 35, // the channel is playing
-            NOTAVAIL = 37, // requested data is not available
-            DECODE = 38, // the channel is a "decoding channel"
-            DX = 39, // a sufficient DirectX version is not installed
-            TIMEOUT = 40, // connection timedout
-            WmaLicense = 1000, // the file is protected
-            UNKNOWN = -1, // some other mystery error	
-        }
-
-        private readonly Error _err;
+        private readonly BASSError _err;
 
         public BASSException() : this(GetErrorCode())
         {
         }
 
-        private BASSException(int code) : base(GetErrorDescription((Error) code))
+        private BASSException(int code) : base(GetErrorDescription((BASSError) code))
         {
-            _err = (Error) code;
+            _err = (BASSError)code;
         }
 
         /// <summary>
@@ -91,7 +47,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         }
 
         [NotNull]
-        protected static string GetErrorDescription(Error error)
+        protected static string GetErrorDescription(BASSError error)
         {
             switch (error)
             {

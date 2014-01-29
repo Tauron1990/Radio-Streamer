@@ -1,5 +1,4 @@
 using System;
-using System.Runtime.InteropServices;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
@@ -8,6 +7,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     /// <summary>
     ///     AdvancedChannel this class is not directly used
     /// </summary>
+    [PublicAPI]
     public abstract class AdvancedChannel : Channel
     {
         private bool _disposed;
@@ -76,8 +76,11 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException(ToString());
 
-                if(_streamendstore )
-                _streamendstore += value;
+                if (_streamendstore == null) _streamendstore = value;
+                else _streamendstore += value;
+
+                if (_getSync != null) return;
+
                 _getSync += OnGetSyncCallBack;
                 _hsync = Bass.BASS_ChannelSetSync(Handle, BASSSync.BASS_SYNC_END, 0, _getSync, IntPtr.Zero);
             }
@@ -86,9 +89,9 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException(ToString());
 
-                _streamendstore -= value;
-                _getSync -= OnGetSyncCallBack;
-                Bass.BASS_ChannelRemoveSync(Handle, _hsync);
+                if(_streamendstore != null)
+// ReSharper disable once DelegateSubtraction
+                    _streamendstore -= value;
             }
         }
 
@@ -175,10 +178,9 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// </summary>
         /// <param name="buffer">A buffer to place retrieved data</param>
         /// <param name="length">length in bytes</param>
-        public int GetData(short[] buffer, int length)
+        public int GetData([NotNull] short[] buffer, int length)
         {
-            if (_disposed)
-                throw new ObjectDisposedException(ToString());
+            if (_disposed) throw new ObjectDisposedException(ToString());
 
             int output = Bass.BASS_ChannelGetData(Handle, buffer, length);
             if (output < 0) throw new BASSException();
@@ -220,8 +222,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                     throw new ObjectDisposedException(ToString());
 
                 int result = Bass.BASS_ChannelGetLevel(Handle);
-                if (result < 0) return 0; /*throw new BASSException();*/
-                return Utils.HighWord32(result);
+                return result < 0 ? 0 : Utils.HighWord32(result);
             }
         }
 
@@ -233,31 +234,26 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// </summary>
         /// <param name="chanfx">ChannelFX</param>
         /// <returns>An FX object</returns>
-        public FX SetFX(ChannelFX chanfx)
+        [NotNull]
+        public FX SetFX(BASSFXType chanfx, int priority)
         {
-            if (_disposed)
-                throw new ObjectDisposedException(ToString());
+            if (_disposed) throw new ObjectDisposedException(ToString());
 
-            IntPtr fx = _SetFX(base.Handle, (int) chanfx);
-            if (fx == IntPtr.Zero) throw new BASSException();
-            return new FX(fx, chanfx);
+            int fx = Bass.BASS_ChannelSetFX(Handle, chanfx, priority);
+            if (fx == 0) throw new BASSException();
+            return new FX(fx, chanfx, priority);
         }
-
-        [DllImport("bass.dll", EntryPoint = "BASS_ChannelRemoveFX")]
-        private static extern int _RemoveFX(IntPtr handle, IntPtr fx); //OK
 
         /// <summary>
         ///     Remove a DX8 effect from a channel. Can only be used when the
         ///     channel is not playing.
         /// </summary>
         /// <param name="fx">The FX object to remove</param>
-        public void RemoveFX(FX fx)
+        public void RemoveFX([NotNull] FX fx)
         {
-            if (_disposed)
-                throw new ObjectDisposedException(ToString());
+            if (_disposed) throw new ObjectDisposedException(ToString());
 
-            if (_RemoveFX(base.Handle, fx.Handle) == 0)
-                throw new BASSException();
+            if (!Bass.BASS_ChannelRemoveFX(Handle, fx.Handle)) throw new BASSException();
         }
 #endif
 
