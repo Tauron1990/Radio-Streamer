@@ -56,7 +56,6 @@
     <Compile Include="Player\Core\FX.cs" />
     <Compile Include="Player\Core\Helper.cs" />
     <Compile Include="Player\Core\Structs.cs" />
-    <Compile Include="Player\Core\WMAStream.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />
     <Compile Include="Player\MemoryManager.cs" />

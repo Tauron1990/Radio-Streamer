@@ -2,6 +2,7 @@
 
 using System;
 using System.Runtime.InteropServices;
+using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
 namespace Tauron.Application.RadioStreamer.Player.Core
@@ -63,10 +64,10 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     /// </summary>
     public class BASS3DPosition
     {
-        public BASS_3DVECTOR front;
-        public BASS_3DVECTOR pos;
-        public BASS_3DVECTOR top;
-        public BASS_3DVECTOR vel;
+        private BASS_3DVECTOR _front;
+        private BASS_3DVECTOR _pos;
+        private BASS_3DVECTOR _top;
+        private BASS_3DVECTOR _vel;
 
         /// <summary>
         ///     Use with setting and getting 3DPosition
@@ -75,18 +76,42 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <param name="vel">listener's velocity, used to calculate doppler effect</param>
         /// <param name="top">Direction that listener's front is pointing</param>
         /// <param name="front">Direction that listener's top is pointing </param>
-        public BASS3DPosition(BASS_3DVECTOR pos, BASS_3DVECTOR vel, BASS_3DVECTOR top, BASS_3DVECTOR front)
+        public BASS3DPosition([NotNull] BASS_3DVECTOR pos, [NotNull] BASS_3DVECTOR vel, [NotNull] BASS_3DVECTOR top, [NotNull] BASS_3DVECTOR front)
         {
-            this.pos = pos;
-            this.vel = vel;
-            this.top = top;
-            this.front = front;
+            _pos = pos;
+            _vel = vel;
+            _top = top;
+            _front = front;
+        }
+
+        public BASS_3DVECTOR Front
+        {
+            get { return _front; }
+            set { _front = value; }
+        }
+
+        public BASS_3DVECTOR Pos
+        {
+            get { return _pos; }
+            set { _pos = value; }
+        }
+
+        public BASS_3DVECTOR Top
+        {
+            get { return _top; }
+            set { _top = value; }
+        }
+
+        public BASS_3DVECTOR Vel
+        {
+            get { return _vel; }
+            set { _vel = value; }
         }
 
         public override string ToString()
         {
             return String.Format("pos:{0}:vel:{1}:top:{2}:front:{3}",
-                pos, vel, top, front);
+                _pos, _vel, _top, _front);
         }
     }
 
@@ -95,9 +120,9 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     /// </summary>
     public class BASS3DFactors
     {
-        public float distf;
-        public float doppf;
-        public float rollf;
+        private float _distf;
+        private float _doppf;
+        private float _rollf;
 
         /// <summary>
         ///     Creates a structure to be used with getting and setting 3DFactors
@@ -120,15 +145,33 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// </param>
         public BASS3DFactors(float distf, float rollf, float doppf)
         {
-            this.distf = distf;
-            this.rollf = rollf;
-            this.doppf = doppf;
+            _distf = distf;
+            _rollf = rollf;
+            _doppf = doppf;
+        }
+
+        public float Distf
+        {
+            get { return _distf; }
+            set { _distf = value; }
+        }
+
+        public float Doppf
+        {
+            get { return _doppf; }
+            set { _doppf = value; }
+        }
+
+        public float Rollf
+        {
+            get { return _rollf; }
+            set { _rollf = value; }
         }
 
         public override string ToString()
         {
             return String.Format("Dist: {0} Roll: {1} Dopp: {2}",
-                distf, rollf, doppf);
+                _distf, _rollf, _doppf);
         }
     }
 
