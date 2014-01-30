@@ -55,6 +55,8 @@
     <Compile Include="Player\Core\Enums.cs" />
     <Compile Include="Player\Core\FX.cs" />
     <Compile Include="Player\Core\Helper.cs" />
+    <Compile Include="Player\Core\Music.cs" />
+    <Compile Include="Player\Core\Sample.cs" />
     <Compile Include="Player\Core\Structs.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />

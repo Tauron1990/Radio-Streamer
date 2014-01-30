@@ -1,5 +1,8 @@
 using System;
 using System.Runtime.InteropServices;
+using Tauron.JetBrains.Annotations;
+using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Flac;
 
 namespace Tauron.Application.RadioStreamer.Player.Core
 {
@@ -64,24 +67,25 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         Loop = SampleInfoFlags.Loop,
     }
 
-    [Flags]
+    [Flags, PublicAPI]
     public enum SampleInfoFlags
     {
         // *********************
         // * Sample info flags *
         // *********************
         Default = 0x0000,
-        EightBits = 0x0001, //  8 bit, else 16 bit
-        Mono = 0x0002, //  mono, else stereo
-        Loop = 0x0004, //  looped
-        ThreeDee = 0x0008, //  3D functionality enabled
-        Software = 0x0010, //  it// s NOT using hardware mixing
-        MuteMax = 0x0020, //  muted at max distance (3D only)
-        VAM = 0x0040, //  uses the DX7 voice allocation & management
-        FX = 0x0080, //  the DX8 effects are enabled
-        OverrideVolume = 0x00010000, //  override lowest volume
-        OverridePosition = 0x00020000, //  override longest playing
-        OverrideDistance = 0x00030000 //  override furthest from listener (3D only)
+        Float = BASSFlag.BASS_SAMPLE_FLOAT,
+        EightBits = BASSFlag.BASS_SAMPLE_8BITS,  //  8 bit, else 16 bit
+        Mono = BASSFlag.BASS_SAMPLE_MONO, //  mono, else stereo
+        Loop = BASSFlag.BASS_SAMPLE_LOOP, //  looped
+        ThreeDee = BASSFlag.BASS_SAMPLE_3D, //  3D functionality enabled
+        Software = BASSFlag.BASS_SAMPLE_SOFTWARE, //  it// s NOT using hardware mixing
+        MuteMax = BASSFlag.BASS_SAMPLE_MUTEMAX, //  muted at max distance (3D only)
+        VAM = BASSFlag.BASS_SAMPLE_VAM, //  uses the DX7 voice allocation & management
+        FX = BASSFlag.BASS_SAMPLE_FX, //  the DX8 effects are enabled
+        OverrideVolume = BASSFlag.BASS_SAMPLE_OVER_VOL, //  override lowest volume
+        OverridePosition = BASSFlag.BASS_SAMPLE_OVER_POS, //  override longest playing
+        OverrideDistance = BASSFlag.BASS_SAMPLE_OVER_DIST //  override furthest from listener (3D only)
     }
 
     internal enum SyncType : long
@@ -185,42 +189,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         //  Turn off 3D processing on the channel, the sound will be played
         //  in the center.
     }
-
-    public enum EAXEnvironment
-    {
-        // ****************************************************
-        // * EAX environments, use with BASS_SetEAXParameters *
-        // ****************************************************
-        Generic = 0,
-        PaddedCell,
-        Room,
-        Bathroom,
-        LivingRoom,
-        StoneRoom,
-        Auditorium,
-        ConcertHall,
-        Cave,
-        Arena,
-        Hangar,
-        CarpetedHallway,
-        Hallway,
-        StoneCorridor,
-        Alley,
-        Forest,
-        City,
-        Mountains,
-        Quarry,
-        Plain,
-        ParkingLot,
-        SewerPipe,
-        Underwater,
-        Drugged,
-        Dizzy,
-        Psychotic,
-        //  total number of environments
-        //COUNT = 26,
-    }
-
+    
     // *************************************************************
     // * EAX presets, usage: BASS_SetEAXParametersVB(EAX_PRESET_xxx) *
     // *************************************************************

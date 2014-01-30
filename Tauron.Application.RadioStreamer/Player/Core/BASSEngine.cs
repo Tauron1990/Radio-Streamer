@@ -82,38 +82,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
 
         #endregion
 
-        #region WMA Construction
-
-        [DllImport("basswma.dll", EntryPoint = "BASS_WMA_StreamCreateFile")]
-        private static extern IntPtr _LoadWMAStream(int mem, IntPtr filename, int offset, int length, int flags);
-
-        /// <summary>
-        ///     Create a sample stream from a WMA file (or URL).
-        /// </summary>
-        /// <param name="mem">TRUE = Stream file from memory</param>
-        /// <param name="filename">Filename (mem=FALSE) or memory location (mem=TRUE)</param>
-        /// <param name="offset">ignored (set to 0)</param>
-        /// <param name="length">Data length (only used if mem=TRUE)</param>
-        /// <param name="flags">WMAStreamFlags</param>
-        /// <returns>WMAStream object</returns>
-        public WMAStream LoadWMAStream(bool mem, string filename, int offset, int length, WMAStreamFlags flags)
-        {
-            if (_disposed)
-                throw new ObjectDisposedException("BASSEngine");
-
-            IntPtr wmastr = _LoadWMAStream(Helper.Bool2Int(mem), Marshal.StringToHGlobalAnsi(filename),
-                offset, length, (int) flags);
-            if (wmastr == IntPtr.Zero) throw new WMAException();
-            return new WMAStream(wmastr);
-        }
-
-        #endregion
-
         #region Sample Construction
-
-        [DllImport("bass.dll", EntryPoint = "BASS_SampleLoad")]
-        private static extern IntPtr _LoadSample(int mem, IntPtr file, int offset,
-            int Length, int max, int flags); //OK, file is LPSTR, mem is bool, return HSAMPLE handle error code
 
         /// <summary>
         ///     Load a WAV/MP3/MP2/MP1 sample. If you//re loading a sample with 3D
@@ -128,21 +97,17 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <param name="max">Maximum number of simultaneous playbacks (1-65535)</param>
         /// <param name="flags">SampleInfoFlags</param>
         /// <returns></returns>
-        public Sample LoadSample(bool mem, string filename, int offset,
+        [NotNull]
+        public Sample LoadSample(bool mem, [NotNull] string filename, int offset,
             int length, int max, SampleInfoFlags flags)
         {
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
-            IntPtr handle = _LoadSample(Helper.Bool2Int(mem), Marshal.StringToHGlobalAnsi(filename), offset,
-                length, max, (int) flags);
-            if (handle == IntPtr.Zero) throw new BASSException();
-            var output = new Sample(handle);
-            return output;
+            int handle = Bass.BASS_SampleLoad(filename, offset, length, max, (BASSFlag) flags);
+            if (handle == 0) throw new BASSException();
+            return new Sample(handle);
         }
-
-        [DllImport("bass.dll", EntryPoint = "BASS_SampleCreate")]
-        private static extern IntPtr _CreateSample(int Length, int freq, int max, int flags); //OK
 
         /// <summary>
         ///     Create a sample. This function allows you to generate custom samples, or
@@ -150,7 +115,6 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         ///     memory location at which you should write the sample's data. After writing
         ///     the data, call BASS_SampleCreateDone to get the new sample's handle.
         /// </summary>
-        /// <param name="length">The sample's length (in samples, NOT bytes)</param>
         /// <param name="freq">default sample rate</param>
         /// <param name="max">Maximum number of simultaneous playbacks (1-65535)</param>
         /// <param name="flags">SampleInfoFlags</param>
@@ -160,18 +124,26 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
-            IntPtr memloc = _CreateSample(data.Length, freq, max, (int) flags);
-            Marshal.Copy(data, 0, memloc, data.Length);
-            if (memloc == IntPtr.Zero) throw new BASSException();
-            IntPtr sample = _CreateSampleDone(); /// ???????????
-            if (sample == IntPtr.Zero) throw new BASSException();
+            int sample = Bass.BASS_SampleCreate(data.Length, freq, 2, max, (BASSFlag) flags);
+            if(sample == 0) throw new BASSException();
+
+            if(!Bass.BASS_SampleSetData(sample, data))
+                throw new BASSException();
+
             return new Sample(sample);
+
+            //IntPtr memloc = _CreateSample(data.Length, freq, max, (int) flags);
+            //Marshal.Copy(data, 0, memloc, data.Length);
+            //if (memloc == IntPtr.Zero) throw new BASSException();
+            //IntPtr sample = _CreateSampleDone(); /// ???????????
+            //if (sample == IntPtr.Zero) throw new BASSException();
+            //return new Sample(sample);
         }
 
-        // Finished creating a new sample.
-        // Return: The New sample //s handle (NULL=error)
-        [DllImport("bass.dll", EntryPoint = "BASS_SampleCreateDone")]
-        private static extern IntPtr _CreateSampleDone();
+        //// Finished creating a new sample.
+        //// Return: The New sample //s handle (NULL=error)
+        //[DllImport("bass.dll", EntryPoint = "BASS_SampleCreateDone")]
+        //private static extern IntPtr _CreateSampleDone();
 
         //how do we handle all the handles????
         //		public void CreateDone()
@@ -184,10 +156,10 @@ namespace Tauron.Application.RadioStreamer.Player.Core
 
         #region Music Construction
 
-        [DllImport("bass.dll", EntryPoint = "BASS_MusicLoad")]
-        private static extern IntPtr _LoadMusic(int mem, IntPtr file, int offset, int Length, int flags);
+        //[DllImport("bass.dll", EntryPoint = "BASS_MusicLoad")]
+        //private static extern IntPtr _LoadMusic(int mem, IntPtr file, int offset, int Length, int flags);
 
-        //OK, bool mem, return point to HMUSIC
+        ////OK, bool mem, return point to HMUSIC
 
         /// <summary>
         ///     Load a music (MO3/XM/MOD/S3M/IT/MTM). The amplification and pan
@@ -566,15 +538,13 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         [DllImport("bass.dll", EntryPoint = "BASS_SetCLSID")]
         private static extern void _SetCLSID(ref Guid clsid); //OK
 
-        [DllImport("bass.dll", EntryPoint = "BASS_Init")]
-        private static extern int _Init(int device, int freq, int flags, IntPtr win); //OK, return bool
 
-        private void Init(int device, int freq, DeviceSetupFlags flags, IntPtr hwnd)
+        private void Init(int device, int freq, BASSInit flags, IntPtr hwnd)
         {
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
-            if (_Init(device, freq, (int) flags, hwnd) == 0) throw new BASSException();
+            if (!Bass.BASS_Init(device, freq, flags, hwnd)) throw new BASSException();
         }
 
         // Free all resources used by the digital output, including  all musics and samples.
@@ -773,18 +743,20 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                int env;
-                float vol, decay, damp;
-                if (_GetEAXParameters(out env, out vol, out decay, out damp) == 0)
+                EAXEnvironment env = 0;
+                float vol = 0;
+                float decay = 0;
+                float damp = 0;
+                if (!Bass.BASS_GetEAXParameters(ref env, ref vol, ref decay, ref damp))
                     throw new BASSException();
-                return new BASSEAXParameters((EAXEnvironment) env, vol, decay, damp);
+                return new BASSEAXParameters(env, vol, decay, damp);
             }
             set
             {
                 if (_disposed)
                     throw new ObjectDisposedException("BASSEngine");
 
-                if (_SetEAXParameters(value.env, value.vol, value.decay, value.damp) == 0)
+                if (!Bass.BASS_SetEAXParameters(value.Env, value.Vol, value.Decay, value.Damp))
                     throw new BASSException();
             }
         }
@@ -794,99 +766,99 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
-            //  
-            switch (preset)
-            {
-                case EAXPreset.EAX_PRESET_GENERIC:
-                    return _SetEAXParameters((int) EAXEnvironment.Generic, 0.5F, 1.493F, 0.5F);
-                case BASSEAXPreset.PaddedCell:
-                    return _SetEAXParameters((int) EAXEnvironment.PaddedCell, 0.25F, 0.1F, 0F);
-                case BASSEAXPreset.Room:
-                    return _SetEAXParameters((int) EAXEnvironment.Room, 0.417F, 0.4F, 0.666F);
-                case BASSEAXPreset.Bathroom:
-                    return _SetEAXParameters((int) EAXEnvironment.Bathroom, 0.653F, 1.499F, 0.166F);
-                case BASSEAXPreset.LivingRoom:
-                    return _SetEAXParameters((int) EAXEnvironment.LivingRoom, 0.208F, 0.478F, 0F);
-                case BASSEAXPreset.StoneRoom:
-                    return _SetEAXParameters((int) EAXEnvironment.StoneRoom, 0.5F, 2.309F, 0.888F);
-                case BASSEAXPreset.Auditorium:
-                    return _SetEAXParameters((int) EAXEnvironment.Auditorium, 0.403F, 4.279F, 0.5F);
-                case BASSEAXPreset.ConcertHall:
-                    return _SetEAXParameters((int) EAXEnvironment.ConcertHall, 0.5F, 3.961F, 0.5F);
-                case BASSEAXPreset.Cave:
-                    return _SetEAXParameters((int) EAXEnvironment.Cave, 0.5F, 2.886F, 1.304F);
-                case BASSEAXPreset.Arena:
-                    return _SetEAXParameters((int) EAXEnvironment.Arena, 0.361F, 7.284F, 0.332F);
-                case BASSEAXPreset.Hangar:
-                    return _SetEAXParameters((int) EAXEnvironment.Hangar, 0.5F, 10F, 0.3F);
-                case BASSEAXPreset.CarpetedHallway:
-                    return _SetEAXParameters((int) EAXEnvironment.CarpetedHallway, 0.153F, 0.259F, 2F);
-                case BASSEAXPreset.Hallway:
-                    return _SetEAXParameters((int) EAXEnvironment.Hallway, 0.361F, 1.493F, 0F);
-                case BASSEAXPreset.StoneCorridor:
-                    return _SetEAXParameters((int) EAXEnvironment.StoneCorridor, 0.444F, 2.697F, 0.638F);
-                case BASSEAXPreset.Alley:
-                    return _SetEAXParameters((int) EAXEnvironment.Alley, 0.25F, 1.752F, 0.776F);
-                case BASSEAXPreset.Forest:
-                    return _SetEAXParameters((int) EAXEnvironment.Forest, 0.111F, 3.145F, 0.472F);
-                case BASSEAXPreset.City:
-                    return _SetEAXParameters((int) EAXEnvironment.City, 0.111F, 2.767F, 0.224F);
-                case BASSEAXPreset.Mountains:
-                    return _SetEAXParameters((int) EAXEnvironment.Mountains, 0.194F, 7.841F, 0.472F);
-                case BASSEAXPreset.Quarry:
-                    return _SetEAXParameters((int) EAXEnvironment.Quarry, 1F, 1.499F, 0.5F);
-                case BASSEAXPreset.Plain:
-                    return _SetEAXParameters((int) EAXEnvironment.Plain, 0.097F, 2.767F, 0.224F);
-                case BASSEAXPreset.ParkingLot:
-                    return _SetEAXParameters((int) EAXEnvironment.ParkingLot, 0.208F, 1.652F, 1.5F);
-                case BASSEAXPreset.SewerPipe:
-                    return _SetEAXParameters((int) EAXEnvironment.SewerPipe, 0.652F, 2.886F, 0.25F);
-                case BASSEAXPreset.Underwater:
-                    return _SetEAXParameters((int) EAXEnvironment.Underwater, 1F, 1.499F, 0F);
-                case BASSEAXPreset.Drugged:
-                    return _SetEAXParameters((int) EAXEnvironment.Drugged, 0.875F, 8.392F, 1.388F);
-                case BASSEAXPreset.Dizzy:
-                    return _SetEAXParameters((int) EAXEnvironment.Dizzy, 0.139F, 17.234F, 0.666F);
-                case BASSEAXPreset.Psychotic:
-                    return _SetEAXParameters((int) EAXEnvironment.Psychotic, 0.486F, 7.563F, 0.806F);
-                default:
-                    goto case BASSEAXPreset.Generic;
-            }
+            Bass.BASS_SetEAXParameters(preset);
+            //switch (preset)
+            //{
+            //    case EAXPreset.EAX_PRESET_GENERIC:
+            //        return _SetEAXParameters((int) EAXEnvironment.Generic, 0.5F, 1.493F, 0.5F);
+            //    case EAXPreset.EAX_PRESET_PADDEDCELL:
+            //        return _SetEAXParameters((int) EAXEnvironment.PaddedCell, 0.25F, 0.1F, 0F);
+            //    case EAXPreset.EAX_PRESET_ROOM:
+            //        return _SetEAXParameters((int) EAXEnvironment.Room, 0.417F, 0.4F, 0.666F);
+            //    case EAXPreset.EAX_PRESET_BATHROOM:
+            //        return _SetEAXParameters((int) EAXEnvironment.Bathroom, 0.653F, 1.499F, 0.166F);
+            //    case EAXPreset.EAX_PRESET_LIVINGROOM:
+            //        return _SetEAXParameters((int) EAXEnvironment.LivingRoom, 0.208F, 0.478F, 0F);
+            //    case BASSEAXPrese:
+            //        return _SetEAXParameters((int) EAXEnvironment.StoneRoom, 0.5F, 2.309F, 0.888F);
+            //    case BASSEAXPreset.Auditorium:
+            //        return _SetEAXParameters((int) EAXEnvironment.Auditorium, 0.403F, 4.279F, 0.5F);
+            //    case BASSEAXPreset.ConcertHall:
+            //        return _SetEAXParameters((int) EAXEnvironment.ConcertHall, 0.5F, 3.961F, 0.5F);
+            //    case BASSEAXPreset.Cave:
+            //        return _SetEAXParameters((int) EAXEnvironment.Cave, 0.5F, 2.886F, 1.304F);
+            //    case BASSEAXPreset.Arena:
+            //        return _SetEAXParameters((int) EAXEnvironment.Arena, 0.361F, 7.284F, 0.332F);
+            //    case BASSEAXPreset.Hangar:
+            //        return _SetEAXParameters((int) EAXEnvironment.Hangar, 0.5F, 10F, 0.3F);
+            //    case BASSEAXPreset.CarpetedHallway:
+            //        return _SetEAXParameters((int) EAXEnvironment.CarpetedHallway, 0.153F, 0.259F, 2F);
+            //    case BASSEAXPreset.Hallway:
+            //        return _SetEAXParameters((int) EAXEnvironment.Hallway, 0.361F, 1.493F, 0F);
+            //    case BASSEAXPreset.StoneCorridor:
+            //        return _SetEAXParameters((int) EAXEnvironment.StoneCorridor, 0.444F, 2.697F, 0.638F);
+            //    case BASSEAXPreset.Alley:
+            //        return _SetEAXParameters((int) EAXEnvironment.Alley, 0.25F, 1.752F, 0.776F);
+            //    case BASSEAXPreset.Forest:
+            //        return _SetEAXParameters((int) EAXEnvironment.Forest, 0.111F, 3.145F, 0.472F);
+            //    case BASSEAXPreset.City:
+            //        return _SetEAXParameters((int) EAXEnvironment.City, 0.111F, 2.767F, 0.224F);
+            //    case BASSEAXPreset.Mountains:
+            //        return _SetEAXParameters((int) EAXEnvironment.Mountains, 0.194F, 7.841F, 0.472F);
+            //    case BASSEAXPreset.Quarry:
+            //        return _SetEAXParameters((int) EAXEnvironment.Quarry, 1F, 1.499F, 0.5F);
+            //    case BASSEAXPreset.Plain:
+            //        return _SetEAXParameters((int) EAXEnvironment.Plain, 0.097F, 2.767F, 0.224F);
+            //    case BASSEAXPreset.ParkingLot:
+            //        return _SetEAXParameters((int) EAXEnvironment.ParkingLot, 0.208F, 1.652F, 1.5F);
+            //    case BASSEAXPreset.SewerPipe:
+            //        return _SetEAXParameters((int) EAXEnvironment.SewerPipe, 0.652F, 2.886F, 0.25F);
+            //    case BASSEAXPreset.Underwater:
+            //        return _SetEAXParameters((int) EAXEnvironment.Underwater, 1F, 1.499F, 0F);
+            //    case BASSEAXPreset.Drugged:
+            //        return _SetEAXParameters((int) EAXEnvironment.Drugged, 0.875F, 8.392F, 1.388F);
+            //    case BASSEAXPreset.Dizzy:
+            //        return _SetEAXParameters((int) EAXEnvironment.Dizzy, 0.139F, 17.234F, 0.666F);
+            //    case BASSEAXPreset.Psychotic:
+            //        return _SetEAXParameters((int) EAXEnvironment.Psychotic, 0.486F, 7.563F, 0.806F);
+            //    default:
+            //        goto case BASSEAXPreset.Generic;
+            //}
         }
 
-        [DllImport("bass.dll", EntryPoint = "BASS_Set3DAlgorithm")]
-        private static extern void _Set3DAlgorithm(int algo); //OK
+        //[DllImport("bass.dll", EntryPoint = "BASS_Set3DAlgorithm")]
+        //private static extern void _Set3DAlgorithm(int algo); //OK
 
-        [DllImport("bass.dll", EntryPoint = "BASS_Set3DFactors")]
-        private static extern int _Set3DFactors(
-            ref float distf,
-            ref float rollf,
-            ref float doppf); //OK return bool err code
+        //[DllImport("bass.dll", EntryPoint = "BASS_Set3DFactors")]
+        //private static extern int _Set3DFactors(
+        //    ref float distf,
+        //    ref float rollf,
+        //    ref float doppf); //OK return bool err code
 
-        [DllImport("bass.dll", EntryPoint = "BASS_Get3DFactors")]
-        private static extern int _Get3DFactors(
-            out float distf,
-            out float rollf,
-            out float doppf); //OK return bool err code
+        //[DllImport("bass.dll", EntryPoint = "BASS_Get3DFactors")]
+        //private static extern int _Get3DFactors(
+        //    out float distf,
+        //    out float rollf,
+        //    out float doppf); //OK return bool err code
 
-        // NOTE   : front & top must both be set in a single call
-        [DllImport("bass.dll", EntryPoint = "BASS_Set3DPosition")]
-        private static extern int _Set3DPosition(
-            ref Vector3D pos,
-            ref Vector3D vel,
-            ref Vector3D front,
-            ref Vector3D top); //OK return bool err code
+        //// NOTE   : front & top must both be set in a single call
+        //[DllImport("bass.dll", EntryPoint = "BASS_Set3DPosition")]
+        //private static extern int _Set3DPosition(
+        //    ref Vector3D pos,
+        //    ref Vector3D vel,
+        //    ref Vector3D front,
+        //    ref Vector3D top); //OK return bool err code
 
-        // NOTE   : front & top must both be retrieved in a single call
-        [DllImport("bass.dll", EntryPoint = "BASS_Get3DPosition")]
-        private static extern int _Get3DPosition(
-            out Vector3D pos,
-            out Vector3D vel,
-            out Vector3D front,
-            out Vector3D top); //OK return bool err code
+        //// NOTE   : front & top must both be retrieved in a single call
+        //[DllImport("bass.dll", EntryPoint = "BASS_Get3DPosition")]
+        //private static extern int _Get3DPosition(
+        //    out Vector3D pos,
+        //    out Vector3D vel,
+        //    out Vector3D front,
+        //    out Vector3D top); //OK return bool err code
 
-        [DllImport("bass.dll", EntryPoint = "BASS_Apply3D")]
-        private static extern int _Apply3D(); //OK return bool err code
+        //[DllImport("bass.dll", EntryPoint = "BASS_Apply3D")]
+        //private static extern int _Apply3D(); //OK return bool err code
 
         /// <summary>
         ///     Apply changes made to the 3D system. This must be called to apply any changes
@@ -904,22 +876,22 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
-            if (_Apply3D() == 0) throw new BASSException();
+            Bass.BASS_Apply3D();
         }
 
-        [DllImport("bass.dll", EntryPoint = "BASS_SetEAXParameters")]
-        private static extern int _SetEAXParameters(
-            int env,
-            float vol,
-            float decay,
-            float damp); //OK return bool err code
+        //[DllImport("bass.dll", EntryPoint = "BASS_SetEAXParameters")]
+        //private static extern int _SetEAXParameters(
+        //    int env,
+        //    float vol,
+        //    float decay,
+        //    float damp); //OK return bool err code
 
-        [DllImport("bass.dll", EntryPoint = "BASS_GetEAXParameters")]
-        private static extern int _GetEAXParameters(
-            out int env,
-            out float vol,
-            out float decay,
-            out float damp); //OK return bool err code
+        //[DllImport("bass.dll", EntryPoint = "BASS_GetEAXParameters")]
+        //private static extern int _GetEAXParameters(
+        //    out int env,
+        //    out float vol,
+        //    out float decay,
+        //    out float damp); //OK return bool err code
 
         #endregion
     }

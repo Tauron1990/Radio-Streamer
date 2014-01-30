@@ -180,10 +180,10 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     /// </summary>
     public class BASSEAXParameters
     {
-        public float damp;
-        public float decay;
-        public int env;
-        public float vol;
+        private float _damp;
+        private float _decay;
+        private EAXEnvironment _env;
+        private float _vol;
 
         /// <summary>
         ///     Used with setting / getting EAXParameters
@@ -197,16 +197,40 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// </param>
         public BASSEAXParameters(EAXEnvironment env, float vol, float decay, float damp)
         {
-            this.env = (int) env;
-            this.vol = vol;
-            this.decay = decay;
-            this.damp = damp;
+            _env = env;
+            _vol = vol;
+            _decay = decay;
+            _damp = damp;
+        }
+
+        public float Damp
+        {
+            get { return _damp; }
+            set { _damp = value; }
+        }
+
+        public float Decay
+        {
+            get { return _decay; }
+            set { _decay = value; }
+        }
+
+        public EAXEnvironment Env
+        {
+            get { return _env; }
+            set { _env = value; }
+        }
+
+        public float Vol
+        {
+            get { return _vol; }
+            set { _vol = value; }
         }
 
         public override string ToString()
         {
             return String.Format("Env: {0} Vol: {1} Decay: {2} Damp: {3}",
-                ((EAXEnvironment) env), vol, decay, damp);
+                ((EAXEnvironment) _env), _vol, _decay, _damp);
         }
     }
 

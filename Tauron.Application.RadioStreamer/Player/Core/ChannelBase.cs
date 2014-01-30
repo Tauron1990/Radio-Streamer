@@ -235,9 +235,9 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         //static extern int _Resume(IntPtr handle);//OK return bool
 
         /// <summary>
-        ///     Resume a paused channel.
+        ///     Play a channel.
         /// </summary>
-        public void Resume()
+        public void Play()
         {
             if (_disposed)
                 throw new ObjectDisposedException(ToString());
