@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Provides methods for initializing the BASSEngine engine.
@@ -172,23 +172,28 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <param name="length">Data length ( 0=use to end of file)</param>
         /// <param name="flags">MusicFlags</param>
         /// <returns></returns>
-        public Music LoadMusic(bool mem, string filename, int offset, int length, MusicFlags flags)
+        [NotNull]
+        public Music LoadMusic(bool mem, [NotNull] string filename, int offset, int length, MusicFlags flags)
         {
-            if (_disposed)
-                throw new ObjectDisposedException("BASSEngine");
+            if (_disposed) throw new ObjectDisposedException("BASSEngine");
 
-            IntPtr pfile = Marshal.StringToHGlobalAnsi(filename); //must be like this
-            IntPtr mus = _LoadMusic(Helper.Bool2Int(mem), pfile,
-                offset, length, (int) flags);
-            if (mus == IntPtr.Zero) throw new BASSException();
-            var output = new Music(mus);
-            output.Owner = this;
-            return output;
+            int handle = Bass.BASS_MusicLoad(filename, offset, length, (BASSFlag) flags, 0);
+            if(handle == 0) throw new BASSException();
+
+            return new Music(handle) { Owner = this};
+
+            //IntPtr pfile = Marshal.StringToHGlobalAnsi(filename); //must be like this
+            //IntPtr mus = _LoadMusic(Helper.Bool2Int(mem), pfile,
+            //    offset, length, (int) flags);
+            //if (mus == IntPtr.Zero) throw new BASSException();
+            //var output = new Music(mus);
+            //output.Owner = this;
+            //return output;
         }
 
         #endregion
 
-        #region Stream Construction
+        #region BassStream Construction
 
         // 
         // freq   : 
@@ -203,19 +208,19 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <summary>
         ///     Create a user sample stream.
         /// </summary>
-        /// <param name="freq">Stream playback rate</param>
+        /// <param name="freq">BassStream playback rate</param>
         /// <param name="flags">StreamFlags</param>
         /// <param name="proc">StreamCallBack delegate</param>
         /// <param name="user">The "user" value passed to the callback function</param>
         /// <returns></returns>
-        private Stream CreateStream(int freq, StreamFlags flags, StreamCallBack proc, int user)
+        private BassStream CreateStream(int freq, StreamFlags flags, StreamCallBack proc, int user)
         {
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
             IntPtr handle = _CreateStream(freq, (int) flags, proc, user);
             if (handle == IntPtr.Zero) throw new BASSException();
-            var output = new Stream(handle);
+            var output = new BassStream(handle);
             output.Owner = this;
             return output;
         }
@@ -227,13 +232,13 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <summary>
         ///     Create a sample stream from an MP3/MP2/MP1/OGG or WAV file.
         /// </summary>
-        /// <param name="mem">Stream file from memory</param>
+        /// <param name="mem">BassStream file from memory</param>
         /// <param name="filename">Filename or memory location</param>
         /// <param name="offset">File offset of the stream data</param>
         /// <param name="length">File length (0=use whole file)</param>
         /// <param name="flags">StreamFlags</param>
         /// <returns></returns>
-        public Stream LoadStream(bool mem, string filename, int offset,
+        public BassStream LoadStream(bool mem, string filename, int offset,
             int length, StreamFlags flags)
         {
             if (_disposed)
@@ -242,7 +247,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             IntPtr handle = _CreateStreamFile(Helper.Bool2Int(mem), Marshal.StringToHGlobalAnsi(filename),
                 offset, length, (int) flags);
             if (handle == IntPtr.Zero) throw new BASSException();
-            var output = new Stream(handle);
+            var output = new BassStream(handle);
             output.Owner = this;
             return output;
         }
@@ -258,14 +263,14 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         /// <param name="flags">StreamFlags</param>
         /// <param name="savefile">Filename to save the streamed file as locally (""=don//t save)</param>
         /// <returns></returns>
-        public Stream CreateStreamFromURL(string url, int offset, StreamFlags flags, string savefile)
+        public BassStream CreateStreamFromURL(string url, int offset, StreamFlags flags, string savefile)
         {
             if (_disposed)
                 throw new ObjectDisposedException("BASSEngine");
 
             IntPtr handle = _CreateStreamURL(url, offset, (int) flags, savefile);
             if (handle == IntPtr.Zero) throw new BASSException();
-            var output = new Stream(handle);
+            var output = new BassStream(handle);
             output.Owner = this;
             return output;
         }
@@ -503,14 +508,14 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         // Set the global music/sample/stream volume levels.
         // musvol : MOD music global volume level (0-100, -1=leave current)
         // samvol : Sample global volume level (0-100, -1=leave current)
-        // strvol : Stream global volume level (0-100, -1=leave current)
+        // strvol : BassStream global volume level (0-100, -1=leave current)
         [DllImport("bass.dll", EntryPoint = "BASS_SetGlobalVolumes")]
         private static extern void _SetGlobalVolumes(int musvol, int samvol, int strvol); //OK
 
         // Retrive the global music/sample/stream volume levels.
         // musvol : MOD music global volume level (NULL=don//t retrieve it)
         // samvol : Sample global volume level (NULL=don//t retrieve it)
-        // strvol : Stream global volume level (NULL=don//t retrieve it)
+        // strvol : BassStream global volume level (NULL=don//t retrieve it)
         [DllImport("bass.dll", EntryPoint = "BASS_GetGlobalVolumes")]
         private static extern unsafe void _GetGlobalVolumes(
             int* musvol,

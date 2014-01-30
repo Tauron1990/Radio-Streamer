@@ -3,7 +3,7 @@ using System.ComponentModel;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Provides common channel methods

@@ -105,3 +105,9 @@ C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Player.Core.BASSEngine.resources
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Player.CoreOld.BASSEngine.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Player.Core.BassErrors.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Player.Core.BassErrors.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\de\Tauron.Application.RadioStreamer.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\de\Tauron.Application.RadioStreamer.resources.dll

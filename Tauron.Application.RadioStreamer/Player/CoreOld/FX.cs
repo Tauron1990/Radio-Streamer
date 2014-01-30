@@ -5,7 +5,7 @@ using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Fx;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
 	/// <summary>
 	/// Summary description for FX.

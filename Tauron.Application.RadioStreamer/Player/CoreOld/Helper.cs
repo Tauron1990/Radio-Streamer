@@ -2,7 +2,7 @@ using System;
 using System.Linq;
 using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Summary description for Helper.

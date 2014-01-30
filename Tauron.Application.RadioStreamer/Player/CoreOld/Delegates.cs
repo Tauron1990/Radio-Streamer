@@ -1,6 +1,6 @@
 using System;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Summary description for Delegates.
@@ -35,7 +35,7 @@ namespace Tauron.Application.RadioStreamer.Player.Core
     //  NOTE: a sync callback function should be very
     //  quick (eg. just posting a message) as other syncs cannot be processed
     //  until it has finished.
-    //  handle : The sync that has occured (Stream or  Music)
+    //  handle : The sync that has occured (BassStream or  Music)
     //  channel: Channel that the sync occured in
     //  data   : Additional data associated with the sync// s occurance
     //  user   : The // user//  parameter given when calling BASS_ChannelSetSync */

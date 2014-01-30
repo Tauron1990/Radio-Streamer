@@ -1,7 +1,7 @@
 using System;
 using Un4seen.Bass;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Used with setting and getting Channel3DAttributes

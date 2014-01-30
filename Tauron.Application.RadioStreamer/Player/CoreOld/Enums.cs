@@ -4,7 +4,7 @@ using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Flac;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     Summary description for Enums.
@@ -21,30 +21,28 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         [MarshalAs(UnmanagedType.U4)] SFFT2048 = 0x80000012, //  2048 stereo FFT
     }
 
-    [Flags]
+    [Flags, PublicAPI]
     public enum MusicFlags
     {
         // ***************
         // * Music flags *
         // ***************
-        NormalRamping = 0x0001, //  normal ramping
-        SensitiveRamping = 0x0002, //  sensitive ramping
+        NormalRamping = BASSFlag.BASS_MUSIC_RAMP, //  normal ramping
+        SensitiveRamping = BASSFlag.BASS_MUSIC_RAMPS, //  sensitive ramping
         //  Ramping doesn// t take a lot of extra processing and improve
         //  the sound quality by removing "clicks". Sensitive ramping will
         //  leave sharp attacked samples, unlike normal ramping.
-        Loop = 0x0004, //  loop music
-        FastTracker2Mode = 0x0010, //  play .MOD as FastTracker 2 does
-        ProTracker1Mode = 0x0020, //  play .MOD as ProTracker 1 does
-        Mono = 0x0040, //  force mono mixing (less CPU usage)
-        ThreeDee = 0x0080, //  enable 3D functionality
-        PositionReset = 0x0100, //  stop all notes when moving position
-        SurroundMode1 = 0x0200, // surround sound
-        SurroundMode2 = 0x0400, // surround sound (mode 2)
-        StopOnBackJump = 0x0800, // stop the music on a backwards jump effect
-        FX = 0x1000, // enable DX8 effects
-        CalculateLength = 0x2000, // calculate playback length
-        DecodeOnly = 0x200000, // don// t play the music, only decode (BASS_ChannelGetData)
-        NoLoadSample = 0x400000, //  don// t load the samples
+        Loop = BASSFlag.BASS_MUSIC_LOOP, //  loop music
+        FastTracker2Mode = BASSFlag.BASS_MUSIC_FT2MOD, //  play .MOD as FastTracker 2 does
+        ProTracker1Mode = BASSFlag.BASS_MUSIC_PT1MOD, //  play .MOD as ProTracker 1 does
+        Mono = BASSFlag.BASS_MUSIC_MONO, //  force mono mixing (less CPU usage)
+        ThreeDee = BASSFlag.BASS_MUSIC_3D, //  enable 3D functionality
+        PositionReset = BASSFlag.BASS_MUSIC_POSRESET, //  stop all notes when moving position
+        SurroundMode1 = BASSFlag.BASS_MUSIC_SURROUND, // surround sound
+        SurroundMode2 = BASSFlag.BASS_MUSIC_SURROUND2, // surround sound (mode 2)
+        StopOnBackJump = BASSFlag.BASS_MUSIC_STOPBACK, // stop the music on a backwards jump effect
+        FX = BASSFlag.BASS_MUSIC_FX, // enable DX8 effects
+        DecodeOnly = BASSFlag.BASS_MUSIC_DECODE, // don// t play the music, only decode (BASS_ChannelGetData)
     }
 
     [Flags]
@@ -55,12 +53,13 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         Mono = DeviceSetupFlags.Mono, // use mono, else stereo
         ThreeDee = DeviceSetupFlags.ThreeDee, // enable 3D functionality
         FX = SampleInfoFlags.FX,
-        HalfRate = Stream.MP3.HALFRATE,
-        SetPosition = Stream.MP3.SETPOS,
-        AutoFree = Stream.Mode2.AUTOFREE,
-        DecodeOnly = Stream.Mode2.DECODE,
+        HalfRate = BassStream.MP3.HALFRATE,
+        SetPosition = BassStream.MP3.SETPOS,
+        AutoFree = BassStream.Mode2.AUTOFREE,
+        DecodeOnly = BassStream.Mode2.DECODE,
     }
 
+    [PublicAPI]
     public enum StreamPlayFlags
     {
         Default = 0,

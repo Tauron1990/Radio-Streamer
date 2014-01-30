@@ -1,9 +1,10 @@
 using System;
+using System.ComponentModel;
 using System.Timers;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.RadioStreamer.Player.CoreOld
 {
     /// <summary>
     ///     ChannelBase. The class is not used directly.
@@ -60,7 +61,8 @@ namespace Tauron.Application.RadioStreamer.Player.Core
             }
         }
 
-        internal int Handle
+        [EditorBrowsable(EditorBrowsableState.Advanced)]
+        public int Handle
         {
             get
             {
@@ -243,6 +245,8 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                 throw new ObjectDisposedException(ToString());
 
             if (!Bass.BASS_ChannelPlay(_handle, false)) throw new BASSException();
+
+            StartTimer();
         }
 
         // handle : Channel handle (HCHANNEL/HMUSIC/HSTREAM, or CDCHANNEL)

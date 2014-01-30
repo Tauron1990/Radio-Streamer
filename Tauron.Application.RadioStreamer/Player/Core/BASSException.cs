@@ -1,139 +1,212 @@
-using System;
+﻿using System;
+using System.Runtime.Serialization;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
 namespace Tauron.Application.RadioStreamer.Player.Core
 {
-    /// <summary>
-    ///     Summary description for BASSException.
-    /// </summary>
-    public class BASSException : Exception
+    [Serializable, PublicAPI]
+    public class BassException : Exception
     {
-        private readonly BASSError _err;
+        //
+        // For guidelines regarding the creation of new exception types, see
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/cpgenref/html/cpconerrorraisinghandlingguidelines.asp
+        // and
+        //    http://msdn.microsoft.com/library/default.asp?url=/library/en-us/dncscol/html/csharp07192001.asp
+        //
+        private BASSError _error;
 
-        public BASSException() : this(GetErrorCode())
+        public BASSError Error
         {
+            get { return _error; }
         }
 
-        private BASSException(int code) : base(GetErrorDescription((BASSError) code))
+        public BassException()
         {
-            _err = (BASSError)code;
+            _error = Bass.BASS_ErrorGetCode();
         }
 
-        /// <summary>
-        ///     Get the error state
-        /// </summary>
-        public Error ErrorState
+        public override string Message
         {
-            get { return _err; }
-        }
-
-        /// <summary>
-        ///     Get an description for the error that occurred
-        /// </summary>
-        [NotNull]
-        public string ErrorDescription
-        {
-            get { return GetErrorDescription(_err); }
-        }
-
-        // Get the BASS_ERROR_xxx error code. Use this function to get the reason for an error.
-        //[DllImport("bass.dll", EntryPoint = "BASS_ErrorGetCode")]
-        //static extern int _ErrorGetCode(); //OK
-
-        protected static int GetErrorCode()
-        {
-            return (int) Bass.BASS_ErrorGetCode();
-        }
-
-        [NotNull]
-        protected static string GetErrorDescription(BASSError error)
-        {
-            switch (error)
+            get
             {
-                case Error.BASSOk:
-                    return "All is OK";
-                case Error.MEM:
-                    return "Memory Error";
-                case Error.FILEOPEN:
-                    return "Can't Open the File";
-                case Error.DRIVER:
-                    return "Can't Find a Free Sound Driver";
-                case Error.BUFLOST:
-                    return "The Sample Buffer Was Lost - Please Report This!";
-                case Error.HANDLE:
-                    return "Invalid Handle";
-                case Error.FORMAT:
-                    return "Unsupported Format";
-                case Error.POSITION:
-                    return "Invalid Playback Position";
-                case Error.INIT:
-                    return "BASSEngine.Init Has Not Been Successfully Called";
-                case Error.START:
-                    return "BASS_Start Has Not Been Successfully Called";
-                case Error.INITCD:
-                    return "Can't Initialize CD";
-                case Error.CDINIT:
-                    return "BASS_CDInit Has Not Been Successfully Called";
-                case Error.NOCD:
-                    return "No CD in drive";
-                case Error.CDTRACK:
-                    return "Can't Play the Selected CD Track";
-                case Error.ALREADY:
-                    return "Already Initialized";
-                case Error.CDVOL:
-                    return "CD Has No Volume Control";
-                case Error.NOPAUSE:
-                    return "Not Paused";
-                case Error.NOTAUDIO:
-                    return "Not An Audio Track";
-                case Error.NOCHAN:
-                    return "Can't Get a Free Channel";
-                case Error.ILLTYPE:
-                    return "An Illegal Type Was Specified";
-                case Error.ILLPARAM:
-                    return "An Illegal Parameter Was Specified";
-                case Error.NO3D:
-                    return "No 3D Support";
-                case Error.NOEAX:
-                    return "No EAX Support";
-                case Error.DEVICE:
-                    return "Illegal Device Number";
-                case Error.NOPLAY:
-                    return "Not Playing";
-                case Error.FREQ:
-                    return "Illegal Sample Rate";
-                case Error.NOA3D:
-                    return "A3D.DLL is Not Installed";
-                case Error.NOTFILE:
-                    return "The Stream is Not a File Stream (WAV/MP3)";
-                case Error.NOHW:
-                    return "No Hardware Voices Available";
-                case Error.EMPTY:
-                    return "The MOD music has no sequence data";
-                case Error.NONET:
-                    return "No Internet connection could be opened";
-                case Error.CREATE:
-                    return "Couldn't create the file";
-                case Error.NOFX:
-                    return "Effects are not enabled";
-                case Error.PLAYING:
-                    return "The channel is playing";
-                case Error.NOTAVAIL:
-                    return "The requested data is not available";
-                case Error.DECODE:
-                    return "The channel is a 'decoding channel' ";
-                case Error.WmaLicense:
-                    return "the file is protected";
-                case Error.UNKNOWN:
-                    return "Some Other Mystery Error";
-                default:
-                    return "Unkown Error";
+                switch (_error)
+                {
+                    case BASSError.BASS_OK:
+                        return BassErrors.ErrorNo;
+                    case BASSError.BASS_ERROR_MEM:
+                        break;
+                    case BASSError.BASS_ERROR_FILEOPEN:
+                        break;
+                    case BASSError.BASS_ERROR_DRIVER:
+                        break;
+                    case BASSError.BASS_ERROR_BUFLOST:
+                        break;
+                    case BASSError.BASS_ERROR_HANDLE:
+                        break;
+                    case BASSError.BASS_ERROR_FORMAT:
+                        break;
+                    case BASSError.BASS_ERROR_POSITION:
+                        break;
+                    case BASSError.BASS_ERROR_INIT:
+                        break;
+                    case BASSError.BASS_ERROR_START:
+                        break;
+                    case BASSError.BASS_ERROR_NOCD:
+                        break;
+                    case BASSError.BASS_ERROR_CDTRACK:
+                        break;
+                    case BASSError.BASS_ERROR_ALREADY:
+                        break;
+                    case BASSError.BASS_ERROR_NOPAUSE:
+                        break;
+                    case BASSError.BASS_ERROR_NOTAUDIO:
+                        break;
+                    case BASSError.BASS_ERROR_NOCHAN:
+                        break;
+                    case BASSError.BASS_ERROR_ILLTYPE:
+                        break;
+                    case BASSError.BASS_ERROR_ILLPARAM:
+                        break;
+                    case BASSError.BASS_ERROR_NO3D:
+                        break;
+                    case BASSError.BASS_ERROR_NOEAX:
+                        break;
+                    case BASSError.BASS_ERROR_DEVICE:
+                        break;
+                    case BASSError.BASS_ERROR_NOPLAY:
+                        break;
+                    case BASSError.BASS_ERROR_FREQ:
+                        break;
+                    case BASSError.BASS_ERROR_NOTFILE:
+                        break;
+                    case BASSError.BASS_ERROR_NOHW:
+                        break;
+                    case BASSError.BASS_ERROR_EMPTY:
+                        break;
+                    case BASSError.BASS_ERROR_NONET:
+                        break;
+                    case BASSError.BASS_ERROR_CREATE:
+                        break;
+                    case BASSError.BASS_ERROR_NOFX:
+                        break;
+                    case BASSError.BASS_ERROR_PLAYING:
+                        break;
+                    case BASSError.BASS_ERROR_NOTAVAIL:
+                        break;
+                    case BASSError.BASS_ERROR_DECODE:
+                        break;
+                    case BASSError.BASS_ERROR_DX:
+                        break;
+                    case BASSError.BASS_ERROR_TIMEOUT:
+                        break;
+                    case BASSError.BASS_ERROR_FILEFORM:
+                        break;
+                    case BASSError.BASS_ERROR_SPEAKER:
+                        break;
+                    case BASSError.BASS_ERROR_VERSION:
+                        break;
+                    case BASSError.BASS_ERROR_CODEC:
+                        break;
+                    case BASSError.BASS_ERROR_ENDED:
+                        break;
+                    case BASSError.BASS_ERROR_BUSY:
+                        break;
+                    case BASSError.BASS_ERROR_UNKNOWN:
+                        break;
+                    case BASSError.BASS_ERROR_WMA_LICENSE:
+                        break;
+                    case BASSError.BASS_ERROR_WMA_WM9:
+                        break;
+                    case BASSError.BASS_ERROR_WMA_DENIED:
+                        break;
+                    case BASSError.BASS_ERROR_WMA_CODEC:
+                        break;
+                    case BASSError.BASS_ERROR_WMA_INDIVIDUAL:
+                        break;
+                    case BASSError.BASS_ERROR_ACM_CANCEL:
+                        break;
+                    case BASSError.BASS_ERROR_CAST_DENIED:
+                        break;
+                    case BASSError.BASS_VST_ERROR_NOINPUTS:
+                        break;
+                    case BASSError.BASS_VST_ERROR_NOOUTPUTS:
+                        break;
+                    case BASSError.BASS_VST_ERROR_NOREALTIME:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_ABORT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_CANNOT_CONNECT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_CANNOT_READ:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_CANNOT_WRITE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_FAILURE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_FILTER:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_INVALID_CHAN:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_INVALID_DLL:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_INVALID_FORMAT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_INVALID_HANDLE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_INVALID_PARAMETER:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_AUDIO:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_EFFECT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_INTERFACE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_RENDERER:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_SUPPORT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NO_VIDEO:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NOT_ALLOWED:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NOT_CONNECTED:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NOT_EXISTS:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NOT_FOUND:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NOT_READY:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_NULL_DEVICE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_OPEN:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_OUTOFMEMORY:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_PARTIAL_RENDER:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_TIME_OUT:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_UNKNOWN_FILE_TYPE:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_UNSUPPORT_STREAM:
+                        break;
+                    case BASSError.BASS_ERROR_VIDEO_VIDEO_FILTER:
+                        break;
+                    case BASSError.BASS_ERROR_WASAPI:
+                        break;
+                    default:
+                        return BassErrors.ErrorUnkown;
+                }
+
+                return BassErrors.ErrorUnkown;
             }
         }
 
-        // ***********************************************
-        // * Error codes returned by BASS_GetErrorCode() *
-        // ***********************************************
+        protected BassException([NotNull] SerializationInfo info,
+            StreamingContext context) : base(info, context)
+        {
+        }
     }
 }

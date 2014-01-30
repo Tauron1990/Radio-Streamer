@@ -44,20 +44,29 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\Core\AdvancedChannel.cs" />
-    <Compile Include="Player\Core\BASSEngine.cs" />
-    <Compile Include="Player\Core\BASSException.cs" />
-    <Compile Include="Player\Core\Channel.cs" />
-    <Compile Include="Player\Core\Channel3DAttributes.cs" />
-    <Compile Include="Player\Core\ChannelAttributes.cs" />
-    <Compile Include="Player\Core\ChannelBase.cs" />
-    <Compile Include="Player\Core\Delegates.cs" />
-    <Compile Include="Player\Core\Enums.cs" />
-    <Compile Include="Player\Core\FX.cs" />
-    <Compile Include="Player\Core\Helper.cs" />
-    <Compile Include="Player\Core\Music.cs" />
-    <Compile Include="Player\Core\Sample.cs" />
-    <Compile Include="Player\Core\Structs.cs" />
+    <None Include="Player\CoreOld\AdvancedChannel.cs" />
+    <None Include="Player\CoreOld\BASSEngine.cs" />
+    <None Include="Player\CoreOld\BASSException.cs" />
+    <None Include="Player\CoreOld\Channel.cs" />
+    <None Include="Player\CoreOld\Channel3DAttributes.cs" />
+    <None Include="Player\CoreOld\ChannelAttributes.cs" />
+    <None Include="Player\CoreOld\ChannelBase.cs" />
+    <None Include="Player\CoreOld\Delegates.cs" />
+    <None Include="Player\CoreOld\Enums.cs" />
+    <None Include="Player\CoreOld\FX.cs" />
+    <None Include="Player\CoreOld\Helper.cs" />
+    <None Include="Player\CoreOld\Music.cs" />
+    <None Include="Player\CoreOld\Sample.cs" />
+    <None Include="Player\CoreOld\BassStream.cs" />
+    <None Include="Player\CoreOld\Structs.cs" />
+    <Compile Include="Player\Core\BassErrors.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BassErrors.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Player\Core\BassException.cs" />
+    <Compile Include="Player\Core\BassManager.cs" />
+    <Compile Include="Player\Core\DeviceManager.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />
     <Compile Include="Player\MemoryManager.cs" />
@@ -114,8 +123,13 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Player\Core\BASSEngine.resx">
+    <EmbeddedResource Include="Player\CoreOld\BASSEngine.resx">
       <DependentUpon>BASSEngine.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Player\Core\BassErrors.de.resx" />
+    <EmbeddedResource Include="Player\Core\BassErrors.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>BassErrors.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
