@@ -1,0 +1,216 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="ErrorUnkown" xml:space="preserve">
+    <value>Unkown Error</value>
+  </data>
+  <data name="BASS_OK" xml:space="preserve">
+    <value>No Error</value>
+  </data>
+  <data name="BASS_ERROR_MEM" xml:space="preserve">
+    <value>Memory Error</value>
+  </data>
+  <data name="BASS_ERROR_FILEOPEN" xml:space="preserve">
+    <value>Can't open the file</value>
+  </data>
+  <data name="BASS_ERROR_DRIVER" xml:space="preserve">
+    <value>Can't find a free/valid driver</value>
+  </data>
+  <data name="BASS_ERROR_BUFLOST" xml:space="preserve">
+    <value>The sample buffer was lost</value>
+  </data>
+  <data name="BASS_ERROR_HANDLE" xml:space="preserve">
+    <value>Invalid handle</value>
+  </data>
+  <data name="BASS_ERROR_FORMAT" xml:space="preserve">
+    <value>Unsupported sample format</value>
+  </data>
+  <data name="BASS_ERROR_POSITION" xml:space="preserve">
+    <value>Invalid playback position</value>
+  </data>
+  <data name="BASS_ERROR_INIT" xml:space="preserve">
+    <value>BASS_Init has not been successfully called</value>
+  </data>
+  <data name="BASS_ERROR_START" xml:space="preserve">
+    <value>BASS_Start has not been successfully called</value>
+  </data>
+  <data name="BASS_ERROR_NOCD" xml:space="preserve">
+    <value>No CD in drive</value>
+  </data>
+  <data name="BASS_ERROR_CDTRACK" xml:space="preserve">
+    <value>Invalid track number</value>
+  </data>
+  <data name="BASS_ERROR_ALREADY" xml:space="preserve">
+    <value>Already initialized/paused/whatever</value>
+  </data>
+  <data name="BASS_ERROR_NOPAUSE" xml:space="preserve">
+    <value>Not paused</value>
+  </data>
+  <data name="BASS_ERROR_NOTAUDIO" xml:space="preserve">
+    <value>Not an audio track</value>
+  </data>
+  <data name="BASS_ERROR_NOCHAN" xml:space="preserve">
+    <value>Can't get a free channel</value>
+  </data>
+  <data name="BASS_ERROR_ILLTYPE" xml:space="preserve">
+    <value>An illegal type was specified</value>
+  </data>
+  <data name="BASS_ERROR_ILLPARAM" xml:space="preserve">
+    <value>An illegal parameter was specified</value>
+  </data>
+  <data name="BASS_ERROR_NO3D" xml:space="preserve">
+    <value>No 3D support</value>
+  </data>
+  <data name="BASS_ERROR_NOEAX" xml:space="preserve">
+    <value>No EAX support</value>
+  </data>
+  <data name="BASS_ERROR_DEVICE" xml:space="preserve">
+    <value>BASS_ERROR_DEVICE</value>
+  </data>
+  <data name="BASS_ERROR_NOPLAY" xml:space="preserve">
+    <value>Not playing</value>
+  </data>
+  <data name="BASS_ERROR_FREQ" xml:space="preserve">
+    <value>Illegal sample rate</value>
+  </data>
+  <data name="BASS_ERROR_NOTFILE" xml:space="preserve">
+    <value>The stream is not a file stream</value>
+  </data>
+  <data name="BASS_ERROR_NOHW" xml:space="preserve">
+    <value>No hardware voices available</value>
+  </data>
+  <data name="BASS_ERROR_EMPTY" xml:space="preserve">
+    <value>The MOD music has no sequence data</value>
+  </data>
+  <data name="BASS_ERROR_NONET" xml:space="preserve">
+    <value>No internet connection could be opened</value>
+  </data>
+  <data name="BASS_ERROR_CREATE" xml:space="preserve">
+    <value>Couldn't create the file</value>
+  </data>
+  <data name="BASS_ERROR_NOFX" xml:space="preserve">
+    <value>Effects are not available</value>
+  </data>
+  <data name="BASS_ERROR_PLAYING" xml:space="preserve">
+    <value>The channel is playing</value>
+  </data>
+  <data name="BASS_ERROR_NOTAVAIL" xml:space="preserve">
+    <value>BASS_Requested data is not available</value>
+  </data>
+</root>

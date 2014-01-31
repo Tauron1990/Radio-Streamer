@@ -59,14 +59,6 @@
     <None Include="Player\CoreOld\Sample.cs" />
     <None Include="Player\CoreOld\BassStream.cs" />
     <None Include="Player\CoreOld\Structs.cs" />
-    <Compile Include="Player\Core\BassErrors.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>BassErrors.resx</DependentUpon>
-    </Compile>
-    <Compile Include="Player\Core\BassException.cs" />
-    <Compile Include="Player\Core\BassManager.cs" />
-    <Compile Include="Player\Core\DeviceManager.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />
     <Compile Include="Player\MemoryManager.cs" />
@@ -126,11 +118,9 @@
     <EmbeddedResource Include="Player\CoreOld\BASSEngine.resx">
       <DependentUpon>BASSEngine.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Player\Core\BassErrors.de.resx" />
-    <EmbeddedResource Include="Player\Core\BassErrors.resx">
-      <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>BassErrors.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Player\Core\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

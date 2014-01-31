@@ -118,9 +118,99 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="ErrorUnkown" xml:space="preserve">
-    <value>Unkown Error</value>
+    <value>Unbekannter Fehler</value>
   </data>
-  <data name="ErrorNo" xml:space="preserve">
-    <value>No Error</value>
+  <data name="BASS_OK" xml:space="preserve">
+    <value>Kein Fehler</value>
+  </data>
+  <data name="BASS_ERROR_MEM" xml:space="preserve">
+    <value>Speicher Fehler</value>
+  </data>
+  <data name="BASS_ERROR_FILEOPEN" xml:space="preserve">
+    <value>Die Datei Konnte nicht geöffnet werden</value>
+  </data>
+  <data name="BASS_ERROR_DRIVER" xml:space="preserve">
+    <value>Kein verfügbarer Audio Treiber</value>
+  </data>
+  <data name="BASS_ERROR_BUFLOST" xml:space="preserve">
+    <value>Der audioPuffer ist nicht mehr Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_HANDLE" xml:space="preserve">
+    <value>Ungültiges Handle</value>
+  </data>
+  <data name="BASS_ERROR_FORMAT" xml:space="preserve">
+    <value>Nicht unterstütztes Format</value>
+  </data>
+  <data name="BASS_ERROR_POSITION" xml:space="preserve">
+    <value>Ungültige Player Position</value>
+  </data>
+  <data name="BASS_ERROR_INIT" xml:space="preserve">
+    <value>BASS_Init wurde nicht erfolgreich aufgerufen</value>
+  </data>
+  <data name="BASS_ERROR_START" xml:space="preserve">
+    <value>BASS_Start wurde nicht erfolgreich Aufgerufen</value>
+  </data>
+  <data name="BASS_ERROR_NOCD" xml:space="preserve">
+    <value>Keine Cd im Laufwerk</value>
+  </data>
+  <data name="BASS_ERROR_CDTRACK" xml:space="preserve">
+    <value>Ungültige Track Nummer</value>
+  </data>
+  <data name="BASS_ERROR_ALREADY" xml:space="preserve">
+    <value>Already initialized/paused/whatever</value>
+  </data>
+  <data name="BASS_ERROR_NOPAUSE" xml:space="preserve">
+    <value>Nicht Pausiert</value>
+  </data>
+  <data name="BASS_ERROR_NOTAUDIO" xml:space="preserve">
+    <value>Kein Audio Track</value>
+  </data>
+  <data name="BASS_ERROR_NOCHAN" xml:space="preserve">
+    <value>Kein Freier Channel Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_ILLTYPE" xml:space="preserve">
+    <value>Ein ungültiger Type wurde Angegeben</value>
+  </data>
+  <data name="BASS_ERROR_ILLPARAM" xml:space="preserve">
+    <value>Ein ungültiger Paremeter wurde angegeben</value>
+  </data>
+  <data name="BASS_ERROR_NO3D" xml:space="preserve">
+    <value>3D wird nicht unterstützt</value>
+  </data>
+  <data name="BASS_ERROR_NOEAX" xml:space="preserve">
+    <value>Keine EAX Unterstützung</value>
+  </data>
+  <data name="BASS_ERROR_DEVICE" xml:space="preserve">
+    <value>Ungültige Geräte Nurmmer</value>
+  </data>
+  <data name="BASS_ERROR_NOPLAY" xml:space="preserve">
+    <value>Spielt nicht</value>
+  </data>
+  <data name="BASS_ERROR_FREQ" xml:space="preserve">
+    <value>Ungültige Abtast Rate</value>
+  </data>
+  <data name="BASS_ERROR_NOTFILE" xml:space="preserve">
+    <value>Der Stream ist keine Datei</value>
+  </data>
+  <data name="BASS_ERROR_NOHW" xml:space="preserve">
+    <value>Keine Hardware Voices Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_EMPTY" xml:space="preserve">
+    <value>Die MOD Musik hat keine Sequenz Daten</value>
+  </data>
+  <data name="BASS_ERROR_NONET" xml:space="preserve">
+    <value>Es konnte keine Internetverbindung hergestellt werden</value>
+  </data>
+  <data name="BASS_ERROR_CREATE" xml:space="preserve">
+    <value>Die Datei konnte nicht erstellt werden</value>
+  </data>
+  <data name="BASS_ERROR_NOFX" xml:space="preserve">
+    <value>Effekte sind nicht Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_PLAYING" xml:space="preserve">
+    <value>Der Kanal wird abgespielt</value>
+  </data>
+  <data name="BASS_ERROR_NOTAVAIL" xml:space="preserve">
+    <value>Die angeforderten Daten sind nicht Verfügbar</value>
   </data>
 </root>

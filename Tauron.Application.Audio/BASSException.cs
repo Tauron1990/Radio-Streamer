@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
-namespace Tauron.Application.RadioStreamer.Player.Core
+namespace Tauron.Application.Audio
 {
     [Serializable, PublicAPI]
     public class BassException : Exception
@@ -30,69 +30,10 @@ namespace Tauron.Application.RadioStreamer.Player.Core
         {
             get
             {
+                return BassMessages.ResourceManager.GetString(Error.ToString()) ?? BassMessages.ErrorUnkown;
                 switch (_error)
                 {
-                    case BASSError.BASS_OK:
-                        return BassErrors.ErrorNo;
-                    case BASSError.BASS_ERROR_MEM:
-                        break;
-                    case BASSError.BASS_ERROR_FILEOPEN:
-                        break;
-                    case BASSError.BASS_ERROR_DRIVER:
-                        break;
-                    case BASSError.BASS_ERROR_BUFLOST:
-                        break;
-                    case BASSError.BASS_ERROR_HANDLE:
-                        break;
-                    case BASSError.BASS_ERROR_FORMAT:
-                        break;
-                    case BASSError.BASS_ERROR_POSITION:
-                        break;
-                    case BASSError.BASS_ERROR_INIT:
-                        break;
-                    case BASSError.BASS_ERROR_START:
-                        break;
-                    case BASSError.BASS_ERROR_NOCD:
-                        break;
-                    case BASSError.BASS_ERROR_CDTRACK:
-                        break;
-                    case BASSError.BASS_ERROR_ALREADY:
-                        break;
-                    case BASSError.BASS_ERROR_NOPAUSE:
-                        break;
-                    case BASSError.BASS_ERROR_NOTAUDIO:
-                        break;
-                    case BASSError.BASS_ERROR_NOCHAN:
-                        break;
-                    case BASSError.BASS_ERROR_ILLTYPE:
-                        break;
-                    case BASSError.BASS_ERROR_ILLPARAM:
-                        break;
-                    case BASSError.BASS_ERROR_NO3D:
-                        break;
-                    case BASSError.BASS_ERROR_NOEAX:
-                        break;
-                    case BASSError.BASS_ERROR_DEVICE:
-                        break;
-                    case BASSError.BASS_ERROR_NOPLAY:
-                        break;
-                    case BASSError.BASS_ERROR_FREQ:
-                        break;
-                    case BASSError.BASS_ERROR_NOTFILE:
-                        break;
-                    case BASSError.BASS_ERROR_NOHW:
-                        break;
-                    case BASSError.BASS_ERROR_EMPTY:
-                        break;
-                    case BASSError.BASS_ERROR_NONET:
-                        break;
-                    case BASSError.BASS_ERROR_CREATE:
-                        break;
-                    case BASSError.BASS_ERROR_NOFX:
-                        break;
-                    case BASSError.BASS_ERROR_PLAYING:
-                        break;
-                    case BASSError.BASS_ERROR_NOTAVAIL:
+                    case BASSError.:
                         break;
                     case BASSError.BASS_ERROR_DECODE:
                         break;
@@ -197,10 +138,10 @@ namespace Tauron.Application.RadioStreamer.Player.Core
                     case BASSError.BASS_ERROR_WASAPI:
                         break;
                     default:
-                        return BassErrors.ErrorUnkown;
+                        return BassMessages.ErrorUnkown;
                 }
 
-                return BassErrors.ErrorUnkown;
+                return BassMessages.ErrorUnkown;
             }
         }
 
