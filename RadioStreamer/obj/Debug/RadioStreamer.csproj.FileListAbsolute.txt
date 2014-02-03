@@ -231,3 +231,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2012\Projects\Radio-Streamer\RadioStreamer\obj\Debug\StartResources.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\RadioStreamer.exe.config
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.exe
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.pdb

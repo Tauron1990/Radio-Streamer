@@ -7,8 +7,8 @@
     <ProjectGuid>{AF2AF397-1FF3-46C0-9944-4B047C6967D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tauron.Application.Audio</RootNamespace>
-    <AssemblyName>Tauron.Application.Audio</AssemblyName>
+    <RootNamespace>Tauron.Application.Bass</RootNamespace>
+    <AssemblyName>Tauron.Application.Bass</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
   </PropertyGroup>
@@ -47,6 +47,11 @@
     </Compile>
     <Compile Include="BASSException.cs" />
     <Compile Include="BassManager.cs" />
+    <Compile Include="BassMessages1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>BassMessages.resx</DependentUpon>
+    </Compile>
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -54,7 +59,7 @@
     <EmbeddedResource Include="BassMessages.de.resx" />
     <EmbeddedResource Include="BassMessages.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>BassMessages.Designer.cs</LastGenOutput>
+      <LastGenOutput>BassMessages1.Designer.cs</LastGenOutput>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>

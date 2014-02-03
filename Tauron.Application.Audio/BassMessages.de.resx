@@ -213,4 +213,127 @@
   <data name="BASS_ERROR_NOTAVAIL" xml:space="preserve">
     <value>Die angeforderten Daten sind nicht Verfügbar</value>
   </data>
+  <data name="BASS_ERROR_DECODE" xml:space="preserve">
+    <value>Der Kanal ist ein "Decoder Kanal"</value>
+  </data>
+  <data name="BASS_ERROR_DX" xml:space="preserve">
+    <value>Keine geeignete DirectX Version Installiert</value>
+  </data>
+  <data name="BASS_ERROR_TIMEOUT" xml:space="preserve">
+    <value>Verbindungs Timeout</value>
+  </data>
+  <data name="BASS_ERROR_FILEFORM" xml:space="preserve">
+    <value>Dateiformat wird nicht unterstützt</value>
+  </data>
+  <data name="BASS_ERROR_SPEAKER" xml:space="preserve">
+    <value>Lautsprecher nicht Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_VERSION" xml:space="preserve">
+    <value>Ungültige Bass Version (genutzt von add-ons)</value>
+  </data>
+  <data name="BASS_ERROR_CODEC" xml:space="preserve">
+    <value>Der Codec ist nicht Verfügbar/Unterstützt</value>
+  </data>
+  <data name="BASS_ERROR_ENDED" xml:space="preserve">
+    <value>Der Kanal/Die Datei ist Beendet</value>
+  </data>
+  <data name="BASS_ERROR_BUSY" xml:space="preserve">
+    <value>Der Treiber ist Beschäftigt (z.B. "exklusive" nutzung durch einen anderen Prozess)</value>
+  </data>
+  <data name="BASS_ERROR_UNKNOWN" xml:space="preserve">
+    <value>Ein Unbekannter Fehler ist eingetreten</value>
+  </data>
+  <data name="BASS_ERROR_WMA_LICENSE" xml:space="preserve">
+    <value>BassWma: Die Datei ist geschützt</value>
+  </data>
+  <data name="BASS_ERROR_WMA_WM9" xml:space="preserve">
+    <value>BassWma: WM9 wird Benötigt</value>
+  </data>
+  <data name="BASS_ERROR_WMA_DENIED" xml:space="preserve">
+    <value>BassWma: Zugriff Verweigert(Nutzer/Passwort ist Falsch)</value>
+  </data>
+  <data name="BASS_ERROR_WMA_CODEC" xml:space="preserve">
+    <value>BassWma: Kein Passender Codec ist Installiert</value>
+  </data>
+  <data name="BASS_ERROR_WMA_INDIVIDUAL" xml:space="preserve">
+    <value>BassWma: individualization is needed (???)</value>
+  </data>
+  <data name="BASS_ERROR_ACM_CANCEL" xml:space="preserve">
+    <value>BassEnc: Acm Codec Auswahl abgebrochen</value>
+  </data>
+  <data name="BASS_ERROR_CAST_DENIED" xml:space="preserve">
+    <value>BassEnc: Zugriff Verweigert (Falsches Passwort)</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOINPUTS" xml:space="preserve">
+    <value>BassVst: Der angegeben Effekt hat keine eingabe und ist möglicherweise ein Instrument und kein effekt</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOOUTPUTS" xml:space="preserve">
+    <value>BassVst: Der effekt hat keine ausgabe</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOREALTIME" xml:space="preserve">
+    <value>BassVst Der Effekt unterstützt keine Echtzeit Verabeitung</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_ABORT" xml:space="preserve">
+    <value>BASSVideo: Aktion wurde Abgebrochen</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_CONNECT" xml:space="preserve">
+    <value>BASSVideo: Kann keine Verbindung zum filter/Pin Herstellen</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_READ" xml:space="preserve">
+    <value>BASSVideo: Datei kann nicht gelesen werden</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_WRITE" xml:space="preserve">
+    <value>BASSVideo: Datei kann nicht geschrieben werden</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_FAILURE" xml:space="preserve">
+    <value>BASSVIDEO: Failure to do. (???)</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_FILTER" xml:space="preserve">
+    <value>BASSVideo: Ein Filter hat einen Fehler Verursacht</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_CHAN" xml:space="preserve">
+    <value>BASSVideo: Ungültiger BassVideo channel</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_DLL" xml:space="preserve">
+    <value>BASSVideo: Falsche Dll</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_FORMAT" xml:space="preserve">
+    <value>BASSVideo: Falsches Format</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_HANDLE" xml:space="preserve">
+    <value>BASSVideo: Fehlerhaftes Handle</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_PARAMETER" xml:space="preserve">
+    <value>BASSVideo: Fehlerhafter Parameter</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_AUDIO" xml:space="preserve">
+    <value>BASSVideo: Kein Sound</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_EFFECT" xml:space="preserve">
+    <value>BASSVideo: Kein "Video Eeffekt" gefunden</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_INTERFACE" xml:space="preserve">
+    <value>BASSVideo: Fehler beim ansprechendes Interfaces</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_RENDERER" xml:space="preserve">
+    <value>BASSVideo: Kein Renderer</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_SUPPORT" xml:space="preserve">
+    <value>BASSVideo: Nicht Unterstützt/Zurzeit nicht Unterstüzt</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_VIDEO" xml:space="preserve">
+    <value>BASSVideo: Kein Video</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_ALLOWED" xml:space="preserve">
+    <value>BASSVideo: Nicht Verfügbar</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_CONNECTED" xml:space="preserve">
+    <value>BASSVideo: Filter/Pin ist nicht Verbunden</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_EXISTS" xml:space="preserve">
+    <value>BASSVideo: Das Object Existiert nicht</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_FOUND" xml:space="preserve">
+    <value>BASSVideo: Object nicht gefunden</value>
+  </data>
 </root>

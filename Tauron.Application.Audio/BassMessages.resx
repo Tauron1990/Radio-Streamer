@@ -213,4 +213,127 @@
   <data name="BASS_ERROR_NOTAVAIL" xml:space="preserve">
     <value>BASS_Requested data is not available</value>
   </data>
+  <data name="BASS_ERROR_DECODE" xml:space="preserve">
+    <value>The channel is a 'decoding channel'</value>
+  </data>
+  <data name="BASS_ERROR_DX" xml:space="preserve">
+    <value>A sufficient DirectX version is not installed</value>
+  </data>
+  <data name="BASS_ERROR_TIMEOUT" xml:space="preserve">
+    <value>Connection timedout</value>
+  </data>
+  <data name="BASS_ERROR_FILEFORM" xml:space="preserve">
+    <value>Unsupported file format</value>
+  </data>
+  <data name="BASS_ERROR_SPEAKER" xml:space="preserve">
+    <value>Unavailable speaker</value>
+  </data>
+  <data name="BASS_ERROR_VERSION" xml:space="preserve">
+    <value>Invalid BASS version (used by add-ons)</value>
+  </data>
+  <data name="BASS_ERROR_CODEC" xml:space="preserve">
+    <value>Codec is not available/supported</value>
+  </data>
+  <data name="BASS_ERROR_ENDED" xml:space="preserve">
+    <value>The channel/file has ended</value>
+  </data>
+  <data name="BASS_ERROR_BUSY" xml:space="preserve">
+    <value>The device is busy (eg. in "exclusive" use by another process)</value>
+  </data>
+  <data name="BASS_ERROR_UNKNOWN" xml:space="preserve">
+    <value>Some other mystery error</value>
+  </data>
+  <data name="BASS_ERROR_WMA_LICENSE" xml:space="preserve">
+    <value>BassWma: the file is protected</value>
+  </data>
+  <data name="BASS_ERROR_WMA_WM9" xml:space="preserve">
+    <value>BassWma: WM9 is required</value>
+  </data>
+  <data name="BASS_ERROR_WMA_DENIED" xml:space="preserve">
+    <value>BassWma: access denied (user/pass is invalid)</value>
+  </data>
+  <data name="BASS_ERROR_WMA_CODEC" xml:space="preserve">
+    <value>BassWma: no appropriate codec is installed</value>
+  </data>
+  <data name="BASS_ERROR_WMA_INDIVIDUAL" xml:space="preserve">
+    <value>BassWma: individualization is needed</value>
+  </data>
+  <data name="BASS_ERROR_ACM_CANCEL" xml:space="preserve">
+    <value>BassEnc: ACM codec selection cancelled</value>
+  </data>
+  <data name="BASS_ERROR_CAST_DENIED" xml:space="preserve">
+    <value>BassEnc: Access denied (invalid password)</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOINPUTS" xml:space="preserve">
+    <value>BassVst: the given effect has no inputs and is probably a VST instrument and no effect</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOOUTPUTS" xml:space="preserve">
+    <value>BassVst: the given effect has no outputs</value>
+  </data>
+  <data name="BASS_VST_ERROR_NOREALTIME" xml:space="preserve">
+    <value>BassVst: the given effect does not support realtime processing</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_ABORT" xml:space="preserve">
+    <value>BASSVIDEO: Action was abort</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_CONNECT" xml:space="preserve">
+    <value>BASSVIDEO: Cannot connect filter / pin.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_READ" xml:space="preserve">
+    <value>BASSVIDEO: Cannot read file.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_CANNOT_WRITE" xml:space="preserve">
+    <value>BASSVIDEO: Cannot write file.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_FAILURE" xml:space="preserve">
+    <value>BASSVIDEO: Failure to do.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_FILTER" xml:space="preserve">
+    <value>BASSVIDEO: Error cause by filter.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_CHAN" xml:space="preserve">
+    <value>BASSVIDEO: Invalid BassVideo channel.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_DLL" xml:space="preserve">
+    <value>BASSVIDEO: Wrong dll.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_FORMAT" xml:space="preserve">
+    <value>BASSVIDEO: Invalid format.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_HANDLE" xml:space="preserve">
+    <value>BASSVIDEO: Invalid handle.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_INVALID_PARAMETER" xml:space="preserve">
+    <value>BASSVIDEO: Invalid parameter.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_AUDIO" xml:space="preserve">
+    <value>BASSVIDEO: No sound.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_EFFECT" xml:space="preserve">
+    <value>BASSVIDEO: No "Video Effect" detected.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_INTERFACE" xml:space="preserve">
+    <value>BASSVIDEO: Failed to querry interface.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_RENDERER" xml:space="preserve">
+    <value>BASSVIDEO: No renderer.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_SUPPORT" xml:space="preserve">
+    <value>BASSVIDEO: No support/Currently not supported.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NO_VIDEO" xml:space="preserve">
+    <value>BASSVIDEO: No Video.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_ALLOWED" xml:space="preserve">
+    <value>BASSVIDEO: Not allowed.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_CONNECTED" xml:space="preserve">
+    <value>BASSVIDEO: Filter/Pin had not connected.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_EXISTS" xml:space="preserve">
+    <value>BASSVIDEO: Not existing object.</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NOT_FOUND" xml:space="preserve">
+    <value>BASSVIDEO: Object not found</value>
+  </data>
 </root>
