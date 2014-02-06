@@ -7,7 +7,7 @@
     <ProjectGuid>{AF2AF397-1FF3-46C0-9944-4B047C6967D3}</ProjectGuid>
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
-    <RootNamespace>Tauron.Application.Bass</RootNamespace>
+    <RootNamespace>Tauron.Application.BassLib</RootNamespace>
     <AssemblyName>Tauron.Application.Bass</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
@@ -40,6 +40,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BassEngine.cs" />
     <Compile Include="BassMessages.Designer.cs">
       <DependentUpon>BassMessages.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -52,7 +53,12 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>BassMessages.resx</DependentUpon>
     </Compile>
+    <Compile Include="Channel.cs" />
+    <Compile Include="Channels\DownloadInterceptor.cs" />
+    <Compile Include="Channels\WebStream.cs" />
+    <Compile Include="Channels\WebStreamFlags.cs" />
     <Compile Include="DeviceManager.cs" />
+    <Compile Include="Extensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

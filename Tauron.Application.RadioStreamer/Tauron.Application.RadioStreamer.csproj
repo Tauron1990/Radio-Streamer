@@ -44,21 +44,6 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Player\CoreOld\AdvancedChannel.cs" />
-    <None Include="Player\CoreOld\BASSEngine.cs" />
-    <None Include="Player\CoreOld\BASSException.cs" />
-    <None Include="Player\CoreOld\Channel.cs" />
-    <None Include="Player\CoreOld\Channel3DAttributes.cs" />
-    <None Include="Player\CoreOld\ChannelAttributes.cs" />
-    <None Include="Player\CoreOld\ChannelBase.cs" />
-    <None Include="Player\CoreOld\Delegates.cs" />
-    <None Include="Player\CoreOld\Enums.cs" />
-    <None Include="Player\CoreOld\FX.cs" />
-    <None Include="Player\CoreOld\Helper.cs" />
-    <None Include="Player\CoreOld\Music.cs" />
-    <None Include="Player\CoreOld\Sample.cs" />
-    <None Include="Player\CoreOld\BassStream.cs" />
-    <None Include="Player\CoreOld\Structs.cs" />
     <Compile Include="Player\Equalizer.cs" />
     <Compile Include="Player\BassMediaPlayer.cs" />
     <Compile Include="Player\MemoryManager.cs" />
@@ -114,14 +99,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Player\CoreOld\BASSEngine.resx">
-      <DependentUpon>BASSEngine.cs</DependentUpon>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Player\Core\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

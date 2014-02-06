@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Tauron.Application.Bass {
+namespace Tauron.Application.BassLib {
     using System;
     
     
@@ -39,7 +39,7 @@ namespace Tauron.Application.Bass {
         internal static global::System.Resources.ResourceManager ResourceManager {
             get {
                 if (object.ReferenceEquals(resourceMan, null)) {
-                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tauron.Application.Bass.BassMessages", typeof(BassMessages).Assembly);
+                    global::System.Resources.ResourceManager temp = new global::System.Resources.ResourceManager("Tauron.Application.BassLib.BassMessages", typeof(BassMessages).Assembly);
                     resourceMan = temp;
                 }
                 return resourceMan;
@@ -624,6 +624,96 @@ namespace Tauron.Application.Bass {
         internal static string BASS_ERROR_VIDEO_NOT_FOUND {
             get {
                 return ResourceManager.GetString("BASS_ERROR_VIDEO_NOT_FOUND", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Graph/Filter not ready.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_NOT_READY {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_NOT_READY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Device is null.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_NULL_DEVICE {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_NULL_DEVICE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Cannot open.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_OPEN {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_OPEN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Not enough memory.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_OUTOFMEMORY {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_OUTOFMEMORY", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Stream is in an unsupported format.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_PARTIAL_RENDER {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_PARTIAL_RENDER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: A Timeout occured.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_TIME_OUT {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_TIME_OUT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Unknown file type.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_UNKNOWN_FILE_TYPE {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_UNKNOWN_FILE_TYPE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Cannot play file, format not supported.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_UNSUPPORT_STREAM {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_UNSUPPORT_STREAM", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSVIDEO: Cannot create video filter.  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_VIDEO_VIDEO_FILTER {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_VIDEO_VIDEO_FILTER", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die BASSWASAPI: no WASAPI available  ähnelt.
+        /// </summary>
+        internal static string BASS_ERROR_WASAPI {
+            get {
+                return ResourceManager.GetString("BASS_ERROR_WASAPI", resourceCulture);
             }
         }
         

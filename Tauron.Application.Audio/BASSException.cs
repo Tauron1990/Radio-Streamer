@@ -3,7 +3,7 @@ using System.Runtime.Serialization;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
-namespace Tauron.Application.Audio
+namespace Tauron.Application.BassLib
 {
     [Serializable, PublicAPI]
     public class BassException : Exception
@@ -30,34 +30,7 @@ namespace Tauron.Application.Audio
         {
             get
             {
-                return BassMessages.ResourceManager.GetString(Error.ToString()) ?? BassMessages.ErrorUnkown;
-                switch (_error)
-                {
-                    case BASSError.BASS_ERROR_VIDEO_NOT_READY:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_NULL_DEVICE:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_OPEN:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_OUTOFMEMORY:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_PARTIAL_RENDER:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_TIME_OUT:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_UNKNOWN_FILE_TYPE:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_UNSUPPORT_STREAM:
-                        break;
-                    case BASSError.BASS_ERROR_VIDEO_VIDEO_FILTER:
-                        break;
-                    case BASSError.BASS_ERROR_WASAPI:
-                        break;
-                    default:
-                        return BassMessages.ErrorUnkown;
-                }
-
-                return BassMessages.ErrorUnkown;
+                return Audio.BassMessages.ResourceManager.GetString(Error.ToString()) ?? Audio.BassMessages.ErrorUnkown;
             }
         }
 

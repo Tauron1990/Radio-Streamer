@@ -336,4 +336,34 @@
   <data name="BASS_ERROR_VIDEO_NOT_FOUND" xml:space="preserve">
     <value>BASSVideo: Object nicht gefunden</value>
   </data>
+  <data name="BASS_ERROR_VIDEO_NOT_READY" xml:space="preserve">
+    <value>BASSVIDEO: Graph/Filter nicht Bereit</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_NULL_DEVICE" xml:space="preserve">
+    <value>BASSVIDEO: Device ist null. </value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_OPEN" xml:space="preserve">
+    <value>BASSVideo: Kann nicht geöffnet werden</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_OUTOFMEMORY" xml:space="preserve">
+    <value>BASSVideo: Nicht genügend Arbeitsspeicher</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_PARTIAL_RENDER" xml:space="preserve">
+    <value>BASSVideo: Der Stream ist ein nicht unterst</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_TIME_OUT" xml:space="preserve">
+    <value>BASSVideo: Ein Timeout ist eingetreten</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_UNKNOWN_FILE_TYPE" xml:space="preserve">
+    <value>BASSVideo: Unbekannter Datei Type</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_UNSUPPORT_STREAM" xml:space="preserve">
+    <value>BASSVideo: Datei kann nicht Abgespielt werden, Format nicht unterstützt</value>
+  </data>
+  <data name="BASS_ERROR_VIDEO_VIDEO_FILTER" xml:space="preserve">
+    <value>BASSVideo: Der Video Filter kann nicht erstellt werden</value>
+  </data>
+  <data name="BASS_ERROR_WASAPI" xml:space="preserve">
+    <value>BASSWASAPI: Keine WASAPI Verfügbar</value>
+  </data>
 </root>
