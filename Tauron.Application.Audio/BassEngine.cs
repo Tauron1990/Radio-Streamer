@@ -1,4 +1,5 @@
-﻿using Tauron.Application.BassLib.Channels;
+﻿using System;
+using Tauron.Application.BassLib.Channels;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 
@@ -7,11 +8,15 @@ namespace Tauron.Application.BassLib
     [PublicAPI]
     public class BassEngine
     {
-        public static WebStream CreateWeb(string url, int offset = 0, WebStreamFlags flags = WebStreamFlags.Default,
-                                          DownloadInterceptor download = null)
+        [NotNull]
+        public static WebStream CreateWeb([NotNull] string url, int offset = 0,
+            WebStreamFlags flags = WebStreamFlags.Default, [CanBeNull] DownloadInterceptor download = null)
         {
-            //int handle = Bass.BASS_StreamCreateURL(url, offset, (BASSFlag)flags)
-            return null;
+            if (url == null) throw new ArgumentNullException("url");
+
+            int handle = Bass.BASS_StreamCreateURL(url, offset, (BASSFlag) flags,
+                download == null ? null : download.Downloadproc, IntPtr.Zero);
+            return new WebStream(handle, download);
         }
     }
 }

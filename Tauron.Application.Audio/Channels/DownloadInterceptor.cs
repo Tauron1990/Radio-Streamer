@@ -7,6 +7,7 @@ namespace Tauron.Application.BassLib.Channels
 {
     public abstract class DownloadInterceptor
     {
+        [NotNull]
         internal DOWNLOADPROC Downloadproc { get; private set; }
 
         protected DownloadInterceptor()
