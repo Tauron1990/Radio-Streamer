@@ -18,5 +18,12 @@ namespace Tauron.Application.BassLib
                 download == null ? null : download.Downloadproc, IntPtr.Zero);
             return new WebStream(handle, download);
         }
+
+        public static FileChannel CreateFile([NotNull] string file, long offset = 0, long lenght = 0)
+        {
+            if (file == null) throw new ArgumentNullException("file");
+            
+            int handle = Bass.BASS_StreamCreateFile(file, offset, lenght, )
+        }
     }
 }

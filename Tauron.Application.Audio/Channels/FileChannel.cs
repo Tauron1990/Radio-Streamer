@@ -1,9 +1,16 @@
-﻿namespace Tauron.Application.BassLib.Channels
+﻿using Un4seen.Bass;
+
+namespace Tauron.Application.BassLib.Channels
 {
     public class FileChannel : Channel
     {
-        public FileChannel(int handle) : base(handle)
+        internal FileChannel(int handle) : base(handle)
         {
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Bass.BASS_StreamFree(HandleFree());
         }
     }
 }
