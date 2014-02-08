@@ -3,8 +3,10 @@ using System.Drawing;
 using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
+using Tauron.Application.BassLib;
+using Tauron.Application.BassLib.Channels;
+using Tauron.Application.BassLib.Misc;
 using Tauron.Application.Ioc;
-using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
@@ -20,9 +22,7 @@ namespace Tauron.Application.RadioStreamer.Player
     [ExportRadioPlayer]
     public sealed class BassMediaPlayer : IDisposable, IRadioPlayer
     {
-        private SYNCPROC _downlodCompledDelegate;
         private MemoryManager _memoryManager;
-        private SYNCPROC _newMetaDelegate;
 
         private RadioPlayerPlay _play;
         private RadioPlayerStop _stop;
@@ -37,35 +37,26 @@ namespace Tauron.Application.RadioStreamer.Player
 
             _memoryManager = new MemoryManager();
 
-            _visuals = new Visuals();
-            BassNet.Registration("Game-over-Alexander@web.de", "2X1533726322323");
-
-            _newMetaDelegate = NewMeta;
-            _downlodCompledDelegate = DownlodCompled;
+            _visuals = new VisualHelper();
+            BassManager.Register("Game-over-Alexander@web.de", "2X1533726322323");
         }
 
         #region Implementation of IRadioPlayer
 
-        private readonly Visuals _visuals;
-        private Equalizer _eq = new Equalizer();
-        private int _handle;
-        private int _mixer;
+        private readonly VisualHelper _visuals;
         private IScript _script;
         private string _sourceUrl;
-        private bool _supportRecording = true;
+        private BassEngine _bassEngine;
+        private WebStream _webStream;
 
-        public bool Activate()
+        public void Activate()
         {
             _memoryManager.Init();
-            bool flag = Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
+            BassManager.IniBass();
+            _bassEngine = new BassEngine();
 
-            if (flag)
-            {
-                Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                    "DLL".CombinePath("PlugIns")));
-            }
-
-            return flag;
+            Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                                       "DLL".CombinePath("PlugIns")));
         }
 
         public void Deactivate()
@@ -73,13 +64,11 @@ namespace Tauron.Application.RadioStreamer.Player
             StopRecording();
             Stop();
 
-            Bass.BASS_Free();
+            BassManager.Free();
         }
 
-        public bool Play(RadioQuality url, [NotNull] IScript script)
+        public void Play(RadioQuality url, [NotNull] IScript script)
         {
-            if (_handle != 0) return true;
-
             _script = script;
             _sourceUrl = url.SourceUrl;
 
@@ -207,7 +196,7 @@ namespace Tauron.Application.RadioStreamer.Player
             _lameencoder.Stop(true);
         }
 
-        public Bitmap CreateSprectrum(string playerCode, int width, int height)
+        public Bitmap CreateSprectrum(Spectrums playerCode, int width, int height)
         {
             switch (playerCode)
             {
@@ -237,19 +226,6 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
-        public string[] GetSpectrumCodes()
-        {
-            return new[]
-            {
-                "Graph",
-                "Balken",
-                "Punkt",
-                "Elipse",
-                "Linie",
-                "Linien-Spitze",
-                "Welle"
-            };
-        }
 
         private void InitEncode()
         {

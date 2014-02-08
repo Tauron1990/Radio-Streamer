@@ -50,9 +50,50 @@ namespace Tauron.Application.BassLib
                 _value = 100;
         }
 
+        public float ToFloat(PercentMode mode)
+        {
+            switch (mode)
+            {
+                case PercentMode.Default:
+                    return _value;
+                case PercentMode.ZeroOne:
+                    return _value/100f;
+                default:
+                    throw new ArgumentOutOfRangeException("mode");
+            }
+        }
+
+        public int ToInt(PercentMode mode)
+        {
+            switch (mode)
+            {
+                case PercentMode.Default:
+                    return _value;
+                case PercentMode.ZeroOne:
+                    return _value / 100;
+                default:
+                    throw new ArgumentOutOfRangeException("mode");
+            }
+        }
+
         public static implicit operator Percentage(int val)
         {
-            return new Percentage(val, val < 1 ? PercentMode.Default);
+            return new Percentage(val, PercentMode.Default);
+        }
+
+        public static implicit operator Percentage(float val)
+        {
+            return new Percentage(val, PercentMode.ZeroOne);
+        }
+
+        public static implicit operator int(Percentage p)
+        {
+            return p._value;
+        }
+
+        public static implicit operator float(Percentage p)
+        {
+            return p._value/100f;
         }
 
         public override string ToString()

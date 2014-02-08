@@ -8,17 +8,16 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
 {
     public abstract class ScriptObject : ScriptingBase, IScript
     {
-        public TAG_INFO GetTitleInfo(string url, string[] meta, out string title)
+        public TAG_INFO GetTitleInfo(string url, TAG_INFO meta, out string title)
         {
             title = null;
-            object result = null;
 
             Url = url;
             Metadata = meta;
             Document = new HtmlDocument();
             Document.Load(new MemoryStream(WebClient.DownloadData(url)));
 
-            result = Invoke();
+            object result = Invoke();
 
             if (result == null)
                 return null;

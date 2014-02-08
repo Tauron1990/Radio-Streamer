@@ -15,6 +15,14 @@ using Picture = System.Drawing.Image;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 {
+                //    "Graph",
+                //"Balken",
+                //"Punkt",
+                //"Elipse",
+                //"Linie",
+                //"Linien-Spitze",
+                //"Welle"
+
     [ExportViewModel(AppConstants.SprectrumViewModel)]
     public sealed class SprecturmViewModel : ViewModelBase, INotifyBuildCompled
     {

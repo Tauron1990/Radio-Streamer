@@ -46,7 +46,6 @@
     <Compile Include="Core\Attributes\ExportRadioPlayer.cs" />
     <Compile Include="Core\Attributes\RadioEniromentExport.cs" />
     <Compile Include="Core\IEqProfileDatabase.cs" />
-    <Compile Include="Core\IEqualizer.cs" />
     <Compile Include="Core\IRadioEnvironment.cs" />
     <Compile Include="Core\Attributes\StatusBarItemExport.cs" />
     <Compile Include="Player\IRadioPlayer.cs" />
@@ -82,6 +81,10 @@
     <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.Audio\Tauron.Application.Bass.csproj">
+      <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
+      <Name>Tauron.Application.Bass</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

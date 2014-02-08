@@ -7,6 +7,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.Scripts
     public interface IScript
     {
         [CanBeNull]
-        TAG_INFO GetTitleInfo([NotNull] string url, [NotNull] string[] meta, out string title);
+        TAG_INFO GetTitleInfo([NotNull] string url, [NotNull] TAG_INFO meta, out string title);
     }
 }

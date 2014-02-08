@@ -9,7 +9,11 @@ namespace Tauron.Application.BassLib
     {
         public static readonly DeviceManager SoundDevice = new DeviceManager(false);
 
+        public static readonly DeviceManager RecordDevice = new DeviceManager(true);
+
         public static bool IsInitialized { get; private set; }
+
+        public static bool IsRecordinginitialized { get; private set; }
 
         public static void IniBass([CanBeNull] BASS_DEVICEINFO deviceinfo = null, int frequency = 44100, BASSInit flags = BASSInit.BASS_DEVICE_DEFAULT)
         {
@@ -21,6 +25,13 @@ namespace Tauron.Application.BassLib
             IsInitialized = true;
         }
 
+        public static void InitRecord([CanBeNull] BASS_DEVICEINFO deviceinfo = null)
+        {
+            Bass.BASS_RecordInit(deviceinfo == null ? -1 : RecordDevice.GetDevice(deviceinfo)).CheckBass();
+
+            IsRecordinginitialized = true;
+        }
+
         public static void Register([NotNull] string email, [NotNull] string key)
         {
             BassNet.Registration(email, key);
@@ -28,11 +39,11 @@ namespace Tauron.Application.BassLib
 
         public static void Free()
         {
-            if(!IsInitialized) return;
-
-            Bass.BASS_Free().CheckBass();
+            if (!IsInitialized) Bass.BASS_Free();
+            if(!IsRecordinginitialized) Bass.BASS_RecordFree();
 
             IsInitialized = false;
+            IsRecordinginitialized = false;
         }
     }
 }

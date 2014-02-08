@@ -33,6 +33,7 @@
     <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
     <Reference Include="System.Xml.Linq" />
     <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="Microsoft.CSharp" />
@@ -54,16 +55,23 @@
       <DependentUpon>BassMessages.resx</DependentUpon>
     </Compile>
     <Compile Include="Channel.cs" />
+    <Compile Include="Channels\BassHelper.cs" />
+    <Compile Include="Channels\FileChannel.cs" />
     <Compile Include="Channels\Mix.cs" />
     <Compile Include="Channels\BassMixFlags.cs" />
     <Compile Include="Channels\DownloadInterceptor.cs" />
     <Compile Include="Channels\WebStream.cs" />
     <Compile Include="Channels\WebStreamFlags.cs" />
     <Compile Include="DeviceManager.cs" />
+    <Compile Include="Misc\Equalizer.cs" />
     <Compile Include="Extensions.cs" />
+    <Compile Include="Misc\IEqualizer.cs" />
+    <Compile Include="Misc\VisualHelper.cs" />
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Recording\Recorder.cs" />
+    <Compile Include="SyncBase.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="BassMessages.de.resx" />
@@ -76,6 +84,10 @@
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
       <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
       <Name>JetBrains.Annotations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
+      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
+      <Name>Tauron.Application.Common</Name>
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -1,6 +1,6 @@
 ﻿using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Contracts.Core
+namespace Tauron.Application.BassLib.Misc
 {
     [PublicAPI]
 	public interface IEqualizer

@@ -2,6 +2,7 @@
 using HtmlAgilityPack;
 using Mono.CSharp;
 using Tauron.JetBrains.Annotations;
+using Un4seen.Bass.AddOn.Tags;
 
 namespace Tauron.Application.RadioStreamer.Database.Scripts
 {
@@ -13,7 +14,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
         public static string Url { get; internal set; }
 
         [NotNull]
-        public static string[] Metadata { get; internal set; }
+        public static TAG_INFO Metadata { get; internal set; }
 
         [NotNull]
         public static HtmlDocument Document { get; internal set; }

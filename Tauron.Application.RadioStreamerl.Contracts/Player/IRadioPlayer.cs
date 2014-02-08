@@ -1,4 +1,6 @@
 ﻿using System.Drawing;
+using Tauron.Application.BassLib;
+using Tauron.Application.BassLib.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
@@ -12,26 +14,24 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
         [NotNull]
         string GetLastError();
 
-		bool Activate();
+		void Activate();
 		void Deactivate();
 
-		bool Play(RadioQuality radio, IScript script);
+		void Play(RadioQuality radio, IScript script);
 		void Stop();
 
-		bool SupportRecording { get; }
 		bool IsRecording { get; }
 
 		void StartRecording([NotNull] string location);
 		void StopRecording();
 
         [NotNull]
-        Bitmap CreateSprectrum([NotNull] string playerCode, int width, int height);
+        Bitmap CreateSprectrum(Spectrums playerCode, int width, int height);
 
-        [NotNull]
-        string[] GetSpectrumCodes();
 		double GetBufferPercentage();
 
 		void SetVolume(double volume);
+
         [NotNull]
         IEqualizer GetEqualizer();
 	}
