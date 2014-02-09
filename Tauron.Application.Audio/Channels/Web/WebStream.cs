@@ -67,9 +67,19 @@ namespace Tauron.Application.BassLib.Channels
         [NotNull]
         public IDisposable SetDownloadEnd([NotNull] Action action)
         {
-            var sync = new StreamDownloadDoneSync(action);
+            var sync = new EndSync(action);
             SyncManager.Register(sync, 0, BASSSync.BASS_SYNC_DOWNLOAD);
             return sync;
+        }
+
+        public override TAG_INFO Tag
+        {
+            get
+            {
+                var tags = new TAG_INFO();
+                BassTags.BASS_TAG_GetFromURL(Handle, tags);
+                return tags;
+            }
         }
 
         protected override void Dispose(bool disposing)

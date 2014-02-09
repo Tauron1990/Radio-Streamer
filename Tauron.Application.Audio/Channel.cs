@@ -4,17 +4,18 @@ using System.Collections.Generic;
 using Tauron.Application.BassLib.Channels;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Tags;
 
 namespace Tauron.Application.BassLib
 {
     [PublicAPI]
     public abstract class Channel : ObservableObject, IDisposable
     {
-        protected class StreamDownloadDoneSync : SyncBase
+        protected class EndSync : SyncBase
         {
             private readonly Action _action;
 
-            public StreamDownloadDoneSync([NotNull] Action action)
+            public EndSync([NotNull] Action action)
             {
                 if (action == null) throw new ArgumentNullException("action");
 
@@ -116,6 +117,8 @@ namespace Tauron.Application.BassLib
 
         protected Channel(int handle)
         {
+            if(handle == 0)
+                throw  new BassException();
             Handle = handle;
         }
 
@@ -135,6 +138,28 @@ namespace Tauron.Application.BassLib
         {
             if(!Bass.BASS_ChannelStop(Handle))
                 throw new BassException();
+        }
+
+        [NotNull]
+        public abstract TAG_INFO Tag
+        {
+            get;
+        }
+
+        public bool IsActive
+        {
+            get
+            {
+                return Bass.BASS_ChannelIsActive(Handle) == BASSActive.BASS_ACTIVE_PLAYING;
+            }
+        }
+
+        public long Position
+        {
+            get
+            {
+                return Bass.BASS_ChannelGetPosition(Handle);
+            }
         }
 
         public void Dispose()

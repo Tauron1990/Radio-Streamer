@@ -59,3 +59,6 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleAppl
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\de\Tauron.Application.Common.resources.dll
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.Bass.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.Bass.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\de\Tauron.Application.Bass.resources.dll

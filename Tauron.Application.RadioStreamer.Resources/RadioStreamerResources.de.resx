@@ -231,4 +231,10 @@
   <data name="SprectumHeaderLabel" xml:space="preserve">
     <value>Visualisierung</value>
   </data>
+  <data name="SpectrumChoiceWindowLabel" xml:space="preserve">
+    <value>Auswahl Visualisirung</value>
+  </data>
+  <data name="SpectrumChoiceMainInstruction" xml:space="preserve">
+    <value>Wählen sie die Gewünschte Visualisierung aus:</value>
+  </data>
 </root>

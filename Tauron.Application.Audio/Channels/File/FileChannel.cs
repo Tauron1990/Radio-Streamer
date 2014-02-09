@@ -1,0 +1,53 @@
+﻿using System;
+using Tauron.JetBrains.Annotations;
+using Un4seen.Bass;
+using Un4seen.Bass.AddOn.Tags;
+
+namespace Tauron.Application.BassLib.Channels
+{
+    public class FileChannel : Channel
+    {
+        internal FileChannel(int handle) : base(handle)
+        {
+        }
+
+        public override TAG_INFO Tag
+        {
+            get
+            {
+                var tags = new TAG_INFO();
+                BassTags.BASS_TAG_GetFromFile(Handle, tags);
+                return tags;
+            }
+        }
+
+        public long Length
+        {
+            get
+            {
+                return Bass.BASS_ChannelGetLength(Handle);
+            }
+        }
+
+        public double Progress
+        {
+            get
+            {
+                return 100d/Length*Position;
+            }
+        }
+
+        [NotNull]
+        public IDisposable SetEntSync([NotNull] Action action)
+        {
+            var sync = new EndSync(action);
+            SyncManager.Register(sync, 0, BASSSync.BASS_SYNC_END);
+            return sync;
+        }
+
+        protected override void Dispose(bool disposing)
+        {
+            Bass.BASS_StreamFree(HandleFree());
+        }
+    }
+}

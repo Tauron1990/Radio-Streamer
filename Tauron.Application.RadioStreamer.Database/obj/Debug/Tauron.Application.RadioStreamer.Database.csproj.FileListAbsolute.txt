@@ -107,3 +107,6 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\obj\Debug\Tauron.Application.RadioStreamer.Database.csprojResolveAssemblyReference.cache
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\obj\Debug\Tauron.Application.RadioStreamer.Database.dll
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\obj\Debug\Tauron.Application.RadioStreamer.Database.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.Bass.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.Bass.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\de\Tauron.Application.Bass.resources.dll

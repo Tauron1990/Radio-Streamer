@@ -26,6 +26,11 @@ namespace Tauron.Application.BassLib
             _error = Bass.BASS_ErrorGetCode();
         }
 
+        public BassException(BASSError error)
+        {
+            _error = error;
+        }
+
         public override string Message
         {
             get

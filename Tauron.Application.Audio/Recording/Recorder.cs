@@ -58,6 +58,15 @@ namespace Tauron.Application.BassLib.Recording
             if(Encoder == null) return;
 
             Encoder.Stop();
+            IsRecording = false;
+        }
+
+        public void ChangeChannel([NotNull] Channel channel)
+        {
+            if (channel == null) throw new ArgumentNullException("channel");
+            if (Encoder == null) return;
+
+            Encoder.ChannelHandle = channel.Handle;
         }
 
         public void Dispose()

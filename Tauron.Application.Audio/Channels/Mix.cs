@@ -3,6 +3,7 @@ using Tauron.Application.BassLib.Misc;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Mix;
+using Un4seen.Bass.AddOn.Tags;
 
 namespace Tauron.Application.BassLib.Channels
 {
@@ -51,6 +52,14 @@ namespace Tauron.Application.BassLib.Channels
             if(Handle == 0) return;
 
             BassMix.BASS_Mixer_ChannelRemove(handle).CheckBass();
+        }
+
+        public override TAG_INFO Tag
+        {
+            get
+            {
+                throw new NotSupportedException();
+            }
         }
 
         protected override void Dispose(bool disposing)

@@ -3,6 +3,7 @@ using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
+using Tauron.Application.BassLib;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
@@ -196,7 +197,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			    if (_percentCache != -2) return _percentCache;
 
 			    if (CurrentTitle.State != PlayerStade.Playing) return 0;
-			    _percentCache = _player.GetBufferPercentage();
+			    _percentCache = _player.BufferPercentage;
 
 			    return _percentCache;
 			}
@@ -224,26 +225,32 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		#region Playing
 		private bool _isInitialized;
 
-		private void SendError()
+		private void SendError([NotNull] BassException ex)
 		{
-			const string caption = "Error";
-			string text = String.Format(RadioStreamerResources.BassErrorMessage, _player.GetLastError());
+		    const string caption = "Error";
+		    string text = String.Format(RadioStreamerResources.BassErrorMessage, ex.Message);
 
-		    Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok, MsgBoxImage.Error, null);
+		    Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok,
+		                           MsgBoxImage.Error, null);
 		}
-		private bool Initialize()
+
+	    private bool Initialize()
 		{
 			if (_isInitialized) return false;
 
-			_isInitialized = _player.Activate();
+		    try
+		    {
+		        _player.Activate();
+		    }
+		    catch (BassException e)
+		    {
+		        const string caption = "Error";
+		        string text = String.Format(RadioStreamerResources.BassInitErrorMessage, e.Message);
 
-		    if (_isInitialized) return _isInitialized;
-
-		    const string caption = "Error";
-		    string text = String.Format(RadioStreamerResources.BassInitErrorMessage, _player.GetLastError());
-
-		    Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok, MsgBoxImage.Error, null);
-
+		        Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok,
+		                               MsgBoxImage.Error, null);
+		    }
+		    _isInitialized = true;
 		    return _isInitialized;
 		}
 		private void Play(RadioQuality radio)
@@ -253,15 +260,17 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			if (CurrentTitle.State == PlayerStade.Playing)
 				Stop();
 
-			bool flag = _player.Play(radio, null);
-			if (flag)
-			{
-				ResetVolume();
-				CurrentTitle.State = PlayerStade.Playing;
-				_time.Start();
-			}
-			else
-				SendError();
+		    try
+		    {
+		        _player.Play(radio, null);
+		        ResetVolume();
+		        CurrentTitle.State = PlayerStade.Playing;
+		        _time.Start();
+		    }
+		    catch (BassException e)
+		    {
+		        SendError(e);
+		    }
 		}
 		
 		private void PlayRadioEventHandler([NotNull] PlayRadioEventArgs obj)
@@ -311,7 +320,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		[CommandTarget]
 		private bool CanRecord()
 		{
-			return _player.SupportRecording && CurrentTitle.State == PlayerStade.Playing;
+			return CurrentTitle.State == PlayerStade.Playing;
 		}
 		[CommandTarget]
 		private void Record()
@@ -414,7 +423,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			else
 				SetVolumeImage(AudioVolumeMuted);
 
-			_player.SetVolume(volume);
+			_player.Volume = volume;
 		}
 		private void SetVolumeImage([NotNull] Uri image)
 		{

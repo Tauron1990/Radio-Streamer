@@ -196,6 +196,16 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Ressource vom Typ System.Drawing.Icon ähnlich wie (Symbol).
+        /// </summary>
+        public static System.Drawing.Icon RadioIcon {
+            get {
+                object obj = ResourceManager.GetObject("RadioIcon", resourceCulture);
+                return ((System.Drawing.Icon)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Land:    {0} ähnelt.
         /// </summary>
         public static string RadioItemCountryLabel {
@@ -354,6 +364,24 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string SearchLabel {
             get {
                 return ResourceManager.GetString("SearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Choice your Spectrum: ähnelt.
+        /// </summary>
+        public static string SpectrumChoiceMainInstruction {
+            get {
+                return ResourceManager.GetString("SpectrumChoiceMainInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Spectrum Choice ähnelt.
+        /// </summary>
+        public static string SpectrumChoiceWindowLabel {
+            get {
+                return ResourceManager.GetString("SpectrumChoiceWindowLabel", resourceCulture);
             }
         }
         

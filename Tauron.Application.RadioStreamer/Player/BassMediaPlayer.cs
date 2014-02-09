@@ -1,315 +1,288 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
-using System.Net;
+using System.Linq;
 using System.Text.RegularExpressions;
 using Tauron.Application.BassLib;
 using Tauron.Application.BassLib.Channels;
 using Tauron.Application.BassLib.Misc;
+using Tauron.Application.BassLib.Recording;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
+using Tauron.Application.RadioStreamer.Player.Engine;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
-using Un4seen.Bass.AddOn.Mix;
 using Un4seen.Bass.AddOn.Tags;
 using Un4seen.Bass.Misc;
 
 namespace Tauron.Application.RadioStreamer.Player
 {
     [ExportRadioPlayer]
-    public sealed class BassMediaPlayer : IDisposable, IRadioPlayer
+    public sealed class BassMediaPlayer : IRadioPlayer
     {
-        private MemoryManager _memoryManager;
+        private static readonly string IllegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
 
-        private RadioPlayerPlay _play;
-        private RadioPlayerStop _stop;
-        private RadioPlayerTitleRecived _titleRecived;
+        private IEnumerable<Lazy<IPlaybackEngine, IPlaybackEngineMetadata>> _playbackEngines; 
+
+        private Channel _currentChannel;
+        private Channel _nextChannel;
+        private Mix _mixer;
+        private Recorder _recorder;
+        private BassEngine _bassEngine;
+        private Dictionary<int, string> _plugins;
+        private IPlaybackEngine _playbackEngine;
+        private IScript _script;
+        private string _url;
+        private string _currentRecordingLocation;
+        private TAG_INFO _tagInfo;
+
+        private readonly VisualHelper _visualHelper;
+        private readonly MemoryManager _memoryManager;
+        private readonly Equalizer _equalizer;
+
+        private readonly RadioPlayerPlay _play;
+        private readonly RadioPlayerStop _stop;
+        private readonly RadioPlayerTitleRecived _titleRecived;
 
         [Inject]
         public BassMediaPlayer([NotNull] IEventAggregator aggregator)
         {
+            _visualHelper = new VisualHelper();
+            _memoryManager = new MemoryManager();
+            _equalizer = new Equalizer();
+
             _play = aggregator.GetEvent<RadioPlayerPlay, EventArgs>();
             _stop = aggregator.GetEvent<RadioPlayerStop, EventArgs>();
             _titleRecived = aggregator.GetEvent<RadioPlayerTitleRecived, string>();
 
-            _memoryManager = new MemoryManager();
-
-            _visuals = new VisualHelper();
             BassManager.Register("Game-over-Alexander@web.de", "2X1533726322323");
         }
 
-        #region Implementation of IRadioPlayer
-
-        private readonly VisualHelper _visuals;
-        private IScript _script;
-        private string _sourceUrl;
-        private BassEngine _bassEngine;
-        private WebStream _webStream;
-
         public void Activate()
         {
-            _memoryManager.Init();
             BassManager.IniBass();
-            _bassEngine = new BassEngine();
+            BassManager.InitRecord();
 
-            Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                                       "DLL".CombinePath("PlugIns")));
+            _memoryManager.Init();
+            _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
+                                           "DLL".CombinePath("PlugIns")));
+            _bassEngine = new BassEngine();
         }
 
         public void Deactivate()
         {
-            StopRecording();
-            Stop();
+            _currentChannel.Dispose();
+            _memoryManager.Dispose();
+
+            _bassEngine = null;
+            if(_playbackEngine != null)
+                _playbackEngine.Free();
+            if(_recorder != null)
+                _recorder.Dispose();
+
+            _nextChannel = null;
+            _currentChannel = null;
+            _plugins = null;
+            _recorder = null;
 
             BassManager.Free();
         }
 
-        public void Play(RadioQuality url, [NotNull] IScript script)
+        public void Play(RadioQuality radio, IScript script)
         {
             _script = script;
-            _sourceUrl = url.SourceUrl;
+            string url = radio.Url;
+            IPlaybackEngine engine = _playbackEngines.First(en => en.Metadata.Name == string.Empty).Value;
 
-            _handle = Bass.BASS_StreamCreateURL(url.Url, 0,
-                BASSFlag.BASS_SAMPLE_FX | BASSFlag.BASS_STREAM_DECODE |
-                BASSFlag.BASS_STREAM_STATUS, null, IntPtr.Zero);
-            _mixer = BassMix.BASS_Mixer_StreamCreate(44100, 2, BASSFlag.BASS_SAMPLE_SOFTWARE);
-            bool ok = BassMix.BASS_Mixer_StreamAddChannel(_mixer, _handle, BASSFlag.BASS_SAMPLE_FX);
-
-            if (!ok)
+            if (url[0] == '[')
             {
-                Bass.BASS_StreamFree(_handle);
-                return false;
+                int index = url.IndexOf(']');
+                if (index != -1)
+                {
+                    string[] values = url.Split(new[] {']'}, 2, StringSplitOptions.RemoveEmptyEntries);
+                    values[0] = values[0].Substring(1);
+
+                    var tempEngine = _playbackEngines.FirstOrDefault(en => en.Metadata.Name == values[0]);
+                    if (tempEngine != null)
+                    {
+                        try
+                        {
+                            engine = tempEngine.Value;
+                            url = values[1];
+                        }
+                        catch (Exception)
+                        {
+                            url = radio.Url;
+                        }
+                    }
+                }
             }
 
-            Bass.BASS_SetConfig(BASSConfig.BASS_CONFIG_NET_PREBUF, 10);
+            BeginPlayback(url, engine);
+        }
 
-            bool flag = Bass.BASS_ChannelPlay(_mixer, false);
+        private void BeginPlayback([NotNull] string url, [NotNull] IPlaybackEngine playbackEngine)
+        {
+            if (_currentChannel != null && _currentChannel.IsActive)
+                Stop();
 
-            if (flag)
-            {
-                Bass.BASS_ChannelSetSync(_handle, BASSSync.BASS_SYNC_META, 0, _newMetaDelegate, IntPtr.Zero);
-                Bass.BASS_ChannelSetSync(_handle, BASSSync.BASS_SYNC_DOWNLOAD, 0, _downlodCompledDelegate, IntPtr.Zero);
-            }
+            _url = url;
 
+            _playbackEngine = playbackEngine;
+            _playbackEngine.ChannelSwitched += PlaybackEngineOnChannelSwitched;
+            _playbackEngine.End += PlaybackEngineOnEnd;
+
+            _playbackEngine.Initialize(_bassEngine, _plugins);
+
+            TAG_INFO tags;
+            _currentChannel = _playbackEngine.PlayChannel(url, out tags);
+            _mixer = new Mix(flags:BassMixFlags.Software | BassMixFlags.Nonstop);
+
+            _tagInfo = tags;
+            _currentChannel.Mix = _mixer;
+
+            _visualHelper.Channel = _currentChannel;
+
+            _mixer.Play();
             _play.Publish(EventArgs.Empty);
+        }
 
-            return flag;
+        private void PlaybackEngineOnEnd()
+        {
+            Stop();
+        }
+
+        private void PlaybackEngineOnChannelSwitched([NotNull] Channel channel, [NotNull] TAG_INFO info)
+        {
+            _nextChannel = channel;
+            if (_nextChannel == channel)
+                _nextChannel = null;
+
+            string newTitle;
+
+            if (string.IsNullOrWhiteSpace(info.title) && _script != null) // ReSharper disable once AssignNullToNotNullAttribute
+                info = _script.GetTitleInfo(_url, info, out newTitle);
+            else newTitle = info.title;
+
+            if(info == null)
+                info = new TAG_INFO { title = "Unkown", artist = "Unkown" };
+
+            if (string.IsNullOrWhiteSpace(newTitle)) newTitle = "Unkown";
+
+            bool startRecording = NewRecordingTitle(info);
+
+            if (_nextChannel != null)
+            {
+                _visualHelper.Channel = _nextChannel;
+
+                _currentChannel.Mix = null;
+                _nextChannel.Mix = _mixer;
+
+                _currentChannel.Dispose();
+                _currentChannel = _nextChannel;
+
+                _nextChannel = null;
+            }
+
+            if (startRecording) StartRecordingInternal();
+
+            _titleRecived.Publish(newTitle);
         }
 
         public void Stop()
         {
-            if (_handle == 0) return;
+            _playbackEngine.ChannelSwitched -= PlaybackEngineOnChannelSwitched;
+            _playbackEngine.End -= PlaybackEngineOnEnd;
+            _playbackEngine.Free();
 
-            StopRecording();
-            Bass.BASS_StreamFree(_mixer);
-            Bass.BASS_StreamFree(_handle);
-            _handle = 0;
-            _mixer = 0;
+            if(IsRecording)
+                StopRecording();
+
+            _mixer.Dispose();
+            _currentChannel.Dispose();
+            _nextChannel = null;
+            _script = null;
 
             _stop.Publish(EventArgs.Empty);
         }
 
-        public double GetBufferPercentage()
-        {
-            double progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_WMA_BUFFER);
-            if (progress == -1) // not a WMA stream, fallback to default...
-                progress = Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_BUFFER)
-                           *100d/Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END);
-
-            return progress;
-
-            //return Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_END) / 100d
-            //* Bass.BASS_StreamGetFilePosition(_handle, BASSStreamFilePosition.BASS_FILEPOS_DOWNLOAD);
-        }
-
-        public void SetVolume(double volume)
-        {
-            if (_mixer >= 0) return;
-
-            if (volume < 0) volume = 0;
-            if (volume > 100) volume = 100;
-
-            Bass.BASS_ChannelSetAttribute(_mixer, BASSAttribute.BASS_ATTRIB_VOL, (float) (volume/100));
-        }
-
-        public IEqualizer GetEqualizer()
-        {
-            return _eq;
-        }
-
-        public string GetLastError()
-        {
-            return Bass.BASS_ErrorGetCode().ToString();
-        }
-
-        private void DownlodCompled(int handle, int channel, int data, IntPtr user)
-        {
-            //bool breaked = _handle != 0;
-            Stop();
-        }
-
-        #region Recording
-
-        private static readonly Color Main = Color.Black;
-        private static readonly Color Sub1 = Color.DarkRed;
-        private static readonly Color Sub2 = Color.LightGray;
-        private WebClient _client = new WebClient();
-        private string _currentName;
-        private string _ilegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
-        private bool _isRecording;
-        private bool _isRecordingEnabled;
-        private BaseEncoder _lameencoder;
-
-        private string _location;
-        private string _recordingName;
-
-        private TAG_INFO _tag;
-
-        public bool SupportRecording
-        {
-            get { return _supportRecording; }
-        }
-
         public bool IsRecording
         {
-            get { return _isRecording; }
+            get
+            {
+                return _recorder != null && _recorder.IsRecording;
+            }
         }
 
         public void StartRecording(string location)
         {
-            _location = location;
-            _isRecordingEnabled = true;
+            _currentRecordingLocation = location;
+            if (_recorder == null) InitRecorder();
 
-            Switch();
+            StartRecordingInternal();
+        }
+
+        private void InitRecorder()
+        {
+            if (_currentChannel == null) return;
+
+            _recorder = new Recorder();
+
+            EncoderLAME encoder = Recorder.CreateLame(_currentChannel);
+
+            encoder.InputFile = null;
+            encoder.NoLimit = true;
+            encoder.LAME_Bitrate = (int) BaseEncoder.BITRATE.kbps_128;
+            encoder.LAME_Mode = EncoderLAME.LAMEMode.JointStereo;
+            encoder.LAME_TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100;
+            encoder.LAME_Quality = EncoderLAME.LAMEQuality.Quality;
+
+            _recorder.Encoder = encoder;
+        }
+
+        private void StartRecordingInternal()
+        {
+            lock (this)
+            {
+                if(_recorder == null) return;
+
+                if (string.IsNullOrWhiteSpace(_currentRecordingLocation) && string.IsNullOrWhiteSpace(_tagInfo.title)) return;
+
+                // ReSharper disable once PossibleNullReferenceException
+                _recorder.Encoder.OutputFile = VerifyPath(_tagInfo.title);
+                _recorder.Encoder.TAGs = _tagInfo;
+
+                _recorder.Start();
+            }
         }
 
         public void StopRecording()
         {
-            if (!_isRecordingEnabled) return;
+            StopRecordingInternal();
 
-            _isRecordingEnabled = false;
-            _isRecording = false;
+            if(_recorder == null) return;
 
-            _lameencoder.Stop(true);
+            if (_recorder.Encoder != null) 
+                _recorder.Encoder.Dispose();
+            _recorder = null;
         }
 
-        public Bitmap CreateSprectrum(Spectrums playerCode, int width, int height)
+        private void StopRecordingInternal()
         {
-            switch (playerCode)
-            {
-                case "Graph":
-                    return (_visuals.CreateSpectrum(_mixer, width, height, Main, Sub1, Sub2, false, true, true));
-                case "Balken":
-                    return (_visuals.CreateSpectrumBean(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
-                case "Punkt":
-                    return
-                        (_visuals.CreateSpectrumDot(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Elipse":
-                    return
-                        (_visuals.CreateSpectrumEllipse(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Linie":
-                    return
-                        (_visuals.CreateSpectrumLine(_mixer, width, height, Main, Sub1, Sub2, 5, 3, false, true, true));
-                case "Linien-Spitze":
-                    return
-                        (_visuals.CreateSpectrumLinePeak(_mixer, width, height, Main, Sub1, Color.DarkOrange, Sub2, 5, 3,
-                            3, 3, false, true, true));
-                case "Welle":
-                    return (_visuals.CreateSpectrumWave(_mixer, width, height, Main, Sub1, Sub2, 5, false, true, true));
-                default:
-                    return
-                        (_visuals.CreateSpectrumText(_mixer, width, height, Main, Sub1, Sub2, "Unknow", false, true,
-                            true));
-            }
+            if(_recorder == null) return;
+            _recorder.Stop();
         }
 
-
-        private void InitEncode()
+        [NotNull]
+        private string VerifyPath([NotNull] string name)
         {
-            Bass.BASS_RecordInit(-1);
+            name = Regex.Replace(name, IllegalFileNamePattern, string.Empty).Trim();
 
-            _lameencoder = new EncoderLAME(_handle)
-            {
-                InputFile = null,
-                NoLimit = true,
-                LAME_Bitrate = (int) BaseEncoder.BITRATE.kbps_128,
-                LAME_Mode = EncoderLAME.LAMEMode.JointStereo,
-                LAME_TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100,
-                LAME_Quality = EncoderLAME.LAMEQuality.Quality
-            };
-        }
-
-        private void Switch()
-        {
-            string[] data = Bass.BASS_ChannelGetTagsMETA(_handle);
-
-            string title;
-
-            try
-            {
-                if (_script != null)
-                {
-                    _tag = _script.GetTitleInfo(_sourceUrl, data, out title);
-                }
-                else
-                {
-                    title = "Unkown";
-                    _tag = new TAG_INFO {title = "Unkown", artist = "Unkown"};
-                }
-            }
-            catch (Exception e)
-            {
-                title = "Error: " + e.Message;
-                _tag = new TAG_INFO {title = "Unkown", artist = "Unkown"};
-            }
-
-            _currentName = title;
-
-            if (_tag == null)
-                _tag = new TAG_INFO {title = title, artist = "Unkown"};
-
-            _tag.comment = "Encoded by Bass.Net and Lame";
-            _tag.encodedby = "Bass.Net and Lame";
-
-            _titleRecived.Publish(title);
-
-            if (_isRecordingEnabled) StartRecording();
-        }
-
-        private void StartRecording()
-        {
-            lock (this)
-            {
-                if (string.IsNullOrWhiteSpace(_location) && string.IsNullOrWhiteSpace(_currentName)) return;
-
-                if (_lameencoder == null) InitEncode();
-
-                if (_isRecording)
-                {
-                    if (_recordingName == _currentName) return;
-                    // ReSharper disable once PossibleNullReferenceException
-                    _lameencoder.Stop();
-                }
-
-                _recordingName = _currentName;
-
-                // ReSharper disable once PossibleNullReferenceException
-                _lameencoder.OutputFile = VerifyPath(_currentName);
-                _lameencoder.TAGs = _tag;
-
-                _isRecording = true;
-                _lameencoder.Start(null, IntPtr.Zero, false);
-            }
-        }
-
-        private string VerifyPath(string name)
-        {
-            name = Regex.Replace(name, _ilegalFileNamePattern, string.Empty).Trim();
-
-            string location = Path.GetFullPath(Path.Combine(_location, name + ".mp3"));
+            string location = Path.GetFullPath(Path.Combine(_currentRecordingLocation, name + ".mp3"));
             var info = new DirectoryInfo(Path.GetDirectoryName(location));
             if (!info.Exists) info.Create();
 
@@ -318,29 +291,54 @@ namespace Tauron.Application.RadioStreamer.Player
             return location;
         }
 
-        private void NewMeta(int handle, int channel, int data, IntPtr user)
+        private bool NewRecordingTitle([NotNull] TAG_INFO info)
         {
-            Switch();
+            bool result = IsRecording;
+
+            if(result)
+                StopRecordingInternal();
+
+            _tagInfo = info;
+
+            if (_nextChannel != null && _recorder != null) _recorder.ChangeChannel(_nextChannel);
+
+            return result;
         }
 
-        #endregion
-
-        #endregion
-
-        #region Implementation of IDisposable
-
-        public void Dispose()
+        public Bitmap CreateSprectrum(Spectrums playerCode, int width, int height)
         {
-            _memoryManager.Dispose();
-            try
+            _visualHelper.Width = width;
+            _visualHelper.Height = height;
+
+            return _visualHelper.CreateSpectrum(playerCode);
+        }
+
+        public double BufferPercentage
+        {
+            get
             {
-                Bass.BASS_Free();
-            }
-            catch (TypeInitializationException)
-            {
+                return _playbackEngine.BufferPercentage;
             }
         }
 
-        #endregion
+        public double Volume
+        {
+            set
+            {
+                _currentChannel.Volume = (int)value;
+            }
+            get
+            {
+                return (int)_currentChannel.Volume;
+            }
+        }
+
+        public IEqualizer Equalizer
+        {
+            get
+            {
+                return _mixer.Equalizer;
+            }
+        }
     }
 }

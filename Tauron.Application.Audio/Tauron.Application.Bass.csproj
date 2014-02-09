@@ -56,12 +56,13 @@
     </Compile>
     <Compile Include="Channel.cs" />
     <Compile Include="Channels\BassHelper.cs" />
-    <Compile Include="Channels\FileChannel.cs" />
+    <Compile Include="Channels\File\FileChannel.cs" />
+    <Compile Include="Channels\File\FileFlags.cs" />
     <Compile Include="Channels\Mix.cs" />
     <Compile Include="Channels\BassMixFlags.cs" />
-    <Compile Include="Channels\DownloadInterceptor.cs" />
-    <Compile Include="Channels\WebStream.cs" />
-    <Compile Include="Channels\WebStreamFlags.cs" />
+    <Compile Include="Channels\Web\DownloadInterceptor.cs" />
+    <Compile Include="Channels\Web\WebStream.cs" />
+    <Compile Include="Channels\Web\WebStreamFlags.cs" />
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Misc\Equalizer.cs" />
     <Compile Include="Extensions.cs" />

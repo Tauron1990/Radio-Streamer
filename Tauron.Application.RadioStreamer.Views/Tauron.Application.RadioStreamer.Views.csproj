@@ -34,6 +34,10 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Elysium.Theme.2.0.4\lib\net45\Elysium.dll</HintPath>
     </Reference>
+    <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
+    </Reference>
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
     <Reference Include="System" />
@@ -144,6 +148,10 @@
     <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.Audio\Tauron.Application.Bass.csproj">
+      <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
+      <Name>Tauron.Application.Bass</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
       <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>

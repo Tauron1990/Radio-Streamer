@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Tauron.Application.BassLib.Misc;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
@@ -124,7 +125,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [Inject]
         public EqManagerViewModel([NotNull] IRadioEnvironment environment, [NotNull] IRadioPlayer player)
         {
-            Equalizer = player.GetEqualizer();
+            Equalizer = player.Equalizer;
             //Equalizer = new EqalizerTest();
             _equalizerProfileDatabase = environment.OpenSettings().EqualizerDatabase;
 
