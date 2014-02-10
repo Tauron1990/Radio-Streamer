@@ -16,12 +16,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 	{
 		private Window _window;
 
-		public RadioPlayerView()
-		{
-			InitializeComponent();
-		}
+	    public RadioPlayerView()
+	    {
+	        InitializeComponent();
+	    }
 
-		private void RadioLoaded(object sender, RoutedEventArgs e)
+	    private void RadioLoaded(object sender, RoutedEventArgs e)
 		{
 			_window = Window.GetWindow(this);
 			_window.SizeChanged += MainWindowSizeChanged;

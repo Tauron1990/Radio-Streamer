@@ -22,7 +22,7 @@ using Un4seen.Bass.Misc;
 namespace Tauron.Application.RadioStreamer.Player
 {
     [ExportRadioPlayer]
-    public sealed class BassMediaPlayer : IRadioPlayer
+    public sealed class BassMediaPlayer : IRadioPlayer, IDisposable
     {
         private static readonly string IllegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
 
@@ -59,6 +59,8 @@ namespace Tauron.Application.RadioStreamer.Player
             _stop = aggregator.GetEvent<RadioPlayerStop, EventArgs>();
             _titleRecived = aggregator.GetEvent<RadioPlayerTitleRecived, string>();
 
+            _memoryManager.Init();
+
             BassManager.Register("Game-over-Alexander@web.de", "2X1533726322323");
         }
 
@@ -67,7 +69,6 @@ namespace Tauron.Application.RadioStreamer.Player
             BassManager.IniBass();
             BassManager.InitRecord();
 
-            _memoryManager.Init();
             _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                                            "DLL".CombinePath("PlugIns")));
             _bassEngine = new BassEngine();
@@ -76,7 +77,6 @@ namespace Tauron.Application.RadioStreamer.Player
         public void Deactivate()
         {
             _currentChannel.Dispose();
-            _memoryManager.Dispose();
 
             _bassEngine = null;
             if(_playbackEngine != null)
@@ -339,6 +339,12 @@ namespace Tauron.Application.RadioStreamer.Player
             {
                 return _mixer.Equalizer;
             }
+        }
+
+        public void Dispose()
+        {
+            Deactivate();
+            _memoryManager.Dispose();
         }
     }
 }

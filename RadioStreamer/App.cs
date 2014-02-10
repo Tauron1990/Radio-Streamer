@@ -14,6 +14,8 @@ namespace Tauron.Application.RadioStreamer
 		public static void Main()
 		{
 			AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
+		    AppDomain.CurrentDomain.UnhandledException +=
+		        (sender, args) => CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
 			Run<App>();
 		}
 

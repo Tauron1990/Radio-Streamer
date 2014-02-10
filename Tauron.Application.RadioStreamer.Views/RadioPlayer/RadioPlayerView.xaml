@@ -53,25 +53,25 @@
 			<Slider IsEnabled="{Binding IsNotMuted}" Margin="10" Width="100" Maximum="100" TickPlacement="BottomRight" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged, Delay=100, Mode=TwoWay}" TickFrequency="5"/>
 		</StackPanel>
 		<TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding RunTime}" HorizontalAlignment="Center"/>
-		<TabControl Grid.ColumnSpan="3" Grid.Column="0" Margin="100, 10,30, 10" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioPlayerExtenionViews}">
-		<TabControl.Resources>
-			<Style TargetType="TabControl">
-				<Setter Property="Template">
-					<Setter.Value>
-						<ControlTemplate TargetType="TabControl">
-							<StackPanel Orientation="Horizontal">
-								<Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
-									<StackPanel IsItemsHost="True" Margin="3" MinWidth="70"/>
-								</Border>
-								<Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
-									<ContentPresenter Name="ContentSite" Margin="{TemplateBinding Padding}" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" ContentTemplateSelector="{TemplateBinding SelectedContentTemplateSelector}" />
-								</Border>
-							</StackPanel>
-						</ControlTemplate>
-					</Setter.Value>
-				</Setter>
-			</Style>
-		</TabControl.Resources>
+		<TabControl Grid.ColumnSpan="3" Grid.Column="0" Margin="100, 10,30, 10" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Name="RadioViewExtensions" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioPlayerExtenionViews}">
+		    <TabControl.Resources>
+			    <Style TargetType="TabControl">
+				    <Setter Property="Template">
+					    <Setter.Value>
+						    <ControlTemplate TargetType="TabControl">
+							    <StackPanel Orientation="Horizontal">
+								    <Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
+									    <StackPanel IsItemsHost="True" Margin="3" MinWidth="70"/>
+								    </Border>
+								    <Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
+									    <ContentPresenter Name="ContentSite" Margin="{TemplateBinding Padding}" Content="{TemplateBinding SelectedContent}" ContentTemplate="{TemplateBinding SelectedContentTemplate}" ContentTemplateSelector="{TemplateBinding SelectedContentTemplateSelector}" />
+								    </Border>
+							    </StackPanel>
+						    </ControlTemplate>
+					    </Setter.Value>
+				    </Setter>
+			    </Style>
+		    </TabControl.Resources>
 		</TabControl>
 	</Grid>
 </UserControl>
