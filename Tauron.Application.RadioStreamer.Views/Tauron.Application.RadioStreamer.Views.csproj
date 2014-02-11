@@ -79,6 +79,10 @@
     </Compile>
     <Compile Include="MedadataView\MetadataWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="RadioManager\Controls\RadioCreateView.xaml.cs">
+      <DependentUpon>RadioCreateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="RadioManager\Controls\RadioCreateViewModel.cs" />
     <Compile Include="RadioPlayer\Equalizer\EqManager.xaml.cs">
       <DependentUpon>EqManager.xaml</DependentUpon>
     </Compile>
@@ -104,6 +108,10 @@
   </ItemGroup>
   <ItemGroup>
     <Page Include="MedadataView\MetadataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="RadioManager\Controls\RadioCreateView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -165,9 +173,7 @@
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="RadioManager\Controls\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

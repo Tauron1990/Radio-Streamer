@@ -1,0 +1,13 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.RadioManager.Controls.RadioCreateView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:contstants="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:ViewManager.ImportView="{x:Static contstants:AppConstants.RadioCreateViewModel}"
+             Width="600" Height="400">
+    <TabControl>
+        <TabItem Header="Edit"></TabItem>
+    </TabControl>
+</Window>

@@ -21,5 +21,7 @@
         public const string RadioPlayerExtenionViews = "RadioPlayerExtensionViews";
 
         public const string SprectrumViewModel = "SprectrumViewModel";
+
+        public const string RadioCreateViewModel = "RadioCreateModel";
     }
 }
