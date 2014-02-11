@@ -8,7 +8,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
     /// <summary>
     /// Interaktionslogik für EqManager.xaml
     /// </summary>
-    [ExportView(AppConstants.RadioPlayerExtenionViews)]
+    [ExportView(AppConstants.RadioPlayerExtenionViews, Order = 100)]
     public partial class EqManager : IHeaderProvider 
     {
         public EqManager()

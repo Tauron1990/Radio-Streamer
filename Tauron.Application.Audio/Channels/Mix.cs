@@ -29,6 +29,7 @@ namespace Tauron.Application.BassLib.Channels
                 throw new BassException();
         }
 
+        [NotNull]
         public Equalizer Equalizer
         {
             get
@@ -39,6 +40,13 @@ namespace Tauron.Application.BassLib.Channels
                 _equalizer.Init(Handle);
 
                 return _equalizer;
+            }
+            set
+            {
+                if (_equalizer != null) _equalizer.Free();
+
+                _equalizer = value;
+                _equalizer.Init(Handle);
             }
         }
 

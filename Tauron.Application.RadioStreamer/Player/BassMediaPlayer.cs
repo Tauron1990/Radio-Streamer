@@ -61,7 +61,7 @@ namespace Tauron.Application.RadioStreamer.Player
 
             _memoryManager.Init();
 
-            BassManager.Register("Game-over-Alexander@web.de", "2X1533726322323");
+            BassNet.Registration("Game-over-Alexander@web.de", "2X1533726322323");
         }
 
         public void Activate()
@@ -76,6 +76,8 @@ namespace Tauron.Application.RadioStreamer.Player
 
         public void Deactivate()
         {
+            if(_currentChannel == null) return;
+
             _currentChannel.Dispose();
 
             _bassEngine = null;
@@ -140,7 +142,7 @@ namespace Tauron.Application.RadioStreamer.Player
 
             TAG_INFO tags;
             _currentChannel = _playbackEngine.PlayChannel(url, out tags);
-            _mixer = new Mix(flags:BassMixFlags.Software | BassMixFlags.Nonstop);
+            _mixer = new Mix(flags:BassMixFlags.Software | BassMixFlags.Nonstop) {Equalizer = _equalizer};
 
             _tagInfo = tags;
             _currentChannel.Mix = _mixer;
@@ -337,7 +339,7 @@ namespace Tauron.Application.RadioStreamer.Player
         {
             get
             {
-                return _mixer.Equalizer;
+                return _equalizer;
             }
         }
 

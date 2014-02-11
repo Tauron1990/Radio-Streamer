@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Threading;
 using System.Windows;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
@@ -53,23 +52,23 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 
                 foreach (var name in Enum.GetNames(typeof(Spectrums)))
                 {
-                    var btn = new TaskDialogRadioButton {Text = SpectrumResources.ResourceManager.GetString(name)};
-                    
+                    var btn = new TaskDialogRadioButton { Text = SpectrumResources.ResourceManager.GetString(name) };
+
                     _dialog.RadioButtons.Add(btn);
 
                     _spectrumMapping[btn] = name;
-                    if(currentSpectrums.ToString() == name) btn.Checked = true;
+                    if (currentSpectrums.ToString() == name) btn.Checked = true;
                 }
 
-                _dialog.ButtonClicked += DialogOnButtonClicked;
+                _dialog.RadioButtonClicked += DialogOnRadioButtonClicked;
             }
 
-            private void DialogOnButtonClicked([NotNull] object sender, [NotNull] TaskDialogItemClickedEventArgs taskDialogItemClickedEventArgs)
+            private void DialogOnRadioButtonClicked([NotNull] object sender, [NotNull] TaskDialogItemClickedEventArgs taskDialogItemClickedEventArgs)
             {
                 var btn = taskDialogItemClickedEventArgs.Item as TaskDialogRadioButton;
                 if (btn == null) return;
 
-                _choice = (Spectrums) Enum.Parse(typeof (Spectrums), _spectrumMapping[btn]);
+                _choice = _spectrumMapping[btn].ParseEnum<Spectrums>();
             }
 
             public Spectrums Show([NotNull] Window window)
@@ -87,17 +86,22 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
         [Inject] 
         private IEventAggregator _events;
 
+        [Inject]
+        private IRadioEnvironment _radioEnvironment;
+
         void INotifyBuildCompled.BuildCompled()
         {
             _events.GetEvent<PlayerViewVisibleChanged, bool>().Subscribe(PlayerVisibleChanged);
             _events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(Play);
             _events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(Stop);
-            
+
+            _currentSpectrum = _radioEnvironment.OpenSettings().LastSprecturm.ParseEnum<Spectrums>();
+
             _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(250), DispatcherPriority.Normal, UpdateSprectrum, SystemDispatcher);
             _sprectrumTimer.Stop();
             CurrentDispatcher.Invoke(() =>
             {
-                SprectrumPicture = new SprectrumPictureBox {BackColor = Color.Transparent};
+                SprectrumPicture = new SprectrumPictureBox {BackColor = Color.Black};
                 SprectrumPicture.Click += SprectrumPictureOnClick;
             });
         }
@@ -106,6 +110,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
         {
             _currentSpectrum = new SpectumChoiceBox(_currentSpectrum).Show(
                 System.Windows.Application.Current.MainWindow);
+
+            _radioEnvironment.OpenSettings().LastSprecturm = _currentSpectrum.ToString();
         }
 
         private void Stop([NotNull] EventArgs obj)
@@ -131,7 +137,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
         }
 
 
-        private Spectrums _currentSpectrum = Spectrums.Bean;
+        private Spectrums _currentSpectrum;
 
         private SprectrumPictureBox _sprectrumPicture;
 

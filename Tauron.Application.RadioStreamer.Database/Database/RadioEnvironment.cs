@@ -393,7 +393,23 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    private SettingComponentList _components;
 
 			private const string IsFirstStartKey = "IsFirstStart";
-			public bool IsFirstStart
+		    private const string LastSprecturmKey = "LastSprecturm";
+
+		    public string LastSprecturm
+		    {
+		        get
+		        {
+		            return GetValue(LastSprecturmKey, "Bean");
+		        }
+		        set
+		        {
+                    if(string.IsNullOrWhiteSpace(value)) return;
+
+		            SetVaue(LastSprecturmKey, value);
+		        }
+		    }
+
+		    public bool IsFirstStart
 			{
 				get 
 				{

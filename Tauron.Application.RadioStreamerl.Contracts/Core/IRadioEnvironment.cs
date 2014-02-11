@@ -62,6 +62,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
     [PublicAPI]
 	public interface IRadioSettings
 	{
+        [NotNull]
+        string LastSprecturm { get; set; }
+
 		bool IsFirstStart { get; }
         [NotNull]
         IRadioFavorites Favorites { get; }

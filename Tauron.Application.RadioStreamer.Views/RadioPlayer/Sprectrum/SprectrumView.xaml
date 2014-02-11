@@ -8,5 +8,5 @@
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" 
              hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.SprectrumViewModel}"
              d:DesignHeight="300" d:DesignWidth="300">
-    <WindowsFormsHost hlp:ControlHelper.MarkControl="SprectrumHost" Margin="10" Visibility="Hidden" Width="300"/>
+    <WindowsFormsHost hlp:ControlHelper.MarkControl="SprectrumHost" Margin="10" Visibility="Hidden" Width="500"/>
 </UserControl>

@@ -155,8 +155,8 @@ namespace Tauron.Application.BassLib.Misc
 
         internal void Free()
         {
-            _handle = -1;
             Enabled = false;
+            _handle = -1;
         }
 
         private void Activate()
