@@ -6,8 +6,6 @@
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:contstants="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:ViewManager.ImportView="{x:Static contstants:AppConstants.RadioCreateViewModel}"
-             Width="600" Height="400">
-    <TabControl>
-        <TabItem Header="Edit"></TabItem>
-    </TabControl>
+             Width="600" Height="400" StateChanged="">
+
 </Window>
