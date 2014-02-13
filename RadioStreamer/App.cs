@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Runtime.ExceptionServices;
+using System.Security;
 using System.Windows;
 using System.Windows.Input;
 using Elysium;
@@ -15,11 +17,17 @@ namespace Tauron.Application.RadioStreamer
 		{
 			AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
 		    AppDomain.CurrentDomain.UnhandledException +=
-		        (sender, args) => CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
+		        OnUnhandledException;
 			Run<App>();
 		}
 
-		public App()
+        [HandleProcessCorruptedStateExceptions, SecurityCritical]
+        private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)
+	    {
+	        CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
+	    }
+
+	    public App()
 			: base(true)
 		{
 		}

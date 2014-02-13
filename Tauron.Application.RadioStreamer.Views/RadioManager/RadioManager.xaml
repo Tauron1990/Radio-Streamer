@@ -46,10 +46,13 @@
 				<Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Play:Play">
                     <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/play.png"/>
 				</Button>
-				<Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Stop:Stop">
+                <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Stop:Stop">
                     <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/stop.png"/>
-				</Button>			
-			</StackPanel>
+                </Button>
+                <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="AddRadio:AddRadio">
+                    <TextBlock TextWrapping="Wrap">Add Place Holder</TextBlock>
+                </Button>
+            </StackPanel>
 			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0">
 				<CheckBox Content="{hlp:SimpleLocalize Name=FavoritesLabel}" Margin="4" VerticalAlignment="Top" IsChecked="{Binding OnlyFavorites}"/>
 				<TextBlock Text="{hlp:SimpleLocalize Name=SearchLabel}" Margin="3"/>

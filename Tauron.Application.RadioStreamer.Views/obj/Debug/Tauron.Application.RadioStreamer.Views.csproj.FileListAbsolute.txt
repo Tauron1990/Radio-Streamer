@@ -472,3 +472,5 @@ C:\Users\josef\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Appli
 C:\Users\josef\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioPlayer\Equalizer\EqManager.baml
 C:\Users\josef\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\RadioManager.baml
 C:\Users\josef\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\Controls\RadioCreateView.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\RadioManager\Controls\RadioCreateView.g.cs

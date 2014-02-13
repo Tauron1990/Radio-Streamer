@@ -4,7 +4,7 @@
 library
 C#
 .cs
-C:\Users\josef\Documents\Visual Studio 2012\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\
 Tauron.Application.RadioStreamer.Views
 none
 false
@@ -13,7 +13,7 @@ DEBUG;TRACE
 81641431734
 
 212141279368
-28-859107087
+28428994052
 MedadataView\MetadataWindow.xaml;RadioManager\Controls\RadioCreateView.xaml;RadioPlayer\Equalizer\EqManager.xaml;RadioPlayer\Equalizer\EqualizerTemplate.xaml;RadioPlayer\Equalizer\EqualizerResources.xaml;RadioPlayer\RadioPlayerView.xaml;RadioManager\RadioManager.xaml;RadioPlayer\Sprectrum\SprectrumView.xaml;
 
 False
