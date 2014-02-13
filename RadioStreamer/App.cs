@@ -67,7 +67,7 @@ namespace Tauron.Application.RadioStreamer
 		}
 		protected override void LoadResources()
 		{
-			CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Violet, null);
+			CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Purple, null);
 		}
 	}
 }

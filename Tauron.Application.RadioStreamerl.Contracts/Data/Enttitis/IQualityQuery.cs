@@ -8,5 +8,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
 	{
 		int Count { get; }
 		bool IsCompled { get; }
+
+        void Reset();
 	}
 }

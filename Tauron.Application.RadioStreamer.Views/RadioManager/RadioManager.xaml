@@ -7,7 +7,7 @@
 			 xmlns:helper="clr-namespace:Tauron.Application.RadioStreamer.Views.Helper"
 			 xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
 			 xmlns:radioManager="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioManager"
-			 MaxHeight="{helper:MaxHeightExpanderSetter}"
+             MaxHeight="{helper:MaxHeightExpanderSetter}"
              d:DesignHeight="300" d:DesignWidth="800"
 			 hlp:DataContextServices.Activate="True"
 			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.RadioManagerViewModelName}"
@@ -31,7 +31,13 @@
 					<TextBlock Text="{hlp:SimpleLocalize Name=RadioItemGenre}" Grid.Row="1" Grid.Column="0" />
 					<TextBlock Text="{Binding Genres}" TextWrapping="Wrap" Grid.Row="1"
 						   Grid.Column="1" Grid.ColumnSpan="2"/>
-					<ComboBox SelectedIndex="{Binding SelectedIndex}" Margin="5" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Qualitys}" hlp:EventBinder.Events="DropDownOpened:QualiysOpend"/>
+					<ComboBox SelectedIndex="{Binding SelectedIndex}" Margin="5" Grid.Row="0" Grid.Column="2" ItemsSource="{Binding Qualitys}" hlp:EventBinder.Events="DropDownOpened:QualiysOpend">
+                        <ComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding Quality.Name}"/>
+                            </DataTemplate>
+                        </ComboBox.ItemTemplate>
+                    </ComboBox>
 				</Grid>
 			</Border>
 		</DataTemplate>
@@ -50,7 +56,7 @@
                     <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/stop.png"/>
                 </Button>
                 <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="AddRadio:AddRadio">
-                    <TextBlock TextWrapping="Wrap">Add Place Holder</TextBlock>
+                    <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/add.png"/>
                 </Button>
             </StackPanel>
 			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0">

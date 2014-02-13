@@ -14,7 +14,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	{
 		Name,
 		MetaKey,
-		MetaValue
+		MetaValue,
+        Deleted
 	}
 	public interface IChangedHandler
 	{
@@ -140,20 +141,22 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        _count++;
 		    }
 
-		    public void Remove([NotNull] string key)
+            [CanBeNull]
+		    public TElement Remove([NotNull] string key)
 		    {
 		        IndexEntry entry = FindIndex(key[0]);
 		        int index;
 		        int result = 1;
+		        TElement ele = null;
 
 		        for (index = entry.IndexValue; index < _elements.Length; index++)
 		        {
-		            TElement ele = _elements[index];
+		            ele = _elements[index];
 		            result = string.CompareOrdinal(ele != null ? ele.CompareKey : null, key);
 		            if (result == 0) break;
-		            if (result > 0) return;
+		            if (result > 0) return null;
 		        }
-		        if (index == 0 && result != 0) return;
+		        if (index == 0 && result != 0) return null;
 
 		        _elements[index] = default(TElement);
 
@@ -161,6 +164,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        _count--;
 
 		        MoveArray(index);
+
+                return ele;
 		    }
 
 		    public TElement this[int index]
@@ -241,7 +246,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			    }
 			}
 
-            protected void Changed(ChangeType type, [NotNull] string oldContent, [NotNull] string content)
+            internal void Changed(ChangeType type, [NotNull] string oldContent, [NotNull] string content)
             {
                 if (_handlers == null) return;
 
@@ -407,8 +412,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        {
 		            Locker.EnterWriteLock();
 
-		            _metadata.Remove(name);
+		            var meta = _metadata.Remove(name);
 		            _metaNames.Remove(name);
+
+                    if(meta != null)
+                        meta.Changed(ChangeType.Deleted, name, string.Empty);
 
 		            Interlocked.Exchange(ref Database._isDirty, 1);
 		        }
@@ -691,8 +699,10 @@ namespace Tauron.Application.RadioStreamer.Database.Database
             {
                 Locker.EnterWriteLock();
 
-                _entrys.Remove(name);
+                var ent = _entrys.Remove(name);
                 _databaseNames.Remove(name);
+                if(ent != null)
+                    ent.Changed(ChangeType.Deleted, name, string.Empty);
 
                 Interlocked.Exchange(ref _isDirty, 1);
             }

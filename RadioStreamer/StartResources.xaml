@@ -5,17 +5,6 @@
         <Setter Property="Foreground" Value="White"/>
     </Style>
     
-    <Style TargetType="{x:Type xctk:WatermarkTextBox}">
-        <Setter Property="Foreground" Value="White"/>
-        <Setter Property="WatermarkTemplate">
-            <Setter.Value>
-                <DataTemplate>
-                    <TextBlock Foreground="CadetBlue" Text="{Binding}"/>
-                </DataTemplate>
-            </Setter.Value>
-        </Setter>
-    </Style>
-    
 	<Grid x:Key="MainLabel" DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="Transparent">
 		<StackPanel Margin="10 0" HorizontalAlignment="Left">
 			<TextBlock x:Name="txtHeading" Foreground="White" FontSize="22">

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
 using Tauron.Application.Ioc;
@@ -39,7 +40,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			}
 		}
 
-		private class DatabaseInterface : IDatabaseInterface
+		private class DatabaseInterface : IDatabaseInterface, IChangedHandler
 		{
 		    [NotNull]
 		    protected DatabaseHelper.DatabaseEntry BaseEntry { get; private set; } 
@@ -47,7 +48,18 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			public DatabaseInterface([NotNull] DatabaseHelper.DatabaseEntry baseEntry)
 			{
 			    BaseEntry = baseEntry;
+                BaseEntry.RegisterHandler();
 			}
+
+		    public event PropertyChangingEventHandler ValueChanged;
+
+		    protected virtual void OnValueChanged([NotNull] PropertyChangingEventArgs e)
+		    {
+		        var handler = ValueChanged;
+		        if (handler != null) handler(this, e);
+		    }
+
+		    public event Action ElementDeleted;
 
 		    public virtual string Read(string key)
 			{
@@ -73,6 +85,21 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			{
 				return GetEnumerator();
 			}
+
+		    public void Changed(ChangeType type, string oldContent, string content)
+		    {
+		        switch (type)
+		        {
+		            case ChangeType.Name:
+		                break;
+		            case ChangeType.MetaKey:
+		                break;
+		            case ChangeType.MetaValue:
+		                break;
+		            default:
+		                throw new ArgumentOutOfRangeException("type");
+		        }
+		    }
 		}
 		private class RadioDatabaseInterface : DatabaseInterface, IRadioDatabaseInterface
 		{

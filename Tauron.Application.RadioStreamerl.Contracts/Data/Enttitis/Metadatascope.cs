@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
@@ -8,6 +9,24 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
     public sealed class Metadatascope : IEnumerable<string>
     {
         private readonly IDatabaseInterface _databaseInterface;
+
+        public event PropertyChangingEventHandler ValueChanged
+        {
+            add { _databaseInterface.ValueChanged += value; }
+            remove { _databaseInterface.ValueChanged -= value; }
+        }
+
+        public event Action ElementDeleted
+        {
+            add { _databaseInterface.ElementDeleted += value; }
+            remove { _databaseInterface.ElementDeleted -= value; }
+        }
+
+        public event Action QualityChanged
+        {
+            add { if (IsRadio) ((IRadioDatabaseInterface) _databaseInterface).QualityChanged += value; }
+            remove { if (IsRadio) ((IRadioDatabaseInterface) _databaseInterface).QualityChanged -= value; }
+        }
 
         public Metadatascope([NotNull] IDatabaseInterface databaseInterface)
         {

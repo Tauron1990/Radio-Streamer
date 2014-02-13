@@ -6,8 +6,6 @@
              xmlns:Eq="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
-             xmlns:xctk="http://schemas.xceed.com/wpf/xaml/toolkit"
-             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.EqManagerViewModel}"
              d:DesignHeight="300" d:DesignWidth="600">
     <Grid Width="600">
@@ -27,8 +25,19 @@
                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="70"/>
         <Button Content="{hlp:SimpleLocalize DeleteLabel}" hlp:CommandBinder.Command="Delete:Delete" Grid.Row="1" Grid.Column="2" 
                 VerticalAlignment="Center" HorizontalAlignment="Center" MinWidth="70"/>
-        <xctk:WatermarkTextBox Watermark="Name" Text="{Binding CurrentPresentName, UpdateSourceTrigger=PropertyChanged}" 
-                               Grid.Column="1" Grid.Row="0" VerticalAlignment="Center" Margin="10, 0" />
+        <Grid Grid.Row="0" Background="{StaticResource BackgroundBrush}" Grid.Column="1" VerticalAlignment="Center" Margin="10, 0" >
+            <Grid.Style>
+                <Style TargetType="Grid" >
+                    <Setter Property="HorizontalAlignment" Value="Stretch" />
+                    <Setter Property="VerticalAlignment" Value="Center" />
+                    <Setter Property="Margin" Value="20,0" />
+                </Style>
+            </Grid.Style>
+            <TextBlock Margin="5,2" Text="Name" Foreground="CadetBlue"
+                       Visibility="{Binding ElementName=txtUserEntry, Path=Text.IsEmpty, Converter={hlp:BoolToVisibilityConverter}}" />
+            <TextBox Name="txtUserEntry" Background="Transparent" BorderBrush="{StaticResource MiddleLightBrush}" Text="{Binding CurrentPresentName, UpdateSourceTrigger=PropertyChanged}"/>
+        </Grid>
+        
         <ComboBox ItemsSource="{Binding Presets}" SelectedItem="{Binding CurrentPresent}" Grid.Column="0" Grid.Row="0" 
                   VerticalAlignment="Center" Margin="10, 0" DisplayMemberPath="Name"/>
         <CheckBox Margin="10,0" Grid.Column="0" Grid.Row="1" Content="{hlp:SimpleLocalize EqualizerActivate}" VerticalAlignment="Center" 
