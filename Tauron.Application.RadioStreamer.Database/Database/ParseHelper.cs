@@ -19,7 +19,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	}
 	public interface IChangedHandler
 	{
-		void Changed(ChangeType type, [NotNull] string oldContent, [NotNull] string content);
+		void Changed(ChangeType type,[NotNull]string key, [NotNull] string oldContent, [NotNull] string content);
 	}
 
     [PublicAPI]
@@ -250,7 +250,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
             {
                 if (_handlers == null) return;
 
-                foreach (var handler in _handlers) handler.Changed(type, oldContent, content);
+                foreach (var handler in _handlers) handler.Changed(type, CompareName, oldContent, content);
             }
 
             string ICompareName.CompareKey

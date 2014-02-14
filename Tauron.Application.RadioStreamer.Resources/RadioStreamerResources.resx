@@ -241,4 +241,7 @@
   <data name="SpectrumChoiceMainInstruction" xml:space="preserve">
     <value>Choice your Spectrum:</value>
   </data>
+  <data name="RadioCreateEditLabel" xml:space="preserve">
+    <value>Radio Edit</value>
+  </data>
 </root>

@@ -5,7 +5,12 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:contstants="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioManager.Controls"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:ViewManager.ImportView="{x:Static contstants:AppConstants.RadioCreateViewModel}"
-             Width="600" Height="400">
-
+             d:DataContext="{d:DesignInstance local:RadioCreateViewModel}"  Width="600" Height="400">
+    <TabControl>
+        <TabItem Header="{hlp:SimpleLocalize RadioCreateEditLabel}">
+            <hlp:ToggleContentButton></hlp:ToggleContentButton>
+        </TabItem>
+    </TabControl>
 </Window>

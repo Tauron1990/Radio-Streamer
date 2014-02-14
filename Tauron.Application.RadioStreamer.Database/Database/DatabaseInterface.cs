@@ -48,18 +48,24 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			public DatabaseInterface([NotNull] DatabaseHelper.DatabaseEntry baseEntry)
 			{
 			    BaseEntry = baseEntry;
-                BaseEntry.RegisterHandler();
+                BaseEntry.RegisterHandler(this);
 			}
 
 		    public event PropertyChangingEventHandler ValueChanged;
 
-		    protected virtual void OnValueChanged([NotNull] PropertyChangingEventArgs e)
+		    protected void OnValueChanged([NotNull] string e)
 		    {
 		        var handler = ValueChanged;
-		        if (handler != null) handler(this, e);
+		        if (handler != null) handler(this, new PropertyChangingEventArgs(e));
 		    }
 
 		    public event Action ElementDeleted;
+
+		    protected void OnElementDeleted()
+		    {
+		        Action handler = ElementDeleted;
+		        if (handler != null) handler();
+		    }
 
 		    public virtual string Read(string key)
 			{
@@ -86,15 +92,21 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				return GetEnumerator();
 			}
 
-		    public void Changed(ChangeType type, string oldContent, string content)
+		    public virtual void Changed(ChangeType type,string key, string oldContent, string content)
 		    {
 		        switch (type)
 		        {
 		            case ChangeType.Name:
+                        OnValueChanged("Name");
 		                break;
 		            case ChangeType.MetaKey:
+		                OnValueChanged(oldContent);
 		                break;
 		            case ChangeType.MetaValue:
+                        OnValueChanged(key);
+		                break;
+		            case ChangeType.Deleted:
+                        OnElementDeleted();
 		                break;
 		            default:
 		                throw new ArgumentOutOfRangeException("type");
@@ -103,12 +115,36 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		}
 		private class RadioDatabaseInterface : DatabaseInterface, IRadioDatabaseInterface
 		{
+            private class QualityChangedHelper : IChangedHandler
+            {
+                private readonly Action _handler;
+
+                public QualityChangedHelper([NotNull] Action handler)
+                {
+                    _handler = handler;
+                }
+
+                public void Changed(ChangeType type, string key, string oldContent, string content)
+                {
+                    _handler();
+                }
+            }
+
 			private DatabaseHelper.DatabaseEntry _quality;
 
 			public RadioDatabaseInterface([NotNull] DatabaseHelper.DatabaseEntry radio, [NotNull] DatabaseHelper.DatabaseEntry quality)
 				: base(radio)
 			{
+                _quality.RegisterHandler(new QualityChangedHelper(OnQualityChanged));
 			}
+
+		    public event Action QualityChanged;
+
+		    protected void OnQualityChanged()
+		    {
+		        Action handler = QualityChanged;
+		        if (handler != null) handler();
+		    }
 
 		    public void DeleteQuality(string name)
 			{
