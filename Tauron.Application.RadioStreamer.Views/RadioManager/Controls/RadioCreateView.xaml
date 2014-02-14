@@ -10,7 +10,9 @@
              d:DataContext="{d:DesignInstance local:RadioCreateViewModel}"  Width="600" Height="400">
     <TabControl>
         <TabItem Header="{hlp:SimpleLocalize RadioCreateEditLabel}">
-            <hlp:ToggleContentButton></hlp:ToggleContentButton>
+            <StackPanel>
+                <hlp:LabeledTextbox></hlp:LabeledTextbox>
+            </StackPanel>
         </TabItem>
     </TabControl>
 </Window>
