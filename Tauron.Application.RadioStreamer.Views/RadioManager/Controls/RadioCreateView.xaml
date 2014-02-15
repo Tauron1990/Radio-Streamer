@@ -11,7 +11,7 @@
     <TabControl>
         <TabItem Header="{hlp:SimpleLocalize RadioCreateEditLabel}">
             <StackPanel>
-                <hlp:LabeledTextbox></hlp:LabeledTextbox>
+                <hlp:LabeledTextbox LabelText="hallo">hh</hlp:LabeledTextbox>
             </StackPanel>
         </TabItem>
     </TabControl>
