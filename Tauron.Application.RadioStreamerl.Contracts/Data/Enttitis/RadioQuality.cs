@@ -43,6 +43,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
             Metadata = metaData.GetQuality(name);
         }
 
+        public RadioQuality([NotNull] Metadatascope metadatascope)
+            : this()
+        {
+            if(!metadatascope.IsQuality) throw new InvalidOperationException();
+
+            Metadata = metadatascope;
+        }
+
         public override string ToString()
         {
             return Name;

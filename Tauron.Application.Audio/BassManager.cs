@@ -27,7 +27,9 @@ namespace Tauron.Application.BassLib
 
         public static void InitRecord([CanBeNull] BASS_DEVICEINFO deviceinfo = null)
         {
-            Bass.BASS_RecordInit(deviceinfo == null ? -1 : RecordDevice.GetDevice(deviceinfo)).CheckBass();
+            int device = deviceinfo == null ? -1 : RecordDevice.GetDevice(deviceinfo);
+
+            Bass.BASS_RecordInit(device).CheckBass();
 
             IsRecordinginitialized = true;
         }

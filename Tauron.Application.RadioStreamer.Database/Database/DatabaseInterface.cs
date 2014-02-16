@@ -31,7 +31,9 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		    public RadioEntry AddOrGetEntry(string name, out bool newEntry)
 			{
-				return _database.CreateRadio(name, out newEntry);
+				var r = _database.CreateRadio(name, out newEntry);
+		        r.Name = name;
+		        return r;
 			}
 
 			public void Save()
@@ -135,6 +137,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			public RadioDatabaseInterface([NotNull] DatabaseHelper.DatabaseEntry radio, [NotNull] DatabaseHelper.DatabaseEntry quality)
 				: base(radio)
 			{
+			    _quality = quality;
                 _quality.RegisterHandler(new QualityChangedHelper(OnQualityChanged));
 			}
 
@@ -224,11 +227,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
         void INotifyBuildCompled.BuildCompled()
 		{
-			using (var steam = _environment.OpenRadio(RadioDatabaseString).Open())
+			using (var steam = _environment.OpenRadio(RadioDatabaseString).OpenRead())
 			{
 				_radios = new DatabaseHelper(new StreamReader(steam).EnumerateTextLines()); 
 			}
-			using (var steam = _environment.OpenRadio(QualityDatabase).Open())
+			using (var steam = _environment.OpenRadio(QualityDatabase).OpenRead())
 			{
 				_qualitys = new DatabaseHelper(new StreamReader(steam).EnumerateTextLines());
 			}
@@ -298,13 +301,19 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		public void Save()
 		{
-			using (var steam = _environment.OpenRadio(RadioDatabaseString).Open())
+			using (var steam = _environment.OpenRadio(RadioDatabaseString).OpenNew())
 			{
-				_radios.Save(new StreamWriter(steam));
+			    using (var writer = new StreamWriter(steam))
+			    {
+			        _radios.Save(writer);
+			    }
 			}
-			using (var steam = _environment.OpenRadio(QualityDatabase).Open())
+			using (var steam = _environment.OpenRadio(QualityDatabase).OpenNew())
 			{
-				_qualitys.Save(new StreamWriter(steam));
+                using (var writer = new StreamWriter(steam))
+                {
+                    _qualitys.Save(writer);
+                }
 			}
 		}
 

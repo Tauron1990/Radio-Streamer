@@ -6,7 +6,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
     /// <summary>
     /// Interaktionslogik für RadioCreateView.xaml
     /// </summary>
-    [ExportView(AppConstants.RadioCreateViewModel)]
+    [ExportWindow(AppConstants.RadioCreateViewModel)]
     public partial class RadioCreateView
     {
         public RadioCreateView()

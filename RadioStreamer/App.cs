@@ -54,7 +54,13 @@ namespace Tauron.Application.RadioStreamer
 
 	    protected override IWindow DoStartup(CommandLineProcessor prcessor)
 		{
-			return ViewManager.Manager.CreateWindow(AppConstants.MainWindowName);
+			var temp = ViewManager.Manager.CreateWindow(AppConstants.MainWindowName);
+	        CurrentWpfApplication.Dispatcher.Invoke(() =>
+	        {
+	            Current.MainWindow = temp;
+	            CurrentWpfApplication.MainWindow = (Window) temp.TranslateForTechnology();
+	        });
+	        return temp;
 		}
 		protected override void LoadCommands()
 		{

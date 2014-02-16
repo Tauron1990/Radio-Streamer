@@ -6,13 +6,82 @@
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:contstants="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioManager.Controls"
-             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:ViewManager.ImportView="{x:Static contstants:AppConstants.RadioCreateViewModel}"
-             d:DataContext="{d:DesignInstance local:RadioCreateViewModel}"  Width="600" Height="400">
-    <TabControl>
+             mc:Ignorable="d" hlp:DataContextServices.Activate="True" ShowInTaskbar="False" Style="{StaticResource {x:Type Window}}"
+             hlp:CompositionServices.ImportViewModel="{x:Static contstants:AppConstants.RadioCreateViewModel}" hlp:ControlHelper.MarkWindow="Window"
+             d:DataContext="{d:DesignInstance local:RadioCreateViewModel}"  MaxWidth="800" MaxHeight="600" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow">
+    <DockPanel>
+        <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="5">
+            <Button DockPanel.Dock="Right" Margin="5" Content="{hlp:SimpleLocalize CloseButton}" hlp:CommandBinder.Command="CloseRC:Close"/>
+            <Button DockPanel.Dock="Right" Margin="5" Content="{hlp:SimpleLocalize SaveLabel}" hlp:CommandBinder.Command="Save:Save"/>
+            <Button DockPanel.Dock="Right" Margin="5" Content="{hlp:SimpleLocalize DeleteLabel}" hlp:CommandBinder.Command="Delete:Delete"/>
+        </DockPanel>
+        <TabControl>
+        <TabControl.Resources>
+            <Style TargetType="{x:Type StackPanel}">
+                <Setter Property="Orientation" Value="Horizontal"/>
+            </Style>
+            <Style TargetType="{x:Type TextBlock}" BasedOn="{StaticResource {x:Type TextBlock}}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="MinWidth" Value="80"/>
+            </Style>
+            <Style TargetType="TextBox" BasedOn="{StaticResource {x:Type TextBox}}">
+                <Setter Property="Margin" Value="10"/>
+                <Setter Property="Width" Value="300"/>
+            </Style>
+            <Style TargetType="Button" BasedOn="{StaticResource {x:Type Button}}">
+                <Setter Property="Margin" Value="5"/>
+                <Setter Property="DockPanel.Dock" Value="Right"/>
+            </Style>
+        </TabControl.Resources>
         <TabItem Header="{hlp:SimpleLocalize RadioCreateEditLabel}">
-            <StackPanel>
-                <hlp:LabeledTextbox LabelText="hallo">hh</hlp:LabeledTextbox>
-            </StackPanel>
+            <DockPanel LastChildFill="False">
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{hlp:SimpleLocalize NameLabel}"/>
+                    <TextBox Text="{Binding Model.Name}"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{hlp:SimpleLocalize LabelGenre}"/>
+                    <TextBox Text="{Binding Model.Genre}"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{hlp:SimpleLocalize LabelDescription}"/>
+                    <TextBox Text="{Binding Model.Description}"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{hlp:SimpleLocalize LabelCountry}"/>
+                    <TextBox Text="{Binding Model.Country}"/>
+                </StackPanel>
+                <StackPanel DockPanel.Dock="Top">
+                    <TextBlock Text="{hlp:SimpleLocalize LabelLanguage}"/>
+                    <TextBox Text="{Binding Model.Language}"/>
+                </StackPanel>
+            </DockPanel>
+        </TabItem>
+        <TabItem Header="{hlp:SimpleLocalize RadioCreationQualityTab}">
+            <DockPanel>
+                <StackPanel DockPanel.Dock="Top" Orientation="Horizontal">
+                    <Button Content="{hlp:SimpleLocalize LabelAdd}" Margin="5" hlp:CommandBinder.Command="AddQ:AddQ"/>
+                    <Button Content="{hlp:SimpleLocalize DeleteLabel}" Margin="5" hlp:CommandBinder.Command="RemoveQ:RemoveQ"/>
+                </StackPanel>
+                <ListBox ItemsSource="{Binding QualityManager}" SelectedItem="{Binding QualityManager.QualityModel}" MinWidth="200" MinHeight="200" Margin="5">
+                    <ListBox.ItemTemplate>
+                        <DataTemplate>
+                            <StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{hlp:SimpleLocalize NameLabel}"/>
+                                    <TextBox Text="{Binding Name}"/>
+                                </StackPanel>
+                                <StackPanel>
+                                    <TextBlock Text="{hlp:SimpleLocalize LabelUrl}"/>
+                                    <TextBox Text="{Binding Url}"/>
+                                </StackPanel>
+                            </StackPanel>
+                        </DataTemplate>
+                    </ListBox.ItemTemplate>    
+                </ListBox>
+            </DockPanel>
         </TabItem>
     </TabControl>
+
+    </DockPanel>
 </Window>

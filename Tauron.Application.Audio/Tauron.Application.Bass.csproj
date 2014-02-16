@@ -20,6 +20,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -42,11 +43,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BassEngine.cs" />
-    <Compile Include="BassMessages.Designer.cs">
-      <DependentUpon>BassMessages.resx</DependentUpon>
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-    </Compile>
     <Compile Include="BASSException.cs" />
     <Compile Include="BassManager.cs" />
     <Compile Include="BassMessages1.Designer.cs">

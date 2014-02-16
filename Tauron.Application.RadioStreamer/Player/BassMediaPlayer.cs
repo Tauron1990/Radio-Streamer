@@ -67,7 +67,7 @@ namespace Tauron.Application.RadioStreamer.Player
         public void Activate()
         {
             BassManager.IniBass();
-            BassManager.InitRecord();
+            //BassManager.InitRecord();
 
             _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
                                            "DLL".CombinePath("PlugIns")));
@@ -222,6 +222,11 @@ namespace Tauron.Application.RadioStreamer.Player
 
         public void StartRecording(string location)
         {
+            if (!BassManager.IsRecordinginitialized)
+            {
+                Un4seen.BassAsio.BassAsio.BASS_ASIO_Init()
+            }
+
             _currentRecordingLocation = location;
             if (_recorder == null) InitRecorder();
 

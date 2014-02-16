@@ -39,7 +39,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			public bool UseCache { get; set; }
 
 			private WeakReference _cache;
-			public Stream Open()
+			public Stream OpenRead()
 			{
 				if (_cache != null && _cache.IsAlive)
 				{
@@ -63,7 +63,26 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				return temp;
 			}
 
-			#endregion
+		    public Stream OpenNew()
+		    {
+                if (_cache != null && _cache.IsAlive)
+                {
+                    try
+                    {
+                        var tempS = (Stream)_cache.Target;
+                        tempS.Position = 0;
+                        tempS.Dispose();
+                        _cache = null;
+                    }
+                    catch (ObjectDisposedException)
+                    {
+                    }
+                }
+
+                return new FileStream(_path, FileMode.Create, FileAccess.ReadWrite, _share, BufferSize, _options);
+		    }
+
+		    #endregion
 		}
 		private sealed class RadioSettings : TauronProfile, IRadioSettings
 		{
@@ -224,10 +243,12 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 					while (!parser.EndOfInput)
 					{
 						int first = parser.GetNumber();
-						int second = parser.GetNumber();
+					    string name = parser.GetNextChars(first);
+                        int second = parser.GetNumber();
+					    string q = parser.GetNextChars(second);
 
-						var favorite = new RadioFavorite(parser.GetNextChars(first),
-																   parser.GetNextChars(second));
+						var favorite = new RadioFavorite(name, q);
+																  
 						_favorites.Add(favorite);
 					}
 				}

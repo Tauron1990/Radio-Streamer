@@ -28,7 +28,7 @@ namespace Tauron.Application.RadioStreamer.Core
 
 		private void Play([NotNull] PlayRadioEventArgs obj)
 		{
-		    RadioSelector.SelectedIndex = 1;
+		    Dispatcher.Invoke(() => RadioSelector.SelectedIndex = 1);
 		}
 
 	    private void TabControlSelectionChanged([NotNull] object sender, [NotNull] SelectionChangedEventArgs e)

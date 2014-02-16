@@ -9,10 +9,10 @@
             throw new BassException();
         }
 
-        public static void CheckBass(this int value)
-        {
-            if(value <= 0) 
-                throw new BassException();
-        }
+        //public static void CheckBass(this int value)
+        //{
+        //    if(value <= 0) 
+        //        throw new BassException();
+        //}
     }
 }

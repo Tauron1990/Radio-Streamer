@@ -20,6 +20,7 @@ using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.MedadataView;
+using Tauron.Application.RadioStreamer.Views.RadioManager.Controls;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioManager
@@ -122,23 +123,24 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
 		public event EventHandler QualitySelected;
 
-		public RadioManagerRadio(RadioEntry entry, bool favorite, [NotNull] IQualityQuery qualitys, [NotNull] Action<RadioManagerRadio> delete)
-		{
-		    _favorite = favorite;
-		    _query = qualitys;		   
-            _delete = delete;
-		    _entry = entry;
+	    public RadioManagerRadio(RadioEntry entry, bool favorite, [NotNull] IQualityQuery qualitys,
+	                             [NotNull] Action<RadioManagerRadio> delete)
+	    {
+	        _favorite = favorite;
+	        _query = qualitys;
+	        _delete = delete;
+	        _entry = entry;
 
-		    // ReSharper disable PossibleNullReferenceException
-		    _entry.Metadata.ValueChanged += MetadataOnValueChanged;
-		    _entry.Metadata.ElementDeleted += MetadataOnElementDeleted;
-            _entry.Metadata.QualityChanged += MetadataOnQualityChanged;
+	        // ReSharper disable PossibleNullReferenceException
+	        _entry.Metadata.ValueChanged += MetadataOnValueChanged;
+	        _entry.Metadata.ElementDeleted += MetadataOnElementDeleted;
+	        _entry.Metadata.QualityChanged += MetadataOnQualityChanged;
 
-		    if (entry.Qualitys == null) entry.SetQuality(qualitys);
+	        if (entry.Qualitys == null) entry.SetQuality(qualitys);
 // ReSharper disable once AssignNullToNotNullAttribute
-		    _qualitys = new QualityList(entry.Qualitys);
-		    // ReSharper restore PossibleNullReferenceException
-		}
+	        _qualitys = new QualityList(entry.Qualitys);
+	        // ReSharper restore PossibleNullReferenceException
+	    }
 
 	    private void MetadataOnQualityChanged()
 	    {
@@ -152,6 +154,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 	        _entry.Metadata.ValueChanged -= MetadataOnValueChanged;
 	        _entry.Metadata.QualityChanged -= MetadataOnQualityChanged;
 	        _entry.Metadata.ElementDeleted -= MetadataOnElementDeleted;
+
 	        _delete(this);
 	    }
 
@@ -230,10 +233,17 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
 		public RadioQuality GetQuality()
 		{
-			if (SelectedIndex < 0) return new RadioQuality();
+		    try
+		    {
+		        if (SelectedIndex < 0) return new RadioQuality();
 
-			var q = Qualitys[SelectedIndex] as NormalQuality;
-			return q == null ? new RadioQuality() : q.Quality;
+		        var q = Qualitys[SelectedIndex] as NormalQuality;
+		        return q == null ? new RadioQuality() : q.Quality;
+		    }
+		    catch (ArgumentOutOfRangeException)
+		    {
+		        return new RadioQuality();
+		    }
 		}
 
 		public override string ToString()
@@ -263,7 +273,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 	        {
 	            return _scope == null
 	                       ? Enumerable.Empty<RadioQuality>().GetEnumerator()
-	                       : _qualitys.Select(quality => new RadioQuality(_scope.GetQuality(quality), quality))
+	                       : _qualitys.Select(quality => new RadioQuality(_scope, quality))
 	                                  .GetEnumerator();
 	        }
 
@@ -356,7 +366,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
 			    private bool FilterRadio([NotNull] RadioManagerRadio radio)
 			    {
-			        if (OnlyFavorites && String.IsNullOrEmpty(SearchText)) return false;
+			        //if (OnlyFavorites && String.IsNullOrEmpty(SearchText)) return false;
 
 			        if (!OnlyFavorites)
 			        {
@@ -533,13 +543,19 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
 		    foreach (var entry in entrys)
 		    {
-		        _radios.Add(new RadioManagerRadio(entry, favorites.Contains(entry.Name), new InternalQualityQuery(entry), radio => _radios.Remove(radio)));
+		        _radios.Add(new RadioManagerRadio(entry, favorites.Contains(entry.Name), new InternalQualityQuery(entry), OnRadioDelete));
 		        languages.Add(entry.Language);
 		    }
 
 		    Languages = languages;
 		    _radios.CompledChanging();
 		}
+
+	    private void OnRadioDelete([NotNull] RadioManagerRadio radio)
+	    {
+	        _radios.Remove(radio);
+	        if (radio.Favorite) _enviroment.OpenSettings().Favorites.Remove(new RadioFavorite(radio.RadioTitle, string.Empty));
+	    }
 
 	    #endregion Common
 
@@ -677,14 +693,26 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 			radio.Favorite = false;
 		}
 
-	    [CommandTarget]
+	    [CommandTarget(Synchronize = true)]
 	    private void AddRadio()
 	    {
-	        IWindow win = Radios.CurrentAddItem != null
-	                          ? ViewManager.CreateWindow(AppConstants.RadioCreateViewModel, Radios.CurrentItem)
-	                          : ViewManager.CreateWindow(AppConstants.RadioCreateViewModel);
+            if(Radios.CurrentItem != null)
+	            RadioCreateViewModel.Entry = ((RadioManagerRadio) Radios.CurrentItem).Entry;
 
-	        win.ShowDialog(ViewManager.GetWindow(AppConstants.MainWindowName));
+	        IWindow win = ViewManager.CreateWindow(AppConstants.RadioCreateViewModel);
+
+	        Task t = win.ShowDialog(ViewManager.GetWindow(AppConstants.MainWindowName));
+
+	        Async.StartNew(() =>
+	        {
+                t.Wait();
+// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+                if(RadioCache.Cache == null || RadioCache.Cache.Count != 1) return;
+
+	            _radios.Add(new RadioManagerRadio(RadioCache.Cache[0], false,
+	                                              new InternalQualityQuery(RadioCache.Cache[0]),
+	                                              OnRadioDelete));
+	        });
 	    }
 
 	    #endregion Metadata

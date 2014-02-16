@@ -11,7 +11,10 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 		bool UseCache { get; set; }
 
         [NotNull]
-        Stream Open();
+        Stream OpenRead();
+
+        [NotNull]
+        Stream OpenNew();
 	}
 	public enum EnviromentLocation
 	{
@@ -43,7 +46,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 	        var second = obj as RadioFavorite;
 	        if (second == null) return false;
 
-	        return second.Name == Name && second.QualityName == QualityName;
+	        return second.Name == Name;
 	    }
 
 	    public override int GetHashCode()

@@ -1,10 +1,15 @@
-﻿using System.Globalization;
-using JetBrains.Annotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics.Contracts;
+using System.Globalization;
+using System.Linq;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
+using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
@@ -12,11 +17,97 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
     [ExportViewModel(AppConstants.RadioCreateViewModel)]
     public class RadioCreateViewModel : ViewModelBase, INotifyBuildCompled
     {
+        public class RadioQualityModel : ObservableObject
+        {
+            private readonly Action<RadioQualityModel> _deleteAction;
+
+            public RadioQualityModel([NotNull] Action<RadioQualityModel> deleteAction)
+            {
+                _deleteAction = deleteAction;
+            }
+
+            private string _name;
+
+            [NotNull]
+            public string Name
+            {
+                get { return _name; }
+                set
+                {
+                    if (Equals(_name, value)) return;
+
+                    _name = value;
+                    if (string.IsNullOrWhiteSpace(value)) _deleteAction(this);
+
+                    OnPropertyChanged();
+                }
+            }
+
+            private string _url;
+
+            [NotNull]
+            public string Url
+            {
+                get { return _url; }
+                set
+                {
+                    if (Equals(_url, value)) return;
+
+                    _url = value;
+
+                    OnPropertyChanged();
+                }
+            }
+        }
+
+        public class RadioQualityManager : UISyncObservableCollection<RadioQualityModel>
+        {
+            private RadioQualityModel _qualityModel;
+
+            public RadioQualityManager(RadioEntry entry)
+            {
+                if(entry.IsEmpty || entry.Qualitys == null) return;
+
+                foreach (var quality in entry.Qualitys)
+                {
+                    var model = CreateQualityModel();
+                    model.Name = quality.Name;
+                    model.Url = quality.Url;
+                    Add(model);
+                }
+            }
+
+            [NotNull]
+            private RadioQualityModel CreateQualityModel()
+            {
+                return new RadioQualityModel(model => Remove(model));
+            }
+
+            public void AddModel([NotNull] string name)
+            {
+                var temp = CreateQualityModel();
+                temp.Name = name;
+                Add(temp);
+            }
+
+            public void Remove()
+            {
+                Remove(QualityModel);
+            }
+
+            [CanBeNull]
+            public RadioQualityModel QualityModel
+            {
+                get { return _qualityModel; }
+                set { _qualityModel = value; OnPropertyChanged(new PropertyChangedEventArgs("QualityModel")); }
+            }
+        }
+
         public class RadioEditModel : ObservableObject
         {
             private string _name;
 
-            [CanBeNull]
+            [NotNull]
             public string Name
             {
                 get { return _name; }
@@ -29,7 +120,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
 
             private string _genre;
 
-            [CanBeNull]
+            [NotNull]
             public string Genre
             {
                 get { return _genre; }
@@ -42,7 +133,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
 
             private string _country;
 
-            [CanBeNull]
+            [NotNull]
             public string Country
             {
                 get { return _country; }
@@ -55,7 +146,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
 
             private string _language;
 
-            [CanBeNull]
+            [NotNull]
             public string Language
             {
                 get { return _language; }
@@ -68,7 +159,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
 
             private string _description;
 
-            [CanBeNull]
+            [NotNull]
             public string Description
             {
                 get { return _description; }
@@ -80,13 +171,15 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
             }
         }
 
-        [Inject("RadioEntry")]
-        private RadioEntry _entry;
+        public static RadioEntry Entry { get; set; }
 
         [Inject]
         private IRadioDatabase _radioDatabase;
 
         private RadioEditModel _model;
+
+        [WindowTarget("Window")]
+        private IWindow _window;
 
         [NotNull]
         public RadioEditModel Model
@@ -95,22 +188,114 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
             set { _model = value; OnPropertyChanged();}
         }
 
+        [NotNull]
+        public RadioQualityManager QualityManager { get; private set; }
+
 
         void INotifyBuildCompled.BuildCompled()
         {
-            if (_entry.IsEmpty)
+            if (Entry.IsEmpty) Model = new RadioEditModel {Language = CultureInfo.CurrentCulture.DisplayName};
+            else
             {
-                Model = new RadioEditModel {Language = CultureInfo.CurrentCulture.DisplayName};
+                Model = new RadioEditModel
+                {
+                    Country = Entry.Country,
+                    Description = Entry.Description,
+                    Genre = Entry.Genre,
+                    Language = Entry.Language,
+                    Name = Entry.Name
+                };
             }
 
-            Model = new RadioEditModel
+            QualityManager = new RadioQualityManager(Entry);
+        }
+
+        #region Main
+
+        [CommandTarget]
+        private void Close()
+        {
+            Entry = new RadioEntry();
+            _window.Close();
+        }
+
+        [CommandTarget]
+        private bool CanDelete()
+        {
+            return !Entry.IsEmpty;
+        }
+
+        [CommandTarget]
+        private void Delete()
+        {
+            _radioDatabase.DeleteRadio(Entry.Name);
+            _radioDatabase.Save();
+            Entry = new RadioEntry();
+            _window.Close();
+        }
+
+        [CommandTarget]
+        private bool CanSave()
+        {
+            return !string.IsNullOrWhiteSpace(_model.Name);
+        }
+
+        [CommandTarget]
+        private void Save()
+        {
+            bool newR;
+            RadioEntry ent = _radioDatabase.GetEntryFactory().AddOrGetEntry(_model.Name, out newR);
+            ent.Language = _model.Language;
+            ent.Genre = _model.Genre;
+            ent.Description = _model.Description;
+            ent.Country = _model.Country;
+            AddQualitys(ent);
+
+            RadioCache.Cache = new List<RadioEntry> { ent };
+            _radioDatabase.Save();
+            Entry = new RadioEntry();
+            _window.Close();
+        }
+
+        #endregion
+
+
+        [CommandTarget]
+        private void AddQ()
+        {
+            string result = Dialogs.GetText(_window, RadioStreamerResources.RadioCreationAddQualityNameInstruction,
+                                            string.Empty, "Name", true, null);
+
+            if(string.IsNullOrWhiteSpace(result)) return;
+
+            QualityManager.AddModel(result);
+        }
+
+        [CommandTarget]
+        private bool CanRemoveQ()
+        {
+            return QualityManager.QualityModel != null;
+        }
+        [CommandTarget]
+        private void RemoveQ()
+        {
+            QualityManager.Remove();
+        }
+
+        private void AddQualitys(RadioEntry entry)
+        {
+            var fac = new RadioQualityFactory(entry);
+
+            if (entry.Qualitys != null)
+                foreach (var source in entry.Qualitys.ToArray())
+                {
+                    fac.RemoveQuality(source.Name);
+                }
+
+            foreach (var quality in QualityManager)
             {
-                Country = _entry.Country,
-                Description = _entry.Description,
-                Genre = _entry.Genre,
-                Language = _entry.Language,
-                Name = _entry.Name
-            };
+                fac.Create(quality.Name, quality.Url, string.Empty);
+            }
         }
     }
 }

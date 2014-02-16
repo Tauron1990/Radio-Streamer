@@ -23,5 +23,10 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
             var temp = new RadioQuality(_baseScope, name) {Name = name, Url = url, SourceUrl = sourceUrl};
             return temp;
         }
+
+        public void RemoveQuality([NotNull] string name)
+        {
+            _baseScope.Delete(name, true);
+        }
     }
 }

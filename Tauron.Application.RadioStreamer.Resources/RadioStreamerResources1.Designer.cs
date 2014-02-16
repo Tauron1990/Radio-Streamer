@@ -160,11 +160,74 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Add:  ähnelt.
+        /// </summary>
+        public static string LabelAdd {
+            get {
+                return ResourceManager.GetString("LabelAdd", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Country:            ähnelt.
+        /// </summary>
+        public static string LabelCountry {
+            get {
+                return ResourceManager.GetString("LabelCountry", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Description:      ähnelt.
+        /// </summary>
+        public static string LabelDescription {
+            get {
+                return ResourceManager.GetString("LabelDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Genre:                ähnelt.
+        /// </summary>
+        public static string LabelGenre {
+            get {
+                return ResourceManager.GetString("LabelGenre", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Language:         ähnelt.
+        /// </summary>
+        public static string LabelLanguage {
+            get {
+                return ResourceManager.GetString("LabelLanguage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Url:     ähnelt.
+        /// </summary>
+        public static string LabelUrl {
+            get {
+                return ResourceManager.GetString("LabelUrl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Language:  ähnelt.
         /// </summary>
         public static string LanguageLabel {
             get {
                 return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Name:               ähnelt.
+        /// </summary>
+        public static string NameLabel {
+            get {
+                return ResourceManager.GetString("NameLabel", resourceCulture);
             }
         }
         
@@ -201,6 +264,24 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string RadioCreateEditLabel {
             get {
                 return ResourceManager.GetString("RadioCreateEditLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enter an Name for The new Quality ähnelt.
+        /// </summary>
+        public static string RadioCreationAddQualityNameInstruction {
+            get {
+                return ResourceManager.GetString("RadioCreationAddQualityNameInstruction", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Qualitys  ähnelt.
+        /// </summary>
+        public static string RadioCreationQualityTab {
+            get {
+                return ResourceManager.GetString("RadioCreationQualityTab", resourceCulture);
             }
         }
         

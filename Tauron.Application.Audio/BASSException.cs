@@ -35,7 +35,7 @@ namespace Tauron.Application.BassLib
         {
             get
             {
-                return Audio.BassMessages.ResourceManager.GetString(Error.ToString()) ?? Audio.BassMessages.ErrorUnkown;
+                return BassMessages.ResourceManager.GetString(Error.ToString()) ?? BassMessages.ErrorUnkown;
             }
         }
 

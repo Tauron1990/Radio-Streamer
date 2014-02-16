@@ -240,4 +240,31 @@
   <data name="RadioCreateEditLabel" xml:space="preserve">
     <value>Radio Beabeiten</value>
   </data>
+  <data name="NameLabel" xml:space="preserve">
+    <value>Name:                    </value>
+  </data>
+  <data name="LabelGenre" xml:space="preserve">
+    <value>Genre:                     </value>
+  </data>
+  <data name="LabelDescription" xml:space="preserve">
+    <value>Beschreibung:       </value>
+  </data>
+  <data name="LabelCountry" xml:space="preserve">
+    <value>Land:                       </value>
+  </data>
+  <data name="LabelLanguage" xml:space="preserve">
+    <value>Sprache:                  </value>
+  </data>
+  <data name="RadioCreationQualityTab" xml:space="preserve">
+    <value>Qualitäten</value>
+  </data>
+  <data name="LabelUrl" xml:space="preserve">
+    <value>Url:                  </value>
+  </data>
+  <data name="LabelAdd" xml:space="preserve">
+    <value>Hunzufügen</value>
+  </data>
+  <data name="RadioCreationAddQualityNameInstruction" xml:space="preserve">
+    <value>Geben sie einen Namen für die Qualität des Radios ein.</value>
+  </data>
 </root>

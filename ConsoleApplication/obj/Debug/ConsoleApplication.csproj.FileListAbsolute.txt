@@ -28,8 +28,16 @@ C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Console
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
-C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Scripts\Technobase.cs
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe.config
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Scripts\Technobase.cs
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\bass.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\bassenc.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\bassmix.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\basswma.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\bass_aac.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\bass_fx.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\OptimFROG.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\tags.dll
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Bass.Net.dll
@@ -62,3 +70,8 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleAppl
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\basswasapi.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Make Some Noise.mp3
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Melodic Madness.mp3
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Music Is My Drug.mp3
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Never Say Goodbye (Wildstylez Remix).mp3

@@ -614,6 +614,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    _databaseNames = new HashSet<string>();
 		    foreach (var line in lines)
 		    {
+                if(line == "End") return;
 		        var tempentry = new DatabaseEntry(this);
 		        var acsessor = new DatabaseEntry.DatabaseEntryAcessor(tempentry);
 		        string[] pairs = line.Split(LineSplitter, StringSplitOptions.RemoveEmptyEntries);
@@ -729,6 +730,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        foreach (Metadata data in entry) writer.Write(String.Format("\t{0}={1}", EncodeIfRequied(data.Key), EncodeIfRequied(data.Value)));
 		        writer.Write(writer.NewLine);
 		    }
+
+            writer.Write("End");
 		}
 
         public void Clear()
