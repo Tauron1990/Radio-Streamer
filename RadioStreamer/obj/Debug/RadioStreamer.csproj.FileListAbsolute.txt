@@ -257,12 +257,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Views.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Aero.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.Metro.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.AvalonDock.Themes.VS2010.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.DataGrid.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Xceed.Wpf.Toolkit.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Ookii.Dialogs.Wpf.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
@@ -297,16 +291,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Expression.Drawing.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.Common.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\es\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\fr\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\hu\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\it\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\pt-BR\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\ro\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\ru\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\sv\Xceed.Wpf.AvalonDock.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\zh-Hans\Xceed.Wpf.AvalonDock.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.Bass.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csprojResolveAssemblyReference.cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Core\DefaultContent.baml
@@ -390,3 +374,7 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csproj.GenerateResource.Cache
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.exe
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Make Some Noise.mp3
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Melodic Madness.mp3
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Music Is My Drug.mp3
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Never Say Goodbye (Wildstylez Remix).mp3

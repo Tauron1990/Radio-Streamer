@@ -26,6 +26,7 @@ namespace Tauron.Application.RadioStreamer.Player
     {
         private static readonly string IllegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
 
+        [Inject]
         private IEnumerable<Lazy<IPlaybackEngine, IPlaybackEngineMetadata>> _playbackEngines; 
 
         private Channel _currentChannel;
@@ -144,18 +145,37 @@ namespace Tauron.Application.RadioStreamer.Player
             _currentChannel = _playbackEngine.PlayChannel(url, out tags);
             _mixer = new Mix(flags:BassMixFlags.Software | BassMixFlags.Nonstop) {Equalizer = _equalizer};
 
-            _tagInfo = tags;
             _currentChannel.Mix = _mixer;
 
-            _visualHelper.Channel = _currentChannel;
+            _visualHelper.Channel = _mixer;
 
             _mixer.Play();
             _play.Publish(EventArgs.Empty);
+            _tagInfo = PublishTitle(tags);
         }
 
         private void PlaybackEngineOnEnd()
         {
             Stop();
+        }
+
+        [NotNull]
+        private TAG_INFO PublishTitle([NotNull] TAG_INFO info)
+        {
+            string newTitle;
+
+            if (string.IsNullOrWhiteSpace(info.title) && _script != null)
+                // ReSharper disable once AssignNullToNotNullAttribute
+                info = _script.GetTitleInfo(_url, info, out newTitle);
+            else newTitle = info.title;
+
+            if (info == null)
+                info = new TAG_INFO {title = "Unkown", artist = "Unkown"};
+
+            if (string.IsNullOrWhiteSpace(newTitle)) newTitle = "Unkown";
+
+            Async.StartNew(() => _titleRecived.Publish(newTitle));
+            return info;
         }
 
         private void PlaybackEngineOnChannelSwitched([NotNull] Channel channel, [NotNull] TAG_INFO info)
@@ -164,23 +184,12 @@ namespace Tauron.Application.RadioStreamer.Player
             if (_nextChannel == channel)
                 _nextChannel = null;
 
-            string newTitle;
-
-            if (string.IsNullOrWhiteSpace(info.title) && _script != null) // ReSharper disable once AssignNullToNotNullAttribute
-                info = _script.GetTitleInfo(_url, info, out newTitle);
-            else newTitle = info.title;
-
-            if(info == null)
-                info = new TAG_INFO { title = "Unkown", artist = "Unkown" };
-
-            if (string.IsNullOrWhiteSpace(newTitle)) newTitle = "Unkown";
+            info = PublishTitle(info);
 
             bool startRecording = NewRecordingTitle(info);
 
             if (_nextChannel != null)
             {
-                _visualHelper.Channel = _nextChannel;
-
                 _currentChannel.Mix = null;
                 _nextChannel.Mix = _mixer;
 
@@ -191,8 +200,6 @@ namespace Tauron.Application.RadioStreamer.Player
             }
 
             if (startRecording) StartRecordingInternal();
-
-            _titleRecived.Publish(newTitle);
         }
 
         public void Stop()
@@ -222,11 +229,6 @@ namespace Tauron.Application.RadioStreamer.Player
 
         public void StartRecording(string location)
         {
-            if (!BassManager.IsRecordinginitialized)
-            {
-                Un4seen.BassAsio.BassAsio.BASS_ASIO_Init()
-            }
-
             _currentRecordingLocation = location;
             if (_recorder == null) InitRecorder();
 

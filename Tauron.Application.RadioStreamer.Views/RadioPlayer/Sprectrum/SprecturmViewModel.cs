@@ -97,7 +97,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 
             _currentSpectrum = _radioEnvironment.OpenSettings().LastSprecturm.ParseEnum<Spectrums>();
 
-            _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(250), DispatcherPriority.Normal, UpdateSprectrum, SystemDispatcher);
+            _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(50), DispatcherPriority.Normal, UpdateSprectrum, SystemDispatcher);
             _sprectrumTimer.Stop();
             CurrentDispatcher.Invoke(() =>
             {
@@ -160,8 +160,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             Picture pic = _sprectrumPicture.Image;
 
             _sprectrumPicture.Image = IsVisble == Visibility.Visible
-                                          ? _player.CreateSprectrum(_currentSpectrum, _sprectrumPicture.Width,
-                                                                    _sprectrumPicture.Height)
+                                          ? _player.CreateSprectrum(_currentSpectrum, _sprectrumPicture.Width - 20,
+                                                                    _sprectrumPicture.Height - 20)
                                           : null;
 
             if (pic != null) pic.Dispose();

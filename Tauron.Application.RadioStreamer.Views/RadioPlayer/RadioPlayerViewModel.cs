@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -149,6 +150,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         void INotifyBuildCompled.BuildCompled()
 		{
 			_events.GetEvent<PlayRadioEvent, PlayRadioEventArgs>().Subscribe(PlayRadioEventHandler);
+            _events.GetEvent<RadioPlayerTitleRecived, string>().Subscribe(str => CurrentTitle.TrackName = str);
 
 			CurrentTitle = new RadioTitle();
 			_bufferTimer = new DispatcherTimer(TimeSpan.FromSeconds(1), DispatcherPriority.Normal, UpdateRadioStade, SystemDispatcher);
@@ -190,7 +192,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 	    public RadioTitle CurrentTitle { get; private set; }
 
 		private double _percentCache = -2;
-		public double PercentageBuffer
+
+	    [NotNull]
+	    public double PercentageBuffer
 		{
 			get 
 			{
@@ -211,7 +215,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 				switch (CurrentTitle.State)
 				{
 					case PlayerStade.Playing:
-						return String.Format("{0}%", PercentageBuffer);
+						return PercentageBuffer.ToString(CultureInfo.InvariantCulture) + "%";
 					default:
 						return RadioStreamerResources.BufferPercentageInvalid;
 				}

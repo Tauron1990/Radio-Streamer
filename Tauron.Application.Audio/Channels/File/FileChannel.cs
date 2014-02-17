@@ -41,7 +41,7 @@ namespace Tauron.Application.BassLib.Channels
         public IDisposable SetEntSync([NotNull] Action action)
         {
             var sync = new EndSync(action);
-            SyncManager.Register(sync, 0, BASSSync.BASS_SYNC_END);
+            SyncManager.Register(sync, 0, BASSSync.BASS_SYNC_END | BASSSync.BASS_SYNC_ONETIME);
             return sync;
         }
 

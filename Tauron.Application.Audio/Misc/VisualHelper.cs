@@ -42,8 +42,8 @@ namespace Tauron.Application.BassLib.Misc
 
             _width = 600;
             _height = 600;
-            _genericLineTikness = 10;
-            _distance = 5;
+            _genericLineTikness = 7;
+            _distance = 1;
             _textContent = "Unkown";
         }
 
@@ -182,7 +182,7 @@ namespace Tauron.Application.BassLib.Misc
                                                        GenericLineTikness, Distance, false, true, true);
                 case Spectrums.LinePeak:
                     return _visuals.CreateSpectrumLinePeak(Channel.Handle, Width, Height, Base, Peak, PeakHold,
-                                                           Background, GenericLineTikness, GenericLineTikness, Distance,
+                                                           Background, GenericLineTikness, 2, Distance,
                                                            20, false, true, true);
                 case Spectrums.Wave:
                     return _visuals.CreateSpectrumWave(Channel.Handle, Width, Height, Base, Peak, Background,
