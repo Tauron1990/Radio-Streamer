@@ -7,6 +7,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Scripts
     public interface IEngineManager
     {
         [NotNull]
+        string[] ScriptNames { get; }
+        [NotNull]
         string[] EngineNames { get; }
 
         [NotNull]

@@ -4,17 +4,17 @@
 winexe
 C#
 .cs
-C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\RadioStreamer\obj\Release\
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Release\
 Tauron.Application.RadioStreamer
 none
 false
 TRACE
 
-22114194539
+3-321118155
 
-5-2089609259
-22866507813
-MainWindow.xaml;LabelResources.xaml;
+71074298180
+22288296921
+Core\DefaultContent.xaml;Core\MainWindow.xaml;StartResources.xaml;
 
 False
 

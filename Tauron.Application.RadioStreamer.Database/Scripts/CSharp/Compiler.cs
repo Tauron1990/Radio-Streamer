@@ -46,8 +46,8 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
 
                 ExplicitDynamicAsseblyDefinition definition;
 
-                if (PrepareCompiler(container, out definition)) return new InvalidDataException("Definition Check Failed");
-                if (ExecuteCompiler(container, definition)) return new InvalidOperationException("Compiler Execution Faild");
+                if (!PrepareCompiler(container, out definition)) return new InvalidDataException("Definition Check Failed");
+                if (!ExecuteCompiler(container, definition)) return new InvalidOperationException("Compiler Execution Faild");
 
                 ReadScripts(definition.Module, scripts);
             }

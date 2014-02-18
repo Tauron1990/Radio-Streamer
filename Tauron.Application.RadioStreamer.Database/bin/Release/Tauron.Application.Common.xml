@@ -1292,6 +1292,38 @@
             <summary>Gets the name.</summary>
             <value>The name.</value>
         </member>
+        <member name="T:Tauron.Application.Ioc.InjectAttribute">
+            <summary>The inject attribute.</summary>
+        </member>
+        <member name="M:Tauron.Application.Ioc.InjectAttribute.#ctor">
+            <summary>
+                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
+                Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> Klasse.
+                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
+            </summary>
+        </member>
+        <member name="M:Tauron.Application.Ioc.InjectAttribute.#ctor(System.Type)">
+            <summary>
+                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
+                Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> Klasse.
+                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
+            </summary>
+            <param name="interface">
+                The interface.
+            </param>
+        </member>
+        <member name="P:Tauron.Application.Ioc.InjectAttribute.ContractName">
+            <summary>Gets or sets the contract name.</summary>
+            <value>The contract name.</value>
+        </member>
+        <member name="P:Tauron.Application.Ioc.InjectAttribute.Interface">
+            <summary>Gets or sets the interface.</summary>
+            <value>The interface.</value>
+        </member>
+        <member name="P:Tauron.Application.Ioc.InjectAttribute.Optional">
+            <summary>Gets or sets a value indicating whether optional.</summary>
+            <value>The optional.</value>
+        </member>
         <member name="T:Tauron.Application.Ioc.LifeTime.ObjectContext">
             <summary>The object context.</summary>
         </member>
@@ -3679,10 +3711,6 @@
         <member name="E:Tauron.Application.IWindow.Closed">
             <summary>The closed.</summary>
         </member>
-        <member name="P:Tauron.Application.IWindow.Handle">
-            <summary>Gets the handle.</summary>
-            <value>The handle.</value>
-        </member>
         <member name="P:Tauron.Application.IWindow.Title">
             <summary>Gets or sets the title.</summary>
         </member>
@@ -4728,7 +4756,10 @@
                 The index.
             </param>
             <returns>
-                The <see cref="!:ObservableDictionary"/>.
+                The <see>
+                    <cref>ObservableDictionary</cref>
+                </see>
+                .
             </returns>
         </member>
         <member name="M:Tauron.Application.ObservableDictionary`2.InvokeCollectionChanged(System.Collections.Specialized.NotifyCollectionChangedEventArgs)">
@@ -4850,7 +4881,10 @@
                 The value.
             </param>
             <returns>
-                The <see cref="!:KeyValuePair"/>.
+                The <see>
+                    <cref>KeyValuePair</cref>
+                </see>
+                .
             </returns>
         </member>
         <member name="M:Tauron.Application.ObservableDictionary`2.Entry.Construct(Tauron.Application.ObservableDictionary{`0,`1}.Entry)">
@@ -4861,7 +4895,10 @@
                 The entry.
             </param>
             <returns>
-                The <see cref="!:KeyValuePair"/>.
+                The <see>
+                    <cref>KeyValuePair</cref>
+                </see>
+                .
             </returns>
         </member>
         <member name="T:Tauron.Application.ObservableDictionary`2.KeyCollection">
@@ -5856,7 +5893,7 @@
                 The component registry.
             </param>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.IExport,System.String,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.IExport,System.String,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
@@ -5867,11 +5904,12 @@
                 The contract name.
             </param>
             <param name="tracer"></param>
+            <param name="buildParameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
@@ -5884,7 +5922,7 @@
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(System.Type,System.Object[],Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.BuildEngine.BuildUp(System.Type,System.Object[],Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
@@ -5982,10 +6020,10 @@
             <summary>Gets a value indicating whether share lifetime.</summary>
             <value>The share lifetime.</value>
         </member>
-        <member name="F:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExport.exportetType">
+        <member name="F:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExport._exportetType">
             <summary>The _exportet type.</summary>
         </member>
-        <member name="F:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExport.exports">
+        <member name="F:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExport._exports">
             <summary>The _exports.</summary>
         </member>
         <member name="M:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExport.#ctor(System.Type,Tauron.Application.Ioc.BuildUp.Exports.ExternalExportInfo,System.Boolean)">
@@ -6167,7 +6205,7 @@
                 The components.
             </param>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExportFactory.Create(System.Type)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExportFactory.Create(System.Type,System.Int32@)">
             <summary>
                 The create.
             </summary>
@@ -6206,7 +6244,7 @@
                 The <see cref="T:Tauron.Application.Ioc.BuildUp.Exports.IExport"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExportFactory.CreateMethodExport(System.Reflection.MethodInfo)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Exports.DefaultExports.DefaultExportFactory.CreateMethodExport(System.Reflection.MethodInfo,System.Int32@)">
             <summary>
                 The create method export.
             </summary>
@@ -7270,7 +7308,7 @@
         <member name="T:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MemberInjector">
             <summary>The member injector.</summary>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MemberInjector.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MemberInjector.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The inject.
             </summary>
@@ -7285,6 +7323,7 @@
             </param>
             <param name="interceptor"></param>
             <param name="errorTracer"></param>
+            <param name="parameters"></param>
         </member>
         <member name="F:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.EventMemberInjector._manager">
             <summary>The _manager.</summary>
@@ -7332,7 +7371,7 @@
                 The member.
             </param>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.Injectorbase`1.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.Injectorbase`1.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The inject.
             </summary>
@@ -7347,6 +7386,7 @@
             </param>
             <param name="interceptor"></param>
             <param name="errorTracer"></param>
+            <param name="parameters"></param>
         </member>
         <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.Injectorbase`1.Inject(System.Object,System.Object)">
             <summary>
@@ -7507,7 +7547,7 @@
                 The event manager.
             </param>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MethodInjector.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MethodInjector.Inject(System.Object,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata,Tauron.Application.Ioc.BuildUp.IImportInterceptor,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The inject.
             </summary>
@@ -7522,6 +7562,7 @@
             </param>
             <param name="interceptor"></param>
             <param name="errorTracer"></param>
+            <param name="parameters"></param>
         </member>
         <member name="T:Tauron.Application.Ioc.BuildUp.Strategy.DafaultStrategys.MethodInjector.ParameterHelper">
             <summary>The parameter helper.</summary>
@@ -7927,7 +7968,7 @@
             <summary>Gets or sets the target.</summary>
             <value>The target.</value>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext.#ctor(Tauron.Application.Ioc.BuildUp.Exports.IExport,Tauron.Application.Ioc.BuildUp.BuildMode,Tauron.Application.Ioc.IContainer,System.String,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext.#ctor(Tauron.Application.Ioc.BuildUp.Exports.IExport,Tauron.Application.Ioc.BuildUp.BuildMode,Tauron.Application.Ioc.IContainer,System.String,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext"/> Klasse.
             </summary>
@@ -7945,7 +7986,7 @@
             </param>
             <param name="errorTracer"></param>
         </member>
-        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext.#ctor(Tauron.Application.Ioc.Components.BuildObject,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext.#ctor(Tauron.Application.Ioc.Components.BuildObject,Tauron.Application.Ioc.IContainer,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext"/> Klasse.
             </summary>
@@ -7956,6 +7997,7 @@
                 The container.
             </param>
             <param name="errorTracer"></param>
+            <param name="parameters"></param>
         </member>
         <member name="P:Tauron.Application.Ioc.BuildUp.Strategy.DefaultBuildContext.BuildCompled">
             <summary>Gets or sets a value indicating whether build compled.</summary>
@@ -8287,22 +8329,7 @@
         <member name="F:Tauron.Application.Ioc.Components.ExportRegistry._registrations">
             <summary>The _registrations.</summary>
         </member>
-        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.FindAll(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer)">
-            <summary>
-                The find all.
-            </summary>
-            <param name="type">
-                The type.
-            </param>
-            <param name="contractName">
-                The contract name.
-            </param>
-            <param name="errorTracer"></param>
-            <returns>
-                The <see cref="!:IEnumerable"/>.
-            </returns>
-        </member>
-        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.FindOptional(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.FindOptional(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer,System.Int32)">
             <summary>
                 The find optional.
             </summary>
@@ -8317,7 +8344,7 @@
                 The <see cref="T:Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.FindSingle(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.FindSingle(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer,System.Int32)">
             <summary>
                 The find single.
             </summary>
@@ -8331,22 +8358,6 @@
             <returns>
                 The <see cref="T:Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata"/>.
             </returns>
-        </member>
-        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport)">
-            <summary>
-                The register.
-            </summary>
-            <param name="export">
-                The export.
-            </param>
-        </member>
-        <member name="M:Tauron.Application.Ioc.Components.ExportRegistry.Remove(Tauron.Application.Ioc.BuildUp.Exports.IExport)">
-            <summary>
-                The remove.
-            </summary>
-            <param name="export">
-                The export.
-            </param>
         </member>
         <member name="M:Tauron.Application.Ioc.Components.InitializeableContracts.Initialize(Tauron.Application.Ioc.Components.ComponentRegistry)">
             <summary>
@@ -8362,11 +8373,9 @@
         <member name="F:Tauron.Application.Ioc.Components.BuildObject._instance">
             <summary>The _instance.</summary>
         </member>
-        <member name="M:Tauron.Application.Ioc.Components.BuildObject.#ctor(System.Collections.Generic.IEnumerable{Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata},Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata)">
+        <member name="M:Tauron.Application.Ioc.Components.BuildObject.#ctor(System.Collections.Generic.IEnumerable{Tauron.Application.Ioc.BuildUp.Exports.ImportMetadata},Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.Components.BuildObject"/> class.
                 Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.Components.BuildObject"/> Klasse.
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.Components.BuildObject"/> class.
             </summary>
             <param name="imports">
                 The imports.
@@ -8471,35 +8480,40 @@
         <member name="T:Tauron.Application.Ioc.IContainer">
             <summary>The Container interface.</summary>
         </member>
-        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="data">
                 The data.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="toBuild">
                 The object.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,System.Object[])">
+        <member name="M:Tauron.Application.Ioc.IContainer.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[],System.Object[])">
             <summary>
                 The build up.
             </summary>
             <param name="type">
                 The type.
             </param>
+            <param name="buildParameters"></param>
             <param name="constructorArguments">
                 The constructor arguments.
             </param>
@@ -8552,13 +8566,28 @@
                 The <see cref="!:IEnumerable"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.IContainer.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport)">
+        <member name="M:Tauron.Application.Ioc.IContainer.FindExports(System.Type,System.String,Tauron.Application.Ioc.ErrorTracer,System.Int32)">
+            <summary>
+                The find exports.
+            </summary>
+            <param name="interfaceType">
+                The interface.
+            </param>
+            <param name="name">
+                The name.
+            </param>
+            <returns>
+                The <see cref="!:IEnumerable"/>.
+            </returns>
+        </member>
+        <member name="M:Tauron.Application.Ioc.IContainer.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport,System.Int32)">
             <summary>
                 The register.
             </summary>
             <param name="exportType">
                 The export.
             </param>
+            <param name="level"></param>
         </member>
         <member name="M:Tauron.Application.Ioc.IContainer.Register(Tauron.Application.Ioc.ExportResolver)">
             <summary>
@@ -8596,29 +8625,33 @@
                 Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.DefaultContainer"/> Klasse.
             </summary>
         </member>
-        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="data">
                 The data.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="toBuild">
                 The object.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,System.Object[])">
+        <member name="M:Tauron.Application.Ioc.DefaultContainer.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[],System.Object[])">
             <summary>
                 The build up.
             </summary>
@@ -8680,13 +8713,14 @@
                 The <see cref="!:IEnumerable"/>.
             </returns>
         </member>
-        <member name="M:Tauron.Application.Ioc.DefaultContainer.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport)">
+        <member name="M:Tauron.Application.Ioc.DefaultContainer.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport,System.Int32)">
             <summary>
                 The register.
             </summary>
             <param name="exportType">
                 The export.
             </param>
+            <param name="level"></param>
         </member>
         <member name="M:Tauron.Application.Ioc.DefaultContainer.Register(Tauron.Application.Ioc.ExportResolver)">
             <summary>
@@ -9043,10 +9077,10 @@
         <member name="T:Tauron.Application.Ioc.ExportResolver.TypeExportProvider">
             <summary>The type export provider.</summary>
         </member>
-        <member name="F:Tauron.Application.Ioc.ExportResolver.TypeExportProvider.types">
+        <member name="F:Tauron.Application.Ioc.ExportResolver.TypeExportProvider._types">
             <summary>The _types.</summary>
         </member>
-        <member name="F:Tauron.Application.Ioc.ExportResolver.TypeExportProvider.exports">
+        <member name="F:Tauron.Application.Ioc.ExportResolver.TypeExportProvider._exports">
             <summary>The _exports.</summary>
         </member>
         <member name="M:Tauron.Application.Ioc.ExportResolver.TypeExportProvider.#ctor(System.Collections.Generic.IEnumerable{System.Type})">
@@ -9074,33 +9108,37 @@
             <summary>Gets the technology.</summary>
             <value>The technology.</value>
         </member>
-        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(Tauron.Application.Ioc.BuildUp.Exports.ExportMetadata,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="data">
                 The data.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
             <exception cref="T:System.NotImplementedException">
             </exception>
         </member>
-        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer)">
+        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(System.Object,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The build up.
             </summary>
             <param name="toBuild">
                 The to build.
             </param>
+            <param name="errorTracer"></param>
+            <param name="parameters"></param>
             <returns>
                 The <see cref="T:System.Object"/>.
             </returns>
             <exception cref="T:System.NotImplementedException">
             </exception>
         </member>
-        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,System.Object[])">
+        <member name="M:Tauron.Application.Ioc.ContainerContracts.BuildUp(System.Type,Tauron.Application.Ioc.ErrorTracer,Tauron.Application.Ioc.BuildParameter[],System.Object[])">
             <summary>
                 The build up.
             </summary>
@@ -9171,13 +9209,14 @@
             <exception cref="T:System.NotImplementedException">
             </exception>
         </member>
-        <member name="M:Tauron.Application.Ioc.ContainerContracts.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport)">
+        <member name="M:Tauron.Application.Ioc.ContainerContracts.Register(Tauron.Application.Ioc.BuildUp.Exports.IExport,System.Int32)">
             <summary>
                 The register.
             </summary>
             <param name="exportType">
                 The export type.
             </param>
+            <param name="level"></param>
             <exception cref="T:System.NotImplementedException">
             </exception>
         </member>
@@ -9210,38 +9249,6 @@
             </param>
             <exception cref="T:System.NotImplementedException">
             </exception>
-        </member>
-        <member name="T:Tauron.Application.Ioc.InjectAttribute">
-            <summary>The inject attribute.</summary>
-        </member>
-        <member name="M:Tauron.Application.Ioc.InjectAttribute.#ctor">
-            <summary>
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
-                Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> Klasse.
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
-            </summary>
-        </member>
-        <member name="M:Tauron.Application.Ioc.InjectAttribute.#ctor(System.Type)">
-            <summary>
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
-                Initialisiert eine neue Instanz der <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> Klasse.
-                Initializes a new instance of the <see cref="T:Tauron.Application.Ioc.InjectAttribute"/> class.
-            </summary>
-            <param name="interface">
-                The interface.
-            </param>
-        </member>
-        <member name="P:Tauron.Application.Ioc.InjectAttribute.ContractName">
-            <summary>Gets or sets the contract name.</summary>
-            <value>The contract name.</value>
-        </member>
-        <member name="P:Tauron.Application.Ioc.InjectAttribute.Interface">
-            <summary>Gets or sets the interface.</summary>
-            <value>The interface.</value>
-        </member>
-        <member name="P:Tauron.Application.Ioc.InjectAttribute.Optional">
-            <summary>Gets or sets a value indicating whether optional.</summary>
-            <value>The optional.</value>
         </member>
         <member name="T:Tauron.Application.Ioc.InjectEventAttribute">
             <summary>The inject event attribute.</summary>
@@ -9540,7 +9547,7 @@
                 Weiter informationen stehen dann in der Inner Exceptionzur verfügung.
             </exception>
         </member>
-        <member name="M:Tauron.ContainerExtensions.Resolve``1(Tauron.Application.Ioc.IContainer,System.String,System.Boolean)">
+        <member name="M:Tauron.ContainerExtensions.Resolve``1(Tauron.Application.Ioc.IContainer,System.String,System.Boolean,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 The resolve.
             </summary>
@@ -9559,7 +9566,7 @@
                 The <see cref="!:TType"/>.
             </returns>
         </member>
-        <member name="M:Tauron.ContainerExtensions.Resolve(Tauron.Application.Ioc.IContainer,System.Type,System.String)">
+        <member name="M:Tauron.ContainerExtensions.Resolve(Tauron.Application.Ioc.IContainer,System.Type,System.String,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 Ruft einene Instanz mit Vertragsnamen aus dem Build System des Containers ab.
             </summary>
@@ -9591,7 +9598,7 @@
                 Weiter informationen stehen dann in der Inner Exceptionzur verfügung.
             </exception>
         </member>
-        <member name="M:Tauron.ContainerExtensions.Resolve(Tauron.Application.Ioc.IContainer,System.Type,System.String,System.Boolean)">
+        <member name="M:Tauron.ContainerExtensions.Resolve(Tauron.Application.Ioc.IContainer,System.Type,System.String,System.Boolean,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 Ruft einene Instanz mit Vertragsnamen aus dem Build System des Containers ab
                 und gibt null zurück wenn kein Export gefunden wurde.
@@ -9627,7 +9634,7 @@
                 Weiter informationen stehen dann in der Inner Exceptionzur verfügung.
             </exception>
         </member>
-        <member name="M:Tauron.ContainerExtensions.ResolveAll(Tauron.Application.Ioc.IContainer,System.Type,System.String)">
+        <member name="M:Tauron.ContainerExtensions.ResolveAll(Tauron.Application.Ioc.IContainer,System.Type,System.String,Tauron.Application.Ioc.BuildParameter[])">
             <summary>
                 Ruft alle Instanzen aus dem Build System des Containers ab.
             </summary>
@@ -10378,7 +10385,7 @@
         <member name="M:Tauron.IOExtensions.ClearDirectory(System.String)">
             <summary>
                 The clear directory.
-            </summary>
+            </summary>+
             <param name="dic">
                 The dic.
             </param>

@@ -87,18 +87,6 @@
     <Content Include="lame.exe">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Make Some Noise.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Melodic Madness.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Music Is My Drug.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
-    <Content Include="Never Say Goodbye %28Wildstylez Remix%29.mp3">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">

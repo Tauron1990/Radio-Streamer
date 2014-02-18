@@ -271,4 +271,10 @@
   <data name="RadioCreationAddQualityNameInstruction" xml:space="preserve">
     <value>Enter an Name for The new Quality</value>
   </data>
+  <data name="RadioCreationScriptTab" xml:space="preserve">
+    <value>Scripts</value>
+  </data>
+  <data name="NoneString" xml:space="preserve">
+    <value>None</value>
+  </data>
 </root>

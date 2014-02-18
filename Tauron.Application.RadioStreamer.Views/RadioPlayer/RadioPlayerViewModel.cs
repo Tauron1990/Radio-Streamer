@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Globalization;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -11,6 +10,7 @@ using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.Helper;
 using Tauron.JetBrains.Annotations;
@@ -143,6 +143,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		[Inject]
 		private IEventAggregator _events;
 
+        [Inject]
+	    private IEngineManager _engineManager;
+
 		private DispatcherTimer _bufferTimer;
 
         private static readonly string ResourceAssembly = "Tauron.Application.RadioStreamer.Resources";
@@ -193,7 +196,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
 		private double _percentCache = -2;
 
-	    [NotNull]
 	    public double PercentageBuffer
 		{
 			get 
@@ -215,7 +217,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 				switch (CurrentTitle.State)
 				{
 					case PlayerStade.Playing:
-						return PercentageBuffer.ToString(CultureInfo.InvariantCulture) + "%";
+						return PercentageBuffer.ToString("F") + "%";
 					default:
 						return RadioStreamerResources.BufferPercentageInvalid;
 				}
@@ -257,16 +259,15 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		    _isInitialized = true;
 		    return _isInitialized;
 		}
-		private void Play(RadioQuality radio)
+		private void Play(RadioQuality radio, [NotNull] string script)
 		{
-			if (!Initialize()) return;
+		    if (!Initialize()) return;
 
-			if (CurrentTitle.State == PlayerStade.Playing)
-				Stop();
+		    if (CurrentTitle.State == PlayerStade.Playing) Stop();
 
 		    try
 		    {
-		        _player.Play(radio, null);
+		        _player.Play(radio, _engineManager.SearchForScript(script));
 		        ResetVolume();
 		        CurrentTitle.State = PlayerStade.Playing;
 		        _time.Start();
@@ -276,8 +277,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		        SendError(e);
 		    }
 		}
-		
-		private void PlayRadioEventHandler([NotNull] PlayRadioEventArgs obj)
+
+	    private void PlayRadioEventHandler([NotNull] PlayRadioEventArgs obj)
 		{
 		    if (obj.Quality.IsEmpty) return;
 		    _lastRadio = obj.Radio;
@@ -285,7 +286,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
 		    CurrentTitle.SetUnkown(true);
 		    CurrentTitle.CurrentRadioTitle = obj.Radio.Name;
-		    Play(obj.Quality);
+		    Play(obj.Quality, obj.Radio.Script);
 		}
 
 	    [CommandTarget]
@@ -296,7 +297,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 		[CommandTarget]
 		private void Play()
 		{
-			Play(_lastQuality);
+			Play(_lastQuality, _lastRadio.Script);
 		}
 		#endregion
 

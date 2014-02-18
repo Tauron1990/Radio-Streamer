@@ -1,11 +1,14 @@
 ﻿using System;
+using System.IO;
 using System.Runtime.ExceptionServices;
 using System.Security;
+using System.Text;
 using System.Windows;
 using System.Windows.Input;
 using Elysium;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
+using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.Views;
 
 namespace Tauron.Application.RadioStreamer
@@ -55,6 +58,7 @@ namespace Tauron.Application.RadioStreamer
 	    protected override IWindow DoStartup(CommandLineProcessor prcessor)
 		{
 			var temp = ViewManager.Manager.CreateWindow(AppConstants.MainWindowName);
+
 	        CurrentWpfApplication.Dispatcher.Invoke(() =>
 	        {
 	            Current.MainWindow = temp;

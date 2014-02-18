@@ -250,6 +250,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die None ähnelt.
+        /// </summary>
+        public static string NoneString {
+            get {
+                return ResourceManager.GetString("NoneString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Quality Manager: Number: {0}, All: {1} ähnelt.
         /// </summary>
         public static string QualityManager {
@@ -282,6 +291,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string RadioCreationQualityTab {
             get {
                 return ResourceManager.GetString("RadioCreationQualityTab", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Scripts ähnelt.
+        /// </summary>
+        public static string RadioCreationScriptTab {
+            get {
+                return ResourceManager.GetString("RadioCreationScriptTab", resourceCulture);
             }
         }
         

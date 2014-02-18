@@ -81,6 +81,15 @@
                 </ListBox>
             </DockPanel>
         </TabItem>
+        <TabItem Header="{hlp:SimpleLocalize RadioCreationScriptTab}">
+            <ListBox MinWidth="200" MinHeight="200" ItemsSource="{Binding ScriptManager}" SelectedItem="{Binding ScriptManager.ScriptModel}">
+                <ListBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Name}"/>
+                    </DataTemplate>
+                </ListBox.ItemTemplate>
+            </ListBox>
+        </TabItem>
     </TabControl>
 
     </DockPanel>

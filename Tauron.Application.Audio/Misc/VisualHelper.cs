@@ -166,30 +166,30 @@ namespace Tauron.Application.BassLib.Misc
             switch (spectrum)
             {
                 case Spectrums.Graph:
-                    return _visuals.CreateSpectrum(Channel.Handle, Width, Height, Base, Peak, Background, false, true,
+                    return _visuals.CreateSpectrum(Channel.Handle, Width, Height, Base, Peak, Background, false, false,
                                                    true);
                 case Spectrums.Bean:
                     return _visuals.CreateSpectrumBean(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                       _genericLineTikness, false, true, true);
+                                                       _genericLineTikness, false, false, true);
                 case Spectrums.Dot:
                     return _visuals.CreateSpectrumDot(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                      GenericLineTikness, Distance, false, true, true);
+                                                      GenericLineTikness, Distance, false, false, true);
                 case Spectrums.Ellipse:
                     return _visuals.CreateSpectrumEllipse(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                          GenericLineTikness, Distance, false, true, true);
+                                                          GenericLineTikness, Distance, false, false, true);
                 case Spectrums.Line:
                     return _visuals.CreateSpectrumLine(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                       GenericLineTikness, Distance, false, true, true);
+                                                       GenericLineTikness, Distance, false, false, true);
                 case Spectrums.LinePeak:
                     return _visuals.CreateSpectrumLinePeak(Channel.Handle, Width, Height, Base, Peak, PeakHold,
                                                            Background, GenericLineTikness, 2, Distance,
-                                                           20, false, true, true);
+                                                           20, false, false, true);
                 case Spectrums.Wave:
                     return _visuals.CreateSpectrumWave(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                       GenericLineTikness, false, true, true);
+                                                       GenericLineTikness, false, false, true);
                 default:
                     return _visuals.CreateSpectrumText(Channel.Handle, Width, Height, Base, Peak, Background,
-                                                       TextContent, false, true, true);
+                                                       TextContent, false, false, true);
             }
         }
     }

@@ -15,9 +15,17 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
 		public const string MetaLanguage = "Language";
 		public const string MetaDescription = "Description";
 		public const string MetaIntegrated = "Integrated";
+        public const string MetaScript = "Script";
 
         [CanBeNull]
         public IQualityQuery Qualitys { get; private set; }
+
+        [NotNull]
+        public string Script
+        {
+            get { return Metadata[MetaScript]; }
+            set { Metadata[MetaScript] = value; }
+        }
 
         [NotNull]
         public string Name

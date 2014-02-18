@@ -21,13 +21,14 @@ namespace Tauron.Application.BassLib.Recording
             get { return _encoder; }
             set
             {
+                _encoder = value;
+
                 if(!_encoder.SupportsSTDOUT)
                     throw new InvalidOperationException("Only SupportsSTDOUT is Supported");
 
                 if(_isRecording)
                     _encoder.Dispose();
 
-                _encoder = value;
                 IsRecording = false;
                 OnPropertyChanged();
             }
@@ -50,6 +51,7 @@ namespace Tauron.Application.BassLib.Recording
         {
             if(Encoder == null) return;
 
+            IsRecording = true;
             Encoder.Start(null, IntPtr.Zero, paused).CheckBass();
         }
 

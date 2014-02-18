@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Diagnostics.Contracts;
 using System.Globalization;
 using System.Linq;
 using Tauron.Application.Ioc;
@@ -9,6 +8,7 @@ using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
+using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
 
@@ -17,6 +17,84 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
     [ExportViewModel(AppConstants.RadioCreateViewModel)]
     public class RadioCreateViewModel : ViewModelBase, INotifyBuildCompled
     {
+        public enum ScriptType
+        {
+            None,
+            Prepare,
+            Script
+        }
+
+        public class RadioScriptModel : ObservableObject
+        {
+            [NotNull]
+            public string InternalName { get; private set; }
+
+            public ScriptType ScriptType { get; private set; }
+
+            public RadioScriptModel([NotNull] string internalName, ScriptType scriptType)
+            {
+                if (internalName == null) throw new ArgumentNullException("internalName");
+                
+                InternalName = internalName;
+                ScriptType = scriptType;
+            }
+
+            [NotNull]
+            public string Name
+            {
+                get
+                {
+                    switch (ScriptType)
+                    {
+                        case ScriptType.None:
+                            return RadioStreamerResources.NoneString;
+                        case ScriptType.Prepare:
+                            return RadioStreamerResources.RadioPlayerStadeInitializing;
+                        case ScriptType.Script:
+                            return InternalName;
+                        default:
+                            return string.Empty;
+                    }
+                }
+            }
+        }
+
+        public class RadioScriptManager : UISyncObservableCollection<RadioScriptModel>
+        {
+            private readonly IEngineManager _manager;
+            private RadioScriptModel _scriptModel;
+
+            public RadioScriptManager([NotNull] IEngineManager manager)
+            {
+                _manager = manager;
+                Add(new RadioScriptModel(string.Empty, ScriptType.Prepare));
+                Async.StartNew(BeginLoad);
+            }
+
+            private void BeginLoad()
+            {
+                Clear();
+
+                Add(new RadioScriptModel(string.Empty, ScriptType.None));
+
+                foreach (var scriptName in _manager.ScriptNames)
+                {
+                    Add(new RadioScriptModel(scriptName, ScriptType.Script));
+                }
+            }
+
+            [CanBeNull]
+            public RadioScriptModel ScriptModel
+            {
+                get { return _scriptModel; }
+                set
+                {
+                    _scriptModel = value;
+                    OnPropertyChanged(new PropertyChangedEventArgs("ScriptModel"));
+                }
+            }
+        }
+
         public class RadioQualityModel : ObservableObject
         {
             private readonly Action<RadioQualityModel> _deleteAction;
@@ -176,6 +254,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
         [Inject]
         private IRadioDatabase _radioDatabase;
 
+        [Inject]
+        private IEngineManager _engineManager;
+
         private RadioEditModel _model;
 
         [WindowTarget("Window")]
@@ -191,6 +272,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
         [NotNull]
         public RadioQualityManager QualityManager { get; private set; }
 
+        [NotNull]
+        public RadioScriptManager ScriptManager { get; private set; }
 
         void INotifyBuildCompled.BuildCompled()
         {
@@ -208,6 +291,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
             }
 
             QualityManager = new RadioQualityManager(Entry);
+            ScriptManager = new RadioScriptManager(_engineManager);
         }
 
         #region Main
@@ -249,9 +333,11 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
             ent.Genre = _model.Genre;
             ent.Description = _model.Description;
             ent.Country = _model.Country;
+            if (ScriptManager.ScriptModel != null && ScriptManager.ScriptModel.ScriptType == ScriptType.Script) ent.Script = ScriptManager.ScriptModel.InternalName;
             AddQualitys(ent);
 
-            RadioCache.Cache = new List<RadioEntry> { ent };
+            if(newR)
+                RadioCache.Cache = new List<RadioEntry> {ent};
             _radioDatabase.Save();
             Entry = new RadioEntry();
             _window.Close();

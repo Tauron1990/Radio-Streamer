@@ -11,6 +11,16 @@ namespace Tauron.Application.BassLib
     [PublicAPI]
     public abstract class Channel : ObservableObject, IDisposable
     {
+        protected bool Equals([NotNull] Channel other)
+        {
+            return Handle == other.Handle;
+        }
+
+        public override int GetHashCode()
+        {
+            return Handle;
+        }
+
         protected class EndSync : SyncBase
         {
             private readonly Action _action;
@@ -108,7 +118,8 @@ namespace Tauron.Application.BassLib
             }
             set
             {
-                Bass.BASS_ChannelSetAttribute(Handle, BASSAttribute.BASS_ATTRIB_VOL, value).CheckBass();
+                float vol = value;
+                Bass.BASS_ChannelSetAttribute(Handle, BASSAttribute.BASS_ATTRIB_VOL, vol).CheckBass();
                 OnPropertyChanged();
             }
         }
@@ -184,6 +195,14 @@ namespace Tauron.Application.BassLib
             _syncManager = null;
 
             return Handle;
+        }
+
+        public override bool Equals(object obj)
+        {
+            if (ReferenceEquals(null, obj)) return false;
+            if (ReferenceEquals(this, obj)) return true;
+            if (obj.GetType() != this.GetType()) return false;
+            return Equals((Channel) obj);
         }
     }
 }

@@ -164,7 +164,7 @@ namespace Tauron.Application.RadioStreamer.Player
         {
             string newTitle;
 
-            if (string.IsNullOrWhiteSpace(info.title) && _script != null)
+            if (_script != null)
                 // ReSharper disable once AssignNullToNotNullAttribute
                 info = _script.GetTitleInfo(_url, info, out newTitle);
             else newTitle = info.title;
@@ -178,10 +178,10 @@ namespace Tauron.Application.RadioStreamer.Player
             return info;
         }
 
-        private void PlaybackEngineOnChannelSwitched([NotNull] Channel channel, [NotNull] TAG_INFO info)
+        private void PlaybackEngineOnChannelSwitched([NotNull] Channel channel, [NotNull] TAG_INFO info, bool newChannel)
         {
             _nextChannel = channel;
-            if (_nextChannel == channel)
+            if (!newChannel)
                 _nextChannel = null;
 
             info = PublishTitle(info);
@@ -334,11 +334,11 @@ namespace Tauron.Application.RadioStreamer.Player
         {
             set
             {
-                _currentChannel.Volume = (int)value;
+                _mixer.Volume = new Percentage(value, PercentMode.Default);
             }
             get
             {
-                return (int)_currentChannel.Volume;
+                return (int)_mixer.Volume;
             }
         }
 

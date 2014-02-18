@@ -57,9 +57,6 @@
     <Compile Include="Scripts\PreCompilerCache.cs" />
     <Compile Include="Scripts\ScriptingBase.cs" />
     <Compile Include="Scripts\CSharp\ScriptObject.cs" />
-    <None Include="Scripts\Technobase.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">

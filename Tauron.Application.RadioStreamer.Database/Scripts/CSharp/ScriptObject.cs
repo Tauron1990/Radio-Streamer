@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System;
+using System.IO;
 using HtmlAgilityPack;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.JetBrains.Annotations;
@@ -15,7 +16,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
             Url = url;
             Metadata = meta;
             Document = new HtmlDocument();
-            Document.Load(new MemoryStream(WebClient.DownloadData(url)));
+            Document.Load(new MemoryStream(WebClient.DownloadData(GetUrl)));
 
             object result = Invoke();
 
@@ -55,5 +56,14 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
 
         [CanBeNull]
         protected abstract object Invoke();
+
+        [NotNull]
+        public virtual string GetUrl
+        {
+            get
+            {
+                return Url;
+            }
+        }
     }
 }

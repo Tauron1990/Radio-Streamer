@@ -267,4 +267,10 @@
   <data name="RadioCreationAddQualityNameInstruction" xml:space="preserve">
     <value>Geben sie einen Namen für die Qualität des Radios ein.</value>
   </data>
+  <data name="RadioCreationScriptTab" xml:space="preserve">
+    <value>Scripts</value>
+  </data>
+  <data name="NoneString" xml:space="preserve">
+    <value>Kein</value>
+  </data>
 </root>

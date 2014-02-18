@@ -6,7 +6,7 @@ using Un4seen.Bass.AddOn.Tags;
 
 namespace Tauron.Application.RadioStreamer.Player.Engine
 {
-    public delegate void ChannelSwitch([NotNull] Channel channel, [CanBeNull] TAG_INFO info);
+    public delegate void ChannelSwitch([NotNull] Channel channel, [CanBeNull] TAG_INFO info, bool newChannel);
 
     public interface IPlaybackEngine
     {

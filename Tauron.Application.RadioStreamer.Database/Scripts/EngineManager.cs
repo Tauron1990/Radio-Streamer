@@ -23,8 +23,9 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
         [Inject] 
         private ITauronEnviroment _enviroment;
 
-        private Dictionary<string, Lazy<IScript>> _scripts = new Dictionary<string, Lazy<IScript>>(); 
+        private Dictionary<string, Lazy<IScript>> _scripts = new Dictionary<string, Lazy<IScript>>();
 
+        public string[] ScriptNames { get; private set; }
         public string[] EngineNames { get; private set; }
         public string[] Extensions { get; private set; }
 
@@ -34,7 +35,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             return _scripts.TryGetValue(script, out scriptValue) ? scriptValue.Value : null;
         }
 
-        public void PreCompile( TextWriter logger)
+        public void PreCompile(TextWriter logger)
         {
             _scripts.Clear();
             string path = _enviroment.LocalApplicationData.CombinePath(AppConstants.AppName, "ScriptCache");
@@ -55,11 +56,13 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
                 {
                     var cacheInfo = info.Deserialize<PreCompilerCache>();
 
+                    
+                    var temp = Directory.GetLastWriteTime(scriptsPath);
                     // ReSharper disable once InvertIf
-                    if (cacheInfo.CreationTime < Directory.GetLastWriteTime(scriptsPath))
+                    if (cacheInfo.CreationTime > temp)
                     {
-                        ExecuteLoad(dll);
-                        return;
+                        //ExecuteLoad(dll);
+                        //return;
                     }
                 }
                 catch (Exception e)
@@ -69,7 +72,9 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             }
 
             ExecuteCompileStep(dll, logger, scriptsPath);
-            new PreCompilerCache(DateTime.Now.AddSeconds(10)).Serialize(info);
+            new PreCompilerCache(DateTime.Now.AddMinutes(3)).Serialize(info);
+
+            ScriptNames = _scripts.Keys.ToArray();
         }
 
         private void ExecuteCompileStep([NotNull] string dll, [NotNull] TextWriter logger, [NotNull]string scriptPath)
@@ -90,7 +95,8 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             foreach (var scriptEngine in _engines)
             {
                 scriptEngine.Init(logger, builder);
-                scriptEngine.BuildUp(scriptPath, _scripts);
+                var temp = scriptEngine.BuildUp(scriptPath, _scripts);
+                if (temp != null) throw temp;
             }
 
             builder.Save(Cachedll, PortableExecutableKinds.ILOnly, ImageFileMachine.I386);

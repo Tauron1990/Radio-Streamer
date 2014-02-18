@@ -4,7 +4,10 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Data;
@@ -18,6 +21,7 @@ using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.MedadataView;
 using Tauron.Application.RadioStreamer.Views.RadioManager.Controls;
@@ -572,6 +576,17 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 			var list = Radios;
 
 			AddRadios(_database.GetRadios());
+
+            var textLogger = new StringBuilder();
+	        try
+	        {
+	            CommonApplication.Current.Container.Resolve<IEngineManager>().PreCompile(new StringWriter(textLogger));
+	        }
+	        catch (Exception)
+	        {
+	            Log.Write(textLogger, TraceEventType.Error);
+	            throw;
+	        }
 
 			list.CurrentChanged += (sendr, e) => CommandManager.InvalidateRequerySuggested();
     	}

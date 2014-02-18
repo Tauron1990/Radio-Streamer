@@ -42,11 +42,17 @@ namespace Tauron.Application.BassLib
             Validate();
         }
 
+        public Percentage(double percent, PercentMode mode)
+            : this((float)percent, mode)
+        {
+        
+        }
+
         private void Validate()
         {
             if (_value < 0)
                 _value = 0;
-            if (_value < 100)
+            if (_value > 100)
                 _value = 100;
         }
 

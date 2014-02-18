@@ -50,7 +50,7 @@
 			</Button.Template>
 				<Image Source="{Binding VolumeImage, Mode=OneWay}"/>
 			</Button>
-			<Slider IsEnabled="{Binding IsNotMuted}" Margin="10" Width="100" Maximum="100" TickPlacement="BottomRight" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged, Delay=100, Mode=TwoWay}" TickFrequency="5"/>
+			<Slider IsEnabled="{Binding IsNotMuted}" Margin="10" Width="100" Maximum="100" TickPlacement="BottomRight" Value="{Binding Volume, UpdateSourceTrigger=PropertyChanged, Delay=500, Mode=TwoWay}" TickFrequency="5"/>
 		</StackPanel>
 		<TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding RunTime}" HorizontalAlignment="Center"/>
 		<TabControl Grid.ColumnSpan="3" Grid.Column="0" Margin="100, 10,30, 10" HorizontalAlignment="Center" Grid.Row="2" Width="Auto" Name="RadioViewExtensions" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioPlayerExtenionViews}">

@@ -42,7 +42,7 @@ namespace Tauron.Application.RadioStreamer.Player.Engine.Impl
         {
             if (!arg1) arg2 = null;
 
-            OnChannelSwitched(_stream, arg2);
+            OnChannelSwitched(_stream, arg2, false);
         }
 
         public override void Free()

@@ -8,3 +8,16 @@ C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Resources\obj\Release\de\Tauron.Application.RadioStreamer.Resources.resources.dll
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.dll
 C:\Users\Tauron\Documents\Visual Studio 2012\Projects\RadioStreamer Slim\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Release\Tauron.Application.RadioStreamer.Resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Release\Tauron.Application.RadioStreamer.Resources.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\bin\Release\de\Tauron.Application.RadioStreamer.Resources.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.g.resources
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.RadioStreamerResources.resources
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.SpectrumResources.resources
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.RadioStreamerResources.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.SpectrumResources.de.resources
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.csproj.GenerateResource.Cache
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\de\Tauron.Application.RadioStreamer.Resources.resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Release\Tauron.Application.RadioStreamer.Resources.pdb

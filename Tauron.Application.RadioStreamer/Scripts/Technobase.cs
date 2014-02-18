@@ -51,5 +51,10 @@ namespace Tauron.Scripts
                 filename = title
             };
         }
+
+        public override string GetUrl
+        {
+            get { return "http://www.technobase.fm/"; }
+        }
     }
 }

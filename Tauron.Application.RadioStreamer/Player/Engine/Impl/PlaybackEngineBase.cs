@@ -18,10 +18,10 @@ namespace Tauron.Application.RadioStreamer.Player.Engine.Impl
             if (handler != null) handler();
         }
 
-        protected virtual void OnChannelSwitched([NotNull] Channel channel, [CanBeNull] TAG_INFO info)
+        protected virtual void OnChannelSwitched([NotNull] Channel channel, [CanBeNull] TAG_INFO info, bool newChannel)
         {
             var handler = ChannelSwitched;
-            if (handler != null) Async.StartNew(() => handler(channel, info));
+            if (handler != null) Async.StartNew(() => handler(channel, info, newChannel));
         }
 
         public abstract double BufferPercentage { get; }
