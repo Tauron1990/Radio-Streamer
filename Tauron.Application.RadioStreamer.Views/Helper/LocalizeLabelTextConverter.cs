@@ -1,4 +1,6 @@
 ﻿
+using Tauron.Application.Converter;
+
 namespace Tauron.Application.RadioStreamer.Views.Helper
 {
 	public class LocalizeLabelTextConverter : ValueConverterFactoryBase
