@@ -127,7 +127,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         {
             Equalizer = player.Equalizer;
             //Equalizer = new EqalizerTest();
-            _equalizerProfileDatabase = environment.OpenSettings().EqualizerDatabase;
+            _equalizerProfileDatabase = environment.Settings.EqualizerDatabase;
 
             Presets =
                 new PresetCollection(

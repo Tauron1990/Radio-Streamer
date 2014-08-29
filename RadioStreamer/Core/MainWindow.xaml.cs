@@ -1,4 +1,5 @@
-﻿using Tauron.Application.RadioStreamer.Contracts;
+﻿using System.Windows;
+using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.Views;
 
 namespace Tauron.Application.RadioStreamer.Core
@@ -7,7 +8,7 @@ namespace Tauron.Application.RadioStreamer.Core
 	/// Interaktionslogik für MainWindow.xaml
 	/// </summary>
 	[ExportWindow(AppConstants.MainWindowName)]
-	public partial class MainWindow
+	public partial class MainWindow : Window
 	{
 		public MainWindow()
 		{

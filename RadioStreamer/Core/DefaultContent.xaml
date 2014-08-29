@@ -4,16 +4,57 @@
 			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
 			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
 			 xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:hard="http://www.hardcodet.net/taskbar"
 			 xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
-			 mc:Ignorable="d" 
+			 xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Core"
+             mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300"
 			 hlp:DataContextServices.Activate="True"
 			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.DefaultContentViewModel}">
 	<DockPanel>
+        <hard:TaskbarIcon DockPanel.Dock="Bottom" IconSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico"
+                          ToolTipText="{Binding CurrentTrack}">
+            <hard:TaskbarIcon.TrayToolTip>
+                <Border BorderThickness="1" BorderBrush="Black" Background="MistyRose">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="60"/>
+                            <ColumnDefinition/>
+                        </Grid.ColumnDefinitions>
+                        <Grid Grid.Column="0" Grid.Row="0" MaxHeight="30" MaxWidth="30">
+                            <Grid.RowDefinitions>
+                                <RowDefinition/>
+                                <RowDefinition Height="15"/>
+                            </Grid.RowDefinitions>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition/>
+                                <ColumnDefinition Width="15"/>
+                            </Grid.ColumnDefinitions>
+                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                                   Source="/RadioStreamer;component/RadioStreamer.png" MaxHeight="35" MaxWidth="35"/>
+                            <Image Grid.Row="1" Grid.Column="1" MaxHeight="15" MaxWidth="15" Source="{Binding ToolTipImage}"/>
+                        </Grid>
+                        <StackPanel Grid.Column="1" Grid.Row="0">
+                            <TextBlock Margin="10" Text="Radioplayer Tilte" TextAlignment="Center"/>
+                        </StackPanel>
+                    </Grid>
+                </Border>
+            </hard:TaskbarIcon.TrayToolTip>
+            <hard:TaskbarIcon.ContextMenu>
+                <ContextMenu>
+                    <ContextMenu.Resources>
+                        <DataTemplate DataType="{x:Type local:ThemeInfo}">
+                            <MenuItem Header="{Binding Name}" IsEnabled="{Binding Enable}" hlp:EventBinder.Events="SimpleModeClick:Click"/>
+                        </DataTemplate>
+                    </ContextMenu.Resources>
+                    <MenuItem Header="{hlp:SimpleLocalize Name=ThemeMenu}" ItemsSource="{Binding Themes}"/>
+                </ContextMenu>
+            </hard:TaskbarIcon.ContextMenu>
+        </hard:TaskbarIcon>
         <!--<hlp:LabeledTextbox DockPanel.Dock="Top" LabelText="hallo" Text="welt"/>-->
 		<ContentControl Content="{StaticResource MainLabel}" DockPanel.Dock="Top"/>
 		<StatusBar DockPanel.Dock="Bottom" MinHeight="30" MaxHeight="30" ItemsSource="{Binding StatusBarItems}" Background="Transparent"/>
-		<TabControl Name="RadioSelector" SelectionChanged="TabControlSelectionChanged" x:FieldModifier="private" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.DefaultContentTab}">
+		<TabControl Name="RadioSelector" Background="Transparent" SelectionChanged="TabControlSelectionChanged" x:FieldModifier="private" hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.DefaultContentTab}">
         <TabControl.Resources>
             <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
                 <Setter Property="Header" Value="{Binding Header}"/>

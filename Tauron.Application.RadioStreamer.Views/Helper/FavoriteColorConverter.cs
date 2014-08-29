@@ -7,10 +7,14 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
 	{
 		private sealed class Converter : ValueConverterBase<bool, Brush>
 		{
-			protected override Brush Convert(bool value)
-			{
-			    return value ? Brushes.DarkGoldenrod : Brushes.Black;
-			}
+		    protected override Brush Convert(bool value)
+		    {
+		        return
+		            (Brush)
+		            (value
+		                 ? WpfApplication.CurrentWpfApplication.Resources["FavoriteBrush"]
+		                 : WpfApplication.CurrentWpfApplication.Resources["FavoriteNormalColor"]);
+		    }
 		}
 
 

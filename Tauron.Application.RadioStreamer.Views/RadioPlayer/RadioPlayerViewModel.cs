@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Text;
 using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Tauron.Application.BassLib;
 using Tauron.Application.Ioc;
@@ -11,8 +10,8 @@ using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
+using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
-using Tauron.Application.RadioStreamer.Views.Helper;
 using Tauron.JetBrains.Annotations;
 using System.Diagnostics;
 
@@ -147,8 +146,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 	    private IEngineManager _engineManager;
 
 		private DispatcherTimer _bufferTimer;
-
-        private static readonly string ResourceAssembly = "Tauron.Application.RadioStreamer.Resources";
 
         void INotifyBuildCompled.BuildCompled()
 		{
@@ -355,21 +352,22 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			}
 		}
 
-        private static readonly Uri RecordImage = StaticPackUrihelper.GetUri("/Record.png", ResourceAssembly, true);
-        private static readonly Uri RecordActiveImage = StaticPackUrihelper.GetUri("/RecordActive.png", ResourceAssembly, true);
-		private Uri _lastRecordImage;
+		private string _lastRecordImage;
 
 		private void UpdateRecordingImage()
 		{
-			if (_player.IsRecording && _lastRecordImage != RecordActiveImage)
+            const string recordImage = "RecordImage";
+            const string recordActiveImage = "RecordActiveImage";
+
+            if (_player.IsRecording && _lastRecordImage != recordActiveImage)
 			{
-				_lastRecordImage = RecordActiveImage;
-				RecordingImage = BitmapFrame.Create(RecordActiveImage);
+                _lastRecordImage = recordActiveImage;
+                RecordingImage = ImagesCache.ImageSources[recordActiveImage];
 			}
-			else if (_lastRecordImage != RecordImage)
+            else if (_lastRecordImage != recordImage)
 			{
-				_lastRecordImage = RecordImage;
-				RecordingImage = BitmapFrame.Create(RecordImage);
+                _lastRecordImage = recordImage;
+                RecordingImage = ImagesCache.ImageSources[recordImage];
 			}
 		}
 
@@ -377,12 +375,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
 		#region Volume
 
-        private static readonly Uri AudioVolumeHigh = StaticPackUrihelper.GetUri("/audio-volume-high.png", ResourceAssembly, true);
-        private static readonly Uri AudioVolumeMedium = StaticPackUrihelper.GetUri("/audio-volume-medium.png", ResourceAssembly, true);
-        private static readonly Uri AudioVolumeMuted = StaticPackUrihelper.GetUri("/audio-volume-muted.png", ResourceAssembly, true);
-        private static readonly Uri AudioVolumeLow = StaticPackUrihelper.GetUri("/audio-volume-low.png", ResourceAssembly, true);
-
-		private Uri _lastVolumeImage;
+		private string _lastVolumeImage;
 
 		private ImageSource _volumeImage;
 
@@ -411,6 +404,11 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 			}
 		}
 
+        private const string AudioVolumeHigh = "AudioVolumeHighImage";
+        private const string AudioVolumeMedium = "AudioVolumeMediumImage";
+        private const string AudioVolumeLow = "AudioVolumeLowImage";
+        private const string AudioVolumeMuted = "AudioVolumeMutedImage";
+
 		private void ResetVolume()
 		{
 			SetVolumeImage(AudioVolumeHigh);
@@ -430,12 +428,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
 			_player.Volume = volume;
 		}
-		private void SetVolumeImage([NotNull] Uri image)
+		private void SetVolumeImage([NotNull] string image)
 		{
 		    if (_lastVolumeImage == image) return;
 
 		    _lastVolumeImage = image;
-		    VolumeImage = BitmapFrame.Create(image);
+		    VolumeImage = ImagesCache.ImageSources[image];
 		}
 
 	    private bool _isNotMuted = true;

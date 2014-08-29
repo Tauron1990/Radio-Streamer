@@ -77,6 +77,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 		//int ParallelCountQualityTasks { get; set; }
 
 		void Save();
+
+        [NotNull]
+        string Theme { get; set; }
 	}
 
     [PublicAPI]
@@ -112,7 +115,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
         string DatabasePath { get; set; }
 
         [NotNull]
-        IRadioSettings OpenSettings();
+        IRadioSettings Settings { get; }
 
         [NotNull]
         string[] DatabaseFiles { get; set; }

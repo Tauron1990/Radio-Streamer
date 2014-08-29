@@ -277,4 +277,10 @@
   <data name="NoneString" xml:space="preserve">
     <value>None</value>
   </data>
+  <data name="ThemeMenu" xml:space="preserve">
+    <value>Themes</value>
+  </data>
+  <data name="ThemeSwichMessage" xml:space="preserve">
+    <value>The Theme becomes available after Restart.</value>
+  </data>
 </root>

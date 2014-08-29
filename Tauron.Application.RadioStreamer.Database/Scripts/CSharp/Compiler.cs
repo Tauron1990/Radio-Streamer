@@ -34,6 +34,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
         private TextWriter _logger;
         private AssemblyBuilder _builder;
         private Report _report;
+        private string _path;
 
         [CanBeNull]
         public Exception BuildUp([NotNull] string dir, [NotNull] Dictionary<string, Lazy<IScript>> scripts)
@@ -77,7 +78,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
                 StdLib = true,
             };
 
-            var context = new CompilerContext(settings, new StreamReportPrinter(_logger));
+            var context = new CompilerContext(settings, new ConsoleReportPrinter(_logger));
 
             int index = 0;
             foreach (var file in dir.EnumerateFiles("*.cs"))
@@ -96,7 +97,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
         {
             var container = new ModuleContainer(context);
             RootContext.ToplevelTypes = container;
-
+            
             return container;
         }
 
@@ -106,7 +107,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
             var session = new ParserSession
             {
                 UseJayGlobalArrays = true,
-                LocatedTokens = new Tokenizer.LocatedToken[15000]
+                LocatedTokens = new LocatedToken[15000]
             };
 
             foreach (var sourceFile in container.Compiler.SourceFiles)
@@ -125,7 +126,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
 
         private bool PrepareCompiler([NotNull] ModuleContainer container, out ExplicitDynamicAsseblyDefinition assemblyDefinitionDynamic)
         {
-            assemblyDefinitionDynamic = new ExplicitDynamicAsseblyDefinition(container, ModuleName, _builder);
+            assemblyDefinitionDynamic = new ExplicitDynamicAsseblyDefinition(container, ModuleName, _builder, _path);
             container.SetDeclaringAssembly(assemblyDefinitionDynamic);
 
             var importer = new ReflectionImporter(container, container.Compiler.BuiltinTypes);
@@ -155,10 +156,11 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
             return _report.Errors == 0;
         }
 
-        public void Init([NotNull] TextWriter logger, [NotNull] AssemblyBuilder builder)
+        public void Init([NotNull] TextWriter logger, [NotNull] AssemblyBuilder builder, [NotNull] string cacheDll)
         {
             _logger = logger;
             _builder = builder;
+            _path = cacheDll;
         }
     }
 }

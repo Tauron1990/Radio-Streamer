@@ -6,7 +6,6 @@ using System.Reflection;
 using System.Reflection.Emit;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts;
-using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.JetBrains.Annotations;
 
@@ -61,8 +60,8 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
                     // ReSharper disable once InvertIf
                     if (cacheInfo.CreationTime > temp)
                     {
-                        //ExecuteLoad(dll);
-                        //return;
+                        ExecuteLoad(dll);
+                        return;
                     }
                 }
                 catch (Exception e)
@@ -94,7 +93,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
 
             foreach (var scriptEngine in _engines)
             {
-                scriptEngine.Init(logger, builder);
+                scriptEngine.Init(logger, builder, Cachedll);
                 var temp = scriptEngine.BuildUp(scriptPath, _scripts);
                 if (temp != null) throw temp;
             }

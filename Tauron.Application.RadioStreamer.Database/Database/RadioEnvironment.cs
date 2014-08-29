@@ -415,6 +415,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 			private const string IsFirstStartKey = "IsFirstStart";
 		    private const string LastSprecturmKey = "LastSprecturm";
+		    private const string ThemeKey = "Theme";
 
 		    public string LastSprecturm
 		    {
@@ -453,31 +454,20 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 			}
 
-            //private const string ParallelCountQualityTasksKey = "ParallelCountQualityTasks";
-            //public int ParallelCountQualityTasks
-            //{
-            //    get
-            //    {
-            //        return Int32.Parse(GetValue(ParallelCountQualityTasksKey, "5"));
-            //    }
-            //    set
-            //    {
-            //        SetVaue(ParallelCountQualityTasksKey, value);
-            //    }
-            //}
-
-            //private const string LastUpdateKey = "LastUpdate";
-            //private const string DownloadLocationKey = "DownloadLocation";
-
-
 			public override void Save()
 			{
 				_components.Save();
 				base.Save();
 			}
 
+		    public string Theme
+		    {
+		        get { return GetValue(ThemeKey, string.Empty); }
+                set { SetVaue(ThemeKey, value); }
+		    }
 
-			public IEqualizerProfileDatabase EqualizerDatabase
+
+		    public IEqualizerProfileDatabase EqualizerDatabase
 			{
 				get { return (IEqualizerProfileDatabase)_components[EqualizerDatabaseManager.EqualizerDatabaseKey]; }
 			}
@@ -628,15 +618,19 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	    public string DatabasePath { get; set; }
 
 		private IRadioSettings _settings;
-		public IRadioSettings OpenSettings()
-		{
-			lock (this)
-			{
-			    return _settings ?? (_settings = new RadioSettings(_enviroment.LocalApplicationData));
-			}
-		}
 
-		public void Dispose()
+	    public IRadioSettings Settings
+	    {
+	        get
+	        {
+	            lock (this)
+	            {
+	                return _settings ?? (_settings = new RadioSettings(_enviroment.LocalApplicationData));
+	            }
+	        }
+	    }
+
+	    public void Dispose()
 		{
 			if (_settings != null)
 				_settings.Save();

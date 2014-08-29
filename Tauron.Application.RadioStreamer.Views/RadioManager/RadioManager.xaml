@@ -9,7 +9,7 @@
 			 xmlns:radioManager="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioManager"
              MaxHeight="{helper:MaxHeightExpanderSetter}"
              d:DesignHeight="300" d:DesignWidth="800"
-			 hlp:DataContextServices.Activate="True"
+			 hlp:DataContextServices.Activate="True" Background="Transparent"
 			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.RadioManagerViewModelName}"
              mc:Ignorable="d">
 	<UserControl.Resources>
@@ -50,13 +50,13 @@
 	    <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="False">
 			<StackPanel MinWidth="100" DockPanel.Dock="Left" Margin="20">
 				<Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Play:Play">
-                    <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/play.png"/>
+                    <Image Source="{StaticResource PlayImage}"/>
 				</Button>
                 <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Stop:Stop">
-                    <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/stop.png"/>
+                    <Image Source="{StaticResource StopImage}"/>
                 </Button>
                 <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="AddRadio:AddRadio">
-                    <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/add.png"/>
+                    <Image Source="{StaticResource AddRadioImage}"/>
                 </Button>
             </StackPanel>
 			<StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0">
@@ -86,7 +86,8 @@
 				<TextBlock Text="{hlp:SimpleLocalize Name=LanguageLabel}" Margin="5" HorizontalAlignment="Center"/>
 				<ComboBox Margin="5" MinWidth="150" ItemsSource="{Binding Languages}" SelectedItem="{Binding CurrentLanguage}"/>
 			</StackPanel>
-			<ListBox DockPanel.Dock="Top" ItemsSource="{Binding Radios}" IsSynchronizedWithCurrentItem="True" Margin="10,0,10,10"/>
+			<ListBox DockPanel.Dock="Top" ItemsSource="{Binding Radios}" IsSynchronizedWithCurrentItem="True" Margin="10,0,10,10"
+                     Background="Transparent"/>
 		</DockPanel>
 	</Grid>
 </UserControl>

@@ -1,0 +1,33 @@
+﻿Container: Zip Archive
+
+Content:
+	Plugins.ini - Plugins and Packages:
+		package = "Name" - Load from Nuget
+		plugin = "Name" - Load from Myget
+
+	Init.cs - initialization Script 
+
+	Dic Images:
+		Name Defines Type:
+		Default Image Names:
+			PlayImage
+			StopImage
+
+			RecordImage
+			RecordActiveImage
+
+			AudioVolumeHighImage
+			AudioVolumeMediumImage
+			AudioVolumeLowImage
+			AudioVolumeMutedImage
+
+	Theme.xaml - Required Keys:
+		BackgroundBrush - Type: Brush
+		MiddleLightBrush - Type: Brush
+		FavoriteBrush - Type: Brush
+		FavoriteNormalColor = Type: Brush
+		TextColor = Type: Brush
+		RadioTitleBrush = Type: Brush
+
+	Dic Controls:
+		MainWindow.xaml - MainWindow Style - Type: Window

@@ -4,11 +4,7 @@
     <Style TargetType="{x:Type Window}" BasedOn="{StaticResource {x:Type Window}}">
         <Setter Property="Background" Value="{DynamicResource BackgroundBrush}"></Setter>
     </Style>
-    
-    <Style TargetType="{x:Type TextBlock}">
-        <Setter Property="Foreground" Value="White"/>
-    </Style>
-    
+   
 	<Grid x:Key="MainLabel" DockPanel.Dock="Top" Height="50" VerticalAlignment="Top" Background="Transparent">
 		<StackPanel Margin="10 0" HorizontalAlignment="Left">
 			<TextBlock x:Name="txtHeading" Foreground="White" FontSize="22">

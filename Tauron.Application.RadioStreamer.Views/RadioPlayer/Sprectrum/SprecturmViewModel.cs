@@ -95,7 +95,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             _events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(Play);
             _events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(Stop);
 
-            _currentSpectrum = _radioEnvironment.OpenSettings().LastSprecturm.ParseEnum<Spectrums>();
+            _currentSpectrum = _radioEnvironment.Settings.LastSprecturm.ParseEnum<Spectrums>();
 
             _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(50), DispatcherPriority.Normal, UpdateSprectrum, SystemDispatcher);
             _sprectrumTimer.Stop();
@@ -111,7 +111,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             _currentSpectrum = new SpectumChoiceBox(_currentSpectrum).Show(
                 System.Windows.Application.Current.MainWindow);
 
-            _radioEnvironment.OpenSettings().LastSprecturm = _currentSpectrum.ToString();
+            _radioEnvironment.Settings.LastSprecturm = _currentSpectrum.ToString();
         }
 
         private void Stop([NotNull] EventArgs obj)

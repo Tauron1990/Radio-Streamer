@@ -19,7 +19,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Scripts
         [CanBeNull]
         Exception BuildUp([NotNull] string dir, [NotNull] Dictionary<string, Lazy<IScript>> scripts);
 
-        void Init([NotNull] TextWriter logger, [NotNull] AssemblyBuilder builder);
+        void Init([NotNull] TextWriter logger, [NotNull] AssemblyBuilder builder, string cacheDll);
 
         void ReadScripts([NotNull] Assembly assembly, [NotNull] Dictionary<string, Lazy<IScript>> scripts);
     }

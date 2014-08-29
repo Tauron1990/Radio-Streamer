@@ -28,9 +28,9 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts.CSharp
             return _compiler.BuildUp(dir, scripts);
         }
 
-        public void Init(TextWriter logger, AssemblyBuilder builder)
+        public void Init(TextWriter logger, AssemblyBuilder builder, string cacheDll)
         {
-            _compiler.Init(logger, builder);
+            _compiler.Init(logger, builder, cacheDll);
         }
 
         public void ReadScripts(Assembly assembly, Dictionary<string, Lazy<IScript>> scripts)

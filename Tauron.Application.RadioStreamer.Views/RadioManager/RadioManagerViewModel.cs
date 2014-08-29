@@ -538,7 +538,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
 		private void AddRadios([NotNull] IEnumerable<RadioEntry> entrys)
 		{
-		    IRadioFavorites favorites = _enviroment.OpenSettings().Favorites;
+		    IRadioFavorites favorites = _enviroment.Settings.Favorites;
 
 		    _radios.Clear();
 		    _radios.BeginChanging();
@@ -558,7 +558,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 	    private void OnRadioDelete([NotNull] RadioManagerRadio radio)
 	    {
 	        _radios.Remove(radio);
-	        if (radio.Favorite) _enviroment.OpenSettings().Favorites.Remove(new RadioFavorite(radio.RadioTitle, string.Empty));
+	        if (radio.Favorite) _enviroment.Settings.Favorites.Remove(new RadioFavorite(radio.RadioTitle, string.Empty));
 	    }
 
 	    #endregion Common
@@ -570,7 +570,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 			_events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(RadioPlay);
 			_events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(RadioStop);
 
-			_radios = CurrentDispatcher.Invoke(() => new RadioList(_enviroment.OpenSettings().Favorites));
+			_radios = CurrentDispatcher.Invoke(() => new RadioList(_enviroment.Settings.Favorites));
 			BindingOperations.EnableCollectionSynchronization(_radios, new Object());
 
 			var list = Radios;
@@ -678,7 +678,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 		{
 			RadioManagerRadio radio = CurrentDispatcher.Invoke(() => (RadioManagerRadio)Radios.CurrentItem);
 
-			IRadioSettings settings = _enviroment.OpenSettings();
+			IRadioSettings settings = _enviroment.Settings;
 			IRadioFavorites favorites = settings.Favorites;
 
 			RadioQuality quality = radio.GetQuality();
@@ -702,7 +702,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 		{
 			var radio = CurrentDispatcher.Invoke(() => (RadioManagerRadio)Radios.CurrentItem);
 
-			var favs = _enviroment.OpenSettings().Favorites;
+			var favs = _enviroment.Settings.Favorites;
 			favs.Remove(favs.First(fav => fav.Name == radio.RadioTitle));
 
 			radio.Favorite = false;

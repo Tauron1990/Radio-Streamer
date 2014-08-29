@@ -1,14 +1,13 @@
 ﻿using System;
-using System.IO;
+using System.Reflection;
 using System.Runtime.ExceptionServices;
 using System.Security;
-using System.Text;
 using System.Windows;
 using System.Windows.Input;
-using Elysium;
+using Bugsense.WPF;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
-using Tauron.Application.RadioStreamer.Contracts.Scripts;
+using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.Views;
 
 namespace Tauron.Application.RadioStreamer
@@ -18,11 +17,22 @@ namespace Tauron.Application.RadioStreamer
 		[STAThread]
 		public static void Main()
 		{
-			AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
+		    var assemblyVersionAttribute = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyVersionAttribute>();
+		    string version = "unkown";
+		    if (assemblyVersionAttribute != null) version = assemblyVersionAttribute.Version;
+
+		    AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
 		    AppDomain.CurrentDomain.UnhandledException +=
 		        OnUnhandledException;
-			Run<App>();
-		}
+
+            #if !DEBUG
+            BugSense.Init("w8cd1a17", version);
+            Run<App>();
+		    BugSense.DetachHandler();
+            #else
+            Run<App>();
+            #endif
+        }
 
         [HandleProcessCorruptedStateExceptions, SecurityCritical]
         private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)
@@ -54,7 +64,7 @@ namespace Tauron.Application.RadioStreamer
 	        SplashMessageListener.CurrentListner.MainLabelForeground = "Black";
             SplashMessageListener.CurrentListner.MainLabelBackground = dic["MainLabelbackground"];
 	    }
-
+        
 	    protected override IWindow DoStartup(CommandLineProcessor prcessor)
 		{
 			var temp = ViewManager.Manager.CreateWindow(AppConstants.MainWindowName);
@@ -62,7 +72,7 @@ namespace Tauron.Application.RadioStreamer
 	        CurrentWpfApplication.Dispatcher.Invoke(() =>
 	        {
 	            Current.MainWindow = temp;
-	            CurrentWpfApplication.MainWindow = (Window) temp.TranslateForTechnology();
+	            CurrentWpfApplication.MainWindow = (Window)temp.TranslateForTechnology();
 	        });
 	        return temp;
 		}
@@ -77,7 +87,9 @@ namespace Tauron.Application.RadioStreamer
 		}
 		protected override void LoadResources()
 		{
-			CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Purple, null);
+            Container.Resolve<IStyleManager>().LoadResources();
+            SimpleLocalize.Register(RadioStreamerResources.ResourceManager, GetType().Assembly);
+		    //CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Purple, null);
 		}
 	}
 }

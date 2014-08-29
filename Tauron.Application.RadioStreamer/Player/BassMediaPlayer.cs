@@ -62,7 +62,7 @@ namespace Tauron.Application.RadioStreamer.Player
 
             _memoryManager.Init();
 
-            BassNet.Registration("Game-over-Alexander@web.de", "2X1533726322323");
+            BassManager.Register("Game-over-Alexander@web.de", "2X1533726322323");
         }
 
         public void Activate()

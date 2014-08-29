@@ -1,0 +1,18 @@
+﻿<ely:Window
+        xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+        xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:ely="http://schemas.codeplex.com/elysium"
+        Title="Radio Streamer" WindowState="Maximized"
+		ResizeMode="CanResize" Width="800" Height="600" Background="{StaticResource BackgroundBrush}"
+        hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.DefaultContentViewName}">
+    <ely:Window.Icon>
+        <BitmapImage UriSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico" DecodePixelHeight="30" DecodePixelWidth="30"/>
+    </ely:Window.Icon>
+    <ely:Window.Resources>
+        <Style TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+        </Style>
+    </ely:Window.Resources>
+</ely:Window>

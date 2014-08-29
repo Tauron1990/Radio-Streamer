@@ -23,7 +23,7 @@
 			<ColumnDefinition/>
 		</Grid.ColumnDefinitions>
 		<Canvas Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="3">
-			<TextBlock Name="RadioTitle" Canvas.Left="-100" Text="{Binding CurrentTitle.Title}" Margin="0,15" Foreground="Yellow"
+            <TextBlock Name="RadioTitle" Canvas.Left="-100" Text="{Binding CurrentTitle.Title}" Margin="0,15" Foreground="{StaticResource RadioTitleBrush}"
 			           x:FieldModifier="private" />
 		</Canvas>
 		<StackPanel Grid.Row="4" Grid.Column="0" Orientation="Horizontal">
@@ -32,10 +32,10 @@
 		</StackPanel>
 		<StackPanel Grid.Column="2" Grid.Row="3" Grid.RowSpan="2" Orientation="Horizontal">
 			<Button Margin="20" hlp:CommandBinder.Command="Play:Play">
-                <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/play.png"/>
+                <Image Source="{StaticResource PlayImage}"/>
 			</Button>
 			<Button Margin="20" hlp:CommandBinder.Command="Stop:Stop">
-                <Image Source="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/stop.png"/>
+                <Image Source="{StaticResource StopImage}"/>
 			</Button>
 			<Button Margin="20" hlp:CommandBinder.Command="Record:Record">
 				<Image Source="{Binding RecordingImage}"/>

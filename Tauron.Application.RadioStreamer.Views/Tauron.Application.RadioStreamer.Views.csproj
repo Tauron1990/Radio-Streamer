@@ -56,7 +56,6 @@
     <Compile Include="Helper\FavoriteColorConverter.cs" />
     <Compile Include="Helper\LocalizeLabelTextConverter.cs" />
     <Compile Include="Helper\MaxHeightExpanderSetter.cs" />
-    <Compile Include="Helper\StaticPackUrihelper.cs" />
     <Compile Include="MedadataView\MetadataWindow.xaml.cs">
       <DependentUpon>MetadataWindow.xaml</DependentUpon>
     </Compile>
