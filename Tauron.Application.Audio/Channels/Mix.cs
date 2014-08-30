@@ -52,7 +52,14 @@ namespace Tauron.Application.BassLib.Channels
 
         internal void Attach(int handle)
         {
-            BassMix.BASS_Mixer_StreamAddChannel(Handle, handle, BASSFlag.BASS_DEFAULT).CheckBass();
+            return BassMix.BASS_Mixer_StreamAddChannel(Handle, handle, BASSFlag.BASS_DEFAULT).CheckBass();
+        }
+
+        public void Attach([NotNull] Channel channel)
+        {
+            if (channel == null) throw new ArgumentNullException("channel");
+        
+            Attach(channel.Handle);
         }
 
         internal void DeAttach(int handle)
@@ -60,6 +67,13 @@ namespace Tauron.Application.BassLib.Channels
             if(Handle == 0) return;
 
             BassMix.BASS_Mixer_ChannelRemove(handle).CheckBass();
+        }
+
+        public void DeAttach([NotNull] Channel channel)
+        {
+            if (channel == null) throw new ArgumentNullException("channel");
+        
+            DeAttach(channel);
         }
 
         public override TAG_INFO Tag

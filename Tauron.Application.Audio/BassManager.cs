@@ -15,7 +15,7 @@ namespace Tauron.Application.BassLib
 
         public static bool IsRecordinginitialized { get; private set; }
 
-        public static void IniBass([CanBeNull] BASS_DEVICEINFO deviceinfo = null, int frequency = 44100, BASSInit flags = BASSInit.BASS_DEVICE_DEFAULT)
+        public static void InitBass([CanBeNull] BASS_DEVICEINFO deviceinfo = null, int frequency = 44100, BASSInit flags = BASSInit.BASS_DEVICE_DEFAULT)
         {
             if (IsInitialized) return;
 

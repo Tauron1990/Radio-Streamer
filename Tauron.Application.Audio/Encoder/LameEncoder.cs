@@ -3,26 +3,26 @@ using Un4seen.Bass.Misc;
 
 namespace Tauron.Application.BassLib.Encoder
 {
-    public sealed class LameEncoder : Encoder
+    [PublicAPI]
+    public sealed class LameEncoder : AudioEncoder
     {
-        [NotNull]
-        public Channel Channel { get; private set; }
-
         public LameEncoder([NotNull] Channel channel) 
-            : base(new EncoderLAME(channel.Handle))
+            : base(new EncoderLAME(channel.Handle), channel)
         {
-            Channel = channel;
         }
 
+        [NotNull]
         private EncoderLAME Lame { get { return (EncoderLAME) BassEncoder; } }
 
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
+        [NotNull]
+        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; }
+        }
         public float Scale { get { return Lame.LAME_Scale; } set { Lame.LAME_Scale = value; } }
         [NotNull]
         public string PresetName { get { return Lame.LAME_PresetName; } set { Lame.LAME_PresetName = value; } }
         public EncoderLAME.LAMEQuality Quality { get { return Lame.LAME_Quality; } set { Lame.LAME_Quality = value; } }
         public EncoderLAME.LAMEReplayGain ReplayGain { get { return Lame.LAME_ReplayGain; } set { Lame.LAME_ReplayGain = value; } }
-        public int Bitrate { get { return Lame.LAME_Bitrate; } set { Lame.LAME_Bitrate = value; } }
+        public BaseEncoder.BITRATE Bitrate { get { return (BaseEncoder.BITRATE)Lame.LAME_Bitrate; } set { Lame.LAME_Bitrate = (int)value; } }
         public EncoderLAME.LAMEVBRQuality VbrQuality { get { return Lame.LAME_VBRQuality; } set { Lame.LAME_VBRQuality = value; } }
         public int VbrMaxBitrate { get { return Lame.LAME_VBRMaxBitrate; } set { Lame.LAME_VBRMaxBitrate = value; } }
         public bool UseCustomOptionsOnly { get { return Lame.LAME_UseCustomOptionsOnly; } set { Lame.LAME_UseCustomOptionsOnly = value; } }
@@ -46,125 +46,12 @@ namespace Tauron.Application.BassLib.Encoder
         public bool PsYallShortBlocks { get { return Lame.LAME_PSYallShortBlocks; } set { Lame.LAME_PSYallShortBlocks = value; } }
         public bool PsYnoTemp { get { return Lame.LAME_PSYnoTemp; } set { Lame.LAME_PSYnoTemp = value; } }
         public bool PsYnsSafeJoint { get { return Lame.LAME_PSYnsSafeJoint; } set { Lame.LAME_PSYnsSafeJoint = value; } }
-        public EncoderLAME.LAMENOASM NoASM { get { return Lame.LAME_NoASM; } set { Lame.LAME_NoASM = value; } }
+        public EncoderLAME.LAMENOASM NoAsm { get { return Lame.LAME_NoASM; } set { Lame.LAME_NoASM = value; } }
         public int HighPassFreq { get { return Lame.LAME_HighPassFreq; } set { Lame.LAME_HighPassFreq = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-        public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; } }
-
+        public int HighPassFreqWidth { get { return Lame.LAME_HighPassFreqWidth; } set { Lame.LAME_HighPassFreqWidth = value; } }
+        public int LowPassFreq { get { return Lame.LAME_LowPassFreq; } set { Lame.LAME_LowPassFreq = value; } }
+        public int LowPassFreqWidth { get { return Lame.LAME_LowPassFreqWidth; } set { Lame.LAME_LowPassFreqWidth = value; } }
+        public EncoderLAME.LAMEATH AthControl { get { return Lame.LAME_ATHControl; } set { Lame.LAME_ATHControl = value; } }
+        public bool EncoderExists { get { return Lame.EncoderExists; } }
     }
 }

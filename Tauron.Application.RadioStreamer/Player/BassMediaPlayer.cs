@@ -67,7 +67,7 @@ namespace Tauron.Application.RadioStreamer.Player
 
         public void Activate()
         {
-            BassManager.IniBass();
+            BassManager.InitBass();
             //BassManager.InitRecord();
 
             _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
@@ -241,14 +241,14 @@ namespace Tauron.Application.RadioStreamer.Player
 
             _recorder = new Recorder();
 
-            EncoderLAME encoder = Recorder.CreateLame(_currentChannel);
+            var encoder = Recorder.CreateLame(_currentChannel);
 
             encoder.InputFile = null;
             encoder.NoLimit = true;
-            encoder.LAME_Bitrate = (int) BaseEncoder.BITRATE.kbps_128;
-            encoder.LAME_Mode = EncoderLAME.LAMEMode.JointStereo;
-            encoder.LAME_TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100;
-            encoder.LAME_Quality = EncoderLAME.LAMEQuality.Quality;
+            encoder.Bitrate = BaseEncoder.BITRATE.kbps_128;
+            encoder.Mode = EncoderLAME.LAMEMode.JointStereo;
+            encoder.TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100;
+            encoder.Quality = EncoderLAME.LAMEQuality.Quality;
 
             _recorder.Encoder = encoder;
         }
@@ -263,7 +263,7 @@ namespace Tauron.Application.RadioStreamer.Player
 
                 // ReSharper disable once PossibleNullReferenceException
                 _recorder.Encoder.OutputFile = VerifyPath(_tagInfo.title);
-                _recorder.Encoder.TAGs = _tagInfo;
+                _recorder.Encoder.Tags = _tagInfo;
 
                 _recorder.Start();
             }
@@ -292,6 +292,7 @@ namespace Tauron.Application.RadioStreamer.Player
             name = Regex.Replace(name, IllegalFileNamePattern, string.Empty).Trim();
 
             string location = Path.GetFullPath(Path.Combine(_currentRecordingLocation, name + ".mp3"));
+            // ReSharper disable once AssignNullToNotNullAttribute
             var info = new DirectoryInfo(Path.GetDirectoryName(location));
             if (!info.Exists) info.Create();
 

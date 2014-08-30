@@ -52,7 +52,7 @@
     </Compile>
     <Compile Include="Channel.cs" />
     <Compile Include="Channels\BassHelper.cs" />
-    <Compile Include="Encoder\Encoder.cs" />
+    <Compile Include="Encoder\AudioEncoder.cs" />
     <Compile Include="Channels\File\FileChannel.cs" />
     <Compile Include="Channels\File\FileFlags.cs" />
     <Compile Include="Channels\Mix.cs" />
@@ -62,9 +62,12 @@
     <Compile Include="Channels\Web\WebStreamFlags.cs" />
     <Compile Include="DeviceManager.cs" />
     <Compile Include="Encoder\LameEncoder.cs" />
+    <Compile Include="Misc\AudioBroadCast.cs" />
     <Compile Include="Misc\Equalizer.cs" />
     <Compile Include="Extensions.cs" />
     <Compile Include="Misc\IEqualizer.cs" />
+    <Compile Include="Misc\AudioStreaminServer.cs" />
+    <Compile Include="Misc\SHOUTcastServer.cs" />
     <Compile Include="Misc\VisualHelper.cs" />
     <Compile Include="Percentage.cs" />
     <Compile Include="PercentMode.cs" />

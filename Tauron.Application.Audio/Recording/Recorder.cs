@@ -1,33 +1,34 @@
 ﻿using System;
+using Tauron.Application.BassLib.Encoder;
 using Tauron.JetBrains.Annotations;
-using Un4seen.Bass.Misc;
 
 namespace Tauron.Application.BassLib.Recording
 {
     public sealed class Recorder : ObservableObject, IDisposable
     {
         [NotNull]
-        public static EncoderLAME CreateLame([NotNull] Channel channel)
+        public static LameEncoder CreateLame([NotNull] Channel channel)
         {
-            return new EncoderLAME(channel.Handle);
+            return new LameEncoder(channel);
         }
 
-        private BaseEncoder _encoder;
+        private AudioEncoder _encoder;
         private bool _isRecording;
 
         [CanBeNull]
-        public BaseEncoder Encoder
+        public AudioEncoder Encoder
         {
             get { return _encoder; }
             set
             {
                 _encoder = value;
 
-                if(!_encoder.SupportsSTDOUT)
+                if(_encoder != null && !_encoder.SupportsStdout)
                     throw new InvalidOperationException("Only SupportsSTDOUT is Supported");
 
                 if(_isRecording)
-                    _encoder.Dispose();
+                    if (_encoder != null) 
+                        _encoder.Dispose();
 
                 IsRecording = false;
                 OnPropertyChanged();
@@ -52,7 +53,7 @@ namespace Tauron.Application.BassLib.Recording
             if(Encoder == null) return;
 
             IsRecording = true;
-            Encoder.Start(null, IntPtr.Zero, paused).CheckBass();
+            Encoder.Start(paused);
         }
 
         public void Stop()
@@ -68,7 +69,7 @@ namespace Tauron.Application.BassLib.Recording
             if (channel == null) throw new ArgumentNullException("channel");
             if (Encoder == null) return;
 
-            Encoder.ChannelHandle = channel.Handle;
+            Encoder.Channel = channel;
         }
 
         public void Dispose()
