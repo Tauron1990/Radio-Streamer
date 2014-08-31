@@ -13,6 +13,13 @@ namespace Tauron.Application.BassLib.Misc
             if (encoder == null) throw new ArgumentNullException("encoder");
         }
 
+        [CanBeNull]
+        public string AdminPassword
+        {
+            get { return ShoutCast.AdminPassword; }
+            set { ShoutCast.AdminPassword = value; }
+        }
+
         [NotNull]
         private SHOUTcast ShoutCast
         {

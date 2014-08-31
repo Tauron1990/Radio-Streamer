@@ -34,5 +34,12 @@ namespace Tauron.Application.BassLib
             int handle = Bass.BASS_StreamCreateFile(file, offset, lenght, (BASSFlag) flags);
             return new FileChannel(handle);
         }
+
+        [NotNull]
+        public string GetLastError()
+        {
+            return BassMessages.ResourceManager.GetString(Bass.BASS_ErrorGetCode().ToString()) ??
+                   BassMessages.ErrorUnkown;
+        }
     }
 }

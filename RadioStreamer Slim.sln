@@ -42,8 +42,6 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppThemes", "AppThemes", "{
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElysiumTheme", "ElysiumTheme\ElysiumTheme.csproj", "{4B012079-D47D-426F-AC72-F68C7F278496}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestInternetRadio", "TestInternetRadio\TestInternetRadio.csproj", "{4FA96842-4E99-4350-945F-1D01990D9C68}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -106,10 +104,6 @@ Global
 		{4B012079-D47D-426F-AC72-F68C7F278496}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4FA96842-4E99-4350-945F-1D01990D9C68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4FA96842-4E99-4350-945F-1D01990D9C68}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4FA96842-4E99-4350-945F-1D01990D9C68}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4FA96842-4E99-4350-945F-1D01990D9C68}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +116,5 @@ Global
 		{2CC827C8-5084-4334-8A68-0515DA46465E} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{E714D32E-1F12-47A5-A671-15EC83D85E75} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{4B012079-D47D-426F-AC72-F68C7F278496} = {F8CC257B-DEA3-4D36-B1BF-ED4AD2B6E1D4}
-		{4FA96842-4E99-4350-945F-1D01990D9C68} = {A9C1AD90-4550-479C-9943-D0A2D8EEC363}
 	EndGlobalSection
 EndGlobal
