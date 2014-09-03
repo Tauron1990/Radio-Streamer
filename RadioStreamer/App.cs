@@ -1,7 +1,4 @@
-﻿using System;
-using System.Reflection;
-using System.Runtime.ExceptionServices;
-using System.Security;
+﻿using System.Reflection;
 using System.Windows;
 using System.Windows.Input;
 using Bugsense.WPF;
@@ -14,18 +11,18 @@ namespace Tauron.Application.RadioStreamer
 {
 	internal class App : WpfApplication
 	{
-		[STAThread]
-		public static void Main()
+	    public App()
+			: base(true)
 		{
-		    var assemblyVersionAttribute = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyVersionAttribute>();
-		    string version = "unkown";
-		    if (assemblyVersionAttribute != null) version = assemblyVersionAttribute.Version;
+		}
 
-		    AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
-		    AppDomain.CurrentDomain.UnhandledException +=
-		        OnUnhandledException;
-
+	    public static void Setup()
+        {
             #if !DEBUG
+             var assemblyVersionAttribute = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyVersionAttribute>();
+            string version = "unkown";
+            if (assemblyVersionAttribute != null) version = assemblyVersionAttribute.Version;
+
             BugSense.Init("w8cd1a17", version);
             Run<App>();
 		    BugSense.DetachHandler();
@@ -33,17 +30,6 @@ namespace Tauron.Application.RadioStreamer
             Run<App>();
             #endif
         }
-
-        [HandleProcessCorruptedStateExceptions, SecurityCritical]
-        private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)
-	    {
-	        CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
-	    }
-
-	    public App()
-			: base(true)
-		{
-		}
 
 	    protected override void ConfigSplash()
 	    {

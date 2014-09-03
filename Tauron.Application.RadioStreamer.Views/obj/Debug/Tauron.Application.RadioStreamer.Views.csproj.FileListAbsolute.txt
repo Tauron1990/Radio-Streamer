@@ -420,7 +420,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Castle.Core.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Bass.Net.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Microsoft.Expression.Drawing.xml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\de\Tauron.Application.Common.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\de\Tauron.Application.Bass.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll

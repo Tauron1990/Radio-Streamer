@@ -169,6 +169,7 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Tauron.Application.Bass.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Tauron.Application.Common.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Contracts.dll
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Castle.Core.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.dll
@@ -180,10 +181,10 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Bass.Net.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\HtmlAgilityPack.xml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Castle.Core.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Logging.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.ExceptionHandling.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Microsoft.Practices.EnterpriseLibrary.Common.xml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\de\Tauron.Application.Common.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\de\Tauron.Application.Bass.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.csprojResolveAssemblyReference.cache

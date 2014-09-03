@@ -97,7 +97,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Bugsense.WPF.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\JetBrains.Annotations.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Microsoft.Web.XmlTransform.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Mono.CSharp.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\NuGet.Core.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.dll
@@ -141,10 +140,8 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Bass.Net.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\HtmlAgilityPack.pdb
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\HtmlAgilityPack.xml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Newtonsoft.Json.xml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.Common.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.RadioStreamer.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\de\Tauron.Application.Bass.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csprojResolveAssemblyReference.cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Core\MainWindow.baml

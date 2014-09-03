@@ -48,9 +48,6 @@
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
-    <Reference Include="Microsoft.Web.XmlTransform">
-      <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
-    </Reference>
     <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Mono.CSharp.3.4.0\lib\net40\Mono.CSharp.dll</HintPath>
@@ -59,16 +56,12 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\NuGet.Core.2.8.3-alpha0001\lib\net40-Client\NuGet.Core.dll</HintPath>
     </Reference>
-    <Reference Include="PresentationFramework.Aero" />
     <Reference Include="System" />
-    <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.IO.Compression" />
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
@@ -88,7 +81,10 @@
     <Compile Include="Core\Tester.xaml.cs">
       <DependentUpon>Tester.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Interop\NativeMethods.cs" />
+    <Compile Include="PlugIns\InternalPackageManager.cs" />
     <Compile Include="PlugIns\PlugInManager.cs" />
+    <Compile Include="Programm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
