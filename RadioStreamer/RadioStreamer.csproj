@@ -84,6 +84,7 @@
     <Compile Include="Interop\NativeMethods.cs" />
     <Compile Include="PlugIns\InternalPackageManager.cs" />
     <Compile Include="PlugIns\PlugInManager.cs" />
+    <Compile Include="PlugIns\UpdateManager.cs" />
     <Compile Include="Programm.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>

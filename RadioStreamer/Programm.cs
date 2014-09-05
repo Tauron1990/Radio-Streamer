@@ -1,22 +1,42 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
+using System.Runtime;
 using System.Runtime.ExceptionServices;
-using System.Runtime.InteropServices;
 using System.Security;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
+using NuGet;
 using Tauron.Application.RadioStreamer.Interop;
+using Tauron.Application.RadioStreamer.PlugIns;
 
 namespace Tauron.Application.RadioStreamer
 {
     public static class Programm
     {
+        #if DEBUG
+        private const string NugetUrl = @"C:\nuget\Packages";
+        private const string MyGetUrl = @"C:\nuget\Plugins";
+        #else
+        private const string NugetUrl
+        private const string MyGetUrl
+        #endif
+
+        private static readonly string[] AssemblysToInstall =
+        {
+            "Tauron.Application.Common",
+            "Tauron.Application.Common.Wpf",
+            "Tauron.Application.Common.Wpf.Controls",
+            "Tauron.RadioStreamer.Skins.ElysiumTheme",
+            "Tauron.Application.Bass",
+            "Tauron.Application.RadioStreamer",
+            "Tauron.Application.RadioStreamer.Contracts",
+            "Tauron.Application.Radiostreamer.Database",
+            "Tauron.Application.RadioStreamer.Resources",
+            "Tauron.Application.RadioStreamer.Views"
+        };
+
         [STAThread]
         public static void Main()
         {
+            ProfileOptimization.StartProfile();
+
             AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
             AppDomain.CurrentDomain.UnhandledException +=
                 OnUnhandledException;
@@ -28,19 +48,46 @@ namespace Tauron.Application.RadioStreamer
 
         private static void LoadApplication()
         {
-            Guid test = new Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4");
-            Type type = Type.GetTypeFromCLSID(test);
-            object test2 = Activator.CreateInstance(type);
-            var test3 = (IWinProgressDialog) test2;
+            var progressDialog = NativeMethods.CreateProgressDialog();
+;
 
-            test3.SetTitle("Haalo Welt");
-            test3.StartProgressDialog(IntPtr.Zero, null, 32, IntPtr.Zero);
+            try
+            {
+                progressDialog.SetTitle("Loadeing Application");
+                progressDialog.SetLine(1, "Prepare for Start up", false, IntPtr.Zero);
+                progressDialog.StartProgressDialog(IntPtr.Zero, null, 32, IntPtr.Zero);
 
-            Thread.Sleep(new TimeSpan(0, 5, 0));
+                IPackageRepository repository = new AggregateRepository(PackageRepositoryFactory.Default,
+                    new[] {MyGetUrl, NugetUrl}, true);
 
-            test3.StopProgressDialog();
-            Marshal.ReleaseComObject(test3);
+                string targetPath = AppDomain.CurrentDomain.BaseDirectory;
+
+                var packManager = new InternalPackageManager(repository, targetPath, false, targetPath, true);
+
+                if (!packManager.IsVersionFilePresent)
+                {
+                    progressDialog.SetLine(2, "Installing Application Files", false, IntPtr.Zero);
+
+                    foreach (var assembly in AssemblysToInstall)
+                    {
+                        packManager.Install(assembly);
+                    }
+                }
+
+                progressDialog.SetLine(2, "Downloading Update on Necessary", false, IntPtr.Zero);
+
+                packManager.CheckForUpdates();
+
+
+                progressDialog.StopProgressDialog();
+            }
+            finally
+            {
+                NativeMethods.FreeObject(progressDialog);
+            }
         }
+
+        private static 
 
         [HandleProcessCorruptedStateExceptions, SecurityCritical]
         private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)

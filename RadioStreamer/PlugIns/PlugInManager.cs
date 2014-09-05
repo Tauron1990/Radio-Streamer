@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Reflection;
 using NuGet;
@@ -13,15 +12,13 @@ namespace Tauron.Application.RadioStreamer.PlugIns
     [Export(typeof (IPlugInManager))]
     public class PlugInManager : IPlugInManager
     {
-        private static readonly string PackPath = AppDomain.CurrentDomain.BaseDirectory.CombinePath("Packs");
-
         public void LoadPakage(string name)
         {
-            PackPath.CreateDirectoryIfNotExis();
+            InternalPackageManager.PackPath.CreateDirectoryIfNotExis();
 
             var repo = PackageRepositoryFactory.Default.CreateRepository(@"C:\nuget");
             var pack = repo.FindPackage(name);
-            var man = new PackageManager(repo, PackPath);
+            var man = new PackageManager(repo, InternalPackageManager.PackPath);
             man.InstallPackage(pack, false, false);
             LoadingPackage(pack);
         }
@@ -43,7 +40,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 string version1 = version;
                 files.AddRange(from assemblyReference in pack.AssemblyReferences
                                where assemblyReference.Path.StartsWith(version1)
-                               select PackPath.CombinePath(pack.Id + "." + pack.Version, assemblyReference.Path));
+                               select InternalPackageManager.PackPath.CombinePath(pack.Id + "." + pack.Version, assemblyReference.Path));
                 if (files.Count > 0) break;
             }
 

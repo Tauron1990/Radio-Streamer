@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Xml.Serialization;
 using NuGet;
 using Tauron.JetBrains.Annotations;
 
@@ -10,8 +12,96 @@ namespace Tauron.Application.RadioStreamer.PlugIns
     [PublicAPI]
     public sealed class InternalPackageManager //: IDisposable
     {
-        private interface ICache
+        public static readonly string PluginPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Plugins");
+        public static readonly string PackPath = Path.Combine(AppDomain.CurrentDomain.DynamicDirectory, "Packs");
+
+        [Serializable]
+        private class CacheEntry
         {
+            [NotNull]
+            public string Path { get; set; }
+
+            [NotNull]
+            public SemanticVersion Version { get; set; }
+
+            [NotNull]
+            public string[] Dependencys { get; set; }
+        }
+
+        private class VersionFileSerializer : IEnumerable<IPackageName>
+        {
+            private const string VersionsFileName = "Packages.xml";
+
+            private static readonly XmlSerializer Serializer = new XmlSerializer(
+                typeof (Dictionary<string, CacheEntry>), new[] {typeof (CacheEntry)});
+
+            private readonly string _location;
+
+            private readonly Dictionary<string, CacheEntry> _versions;
+
+            public bool IsFilePresent { get { return File.Exists(_location); } }
+
+            public VersionFileSerializer([NotNull] string location)
+            {
+                _location = Path.Combine(location, VersionsFileName);
+
+                try
+                {
+                    using (var stream = new FileStream(location, FileMode.Open))
+                        _versions = (Dictionary<string, CacheEntry>) Serializer.Deserialize(stream);
+                }
+                catch (Exception)
+                {
+                    File.Delete(_location);
+                    _versions = new Dictionary<string, CacheEntry>();
+                }
+            }
+
+            public void SaveVersions()
+            {
+                using (var stream = new FileStream(_location, FileMode.Create))
+                {
+                    Serializer.Serialize(stream, _versions);
+                }
+            }
+
+            public bool TryGetValue([NotNull] string name, out CacheEntry entry)
+            {
+                if (name == null) throw new ArgumentNullException("name");
+
+                return _versions.TryGetValue(name, out entry);
+            }
+
+            public CacheEntry this[string name]
+            {
+                set { _versions[name] = value; }
+            }
+
+            public void Remove([NotNull] string name)
+            {
+                _versions.Remove(name);
+                SaveVersions();
+            }
+
+            public IEnumerator<IPackageName> GetEnumerator()
+            {
+                return
+                    _versions.Select(cacheEntry => new PackageName(cacheEntry.Key, cacheEntry.Value.Version))
+                        .Cast<IPackageName>()
+                        .GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
+        private interface ICache : IEnumerable<IPackageName>
+        {
+            bool IsFilePresent { get; }
+
+            bool VersionCahce { get; }
             [NotNull]
             string Root { get; }
 
@@ -26,7 +116,9 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         }
         private class NullCache : ICache
         {
-            public string Root { get { return string.Empty; } }
+            public bool IsFilePresent { get { return false; } }
+            public bool VersionCahce { get { return false; } }
+            public string Root { get { return String.Empty; } }
 
             public void Add(string name, IEnumerable<string> files, SemanticVersion version, IEnumerable<string> dependencys)
             {
@@ -47,54 +139,35 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             {
                 return Enumerable.Empty<string>();
             }
+
+            public IEnumerator<IPackageName> GetEnumerator()
+            {
+                return Enumerable.Empty<IPackageName>().GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
         }
         private class LocalCache : ICache
         {
-            private const string VersionsFileName = "Packages.bin";
-
-            [Serializable]
-            private class CacheEntry
-            {
-                [NotNull]
-                public string Path { get; set; }
-
-                [NotNull]
-                public SemanticVersion Version { get; set; }
-
-                [NotNull]
-                public string[] Dependencys { get; set; }
-            }
-
             private readonly string _cachePath;
-            private readonly string _versionPath;
-            private readonly Dictionary<string, CacheEntry> _versions;
+            private readonly VersionFileSerializer _versionsFile;
 
             public LocalCache([NotNull] string cachePath)
             {
                 if (cachePath == null) throw new ArgumentNullException("cachePath");
                 
                 _cachePath = cachePath;
-                _cachePath.CreateDirectoryIfNotExis();
+                if (!Directory.Exists(cachePath))
+                    Directory.CreateDirectory(cachePath);
 
-                _versionPath = _cachePath.CombinePath(VersionsFileName);
-
-                try
-                {
-                    _versions = _versionPath.Deserialize<Dictionary<string, CacheEntry>>();
-                }
-                catch (Exception)
-                {
-                    _versionPath.DeleteFile();
-                    _versions = new Dictionary<string, CacheEntry>();
-                }
+                _versionsFile = new VersionFileSerializer(cachePath);
             }
 
-            private void SaveVersions()
-            {
-                _versionPath.DeleteFile();
-                _versions.Serialize(_cachePath);
-            }
-
+            public bool IsFilePresent { get { return _versionsFile.IsFilePresent; } }
+            public bool VersionCahce { get { return false; } }
             public string Root { get { return _cachePath; } }
 
             public void Add(string name, IEnumerable<string> files, SemanticVersion version, IEnumerable<string> dependencys)
@@ -102,55 +175,52 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 try
                 {
                     CacheEntry entry;
-                    if (_versions.TryGetValue(name, out entry))
+                    var entryExist = _versionsFile.TryGetValue(name, out entry);
+                    var path = entryExist ? entry.Path : Path.Combine(_cachePath, name);
+                    if (Directory.Exists(path))
                     {
-                        var path = entry.Path;
-                        path.ClearDirectory();
-                        path.CreateDirectoryIfNotExis();
-
-                        foreach (var file in files)
-                        {
-                            file.CopyFileTo(path);
-                        }
-                        
-                        return;
+                        foreach (var directory in Directory.EnumerateDirectories(path))
+                            Directory.Delete(directory, true);
+                        foreach (var file in Directory.EnumerateFiles(path))
+                            File.Delete(file);
                     }
-
-                    string newPath = _cachePath.CombinePath(name);
-                    newPath.CreateDirectoryIfNotExis();
+                    else
+                        Directory.CreateDirectory(path);
 
                     foreach (var file in files)
                     {
-                        file.CopyFileTo(newPath);
+// ReSharper disable once AssignNullToNotNullAttribute
+                        string newLoc = file.Replace(Path.GetDirectoryName(file), path);
+                        File.Copy(file, newLoc);
                     }
                 }
                 finally
                 {
-                    var entry = new CacheEntry { Dependencys = dependencys.ToArray(), Path = _cachePath.CombinePath(name), Version = version};
-                    _versions[name] = entry;
-                    SaveVersions();
+                    var entry = new CacheEntry { Dependencys = dependencys.ToArray(), Path = Path.Combine(_cachePath, name), Version = version };
+                    _versionsFile[name] = entry;
+                    _versionsFile.SaveVersions();
                 }
             }
 
             public void Remove(string name)
             {
                 CacheEntry entry;
-                if (!_versions.TryGetValue(name, out entry)) return;
+                if (!_versionsFile.TryGetValue(name, out entry)) return;
 
-                entry.Path.DeleteDirectory();
-                _versions.Remove(name);
+                Directory.Delete(entry.Path, true);
+                _versionsFile.Remove(name);
             }
 
             public SemanticVersion GetVersion(string name)
             {
                 CacheEntry entry;
-                return !_versions.TryGetValue(name, out entry) ? null : entry.Version;
+                return !_versionsFile.TryGetValue(name, out entry) ? null : entry.Version;
             }
 
             public IEnumerable<string> GetFiles(string name)
             {
                 CacheEntry entry;
-                if(!_versions.TryGetValue(name, out entry)) return Enumerable.Empty<string>();
+                if(!_versionsFile.TryGetValue(name, out entry)) return Enumerable.Empty<string>();
 
                 var files = new List<string>();
 
@@ -159,9 +229,65 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                     files.AddRange(GetFiles(dependency));
                 }
 
-                files.AddRange(entry.Path.EnumerateAllFiles());
+                files.AddRange(Directory.EnumerateFiles(entry.Path, "*.*", SearchOption.AllDirectories));
 
                 return files;
+            }
+
+            public IEnumerator<IPackageName> GetEnumerator()
+            {
+                return _versionsFile.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+        private class VersionCache : ICache
+        {
+            private readonly VersionFileSerializer _versionFile;
+
+            public bool IsFilePresent { get { return _versionFile.IsFilePresent; } }
+            public bool VersionCahce { get { return true; } }
+            public string Root { get; private set; }
+
+            public VersionCache([NotNull] string cachePath)
+            {
+                if (cachePath == null) throw new ArgumentNullException("cachePath");
+                _versionFile = new VersionFileSerializer(cachePath);
+                Root = cachePath;
+            }
+
+            public void Add(string name, IEnumerable<string> files, SemanticVersion version, IEnumerable<string> dependencys)
+            {
+                _versionFile[name] = new CacheEntry { Version = version, Dependencys =  dependencys.ToArray()};
+            }
+
+            public void Remove(string name)
+            {
+             _versionFile.Remove(name);
+            }
+
+            public SemanticVersion GetVersion(string name)
+            {
+                CacheEntry ent;
+                return _versionFile.TryGetValue(name, out ent) ? ent.Version : null;
+            }
+
+            public IEnumerable<string> GetFiles(string name)
+            {
+                return Enumerable.Empty<string>();
+            }
+
+            public IEnumerator<IPackageName> GetEnumerator()
+            {
+                return _versionFile.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
             }
         }
 
@@ -170,19 +296,29 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         private readonly string _targetPath;
         private readonly IPackageRepository _packageRepository;
 
+        public bool IsVersionFilePresent { get { return _cache.IsFilePresent; } }
+
         public InternalPackageManager([NotNull] string url, [CanBeNull] string targetPath,
-            bool keepInCache = false, [NotNull] string cachePath = null)
+            bool keepInCache = false, [CanBeNull] string cachePath = null, bool useVersionOnly = false)
+            : this(PackageRepositoryFactory.Default.CreateRepository(url), targetPath, keepInCache, cachePath, useVersionOnly)
+        { }
+
+        public InternalPackageManager([NotNull] IPackageRepository repository, [CanBeNull] string targetPath,
+            bool keepInCache = false, [CanBeNull] string cachePath = null, bool useVersionOnly = false)
         {
-            if (url == null) throw new ArgumentNullException("url");
+            if (repository == null) throw new ArgumentNullException("repository");
             if (keepInCache && cachePath == null) throw new ArgumentNullException("cachePath");
 
-            targetPath.CreateDirectoryIfNotExis();
+            if (targetPath != null && !Directory.Exists(targetPath))
+                Directory.CreateDirectory(targetPath);
 
             if (keepInCache) _cache = new LocalCache(cachePath);
+            // ReSharper disable once AssignNullToNotNullAttribute
+            if (useVersionOnly) _cache = new VersionCache(cachePath);
             else _cache = new NullCache();
 
             _targetPath = targetPath;
-            _packageRepository = PackageRepositoryFactory.Default.CreateRepository(url);
+            _packageRepository = repository;
         }
 
         [NotNull]
@@ -195,21 +331,23 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             return files;
         }
 
-        public void DeInstall(string name)
+        public void DeInstall([NotNull] string name)
         {
+            if (name == null) throw new ArgumentNullException("name");
+
             string[] files = _cache.GetFiles(name).ToArray();
-            if(files.Length == 0) return;
+            if (files.Length == 0) return;
 
             string root = _cache.Root;
             foreach (var file in files)
             {
-                file.Replace(root, _targetPath).DeleteFile();
+                File.Delete(file.Replace(root, _targetPath));
             }
 
             _cache.Remove(name);
         }
- 
-       private void Install([NotNull] string name, [CanBeNull] IVersionSpec spec, [NotNull] List<string> files)
+
+        private void Install([NotNull] string name, [CanBeNull] IVersionSpec spec, [NotNull] List<string> files)
         {
             if (name == null) throw new ArgumentNullException("name");
 
@@ -217,14 +355,21 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             if (pack == null) return;
 
             var cacheVer = _cache.GetVersion(name);
-            if (cacheVer != null && cacheVer == pack.Version)
+            if (!_cache.VersionCahce && cacheVer != null && cacheVer == pack.Version)
             {
                 files.AddRange(_cache.GetFiles(name));
+                return;
             }
 
-            Version[] versions = {new Version(4, 5), new Version(4, 0)};
+            InstallPackage(pack, files);
+        }
+
+        private void InstallPackage([NotNull] IPackage pack, [NotNull] List<string> files)
+        {
+            Version[] versions = { new Version(4, 5), new Version(4, 0) };
             var frameworkNames = pack.GetSupportedFrameworks().ToArray();
             Version targetVersion = versions.FirstOrDefault(v => frameworkNames.Any(f => f.Version == v));
+            if(targetVersion == null) return;
 
             var depSet = pack.DependencySets.FirstOrDefault(d => d.TargetFramework.Version == targetVersion);
             if (depSet != null)
@@ -235,19 +380,20 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 }
             }
 
-            string path = Path.GetTempPath().CombinePath("Tauron");
+            string path = Path.Combine(Path.GetTempPath(),"Tauron");
             var tempfiles = new List<string>();
-            string downlodPath = path.CombinePath("RSPM\\Downloads");
+            string downlodPath = Path.Combine(path, "RSPM\\Downloads");
 
             try
             {
-                downlodPath.CreateDirectoryIfNotExis();
+                if (!Directory.Exists(downlodPath))
+                    Directory.CreateDirectory(downlodPath);
 
                 foreach (var file in pack.GetLibFiles().Where(file => !file.EffectivePath.Contains("Design")))
                 {
-                    string copyPath = downlodPath.CombinePath(pack.Id, file.EffectivePath);
+                    string copyPath = Path.Combine(downlodPath, pack.Id, file.EffectivePath);
 
-                    using (var fileStream = copyPath.OpenWrite())
+                    using (var fileStream = new FileStream(copyPath, FileMode.Create))
                     {
                         using (var sourceStream = file.GetStream())
                         {
@@ -263,22 +409,38 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
                 if (_targetPath != null)
                 {
-                    _targetPath.CreateDirectoryIfNotExis();
-                    string copyPath = downlodPath.CombinePath(pack.Id);
-
-                    foreach (var tempfile in tempfiles)
+                    UpdateManager.PutUpdate(pack.Id, _targetPath, updatePath =>
                     {
-                        var targetPath = tempfile.Replace(copyPath, _targetPath);
-                        files.Add(targetPath);
-                        tempfile.MoveTo(targetPath);
-                    }
+
+                        if (!Directory.Exists(_targetPath))
+                            Directory.Exists(_targetPath);
+                        string copyPath = Path.Combine(downlodPath, pack.Id);
+
+                        foreach (var tempfile in tempfiles)
+                        {
+                            var targetPath = tempfile.Replace(copyPath, updatePath);
+                            files.Add(targetPath);
+                            File.Move(tempfile, targetPath);
+                        }
+                    });
                 }
-                else 
+                else
                     files.AddRange(_cache.GetFiles(pack.Id));
             }
             finally
             {
-                path.DeleteDirectory();
+                Directory.Delete(path, true);
+            }
+        }
+
+        public void CheckForUpdates()
+        {
+            if (_cache is NullCache) return;
+            var files = new List<string>();
+
+            foreach (var package in _packageRepository.GetUpdates(_cache, true, false))
+            {
+                InstallPackage(package, files);
             }
         }
 
