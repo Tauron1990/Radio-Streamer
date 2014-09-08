@@ -38,9 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <None Include="Plugins.ini">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    <None Include="Plugins.ini" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Elysium">
@@ -55,7 +53,6 @@
   <ItemGroup>
     <None Include="Controls\MainWindow.xaml">
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </None>
   </ItemGroup>
   <ItemGroup>
@@ -73,15 +70,12 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Init.cs">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Compile>
+    <Compile Include="Init.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="Theme.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Page>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

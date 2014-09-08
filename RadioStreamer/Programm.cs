@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.IO;
 using System.Runtime;
 using System.Runtime.ExceptionServices;
 using System.Security;
-using NuGet;
 using Tauron.Application.RadioStreamer.Interop;
 using Tauron.Application.RadioStreamer.PlugIns;
 
@@ -10,16 +12,9 @@ namespace Tauron.Application.RadioStreamer
 {
     public static class Programm
     {
-        #if DEBUG
-        private const string NugetUrl = @"C:\nuget\Packages";
-        private const string MyGetUrl = @"C:\nuget\Plugins";
-        #else
-        private const string NugetUrl
-        private const string MyGetUrl
-        #endif
-
         private static readonly string[] AssemblysToInstall =
         {
+            "JetBrains.Annotations",
             "Tauron.Application.Common",
             "Tauron.Application.Common.Wpf",
             "Tauron.Application.Common.Wpf.Controls",
@@ -35,21 +30,23 @@ namespace Tauron.Application.RadioStreamer
         [STAThread]
         public static void Main()
         {
-            ProfileOptimization.StartProfile();
+            string profileOptimizionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jitter");
+            if (!Directory.Exists(profileOptimizionPath)) Directory.CreateDirectory(profileOptimizionPath);
+
+            ProfileOptimization.SetProfileRoot(profileOptimizionPath);
+            ProfileOptimization.StartProfile("Main.jit");
 
             AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
-            AppDomain.CurrentDomain.UnhandledException +=
-                OnUnhandledException;
+            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
 
             LoadApplication();
             
-            App.Setup();
+            StartApp();
         }
 
         private static void LoadApplication()
         {
             var progressDialog = NativeMethods.CreateProgressDialog();
-;
 
             try
             {
@@ -57,12 +54,7 @@ namespace Tauron.Application.RadioStreamer
                 progressDialog.SetLine(1, "Prepare for Start up", false, IntPtr.Zero);
                 progressDialog.StartProgressDialog(IntPtr.Zero, null, 32, IntPtr.Zero);
 
-                IPackageRepository repository = new AggregateRepository(PackageRepositoryFactory.Default,
-                    new[] {MyGetUrl, NugetUrl}, true);
-
-                string targetPath = AppDomain.CurrentDomain.BaseDirectory;
-
-                var packManager = new InternalPackageManager(repository, targetPath, false, targetPath, true);
+                var packManager = InternalPackageManager.BuildRootManager();
 
                 if (!packManager.IsVersionFilePresent)
                 {
@@ -70,14 +62,36 @@ namespace Tauron.Application.RadioStreamer
 
                     foreach (var assembly in AssemblysToInstall)
                     {
+                        CheckCancel(progressDialog);
                         packManager.Install(assembly);
                     }
                 }
 
-                progressDialog.SetLine(2, "Downloading Update on Necessary", false, IntPtr.Zero);
+                progressDialog.SetLine(2, "Check for Updates", false, IntPtr.Zero);
 
-                packManager.CheckForUpdates();
+                var managers = new List<InternalPackageManager>();
 
+                if(packManager.CheckForUpdates())
+                    managers.Add(packManager);
+                CheckCancel(progressDialog);
+                packManager = InternalPackageManager.BuildPackManager();
+                if(packManager.CheckForUpdates())
+                    managers.Add(packManager);
+                CheckCancel(progressDialog);
+                packManager = InternalPackageManager.BuildPluginManager();
+                if(packManager.CheckForUpdates())
+                    managers.Add(packManager);
+                CheckCancel(progressDialog);
+
+                progressDialog.SetLine(2, "Downloading Updates", false, IntPtr.Zero);
+
+                foreach (var manager in managers)
+                    manager.InstallUpdates();
+                CheckCancel(progressDialog);
+
+                progressDialog.SetLine(2, "Install Updates", false, IntPtr.Zero);
+
+                UpdateManager.InstallUpdates();
 
                 progressDialog.StopProgressDialog();
             }
@@ -87,7 +101,17 @@ namespace Tauron.Application.RadioStreamer
             }
         }
 
-        private static 
+        [DebuggerStepThrough]
+        private static void CheckCancel(IWinProgressDialog dialog)
+        {
+            if(dialog.HasUserCancelled())
+                Environment.Exit(-1);
+        }
+
+        private static void StartApp()
+        {
+            App.Setup();
+        }
 
         [HandleProcessCorruptedStateExceptions, SecurityCritical]
         private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)

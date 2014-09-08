@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // die mit einer Assembly verknüpft sind.
 
 [assembly: AssemblyTitle("Tauron.Application.RadioStreamer")]
-[assembly: AssemblyDescription("")]
+[assembly: AssemblyDescription("Radio Streamer Core Lib")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("")]
+[assembly: AssemblyCompany("Tauron Applications")]
 [assembly: AssemblyProduct("Tauron.Application.RadioStreamer")]
-[assembly: AssemblyCopyright("Copyright ©  2014")]
+[assembly: AssemblyCopyright("Copyright Tauron©  2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -35,5 +35,5 @@ using System.Runtime.InteropServices;
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
 
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
+[assembly: AssemblyFileVersion("0.5.0.0")]

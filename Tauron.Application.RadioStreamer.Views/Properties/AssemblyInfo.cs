@@ -6,11 +6,11 @@ using System.Runtime.InteropServices;
 // Attribute gesteuert. Ändern Sie diese Attributwerte, um die Informationen zu ändern,
 // die mit einer Assembly verknüpft sind.
 [assembly: AssemblyTitle("RadioStreamer Views")]
-[assembly: AssemblyDescription("Enthält die Ansichten für den Radio")]
+[assembly: AssemblyDescription("Contains the Common UI for RadioStreamer")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Parallel Works")]
+[assembly: AssemblyCompany("Tauron Applications")]
 [assembly: AssemblyProduct("RadioStreamer")]
-[assembly: AssemblyCopyright("Copyright ©  Tauron 2012")]
+[assembly: AssemblyCopyright("Copyright ©  Tauron 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 
@@ -32,6 +32,6 @@ using System.Runtime.InteropServices;
 // Sie können alle Werte angeben oder die standardmäßigen Build- und Revisionsnummern 
 // übernehmen, indem Sie "*" eingeben:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("1.0.0.0")]
-[assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: AssemblyVersion("0.5.0.0")]
+[assembly: AssemblyFileVersion("0.5.0.0")]
 [assembly: System.Resources.NeutralResourcesLanguage("en", System.Resources.UltimateResourceFallbackLocation.MainAssembly)]

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata minClientVersion="2.8">
+        <id>Tauron.Application.RadioStreamer.Resources</id>
+        <version>0.5.0</version>
+        <title>Tauron.Application.RadioStreamer.Resources</title>
+        <authors>Tauron</authors>
+        <owners>Tauron</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Contains Common Resources for Radio Streamer</description>
+        <summary>Contains Common Resources for Radio Streamer</summary>
+        <copyright>Copyright Tauron©  2014</copyright>
+    </metadata>
+    <files>
+        <file src="de\Tauron.Application.RadioStreamer.Resources.resources.dll" target="lib\net45\de\Tauron.Application.RadioStreamer.Resources.resources.dll" />
+        <file src="Tauron.Application.RadioStreamer.Resources.dll" target="lib\net45\Tauron.Application.RadioStreamer.Resources.dll" />
+        <file src="Tauron.Application.RadioStreamer.Resources.pdb" target="lib\net45\Tauron.Application.RadioStreamer.Resources.pdb" />
+    </files>
+</package>

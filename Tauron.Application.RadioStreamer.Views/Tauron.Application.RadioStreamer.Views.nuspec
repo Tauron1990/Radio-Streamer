@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata minClientVersion="2.8">
+        <id>Tauron.Application.RadioStreamer.Views</id>
+        <version>0.5.0</version>
+        <title>Tauron.Application.RadioStreamer.Views</title>
+        <authors>Tauron</authors>
+        <owners>Tauron</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>My package description.</description>
+        <copyright>Copyright ©  Tauron 2014</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Ookii.Dialogs" />
+                <dependency id="JetBrains.Annotations" />
+                <dependency id="Tauron.Application.Bass" />
+                <dependency id="Tauron.Application.Common" />
+                <dependency id="Tauron.Application.Common.Wpf" />
+                <dependency id="Tauron.Application.Common.Wpf.Controls" />
+                <dependency id="Tauron.Application.RadioStreamer.Contracts" />
+                <dependency id="Tauron.Application.RadioStreamer.Resources" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Tauron.Application.RadioStreamer.Views.dll" target="lib\net45\Tauron.Application.RadioStreamer.Views.dll" />
+        <file src="Tauron.Application.RadioStreamer.Views.pdb" target="lib\net45\Tauron.Application.RadioStreamer.Views.pdb" />
+    </files>
+</package>

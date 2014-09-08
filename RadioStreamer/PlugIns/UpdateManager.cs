@@ -12,9 +12,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         private const string UpdatePath = "Updates";
         private const string UpdateManifestFile = "manifest.conf";
 
-        private class UpdateManifest
+        public class UpdateManifest
         {
-            [NotNull]
             public string TargetLocation { get; set; } 
         }
 
@@ -49,7 +48,10 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                     {
                         var targetPath = file.Replace(directory, manifest.TargetLocation);
 
-                        File.Move(file, targetPath);
+                        string copydic = Path.GetDirectoryName(targetPath);
+                        if (!Directory.Exists(copydic)) Directory.CreateDirectory(copydic);
+
+                        File.Copy(file, targetPath, true);
                     }
                 }
                 catch (InvalidOperationException) { }

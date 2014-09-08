@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata minClientVersion="2.8">
+        <id>RadioStreamer</id>
+        <version>0.7.0</version>
+        <title>Radio Streamer</title>
+        <authors>Tauron</authors>
+        <owners>Tauron</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Application for Streaming and Recording Web Radio.</description>
+        <summary>Application for Streaming and Recording Web Radio</summary>
+        <copyright>Copyright Tauron©  2014</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Tauron.Application.Common" />
+                <dependency id="Mono.CSharp" />
+                <dependency id="Nuget.Core" />
+                <dependency id="Hardcodet.NotifyIcon.Wpf" />
+                <dependency id="Tauron.Application.Common.Wpf" />
+                <dependency id="Tauron.Application.Common.Wpf.Controls" />
+                <dependency id="Tauron.RadioStreamer.Skins.ElysiumTheme" />
+                <dependency id="Tauron.Application.Bass" />
+                <dependency id="Tauron.Application.RadioStreamer" />
+                <dependency id="Tauron.Application.RadioStreamer.Contracts" />
+                <dependency id="Tauron.Application.Radiostreamer.Database" />
+                <dependency id="Tauron.Application.RadioStreamer.Resources" />
+                <dependency id="Tauron.Application.RadioStreamer.Views" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Catalogs.xaml" target="lib\net45\Catalogs.xaml" />
+        <file src="Microsoft.Web.XmlTransform.dll" target="lib\net45\Microsoft.Web.XmlTransform.dll" />
+        <file src="NuGet.Core.dll" target="lib\net45\NuGet.Core.dll" />
+        <file src="RadioStreamer.exe" target="lib\net45\RadioStreamer.exe" />
+        <file src="RadioStreamer.exe.config" target="lib\net45\RadioStreamer.exe.config" />
+        <file src="RadioStreamer.pdb" target="lib\net45\RadioStreamer.pdb" />
+    </files>
+</package>

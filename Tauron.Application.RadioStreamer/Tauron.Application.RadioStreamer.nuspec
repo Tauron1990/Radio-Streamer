@@ -1,0 +1,38 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Tauron.Application.RadioStreamer</id>
+        <version>0.5.0</version>
+        <title>Tauron.Application.RadioStreamer</title>
+        <authors>Tauron</authors>
+        <owners>Tauron</owners>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Radio Streamer Core Lib</description>
+        <summary>Radio Streamer Core Lib</summary>
+      <copyright>Copyright © Tauron  2014</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="HtmlAgilityPack" />
+                <dependency id="JetBrains.Annotations" />
+                <dependency id="Tauron.Application.Bass" />
+                <dependency id="Tauron.Application.Common" />
+                <dependency id="Tauron.Application.RadioStreamer.Contracts" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="de\Tauron.Application.RadioStreamer.resources.dll" target="lib\net45\de\Tauron.Application.RadioStreamer.resources.dll" />
+        <file src="Dll\PlugIns\basswma.dll" target="lib\net45\Dll\PlugIns\basswma.dll" />
+        <file src="Dll\PlugIns\bass_aac.dll" target="lib\net45\Dll\PlugIns\bass_aac.dll" />
+        <file src="Dll\bass.dll" target="lib\net45\Dll\bass.dll" />
+        <file src="Dll\bassenc.dll" target="lib\net45\Dll\bassenc.dll" />
+        <file src="Dll\bassmix.dll" target="lib\net45\Dll\bassmix.dll" />
+        <file src="Dll\bass_fx.dll" target="lib\net45\Dll\bass_fx.dll" />
+        <file src="Dll\OptimFROG.dll" target="lib\net45\Dll\OptimFROG.dll" />
+        <file src="Dll\tags.dll" target="lib\net45\Dll\tags.dll" />
+        <file src="Scripts\Technobase.cs" target="lib\net45\Scripts\Technobase.cs" />
+        <file src="lame.exe" target="lib\net45\lame.exe" />
+        <file src="Tauron.Application.RadioStreamer.dll" target="lib\net45\Tauron.Application.RadioStreamer.dll" />
+        <file src="Tauron.Application.RadioStreamer.pdb" target="lib\net45\Tauron.Application.RadioStreamer.pdb" />
+    </files>
+</package>

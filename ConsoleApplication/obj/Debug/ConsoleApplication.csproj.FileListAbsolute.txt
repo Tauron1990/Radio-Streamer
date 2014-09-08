@@ -60,3 +60,17 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleAppl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Database.nuspec
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Contracts.nuspec
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe.config
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Bass.Net.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Contracts.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Database.dll
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Database.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Tauron.Application.RadioStreamer.Contracts.pdb
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\bin\Debug\Bass.Net.xml
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.exe
+C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.pdb

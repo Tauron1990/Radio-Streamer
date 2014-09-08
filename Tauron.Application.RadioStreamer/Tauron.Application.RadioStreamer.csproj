@@ -11,6 +11,8 @@
     <AssemblyName>Tauron.Application.RadioStreamer</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -34,16 +36,12 @@
     <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
     <Reference Include="HtmlAgilityPack">
       <HintPath>..\packages\HtmlAgilityPack.1.4.6\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>False</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.ComponentModel.Composition" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Player\BassMediaPlayer.cs" />
@@ -59,6 +57,9 @@
     <None Include="Player\Temp.cs" />
     <Compile Include="Player\Engine\IPlaybackEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Tauron.Application.RadioStreamer.nuspec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Dll\bass.dll">
@@ -93,18 +94,22 @@
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
       <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
       <Name>JetBrains.Annotations</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.Audio\Tauron.Application.Bass.csproj">
       <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
       <Name>Tauron.Application.Bass</Name>
+      <Private>False</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
       <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>
       <Name>Tauron.Application.RadioStreamer.Contracts</Name>
+      <Private>False</Private>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -112,11 +117,14 @@
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+  <!--To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
+    <CreateItem Include="$(ProjectDir)$(OutputPath)**\*.*">
+      <Output TaskParameter="Include" ItemName="BinFiles" />
+    </CreateItem>
+    <Copy SkipUnchangedFiles="True" OverWriteReadOnlyFiles="true" SourceFiles="@(BinFiles)" DestinationFiles="@(BinFiles->'$(SolutionDir)\NugetBuilder\$(ProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
-  -->
 </Project>

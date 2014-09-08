@@ -34,11 +34,6 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -95,12 +90,20 @@
   <ItemGroup>
     <Resource Include="add.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Tauron.Application.RadioStreamer.Resources.nuspec">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
-       Other similar extension points exist, see Microsoft.Common.targets.
+  <!--To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.-->
   <Target Name="BeforeBuild">
   </Target>
   <Target Name="AfterBuild">
+    <CreateItem Include="$(ProjectDir)$(OutputPath)**\*.*">
+      <Output TaskParameter="Include" ItemName="BinFiles" />
+    </CreateItem>
+    <Copy SkipUnchangedFiles="True" OverWriteReadOnlyFiles="true" SourceFiles="@(BinFiles)" DestinationFiles="@(BinFiles->'$(SolutionDir)\NugetBuilder\$(ProjectName)\%(RecursiveDir)%(Filename)%(Extension)')" />
   </Target>
-  -->
 </Project>

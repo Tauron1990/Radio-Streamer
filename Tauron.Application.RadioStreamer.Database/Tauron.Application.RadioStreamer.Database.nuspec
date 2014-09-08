@@ -1,0 +1,27 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2012/06/nuspec.xsd">
+    <metadata>
+        <id>Tauron.Application.RadioStreamer.Database</id>
+        <version>0.5.0</version>
+        <title>Tauron.Application.RadioStreamer.Database</title>
+        <authors>Tauron</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>Data Acess Layer for Radio Streamer</description>
+        <summary>Data Acess Layer for Radio Streamer</summary>
+        <copyright>Copyright Tauron©  2014</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="Mono.CSharp" />
+                <dependency id="HtmlAgilityPack" />
+                <dependency id="JetBrains.Annotations" />
+                <dependency id="Tauron.Application.Bass" />
+                <dependency id="Tauron.Application.Common" />
+                <dependency id="Tauron.Application.RadioStreamer.Contracts" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Tauron.Application.RadioStreamer.Database.dll" target="lib\net45\Tauron.Application.RadioStreamer.Database.dll" />
+        <file src="Tauron.Application.RadioStreamer.Database.pdb" target="lib\net45\Tauron.Application.RadioStreamer.Database.pdb" />
+    </files>
+</package>

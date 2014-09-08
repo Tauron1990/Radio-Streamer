@@ -1,7 +1,5 @@
-﻿using System.Reflection;
-using System.Windows;
+﻿using System.Windows;
 using System.Windows.Input;
-using Bugsense.WPF;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Resources;

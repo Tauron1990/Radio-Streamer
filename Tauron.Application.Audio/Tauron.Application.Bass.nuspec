@@ -1,0 +1,24 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/01/nuspec.xsd">
+    <metadata minClientVersion="2.8">
+        <id>Tauron.Application.Bass</id>
+        <version>0.0.1</version>
+        <title>Tauron.Application.Bass</title>
+        <authors>Tauron</authors>
+        <requireLicenseAcceptance>false</requireLicenseAcceptance>
+        <description>An Onject Orientated Warper over Bass.Net</description>
+        <summary>An Onject Orientated Warper over Bass.Net</summary>
+      <copyright>Copyright © Tauron  2014</copyright>
+        <dependencies>
+            <group targetFramework=".NETFramework4.5">
+                <dependency id="JetBrains.Annotations" />
+                <dependency id="Tauron.Application.Common" />
+            </group>
+        </dependencies>
+    </metadata>
+    <files>
+        <file src="Bass.Net.dll" target="lib\net45\Bass.Net.dll" />
+        <file src="Tauron.Application.Bass.dll" target="lib\net45\Tauron.Application.Bass.dll" />
+        <file src="Tauron.Application.Bass.pdb" target="lib\net45\Tauron.Application.Bass.pdb" />
+    </files>
+</package>
