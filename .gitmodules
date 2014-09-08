@@ -1,0 +1,3 @@
+[submodule "Tauron-Application-Common"]
+	path = Tauron-Application-Common
+	url = https://github.com/Tauron1990/Tauron-Application-Common.git
