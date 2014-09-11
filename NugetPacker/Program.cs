@@ -25,7 +25,8 @@ namespace NugetPacker
                     Console.Write("Packing... ");
                     if(directory.EndsWith("Packages")) continue;
 
-                    var pack = new PackageBuilder(Directory.EnumerateFiles(directory).First(s => s.EndsWith(".nuspec")),
+                    string name = Path.GetFileName(directory) + ".nuspec";
+                    var pack = new PackageBuilder(Directory.EnumerateFiles(directory).First(s => s.EndsWith(name)),
                                                   directory, null, true);
                     Console.Write(pack.Id + "... ");
 

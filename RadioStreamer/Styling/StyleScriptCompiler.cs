@@ -51,11 +51,10 @@ namespace Tauron.Application.RadioStreamer.Styling
         private Report _report;
         private string _moduleName;
 
-        public void BuildUp([NotNull] string source, [NotNull] string typeName)
+        public void BuildUp([NotNull] string source)
         {
             if (source == null) throw new ArgumentNullException("source");
-            if (typeName == null) throw new ArgumentNullException("typeName");
-            
+
             var context = CreateContext(source);
             var container = CreateModuleContainer(context);
             ParseFiles(container);
@@ -108,7 +107,6 @@ namespace Tauron.Application.RadioStreamer.Styling
             foreach (var sourceFile in container.Compiler.SourceFiles)
             {
                 var compilationSourceFile = new CompilationSourceFile(container, sourceFile);
-                container.AddTypeContainer(compilationSourceFile);
                 using (
                     var seekStream =
                         new SeekableStreamReader(new MemoryStream(Encoding.UTF8.GetBytes(sourceFile.FullPathName)),
@@ -116,6 +114,8 @@ namespace Tauron.Application.RadioStreamer.Styling
                 {
                     new CSharpParser(seekStream, compilationSourceFile, _report, session).parse();
                 }
+
+                container.AddTypeContainer(compilationSourceFile);
             }
         }
 

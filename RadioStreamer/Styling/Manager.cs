@@ -115,7 +115,7 @@ namespace Tauron.Application.RadioStreamer.Styling
 
                             using (var stream = entry.Open())
                             {
-                                comp.BuildUp(stream.ReadToEnd(), "Init");
+                                comp.BuildUp(stream.ReadToEnd());
                             }
 
                             ((ThemeLoaderBase)
