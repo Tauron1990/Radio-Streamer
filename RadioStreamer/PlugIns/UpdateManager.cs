@@ -65,21 +65,19 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             Directory.Delete(FullUpdatePath, true);
         }
 
-        public static void PutUpdate([NotNull] string name, [NotNull] string targetPath,
-            [NotNull] Action<string> copyFiles)
+        public static FileAdder PutUpdate([NotNull] string name, [NotNull] string targetPath)
         {
             if (name == null) throw new ArgumentNullException("name");
             if (targetPath == null) throw new ArgumentNullException("targetPath");
-            if (copyFiles == null) throw new ArgumentNullException("copyFiles");
 
             string updateLocation = Path.Combine(FullUpdatePath, name);
 
             Directory.CreateDirectory(updateLocation);
-
-            copyFiles(updateLocation);
-
+            
             using (var stream = new FileStream(Path.Combine(updateLocation, UpdateManifestFile), FileMode.Create))
                 Serializer.Serialize(stream, new UpdateManifest {TargetLocation = targetPath});
+
+            return new PathFileAdder(updateLocation);
         }
     }
 }

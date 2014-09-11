@@ -1,66 +1,49 @@
 ﻿using System;
-using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Reflection;
-using NuGet;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
-using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.PlugIns
 {
     [Export(typeof (IPlugInManager))]
     public class PlugInManager : IPlugInManager
     {
+        private readonly InternalPackageManager _pluginManager;
+        private readonly InternalPackageManager _packageManager;
+
+        public PlugInManager()
+        {
+            _pluginManager = InternalPackageManager.BuildPluginManager();
+            _packageManager = InternalPackageManager.BuildPackManager();
+        }
+
         public void LoadPakage(string name)
         {
-            InternalPackageManager.PackPath.CreateDirectoryIfNotExis();
-
-            var repo = PackageRepositoryFactory.Default.CreateRepository(@"C:\nuget");
-            var pack = repo.FindPackage(name);
-            var man = new PackageManager(repo, InternalPackageManager.PackPath);
-            man.InstallPackage(pack, false, false);
-            LoadingPackage(pack);
-        }
-
-        private void LoadingPackage([NotNull] IPackage pack)
-        {
-            var set = (SearchSet(pack, new Version(4, 5)) ?? SearchSet(pack, new Version(4, 0))) ??
-                      pack.PackageAssemblyReferences.FirstOrDefault();
-
-            const string ver1 = "net45";
-            const string ver2 = "net40";
-            const string libstart = "lib";
-            string[] versions = {libstart.CombinePath(ver1), libstart.CombinePath(ver2)};
-
-            var files = new List<string>();
-
-            foreach (var version in versions)
+            foreach (var file in _packageManager.Install(name, true).Where(f => f.EndsWith(".dll") || f.EndsWith(".exe")))
             {
-                string version1 = version;
-                files.AddRange(from assemblyReference in pack.AssemblyReferences
-                               where assemblyReference.Path.StartsWith(version1)
-                               select InternalPackageManager.PackPath.CombinePath(pack.Id + "." + pack.Version, assemblyReference.Path));
-                if (files.Count > 0) break;
+                try
+                {
+                    Assembly.LoadFrom(file);
+                }
+                catch (IOException){}
+                catch(BadImageFormatException){}
+                catch(ArgumentException){}
             }
-
-            foreach (
-                var file in
-                    from reference in set.References from file in files where file.EndsWith(reference) select file) Assembly.LoadFrom(file);
         }
 
-        private PackageReferenceSet SearchSet(IPackage pack, Version ver)
+        public void InstallPlugIn(string name)
         {
-            return
-                pack.PackageAssemblyReferences.FirstOrDefault(
-                    p =>
-                    p.TargetFramework != null &&
-                    (p.TargetFramework.Version == ver || p.SupportedFrameworks.Any(f => f.Version == ver)));
+            _pluginManager.Install(name);
         }
 
-        public void LoadPlugIn(string name)
+        public void Unistall(string name, bool plugin)
         {
-        
+            if(plugin)
+                _pluginManager.UnInstall(name);
+            else 
+                _packageManager.UnInstall(name);
         }
     }
 }

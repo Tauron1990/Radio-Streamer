@@ -21,16 +21,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ConsoleApplication", "Conso
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.RadioStreamer.Views", "Tauron.Application.RadioStreamer.Views\Tauron.Application.RadioStreamer.Views.csproj", "{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBrains.Annotations", "..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj", "{DF97133F-565A-4D1A-AFE3-4155B31A89E5}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common", "..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj", "{0D50EE98-A718-41B2-A1B6-57D23FDF5223}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf", "..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj", "{03F1490A-9173-4E75-9D6E-FBE5A37AA649}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf.Controls", "..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj", "{2CC827C8-5084-4334-8A68-0515DA46465E}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Files", "..\Tauron-Application-Common\Tauron.Application.Files\Tauron.Application.Files.csproj", "{E714D32E-1F12-47A5-A671-15EC83D85E75}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Bass", "Tauron.Application.Audio\Tauron.Application.Bass.csproj", "{AF2AF397-1FF3-46C0-9944-4B047C6967D3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{6EBEBE6E-60B8-4A07-85B8-1C509CDBEA54}"
@@ -43,6 +33,16 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ElysiumTheme", "ElysiumTheme\ElysiumTheme.csproj", "{4B012079-D47D-426F-AC72-F68C7F278496}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NugetPacker", "NugetPacker\NugetPacker.csproj", "{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "JetBrains.Annotations", "Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj", "{DF97133F-565A-4D1A-AFE3-4155B31A89E5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common", "Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj", "{0D50EE98-A718-41B2-A1B6-57D23FDF5223}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf", "Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj", "{03F1490A-9173-4E75-9D6E-FBE5A37AA649}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Common.Wpf.Controls", "Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj", "{2CC827C8-5084-4334-8A68-0515DA46465E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tauron.Application.Files", "Tauron-Application-Common\Tauron.Application.Files\Tauron.Application.Files.csproj", "{E714D32E-1F12-47A5-A671-15EC83D85E75}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -78,6 +78,18 @@ Global
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADAE8E24-7A4C-4A42-A68F-F2BA755DED46}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B012079-D47D-426F-AC72-F68C7F278496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B012079-D47D-426F-AC72-F68C7F278496}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{DF97133F-565A-4D1A-AFE3-4155B31A89E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -98,30 +110,18 @@ Global
 		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E714D32E-1F12-47A5-A671-15EC83D85E75}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AF2AF397-1FF3-46C0-9944-4B047C6967D3}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4B012079-D47D-426F-AC72-F68C7F278496}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4B012079-D47D-426F-AC72-F68C7F278496}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4B012079-D47D-426F-AC72-F68C7F278496}.Release|Any CPU.Build.0 = Release|Any CPU
-		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
 		{B0CA582B-6A76-472C-BF6F-78DC31C1769C} = {A9C1AD90-4550-479C-9943-D0A2D8EEC363}
+		{4B012079-D47D-426F-AC72-F68C7F278496} = {F8CC257B-DEA3-4D36-B1BF-ED4AD2B6E1D4}
+		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5} = {A9C1AD90-4550-479C-9943-D0A2D8EEC363}
 		{DF97133F-565A-4D1A-AFE3-4155B31A89E5} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{0D50EE98-A718-41B2-A1B6-57D23FDF5223} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{03F1490A-9173-4E75-9D6E-FBE5A37AA649} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{2CC827C8-5084-4334-8A68-0515DA46465E} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{E714D32E-1F12-47A5-A671-15EC83D85E75} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
-		{4B012079-D47D-426F-AC72-F68C7F278496} = {F8CC257B-DEA3-4D36-B1BF-ED4AD2B6E1D4}
-		{A0B4CA0E-DC17-4D48-A389-AC744F3829E5} = {A9C1AD90-4550-479C-9943-D0A2D8EEC363}
 	EndGlobalSection
 EndGlobal

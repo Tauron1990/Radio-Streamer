@@ -277,6 +277,6 @@
     <value>Themes</value>
   </data>
   <data name="ThemeSwichMessage" xml:space="preserve">
-    <value>Das Theme wird erst nach eine Neustart Verfügbar sein.</value>
+    <value>Das Theme wird erst nach einem Neustart Verfügbar sein.</value>
   </data>
 </root>

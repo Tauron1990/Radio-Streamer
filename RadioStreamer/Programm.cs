@@ -36,13 +36,17 @@ namespace Tauron.Application.RadioStreamer
             ProfileOptimization.SetProfileRoot(profileOptimizionPath);
             ProfileOptimization.StartProfile("Main.jit");
 
-            AppDomain.CurrentDomain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
-            AppDomain.CurrentDomain.UnhandledException += OnUnhandledException;
-
+            var domain = AppDomain.CurrentDomain;
+            domain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
+            domain.UnhandledException += OnUnhandledException;
+           
+            #if !DEBUG
             LoadApplication();
-            
+            #endif
+   
             StartApp();
         }
+
 
         private static void LoadApplication()
         {

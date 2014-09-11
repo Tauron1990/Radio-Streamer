@@ -88,7 +88,7 @@ namespace Tauron.Application.RadioStreamer.Styling
                                             _plugInManager.LoadPakage(parts[1]);
                                             break;
                                         case "plugin":
-                                            _plugInManager.LoadPlugIn(parts[1]);
+                                            _plugInManager.InstallPlugIn(parts[1]);
                                             break;
                                     }
                                 }

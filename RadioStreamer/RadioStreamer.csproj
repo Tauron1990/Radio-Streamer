@@ -47,15 +47,14 @@
   <ItemGroup>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
-      <Private>False</Private>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Web.XmlTransform">
       <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
+      <Private>True</Private>
     </Reference>
-    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
+    <Reference Include="Mono.CSharp">
       <HintPath>..\packages\Mono.CSharp.3.4.0\lib\net40\Mono.CSharp.dll</HintPath>
-      <Private>False</Private>
     </Reference>
     <Reference Include="NuGet.Core, Version=2.8.50506.491, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -88,7 +87,11 @@
       <DependentUpon>Tester.xaml</DependentUpon>
     </Compile>
     <Compile Include="Interop\NativeMethods.cs" />
+    <Compile Include="PlugIns\AggregareFileAdder.cs" />
+    <Compile Include="PlugIns\FileAdder.cs" />
     <Compile Include="PlugIns\InternalPackageManager.cs" />
+    <Compile Include="PlugIns\NullFileAdder.cs" />
+    <Compile Include="PlugIns\PathFileAdder.cs" />
     <Compile Include="PlugIns\PlugInManager.cs" />
     <Compile Include="PlugIns\UpdateManager.cs" />
     <Compile Include="Programm.cs" />
@@ -127,7 +130,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="Catalogs.xaml">
@@ -154,35 +159,47 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
+    <ProjectReference Include="..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
       <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
       <Name>JetBrains.Annotations</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
+    <ProjectReference Include="..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
       <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
       <Name>Tauron.Application.Common.Wpf.Controls</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
+    <ProjectReference Include="..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
       <Project>{03f1490a-9173-4e75-9d6e-fbe5a37aa649}</Project>
       <Name>Tauron.Application.Common.Wpf</Name>
-      <Private>False</Private>
+      <Private>True</Private>
     </ProjectReference>
-    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
+    <ProjectReference Include="..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
-      <Private>False</Private>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Database\Tauron.Application.RadioStreamer.Database.csproj">
+      <Project>{04359b61-d252-4f63-ad43-c27437b3b74c}</Project>
+      <Name>Tauron.Application.RadioStreamer.Database</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
       <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
       <Name>Tauron.Application.RadioStreamer.Resources</Name>
-      <Private>False</Private>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Views\Tauron.Application.RadioStreamer.Views.csproj">
+      <Project>{adae8e24-7a4c-4a42-a68f-f2ba755ded46}</Project>
+      <Name>Tauron.Application.RadioStreamer.Views</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
       <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>
       <Name>Tauron.Application.RadioStreamer.Contracts</Name>
-      <Private>False</Private>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer\Tauron.Application.RadioStreamer.csproj">
+      <Project>{26b0dd34-198a-4379-af18-0abbcce569a2}</Project>
+      <Name>Tauron.Application.RadioStreamer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

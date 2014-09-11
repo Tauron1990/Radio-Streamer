@@ -21,7 +21,6 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="de\Tauron.Application.RadioStreamer.resources.dll" target="lib\net45\de\Tauron.Application.RadioStreamer.resources.dll" />
         <file src="Dll\PlugIns\basswma.dll" target="lib\net45\Dll\PlugIns\basswma.dll" />
         <file src="Dll\PlugIns\bass_aac.dll" target="lib\net45\Dll\PlugIns\bass_aac.dll" />
         <file src="Dll\bass.dll" target="lib\net45\Dll\bass.dll" />
