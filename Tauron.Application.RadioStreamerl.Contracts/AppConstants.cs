@@ -2,6 +2,8 @@
 {
     public static class AppConstants
     {
+        public const string NotifyIconContextMenuEntry = "NotifyIconContextMenuEntry";
+
         public const string DefaultContentTab = "ContentView";
 
         public const string RadioViewModelName = "RadioViewModel";

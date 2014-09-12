@@ -1,15 +1,53 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Reflection;
+using NuGet;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.PlugIns
 {
     [Export(typeof (IPlugInManager))]
     public class PlugInManager : IPlugInManager
     {
+        private class PackInfo : IPackInfo
+        {
+            private static readonly IPackageRepository MachineCache = NuGet.MachineCache.Default;
+
+            private readonly string _name;
+
+            public PackInfo([NotNull] InternalPackageManager.CacheEntry cacheEntry,
+                [NotNull] IPackageRepository repository)
+            {
+                if (cacheEntry == null) throw new ArgumentNullException("cacheEntry");
+                if (repository == null) throw new ArgumentNullException("repository");
+
+                var versionSpec = new VersionSpec(cacheEntry.SemanticVersion);
+                var package = MachineCache.FindPackage(cacheEntry.Name, versionSpec, true, true)
+                           ?? repository.FindPackage(cacheEntry.Name, versionSpec, true, true);
+
+                CanUnInstall = true;
+                
+                _name = cacheEntry.Name;
+                Name = package.Title;
+                Description = package.Description;
+                Version = package.Version.Version;
+            }
+
+            public bool CanUnInstall { get; private set; }
+            public void UnInstall()
+            {
+                InternalPackageManager.BuildPluginManager().UnInstall(_name);
+            }
+
+            public string Name { get; private set; }
+            public string Description { get; private set; }
+            public Version Version { get; private set; }
+        }
+
         private readonly InternalPackageManager _pluginManager;
         private readonly InternalPackageManager _packageManager;
 
@@ -17,6 +55,13 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         {
             _pluginManager = InternalPackageManager.BuildPluginManager();
             _packageManager = InternalPackageManager.BuildPackManager();
+        }
+
+        public IEnumerable<IPackInfo> GetPackInfos()
+        {
+            return
+                _pluginManager.GetEntries()
+                    .Select(cacheEntry => new PackInfo(cacheEntry, _packageManager.PackageRepository));
         }
 
         public void LoadPakage(string name)

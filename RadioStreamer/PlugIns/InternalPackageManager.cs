@@ -34,7 +34,12 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         private static readonly IPackageRepository MyGetRepository =
             PackageRepositoryFactory.Default.CreateRepository(MyGetUrl);
 
-        private static readonly ICache PackCache = new LocalCache(PackPath, false); 
+        private static readonly ICache PackCache = new LocalCache(PackPath, false);
+
+        public static IEnumerable<CacheEntry> GetPackEntries()
+        {
+            return PackCache.GetEntries();
+        }
 
         public static InternalPackageManager BuildRootManager()
         {
@@ -76,7 +81,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public string[] Files { get; set; }
         }
 
-        private class VersionFileSerializer : IEnumerable<IPackageName>
+        private class VersionFileSerializer : IEnumerable<IPackageName>, IEnumerable<CacheEntry>
         {
             private const string VersionsFileName = "Packages.xml";
 
@@ -144,6 +149,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 SaveVersions();
             }
 
+            IEnumerator<CacheEntry> IEnumerable<CacheEntry>.GetEnumerator()
+            {
+                return _versions.GetEnumerator();
+            }
+
             public IEnumerator<IPackageName> GetEnumerator()
             {
                 return
@@ -172,7 +182,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
             SemanticVersion GetVersion(string name);
 
-
+            IEnumerable<CacheEntry> GetEntries();
             IEnumerable<string> GetFiles(string name);
         }
 
@@ -206,6 +216,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public SemanticVersion GetVersion(string name)
             {
                 return null;
+            }
+
+            public IEnumerable<CacheEntry> GetEntries()
+            {
+                return Enumerable.Empty<CacheEntry>();
             }
 
             public IEnumerable<string> GetFiles(string name)
@@ -290,7 +305,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 CacheEntry entry;
                 if (!_versionsFile.TryGetValue(name, out entry)) return;
 
-                Directory.Delete(entry.Path, true);
+                UpdateManager.AddFileToDelete(entry.Files);
+
                 _versionsFile.Remove(name);
             }
 
@@ -298,6 +314,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             {
                 CacheEntry entry;
                 return !_versionsFile.TryGetValue(name, out entry) ? null : entry.SemanticVersion;
+            }
+
+            public IEnumerable<CacheEntry> GetEntries()
+            {
+                return _versionsFile;
             }
 
             public IEnumerable<string> GetFiles(string name)
@@ -371,6 +392,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 return _versionFile.TryGetValue(name, out ent) ? ent.SemanticVersion : null;
             }
 
+            public IEnumerable<CacheEntry> GetEntries()
+            {
+                return _versionFile;
+            }
+
             public IEnumerable<string> GetFiles(string name)
             {
                 return Enumerable.Empty<string>();
@@ -398,6 +424,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         }
 
         private ICache Cache { get; set; }
+
+        public IPackageRepository PackageRepository
+        {
+            get { return _packageRepository; }
+        }
 
         private InternalPackageManager(string url, string targetPath,
                                       bool keepInCache = false, string cachePath = null, bool useVersionOnly = false)
@@ -445,6 +476,10 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             _parent = BuildPackManager();
         }
 
+        public IEnumerable<CacheEntry> GetEntries()
+        {
+            return Cache.GetEntries();
+        }
 
 // ReSharper disable once UnusedMethodReturnValue.Global
         public IEnumerable<string> Install(string name,bool forceCopy = false)
@@ -463,11 +498,9 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             string[] files = Cache.GetFiles(name).ToArray();
             if (files.Length == 0) return;
 
-            string root = Cache.Root;
-            foreach (var file in files)
-            {
-                File.Delete(file.Replace(root, _targetPath));
-            }
+            string cacheRoot = Cache.Root;
+            if(!string.IsNullOrEmpty(_targetPath))
+                UpdateManager.AddFileToDelete(files.Select(s => s.Replace(cacheRoot, _targetPath)));
 
             Cache.Remove(name);
         }
@@ -476,7 +509,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         {
             if (name == null) throw new ArgumentNullException("name");
 
-            var pack = _packageRepository.FindPackage(name, spec, null, true, true);
+            var pack = PackageRepository.FindPackage(name, spec, null, true, true);
             if (pack == null)
             {
                 if(_parent == null)
@@ -575,7 +608,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             if (Cache is NullCache) return false;
             _updates = new List<IPackage>();
 
-            foreach (var package in _packageRepository.GetUpdates(Cache, true, false))
+            foreach (var package in PackageRepository.GetUpdates(Cache, true, false))
             {
                 _updates.Add(package);
             }

@@ -59,6 +59,8 @@ namespace Tauron.Application.RadioStreamer.Core
 		[StatusBarItemImport]
 		private object[] _statusBarItems;
 
+	    private object[] _contextMenuEntrys;
+
 	    [NotNull]
 	    public object[] StatusBarItems
 		{

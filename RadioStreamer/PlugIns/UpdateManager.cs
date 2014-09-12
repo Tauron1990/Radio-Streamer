@@ -1,5 +1,7 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Security;
 using System.Xml;
 using System.Xml.Serialization;
@@ -10,6 +12,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
     public static class UpdateManager
     {
         private const string UpdatePath = "Updates";
+        private const string DeletePath = "Delete";
         private const string UpdateManifestFile = "manifest.conf";
 
         public class UpdateManifest
@@ -17,7 +20,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public string TargetLocation { get; set; } 
         }
 
-        private static readonly XmlSerializer Serializer = new XmlSerializer(typeof(UpdateManifest));
+        private static readonly XmlSerializer InstallSerializer = new XmlSerializer(typeof(UpdateManifest));
+        private static readonly XmlSerializer DeleteSerializer = new XmlSerializer(typeof (List<string>));
 
         [NotNull]
         public static string FullUpdatePath 
@@ -28,41 +32,90 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             } 
         }
 
+        public static string FullDeletePath
+        {
+            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeletePath); }
+        }
+
         public static void InstallUpdates()
         {
-            if(!Directory.Exists(FullUpdatePath)) return;
-
-            foreach (var directory in Directory.EnumerateDirectories(UpdatePath))
+            if (Directory.Exists(FullUpdatePath))
             {
-                try
+                foreach (var directory in Directory.EnumerateDirectories(UpdatePath))
                 {
-                    string manifestPath = Path.Combine(directory, UpdateManifestFile);
-                    UpdateManifest manifest;
-
-                    using (var stream = new FileStream(manifestPath, FileMode.Open))
-                        manifest = (UpdateManifest) Serializer.Deserialize(stream);
-
-                    File.Delete(manifestPath);
-
-                    foreach (var file in Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories))
+                    try
                     {
-                        var targetPath = file.Replace(directory, manifest.TargetLocation);
+                        string manifestPath = Path.Combine(directory, UpdateManifestFile);
+                        UpdateManifest manifest;
 
-                        string copydic = Path.GetDirectoryName(targetPath);
-                        if (!Directory.Exists(copydic)) Directory.CreateDirectory(copydic);
+                        using (var stream = new FileStream(manifestPath, FileMode.Open))
+                            manifest = (UpdateManifest) InstallSerializer.Deserialize(stream);
 
-                        File.Copy(file, targetPath, true);
+                        File.Delete(manifestPath);
+
+                        foreach (var file in Directory.EnumerateFiles(directory, "*.*", SearchOption.AllDirectories))
+                        {
+                            var targetPath = file.Replace(directory, manifest.TargetLocation);
+
+                            string copydic = Path.GetDirectoryName(targetPath);
+                            if (!Directory.Exists(copydic)) Directory.CreateDirectory(copydic);
+
+                            File.Copy(file, targetPath, true);
+                        }
+                    }
+                    catch (InvalidOperationException)
+                    {
+                    }
+                    catch (IOException)
+                    {
+                    }
+                    catch (UnauthorizedAccessException)
+                    {
+                    }
+                    catch (XmlException)
+                    {
+                    }
+                    catch (SecurityException)
+                    {
+                    }
+                    catch (ArgumentException)
+                    {
                     }
                 }
-                catch (InvalidOperationException) { }
-                catch(IOException){ }
-                catch(UnauthorizedAccessException) { }
-                catch(XmlException) { }
-                catch(SecurityException) { }
-                catch(ArgumentException) { }
+
+                Directory.Delete(FullUpdatePath, true);
             }
 
-            Directory.Delete(FullUpdatePath, true);
+            if(!Directory.Exists(FullDeletePath)) return;
+
+            try
+            {
+                using (var stream = new FileStream(Path.Combine(FullDeletePath, UpdateManifestFile), FileMode.Open))
+                {
+                    var files = (List<string>) DeleteSerializer.Deserialize(stream);
+
+                    foreach (var file in files)
+                    {
+                        var info = new FileInfo(file);
+                        var dic = info.Directory;
+
+                        info.Delete();
+                            
+                        if(dic != null && dic.EnumerateFileSystemInfos().FirstOrDefault() == null)
+                            dic.Delete();
+                    }
+                }
+            }
+            catch (IOException)
+            {
+            }
+            catch (XmlException)
+            {
+            }
+            finally
+            {
+                Directory.Delete(FullDeletePath, true);
+            }
         }
 
         public static FileAdder PutUpdate([NotNull] string name, [NotNull] string targetPath)
@@ -75,9 +128,44 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             Directory.CreateDirectory(updateLocation);
             
             using (var stream = new FileStream(Path.Combine(updateLocation, UpdateManifestFile), FileMode.Create))
-                Serializer.Serialize(stream, new UpdateManifest {TargetLocation = targetPath});
+                InstallSerializer.Serialize(stream, new UpdateManifest {TargetLocation = targetPath});
 
             return new PathFileAdder(updateLocation);
+        }
+
+        public static void AddFileToDelete(IEnumerable<string> files)
+        {
+            string path = Path.Combine(FullUpdatePath, UpdateManifestFile);
+
+            List<string> filesList = null;
+
+            if (File.Exists(path))
+            {
+                try
+                {
+                    using (var stream = new FileStream(path, FileMode.Open))
+                    {
+                        filesList = (List<string>) DeleteSerializer.Deserialize(stream);
+                    }
+                }
+                finally
+                {
+                    if (filesList == null)
+                    {
+                        filesList = new List<string>();
+                        File.Delete(path);
+                    }
+                }
+            }
+            else 
+                filesList = new List<string>();
+
+            filesList.AddRange(files);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                DeleteSerializer.Serialize(stream, filesList);
+            }
         }
     }
 }

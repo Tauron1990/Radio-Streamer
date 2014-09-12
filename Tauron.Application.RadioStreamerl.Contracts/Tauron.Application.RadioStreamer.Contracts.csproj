@@ -44,6 +44,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AppConstants.cs" />
+    <Compile Include="Core\IPackInfo.cs" />
     <Compile Include="Core\IPlugInManager.cs" />
     <Compile Include="Core\PlayerViewVisibleChanged.cs" />
     <Compile Include="Core\Attributes\ExportRadioPlayer.cs" />
