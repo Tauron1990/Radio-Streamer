@@ -5,8 +5,12 @@ using System.IO;
 using System.Runtime;
 using System.Runtime.ExceptionServices;
 using System.Security;
+using System.Security.Principal;
+using System.Threading;
+using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Interop;
 using Tauron.Application.RadioStreamer.PlugIns;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer
 {
@@ -30,24 +34,55 @@ namespace Tauron.Application.RadioStreamer
         [STAThread]
         public static void Main()
         {
-            string profileOptimizionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jitter");
-            if (!Directory.Exists(profileOptimizionPath)) Directory.CreateDirectory(profileOptimizionPath);
+            bool first;
+            string applicationIdentifier = "RadioStreamer" + Environment.UserName;
 
-            ProfileOptimization.SetProfileRoot(profileOptimizionPath);
-            ProfileOptimization.StartProfile("Main.jit");
+            string channelName = string.Concat(applicationIdentifier, ":", "SingeInstanceIPCChannel");
+            var mutex = new Mutex(true, applicationIdentifier, out first);
 
-            var domain = AppDomain.CurrentDomain;
-            domain.SetPrincipalPolicy(System.Security.Principal.PrincipalPolicy.WindowsPrincipal);
-            domain.UnhandledException += OnUnhandledException;
+            try
+            {
+                if (!first)
+                    SignalFirstInstance(channelName, applicationIdentifier);
+
+                string profileOptimizionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jitter");
+                if (!Directory.Exists(profileOptimizionPath)) Directory.CreateDirectory(profileOptimizionPath);
+
+                ProfileOptimization.SetProfileRoot(profileOptimizionPath);
+                ProfileOptimization.StartProfile("Main.jit");
+
+                var domain = AppDomain.CurrentDomain;
+                domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
+                domain.UnhandledException += OnUnhandledException;
            
-            #if !DEBUG
-            LoadApplication();
-            #endif
+                #if !DEBUG
+                LoadApplication();
+                #endif
    
-            StartApp();
+                StartApp(mutex, channelName);
+            }
+            finally
+            {
+                CleanUp();
+            }
+        }
+
+        private static void SignalFirstInstance([NotNull] string channelName, [NotNull] string applicationIdentifier)
+        {
+            if (channelName == null) throw new ArgumentNullException("channelName");
+            if (applicationIdentifier == null) throw new ArgumentNullException("applicationIdentifier");
+
+            SingleInstance<App>.SignalFirstInstance(channelName,
+                SingleInstance<App>.GetCommandLineArgs(applicationIdentifier));
+        }
+
+        private static void CleanUp()
+        {
+            SingleInstance<App>.Cleanup();
         }
 
 
+        [UsedImplicitly]
         private static void LoadApplication()
         {
             var progressDialog = NativeMethods.CreateProgressDialog();
@@ -106,21 +141,26 @@ namespace Tauron.Application.RadioStreamer
         }
 
         [DebuggerStepThrough]
-        private static void CheckCancel(IWinProgressDialog dialog)
+        private static void CheckCancel([NotNull] IWinProgressDialog dialog)
         {
-            if(dialog.HasUserCancelled())
+            if (dialog.HasUserCancelled())
                 Environment.Exit(-1);
         }
 
-        private static void StartApp()
+        private static void StartApp([NotNull] Mutex mutex, [NotNull] string channelName)
         {
-            App.Setup();
+            App.Setup(mutex, channelName);
         }
 
         [HandleProcessCorruptedStateExceptions, SecurityCritical]
-        private static void OnUnhandledException([JetBrains.Annotations.NotNull] object sender, [JetBrains.Annotations.NotNull] UnhandledExceptionEventArgs args)
+        private static void OnUnhandledException([NotNull] object sender, [NotNull] UnhandledExceptionEventArgs args)
         {
             CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
+        }
+
+        public static void Restart()
+        {
+        
         }
     }
 }

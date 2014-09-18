@@ -25,5 +25,7 @@
         public const string SprectrumViewModel = "SprectrumViewModel";
 
         public const string RadioCreateViewModel = "RadioCreateModel";
+
+        public const string AddInViewModel = "AddInViewModel";
     }
 }

@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.Collections.Generic;
+using System.Threading;
+using System.Windows;
 using System.Windows.Input;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
@@ -7,14 +9,14 @@ using Tauron.Application.Views;
 
 namespace Tauron.Application.RadioStreamer
 {
-	internal class App : WpfApplication
+	internal class App : WpfApplication, ISingleInstanceApp
 	{
 	    public App()
 			: base(true)
 		{
 		}
 
-	    public static void Setup()
+        public static void Setup(Mutex mutex, string channelName)
         {
             #if !DEBUG
              var assemblyVersionAttribute = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyVersionAttribute>();
@@ -25,7 +27,7 @@ namespace Tauron.Application.RadioStreamer
             Run<App>();
 		    BugSense.DetachHandler();
             #else
-            Run<App>();
+            Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
             #endif
         }
 
@@ -75,5 +77,12 @@ namespace Tauron.Application.RadioStreamer
             SimpleLocalize.Register(RadioStreamerResources.ResourceManager, GetType().Assembly);
 		    //CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Purple, null);
 		}
+
+	    public bool SignalExternalCommandLineArgs(IList<string> args)
+	    {
+	        if (MainWindow != null) MainWindow.Focus();
+	        return true;
+	    }
+
 	}
 }

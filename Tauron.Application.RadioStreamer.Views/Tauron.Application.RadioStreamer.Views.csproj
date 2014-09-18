@@ -51,11 +51,16 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AddIns\AddInViewModel.cs" />
+    <Compile Include="AddIns\InternalAddInInfo.cs" />
+    <Compile Include="AddIns\AddInView.xaml.cs">
+      <DependentUpon>AddInView.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Helper\convertTextInputToVisibility.cs" />
     <Compile Include="Helper\FavoriteColorConverter.cs" />
     <Compile Include="Helper\LocalizeLabelTextConverter.cs" />
     <Compile Include="Helper\MaxHeightExpanderSetter.cs" />
-    <Compile Include="MedadataView\MetadataWindow.xaml.cs">
+    <Compile Include="MetadataWindow.xaml.cs">
       <DependentUpon>MetadataWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="MedadataView\MetadataWindowViewModel.cs" />
@@ -88,7 +93,11 @@
     <Compile Include="ViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="MedadataView\MetadataWindow.xaml">
+    <Page Include="AddIns\AddInView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="MetadataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

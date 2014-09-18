@@ -5,10 +5,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 {
     public interface IPackInfo
     {
-        bool CanUnInstall { get; }
-
-        void UnInstall();
-
         [NotNull]
         string Name { get; }
 
@@ -17,5 +13,17 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         [NotNull]
         Version Version { get; }
+    }
+
+    public interface IInstalledPackInfo : IPackInfo
+    {
+        bool CanUnInstall { get; }
+
+        void UnInstall();
+    }
+
+    public interface IInstallablePackInfo : IPackInfo
+    {
+        void Install();
     }
 }

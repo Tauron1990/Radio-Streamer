@@ -13,13 +13,13 @@ namespace Tauron.Application.RadioStreamer.PlugIns
     [Export(typeof (IPlugInManager))]
     public class PlugInManager : IPlugInManager
     {
-        private class PackInfo : IPackInfo
+        private class InstalledPackInfo : IInstalledPackInfo
         {
             private static readonly IPackageRepository MachineCache = NuGet.MachineCache.Default;
 
             private readonly string _name;
 
-            public PackInfo([NotNull] InternalPackageManager.CacheEntry cacheEntry,
+            public InstalledPackInfo([NotNull] InternalPackageManager.CacheEntry cacheEntry,
                 [NotNull] IPackageRepository repository)
             {
                 if (cacheEntry == null) throw new ArgumentNullException("cacheEntry");
@@ -47,6 +47,28 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public string Description { get; private set; }
             public Version Version { get; private set; }
         }
+        private class InstallablePackInfo : IInstallablePackInfo
+        {
+            private readonly IPackage _package;
+            private readonly InternalPackageManager _manager;
+
+            public InstallablePackInfo([NotNull] IPackage package, [NotNull] InternalPackageManager manager)
+            {
+                if (package == null) throw new ArgumentNullException("package");
+                if (manager == null) throw new ArgumentNullException("manager");
+
+                _package = package;
+                _manager = manager;
+            }
+
+            public string Name { get { return _package.Title; } }
+            public string Description { get { return _package.Description; } }
+            public Version Version { get { return _package.Version.Version; } }
+            public void Install()
+            {
+                _manager.InstallPackage(_package);
+            }
+        }
 
         private readonly InternalPackageManager _pluginManager;
         private readonly InternalPackageManager _packageManager;
@@ -57,11 +79,16 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             _packageManager = InternalPackageManager.BuildPackManager();
         }
 
-        public IEnumerable<IPackInfo> GetPackInfos()
+        public IEnumerable<IInstallablePackInfo> GetAvailableAddIns()
+        {
+            return _pluginManager.GetAvailableAddIns().Select(p => new InstallablePackInfo(p, _pluginManager));
+        }
+
+        public IEnumerable<IInstalledPackInfo> GetInstalledAddIns()
         {
             return
                 _pluginManager.GetEntries()
-                    .Select(cacheEntry => new PackInfo(cacheEntry, _packageManager.PackageRepository));
+                    .Select(cacheEntry => new InstalledPackInfo(cacheEntry, _packageManager.PackageRepository));
         }
 
         public void LoadPakage(string name)

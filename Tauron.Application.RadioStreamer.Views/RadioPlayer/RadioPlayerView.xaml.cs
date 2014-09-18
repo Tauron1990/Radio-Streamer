@@ -1,4 +1,6 @@
-﻿using System;
+﻿#region Usings
+
+using System;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Animation;
@@ -6,57 +8,63 @@ using Tauron.Application.Controls;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.Views;
 
+#endregion
+
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 {
-	/// <summary>
-	/// Interaktionslogik für RadioPlayerView.xaml
-	/// </summary>
-	[ExportView(AppConstants.DefaultContentTab, Order = 200)]
-	public partial class RadioPlayerView : IHeaderProvider
-	{
-		private Window _window;
+    /// <summary>
+    ///     Interaktionslogik für RadioPlayerView.xaml
+    /// </summary>
+    [ExportView(AppConstants.DefaultContentTab, Order = 200)]
+    public partial class RadioPlayerView : IHeaderProvider
+    {
+        private Window _window;
 
-	    public RadioPlayerView()
-	    {
-	        InitializeComponent();
-	    }
+        public RadioPlayerView()
+        {
+            InitializeComponent();
+        }
 
-	    private void RadioLoaded(object sender, RoutedEventArgs e)
-		{
-			_window = Window.GetWindow(this);
-			_window.SizeChanged += MainWindowSizeChanged;
+        public object Header
+        {
+            get { return AppConstants.RadioPlayerHeader; }
+        }
 
-			InitAnimation();
-		}
-		private void MainWindowSizeChanged(object sender, SizeChangedEventArgs e)
-		{
-			if (!e.WidthChanged) return;
+        private void RadioLoaded(object sender, RoutedEventArgs e)
+        {
+            _window = Window.GetWindow(this);
+            _window.SizeChanged += MainWindowSizeChanged;
 
-			InitAnimation();
-		}
+            InitAnimation();
+        }
 
-		private void InitAnimation()
-		{
-			var animation = new DoubleAnimation
-			{
-			    From = -100,
-			    To = _window.ActualWidth + 100,
-			    RepeatBehavior = RepeatBehavior.Forever
-			};
+        private void MainWindowSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            if (!e.WidthChanged) return;
 
-		    double duration = _window.ActualWidth / 90;
-			if (duration < 1)
-				duration = 1;
+            InitAnimation();
+        }
 
-			animation.Duration = new Duration(TimeSpan.FromSeconds((int)duration));
+        private void InitAnimation()
+        {
+            var animation = new DoubleAnimation
+            {
+                From = -100,
+                To = _window.ActualWidth + 100,
+                RepeatBehavior = RepeatBehavior.Forever
+            };
 
-			var clock = animation.CreateClock();
+            double duration = _window.ActualWidth/90;
+            if (duration < 1)
+                duration = 1;
 
-			RadioTitle.ApplyAnimationClock(Canvas.LeftProperty, clock);
+            animation.Duration = new Duration(TimeSpan.FromSeconds((int) duration));
 
-			clock.Controller.Begin();
-		}
+            var clock = animation.CreateClock();
 
-	    public object Header { get { return AppConstants.RadioPlayerHeader; } }
-	}
+            RadioTitle.ApplyAnimationClock(Canvas.LeftProperty, clock);
+
+            clock.Controller.Begin();
+        }
+    }
 }

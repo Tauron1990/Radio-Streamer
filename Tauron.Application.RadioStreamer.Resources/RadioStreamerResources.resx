@@ -283,4 +283,25 @@
   <data name="ThemeSwichMessage" xml:space="preserve">
     <value>The Theme becomes available after Restart.</value>
   </data>
+  <data name="AddInViewModuleLabel" xml:space="preserve">
+    <value>Modules</value>
+  </data>
+  <data name="AddInViewAddinsLabel" xml:space="preserve">
+    <value>Addins</value>
+  </data>
+  <data name="AddInViewReadyAddInsLabel" xml:space="preserve">
+    <value>Available AddIns </value>
+  </data>
+  <data name="AddInViewUnistallButtonLabel" xml:space="preserve">
+    <value>Uninstall</value>
+  </data>
+  <data name="AddInViewInstallButton" xml:space="preserve">
+    <value>Install</value>
+  </data>
+  <data name="InstallingLabel" xml:space="preserve">
+    <value>Installing</value>
+  </data>
+  <data name="ViewAddinManagerLabel" xml:space="preserve">
+    <value>AddIns</value>
+  </data>
 </root>

@@ -42,6 +42,14 @@ namespace Tauron.Application.RadioStreamer.Styling
             _themes = ThemePath.GetFiles("*." + ThemeExt, SearchOption.TopDirectoryOnly);
         }
 
+        public event EventHandler ThemeChanged;
+
+        private void OnThemeChanged()
+        {
+            EventHandler handler = ThemeChanged;
+            if (handler != null) handler(this, EventArgs.Empty);
+        }
+
         public string CurrentTheme { get { return _tauronEnviroment.Settings.Theme; } }
 
         public string[] Themes { get { return _themes; } }
@@ -53,6 +61,7 @@ namespace Tauron.Application.RadioStreamer.Styling
             _tauronEnviroment.Settings.Theme = name;
             _tauronEnviroment.Settings.Save();
         
+            OnThemeChanged();
         }
 
         public void LoadResources()

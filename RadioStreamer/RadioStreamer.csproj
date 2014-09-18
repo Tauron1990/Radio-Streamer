@@ -45,6 +45,9 @@
     <ApplicationManifest>app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bugsense.WPF">
+      <HintPath>..\packages\Bugsense.WPF.1.0.5\lib\net40\Bugsense.WPF.dll</HintPath>
+    </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
       <Private>True</Private>
@@ -84,9 +87,6 @@
     <Compile Include="Core\MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Tester.xaml.cs">
-      <DependentUpon>Tester.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interop\NativeMethods.cs" />
     <Compile Include="PlugIns\AggregareFileAdder.cs" />
     <Compile Include="PlugIns\FileAdder.cs" />
@@ -96,6 +96,7 @@
     <Compile Include="PlugIns\PlugInManager.cs" />
     <Compile Include="PlugIns\UpdateManager.cs" />
     <Compile Include="Programm.cs" />
+    <Compile Include="ProgrammManager.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -149,10 +150,6 @@
     <Page Include="Core\MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Core\Tester.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="StartResources.xaml">
       <Generator>MSBuild:Compile</Generator>

@@ -6,6 +6,7 @@
 			 xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:hard="http://www.hardcodet.net/taskbar"
 			 xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns:conUI="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
 			 xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Core"
              mc:Ignorable="d" 
 			 d:DesignHeight="300" d:DesignWidth="300"
@@ -15,7 +16,7 @@
         <hard:TaskbarIcon DockPanel.Dock="Bottom" IconSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico"
                           ToolTipText="{Binding CurrentTrack}">
             <hard:TaskbarIcon.TrayToolTip>
-                <Border BorderThickness="1" BorderBrush="Black" Background="MistyRose">
+                <Border BorderThickness="1" BorderBrush="Black" Background="{StaticResource BackgroundBrush}">
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="60"/>
@@ -41,13 +42,13 @@
                 </Border>
             </hard:TaskbarIcon.TrayToolTip>
             <hard:TaskbarIcon.ContextMenu>
-                <ContextMenu>
+                <ContextMenu ItemsSource="{Binding NotifyContextMenu}">
                     <ContextMenu.Resources>
-                        <DataTemplate DataType="{x:Type local:ThemeInfo}">
-                            <MenuItem Header="{Binding Name}" IsEnabled="{Binding Enable}" hlp:EventBinder.Events="SimpleModeClick:Click"/>
-                        </DataTemplate>
+                        <HierarchicalDataTemplate DataType="{x:Type conUI:GenericMenuItem}" ItemsSource="{Binding MenuItems}">
+                            <MenuItem Header="{Binding Label}" IsEnabled="{Binding IsEnabled}" Icon="{Binding ImageSource}"
+                                      hlp:DataContextServices.Activate="True" hlp:EventBinder.Events="Click:Click"/>
+                        </HierarchicalDataTemplate>
                     </ContextMenu.Resources>
-                    <MenuItem Header="{hlp:SimpleLocalize Name=ThemeMenu}" ItemsSource="{Binding Themes}"/>
                 </ContextMenu>
             </hard:TaskbarIcon.ContextMenu>
         </hard:TaskbarIcon>

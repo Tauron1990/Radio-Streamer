@@ -51,6 +51,7 @@
     <Compile Include="Player\Engine\Impl\WebRadio.cs" />
     <Compile Include="Player\Engine\IPlaybackEngineMetadata.cs" />
     <Compile Include="Player\MemoryManager.cs" />
+    <Compile Include="RadioStreamerModule.cs" />
     <None Include="packages.config" />
     <None Include="Scripts\Technobase.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>

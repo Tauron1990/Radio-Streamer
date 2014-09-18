@@ -1,0 +1,64 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.AddIns.AddInView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+        xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+        xmlns:self="clr-namespace:Tauron.Application.RadioStreamer.Views.AddIns"
+        mc:Ignorable="d" hlp:DataContextServices.Activate="True"
+        hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.AddInViewModel}"
+        d:DesignHeight="300" d:DesignWidth="300">
+    <DockPanel Margin="10">
+        <TabControl>
+            <TabControl.Resources>
+                <DataTemplate DataType="{x:Type self:ModuleInfo}">
+                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource TextColor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="3" Text="{Binding Name}" Foreground="{StaticResource TextColor}"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Version}" Margin="3" Foreground="{StaticResource TextColor}"/>
+                            <TextBlock Margin="3" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"
+                                               Text="{Binding Description}"
+                                               TextWrapping="Wrap"  Foreground="{StaticResource TextColor}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+                <DataTemplate DataType="{x:Type self:InternalAddInInfo}">
+                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource TextColor}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="2*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*" />
+                                <RowDefinition Height="*" />
+                            </Grid.RowDefinitions>
+                            <TextBlock Margin="3" Text="{Binding Name}" Foreground="{StaticResource TextColor}"/>
+                            <TextBlock Grid.Column="1" Grid.Row="0" Text="{Binding Version}" Margin="3" Foreground="{StaticResource TextColor}"/>
+                            <TextBlock Margin="3" Grid.Column="0" Grid.Row="1" Text="{Binding Description}" TextWrapping="Wrap" Foreground="{StaticResource TextColor}"/>
+                            <Button Grid.Column="1" Grid.Row="1" Margin="2" IsEnabled="{Binding CanPerformAction}" Content="{Binding ButtonLabel}"/>
+                        </Grid>
+                    </Border>
+                </DataTemplate>
+            </TabControl.Resources>
+            <TabItem Header="{hlp:SimpleLocalize AddInViewModuleLabel}">
+                <ItemsControl ItemsSource="{Binding Modules}"/>
+            </TabItem>
+            <TabItem Header="{hlp:SimpleLocalize AddInViewAddinsLabel}">
+                <ItemsControl ItemsSource="{Binding AddIns}" hlp:DataContextServices.Activate="True"/>
+            </TabItem>
+            <TabItem Header="{hlp:SimpleLocalize AddInViewReadyAddInsLabel}">
+                <ItemsControl ItemsSource="{Binding ReadyAddIns}" hlp:DataContextServices.Activate="True"/>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

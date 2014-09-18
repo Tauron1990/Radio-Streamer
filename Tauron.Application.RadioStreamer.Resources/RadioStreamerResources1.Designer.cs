@@ -70,6 +70,51 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Addins ähnelt.
+        /// </summary>
+        public static string AddInViewAddinsLabel {
+            get {
+                return ResourceManager.GetString("AddInViewAddinsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Install ähnelt.
+        /// </summary>
+        public static string AddInViewInstallButton {
+            get {
+                return ResourceManager.GetString("AddInViewInstallButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Modules ähnelt.
+        /// </summary>
+        public static string AddInViewModuleLabel {
+            get {
+                return ResourceManager.GetString("AddInViewModuleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Available AddIns  ähnelt.
+        /// </summary>
+        public static string AddInViewReadyAddInsLabel {
+            get {
+                return ResourceManager.GetString("AddInViewReadyAddInsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Uninstall ähnelt.
+        /// </summary>
+        public static string AddInViewUnistallButtonLabel {
+            get {
+                return ResourceManager.GetString("AddInViewUnistallButtonLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die An Error has Occured.\n The Error Code is: {0} ähnelt.
         /// </summary>
         public static string BassErrorMessage {
@@ -156,6 +201,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string FavoritesLabel {
             get {
                 return ResourceManager.GetString("FavoritesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Installing ähnelt.
+        /// </summary>
+        public static string InstallingLabel {
+            get {
+                return ResourceManager.GetString("InstallingLabel", resourceCulture);
             }
         }
         
@@ -544,6 +598,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string UpdateAvailableMessage {
             get {
                 return ResourceManager.GetString("UpdateAvailableMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die AddIns ähnelt.
+        /// </summary>
+        public static string ViewAddinManagerLabel {
+            get {
+                return ResourceManager.GetString("ViewAddinManagerLabel", resourceCulture);
             }
         }
         

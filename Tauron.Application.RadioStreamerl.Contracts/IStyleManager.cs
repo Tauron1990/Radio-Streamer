@@ -1,9 +1,12 @@
-﻿using Tauron.JetBrains.Annotations;
+﻿using System;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts
 {
     public interface IStyleManager
     {
+        event EventHandler ThemeChanged;
+
         [NotNull]
         string CurrentTheme { get; }
 

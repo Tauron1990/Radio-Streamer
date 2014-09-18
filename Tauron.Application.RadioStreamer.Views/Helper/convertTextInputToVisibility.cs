@@ -1,14 +1,20 @@
-﻿using System;
+﻿#region Usings
+
+using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Data;
 using Tauron.JetBrains.Annotations;
+
+#endregion
 
 namespace Tauron.Application.RadioStreamer.Views.Helper
 {
     public class TextInputToVisibilityConverter : IMultiValueConverter
     {
         [NotNull]
-        public object Convert([NotNull] object[] values, [NotNull] Type targetType, [NotNull] object parameter, [NotNull] System.Globalization.CultureInfo culture )
+        public object Convert([NotNull] object[] values, [NotNull] Type targetType, [NotNull] object parameter,
+            [NotNull] CultureInfo culture)
         {
             // Always test MultiValueConverter inputs for non-null
             // (to avoid crash bugs for views in the designer)
@@ -25,7 +31,8 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
 
 
         [NotNull]
-        public object[] ConvertBack([NotNull] object value, [NotNull] Type[] targetTypes, [NotNull] object parameter, [NotNull] System.Globalization.CultureInfo culture )
+        public object[] ConvertBack([NotNull] object value, [NotNull] Type[] targetTypes, [NotNull] object parameter,
+            [NotNull] CultureInfo culture)
         {
             throw new NotImplementedException();
         }

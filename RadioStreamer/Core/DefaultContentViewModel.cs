@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Windows.Media;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
@@ -11,39 +12,6 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Core
 {
-    public class ThemeInfo : ViewModelBase
-    {
-        private readonly IDialogFactory _factory;
-        private string _name;
-
-        public ThemeInfo([NotNull] string name, [NotNull] IStyleManager manager, [NotNull] IDialogFactory factory)
-        {
-            _factory = factory;
-            _name = name;
-            Manager = manager;
-        }
-
-        [NotNull]
-        public string Name
-        {
-            get { return _name.GetFileNameWithoutExtension(); }
-        }
-
-        [NotNull]
-        public IStyleManager Manager { get; private set; }
-
-        public bool Enable { get { return Name != Manager.CurrentTheme; } }
-
-        [EventTarget]
-        public void Click()
-        {
-            Manager.SetTheme(_name);
-
-            _factory.ShowMessageBox(MainWindow, RadioStreamerResources.ThemeSwichMessage, "Themes", MsgBoxButton.Ok,
-                                    MsgBoxImage.Information, null);
-        }
-    }
-
 	[ExportViewModel(AppConstants.DefaultContentViewModel)]
 	public class DefaultContentViewModel : ViewModelBase, INotifyBuildCompled
 	{
@@ -58,9 +26,7 @@ namespace Tauron.Application.RadioStreamer.Core
 
 		[StatusBarItemImport]
 		private object[] _statusBarItems;
-
-	    private object[] _contextMenuEntrys;
-
+        
 	    [NotNull]
 	    public object[] StatusBarItems
 		{
@@ -106,35 +72,18 @@ namespace Tauron.Application.RadioStreamer.Core
 	        }
 	    }
 
-        private UISyncObservableCollection<ThemeInfo> _theme;
-
 	    [NotNull]
-	    public UISyncObservableCollection<ThemeInfo> Themes
+	    public IEnumerable<GenericMenuItem> NotifyContextMenu
 	    {
-	        get { return _theme; }
-	        set
-	        {
-	            if (Equals(_theme, value)) return;
-
-	            _theme = value;
-
-	            OnPropertyChanged();
-	        }
+	        get { return MenuItemService.GetMenu(MenuItemService.NotifyContextMenuName); }
 	    }
-        
+
 	    public void BuildCompled()
 	    {
 	        CurrentTrack = RadioStreamerResources.UnkownString;
 
 	        ToolTipImage = ImagesCache.ImageSources["StopImage"];
-
-            Themes = new UISyncObservableCollection<ThemeInfo>();
-
-	        foreach (var theme in _styleManager.Themes)
-	        {
-	            Themes.Add(new ThemeInfo(theme, _styleManager, _factory));
-	        }
-
+            
 	        _eventAggregator.GetEvent<RadioPlayerTitleRecived, string>().Subscribe(str => CurrentTrack = str);
 	        _eventAggregator.GetEvent<RadioPlayerPlay, EventArgs>()
 	                        .Subscribe(e => ToolTipImage = ImagesCache.ImageSources["PlayImage"]);

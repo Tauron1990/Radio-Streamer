@@ -36,11 +36,6 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
         private static readonly ICache PackCache = new LocalCache(PackPath, false);
 
-        public static IEnumerable<CacheEntry> GetPackEntries()
-        {
-            return PackCache.GetEntries();
-        }
-
         public static InternalPackageManager BuildRootManager()
         {
             string targetPath = AppDomain.CurrentDomain.BaseDirectory;
@@ -537,10 +532,15 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 return;
             }
 
-            InstallPackage(pack, files, forceCopy);
+            InstallPackagePrivate(pack, files, forceCopy);
         }
 
-        private void InstallPackage(IPackage pack, HashSet<string> files = null, bool forceCopy = false)
+        public void InstallPackage(IPackage package)
+        {
+            InstallPackagePrivate(package);
+        }
+
+        private void InstallPackagePrivate(IPackage pack, HashSet<string> files = null, bool forceCopy = false)
         {
             FrameworkName targetVersion = SelectCorrectVersion(pack);
             if (targetVersion == null) return;
@@ -622,7 +622,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         {
             foreach (var package in _updates)
             {
-                InstallPackage(package);
+                InstallPackagePrivate(package);
             }
 
             _parent.InstallUpdates();
@@ -635,6 +635,12 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         //    _downloadPath.DeleteDirectory();
 
         //}
+        public IEnumerable<IPackage> GetAvailableAddIns()
+        {
+            var installed = new List<string>(Cache.Select(p => p.Id));
+
+            return _packageRepository.GetPackages().Where(p => p.Tags.Contains("AddIn") && !installed.Contains(p.Id));
+        }
     }
 }
 // ReSharper restore CodeAnnotationAnalyzer

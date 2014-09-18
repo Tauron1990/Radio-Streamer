@@ -1,4 +1,6 @@
-﻿using System.Collections.Generic;
+﻿#region Usings
+
+using System.Collections.Generic;
 using System.Linq;
 using Tauron.Application.BassLib.Misc;
 using Tauron.Application.Ioc;
@@ -8,6 +10,8 @@ using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
+
+#endregion
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
 {
@@ -95,31 +99,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         //    }
         //}
 
-        public class PresetCollection : UISyncObservableCollection<EqManagerPresent>
-        {
-            private readonly EqManagerPresent _newPresent = new EqManagerPresent("<-" + RadioStreamerResources.NewLabel + "->")
-            {
-                OriginalName = RadioStreamerResources.NewLabel, 
-                PresetType = EqManagerPresetType.Newlabel
-            };
-
-            public PresetCollection([NotNull] IEnumerable<EqManagerPresent> @select)
-                : base(@select)
-            {
-                Items.Add(_newPresent);
-            }
-
-            protected override void InsertItem(int index, [CanBeNull] EqManagerPresent item)
-            {
-                if (item == null) return;
-                if (item == _newPresent) return;
-
-                if (Items.Count == index) Remove(_newPresent);
-                base.InsertItem(index - 1, item);
-                base.InsertItem(index,  _newPresent);
-            }
-        }
-
+        private EqManagerPresent _currentPresent;
+        private string _currentPresentName;
         private IEqualizerProfileDatabase _equalizerProfileDatabase;
 
         [Inject]
@@ -137,8 +118,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [NotNull]
         public IEqualizer Equalizer { get; private set; }
 
-        private string _currentPresentName;
-
         [NotNull]
         public string CurrentPresentName
         {
@@ -154,18 +133,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
             }
         }
 
-        private void UpdateEqName([NotNull] string currentPresentName, [NotNull] string value)
-        {
-            if (CurrentPresent == null || CurrentPresent.PresetType == EqManagerPresetType.Newlabel) return;
-
-            if (CurrentPresent.Name == currentPresentName) CurrentPresent.Name += "*";
-            else CurrentPresent.Name = CurrentPresent.OriginalName;
-        }
-
         [NotNull]
         public UISyncObservableCollection<EqManagerPresent> Presets { get; private set; }
-
-        private EqManagerPresent _currentPresent;
 
         [CanBeNull]
         public EqManagerPresent CurrentPresent
@@ -182,12 +151,20 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
             }
         }
 
+        private void UpdateEqName([NotNull] string currentPresentName, [NotNull] string value)
+        {
+            if (CurrentPresent == null || CurrentPresent.PresetType == EqManagerPresetType.Newlabel) return;
+
+            if (CurrentPresent.Name == currentPresentName) CurrentPresent.Name += "*";
+            else CurrentPresent.Name = CurrentPresent.OriginalName;
+        }
+
         private void UpdatePreset([CanBeNull] EqManagerPresent value)
         {
             if (value == null || value.PresetType == EqManagerPresetType.Newlabel)
             {
                 if (_currentPresent == null || CurrentPresentName != _currentPresent.Name) return;
-                
+
                 CurrentPresentName = string.Empty;
                 Equalizer.Band0 = 0;
                 Equalizer.Band1 = 0;
@@ -216,7 +193,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         [CommandTarget]
         private void Save()
         {
-            if(CurrentPresent == null) return;
+            if (CurrentPresent == null) return;
 
             switch (CurrentPresent.PresetType)
             {
@@ -252,6 +229,32 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
                 Presets.Remove(CurrentPresent);
             }
             CurrentPresent = null;
+        }
+
+        public class PresetCollection : UISyncObservableCollection<EqManagerPresent>
+        {
+            private readonly EqManagerPresent _newPresent =
+                new EqManagerPresent("<-" + RadioStreamerResources.NewLabel + "->")
+                {
+                    OriginalName = RadioStreamerResources.NewLabel,
+                    PresetType = EqManagerPresetType.Newlabel
+                };
+
+            public PresetCollection([NotNull] IEnumerable<EqManagerPresent> @select)
+                : base(@select)
+            {
+                Items.Add(_newPresent);
+            }
+
+            protected override void InsertItem(int index, [CanBeNull] EqManagerPresent item)
+            {
+                if (item == null) return;
+                if (item == _newPresent) return;
+
+                if (Items.Count == index) Remove(_newPresent);
+                base.InsertItem(index - 1, item);
+                base.InsertItem(index, _newPresent);
+            }
         }
     }
 }

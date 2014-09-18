@@ -1,26 +1,27 @@
-﻿using Tauron.Application.Controls;
+﻿#region Usings
+
+using Tauron.Application.Controls;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.Views;
 
+#endregion
+
 namespace Tauron.Application.RadioStreamer.Views.RadioManager
 {
-	/// <summary>
-	/// Interaktionslogik für RadioManager.xaml
-	/// </summary>
-	[ExportView(AppConstants.DefaultContentTab, Order = 100)]
-	public partial class RadioManagerView : IHeaderProvider
-	{
+    /// <summary>
+    ///     Interaktionslogik für RadioManager.xaml
+    /// </summary>
+    [ExportView(AppConstants.DefaultContentTab, Order = 100)]
+    public partial class RadioManagerView : IHeaderProvider
+    {
         public RadioManagerView()
-		{
-			InitializeComponent();
-		}
+        {
+            InitializeComponent();
+        }
 
-	    public object Header
-	    {
-	        get
-	        {
-	            return "Radio Manager";
-	        }
-	    }
-	}
+        public object Header
+        {
+            get { return "Radio Manager"; }
+        }
+    }
 }

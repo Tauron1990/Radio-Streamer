@@ -6,7 +6,10 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
     public interface IPlugInManager
     {
         [NotNull]
-        IEnumerable<IPackInfo> GetPackInfos(); 
+        IEnumerable<IInstallablePackInfo> GetAvailableAddIns();
+        
+        [NotNull]
+        IEnumerable<IInstalledPackInfo> GetInstalledAddIns(); 
 
         void LoadPakage([NotNull] string name);
         void InstallPlugIn([NotNull] string name);
