@@ -8,12 +8,13 @@
         xmlns:self="clr-namespace:Tauron.Application.RadioStreamer.Views.AddIns"
         mc:Ignorable="d" hlp:DataContextServices.Activate="True"
         hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.AddInViewModel}"
-        d:DesignHeight="300" d:DesignWidth="300">
+        d:DesignHeight="300" d:DesignWidth="300" Background="{StaticResource BackgroundBrush}" WindowStyle="ToolWindow"
+        Icon="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico">
     <DockPanel Margin="10">
         <TabControl>
             <TabControl.Resources>
                 <DataTemplate DataType="{x:Type self:ModuleInfo}">
-                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource TextColor}">
+                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource FavoriteNormalColor}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*" />
@@ -32,7 +33,7 @@
                     </Border>
                 </DataTemplate>
                 <DataTemplate DataType="{x:Type self:InternalAddInInfo}">
-                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource TextColor}">
+                    <Border Margin="5" BorderThickness="5" BorderBrush="{StaticResource FavoriteNormalColor}">
                         <Grid>
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="2*" />

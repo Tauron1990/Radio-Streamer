@@ -93,7 +93,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.Controls.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Resources.nuspec
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Bass.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Contracts.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Database.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.RadioStreamer.Views.nuspec
@@ -176,3 +175,4 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csproj.GenerateResource.Cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.exe
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Bass.nuspec

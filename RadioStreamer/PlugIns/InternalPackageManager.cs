@@ -639,7 +639,9 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         {
             var installed = new List<string>(Cache.Select(p => p.Id));
 
-            return _packageRepository.GetPackages().Where(p => p.Tags.Contains("AddIn") && !installed.Contains(p.Id));
+            return
+                _packageRepository.GetPackages()
+                    .Where(p => p.Tags != null && p.Tags.Contains("AddIn") && !installed.Contains(p.Id));
         }
     }
 }

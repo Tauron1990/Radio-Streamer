@@ -118,7 +118,6 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\JetBrains.Annotations.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.Common.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.Bass.nuspec
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.Common.Wpf.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.RadioStreamer.Contracts.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.RadioStreamer.Database.nuspec
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Database\bin\Debug\Tauron.Application.RadioStreamer.Database.dll

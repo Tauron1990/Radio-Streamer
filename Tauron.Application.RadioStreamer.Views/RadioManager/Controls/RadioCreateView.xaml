@@ -11,7 +11,7 @@
         hlp:CompositionServices.ImportViewModel="{x:Static contstants:AppConstants.RadioCreateViewModel}"
         hlp:ControlHelper.MarkWindow="Window"
         d:DataContext="{d:DesignInstance local:RadioCreateViewModel}" MaxWidth="800" MaxHeight="600"
-        SizeToContent="WidthAndHeight" WindowStyle="ToolWindow">
+        SizeToContent="WidthAndHeight" WindowStyle="ToolWindow" Icon="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico">
     <DockPanel>
         <DockPanel DockPanel.Dock="Bottom" LastChildFill="False" Margin="5">
             <Button DockPanel.Dock="Right" Margin="5" Content="{hlp:SimpleLocalize CloseButton}"

@@ -12,12 +12,12 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Database.Scripts
 {
     [Export(typeof(IEngineManager))]
-    public class EngineManager : IEngineManager
+    public class EngineManager : IEngineManager, INotifyBuildCompled
     {
         private const string ScriptsPath = "Scripts";
         private const string Cachedll = "Cache.dll";
         [Inject]
-        private IEnumerable<IScriptEngine> _engines;
+        private List<IScriptEngine> _engines;
 
         [Inject] 
         private ITauronEnviroment _enviroment;
@@ -106,6 +106,13 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             var asm = Assembly.LoadFile(dll);
 
             foreach (var scriptEngine in _engines) scriptEngine.ReadScripts(asm, _scripts);
+            ScriptNames = _scripts.Keys.ToArray();
+        }
+
+        public void BuildCompled()
+        {
+            EngineNames = _engines.Select(e => e.Name).ToArray();
+            Extensions = _engines.SelectMany(e => e.Extensions).ToArray();
         }
     }
 }
