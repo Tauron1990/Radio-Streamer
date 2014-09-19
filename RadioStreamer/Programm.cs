@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Reflection;
 using System.Runtime;
 using System.Runtime.ExceptionServices;
 using System.Security;
@@ -16,6 +17,8 @@ namespace Tauron.Application.RadioStreamer
 {
     public static class Programm
     {
+        private static bool _isRestart;
+
         private static readonly string[] AssemblysToInstall =
         {
             "JetBrains.Annotations",
@@ -54,17 +57,25 @@ namespace Tauron.Application.RadioStreamer
                 var domain = AppDomain.CurrentDomain;
                 domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);
                 domain.UnhandledException += OnUnhandledException;
-           
+
                 #if !DEBUG
                 LoadApplication();
                 #endif
-   
+
                 StartApp(mutex, channelName);
+            }
+            catch
+            {
+                _isRestart = false;
+                throw;
             }
             finally
             {
                 CleanUp();
             }
+
+            if (_isRestart)
+                Process.Start(Assembly.GetEntryAssembly().CodeBase);
         }
 
         private static void SignalFirstInstance([NotNull] string channelName, [NotNull] string applicationIdentifier)
@@ -156,11 +167,13 @@ namespace Tauron.Application.RadioStreamer
         private static void OnUnhandledException([NotNull] object sender, [NotNull] UnhandledExceptionEventArgs args)
         {
             CommonConstants.LogCommon(true, args.ExceptionObject.ToString());
+            _isRestart = false;
         }
 
         public static void Restart()
         {
-        
+            _isRestart = true;
+            CommonApplication.Current.Shutdown();
         }
     }
 }

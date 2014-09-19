@@ -35,6 +35,7 @@ namespace NugetPacker
                         pack.Save(stream);
                     }
 
+                    
                     Directory.Delete(directory, true);
 
                     Console.WriteLine("Done");
