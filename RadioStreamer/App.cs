@@ -1,7 +1,9 @@
 ﻿using System.Collections.Generic;
+using System.Reflection;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
+using Bugsense.WPF;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Resources;
@@ -19,9 +21,7 @@ namespace Tauron.Application.RadioStreamer
         public static void Setup(Mutex mutex, string channelName)
         {
             #if !DEBUG
-             var assemblyVersionAttribute = Assembly.GetEntryAssembly().GetCustomAttribute<AssemblyVersionAttribute>();
-            string version = "unkown";
-            if (assemblyVersionAttribute != null) version = assemblyVersionAttribute.Version;
+             var version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             BugSense.Init("w8cd1a17", version);
             Run<App>();
