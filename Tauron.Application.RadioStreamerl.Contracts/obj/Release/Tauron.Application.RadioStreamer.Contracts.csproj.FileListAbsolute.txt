@@ -44,3 +44,6 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.csprojResolveAssemblyReference.cache
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.dll
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.csprojResolveAssemblyReference.cache
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.dll
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamerl.Contracts\obj\Release\Tauron.Application.RadioStreamer.Contracts.pdb

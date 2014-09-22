@@ -19,8 +19,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         private const string NugetUrl = @"C:\nuget\Packages";
         private const string MyGetUrl = @"C:\nuget\Plugins";
 #else
-        private const string NugetUrl
-        private const string MyGetUrl
+        private const string NugetUrl = "Invaid";
+        private const string MyGetUrl = "Invalid";
 #endif
 
         private static readonly FrameworkName MyFrameWorkVersion = new FrameworkName(".NETFramework", new Version(4, 5));
