@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using System.Runtime;
 using System.Runtime.ExceptionServices;
 using System.Security;
@@ -16,6 +18,9 @@ namespace Tauron.Application.RadioStreamer
 {
     public static class Programm
     {
+        private const string UpdateCommadLine = "-Update"; 
+        private static bool _installUpdatesSolo;
+
         private static readonly string[] AssemblysToInstall =
         {
             "JetBrains.Annotations",
@@ -34,6 +39,11 @@ namespace Tauron.Application.RadioStreamer
         [STAThread]
         public static void Main()
         {
+            if (ExecuteSoloUpdate())
+            {
+                return;
+            }
+
             bool first;
             string applicationIdentifier = "RadioStreamer" + Environment.UserName;
 
@@ -58,7 +68,14 @@ namespace Tauron.Application.RadioStreamer
                 #if !DEBUG
                 LoadApplication();
                 #endif
-   
+
+                if (_installUpdatesSolo)
+                {
+                    SheduleSoloUpdate();
+                    mutex.Dispose();
+                    return;
+                }
+
                 StartApp(mutex, channelName);
             }
             finally
@@ -81,6 +98,46 @@ namespace Tauron.Application.RadioStreamer
             SingleInstance<App>.Cleanup();
         }
 
+        private static void SheduleSoloUpdate()
+        {
+            string file = Assembly.GetEntryAssembly().CodeBase;
+            string path = Path.Combine(Path.GetTempPath(), "Tauron");
+            if (!Directory.Exists(path)) Directory.CreateDirectory(path);
+
+            string newPath = file.Replace(AppDomain.CurrentDomain.BaseDirectory, path);
+            File.Copy(file, newPath, true);
+
+            Process.Start(newPath, UpdateCommadLine + AppDomain.CurrentDomain.BaseDirectory);
+        }
+
+        private static bool ExecuteSoloUpdate()
+        {
+            string[] args = Environment.GetCommandLineArgs();
+
+            if(!args.Contains(UpdateCommadLine)) return false;
+
+            bool found = false;
+            string path = null;
+
+            foreach (var s in args)
+            {
+                if (found)
+                    path = s;
+
+                if (s == UpdateCommadLine)
+                    found = true;
+            }
+
+            if (string.IsNullOrEmpty(path) || !Directory.Exists(path)) return false;
+
+            UpdateManager.FullUpdatePath = path;
+            UpdateManager.FullDeletePath = path;
+            UpdateManager.InstallUpdates();
+
+            Process.Start(Path.Combine(path, Path.GetFileName(Assembly.GetEntryAssembly().CodeBase)));
+
+            return true;
+        }
 
         [UsedImplicitly]
         private static void LoadApplication()
@@ -104,13 +161,18 @@ namespace Tauron.Application.RadioStreamer
                         CheckCancel(progressDialog);
                         packManager.Install(assembly);
                     }
+
+                    packManager.RegisterPack(
+                        new InternalPackageManager.CacheEntry(
+                            Assembly.GetExecutingAssembly().GetManifestResourceStream("RadioStreamer.nuspec")));
                 }
 
                 progressDialog.SetLine(2, "Check for Updates", false, IntPtr.Zero);
 
                 var managers = new List<InternalPackageManager>();
 
-                if(packManager.CheckForUpdates())
+                bool needCopy;
+                if (packManager.CheckForUpdates(new[] { "RadioStreamer" }, out needCopy))
                     managers.Add(packManager);
                 CheckCancel(progressDialog);
                 packManager = InternalPackageManager.BuildPackManager();
@@ -129,6 +191,13 @@ namespace Tauron.Application.RadioStreamer
                 CheckCancel(progressDialog);
 
                 progressDialog.SetLine(2, "Install Updates", false, IntPtr.Zero);
+
+                if (needCopy)
+                {
+                    _installUpdatesSolo = true;
+                    progressDialog.StopProgressDialog(); 
+                    return;
+                }
 
                 UpdateManager.InstallUpdates();
 

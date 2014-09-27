@@ -7,12 +7,14 @@
         <authors>Tauron</authors>
         <owners>Tauron</owners>
         <requireLicenseAcceptance>false</requireLicenseAcceptance>
-        <description>My package description.</description>
+        <description>Contains the Common UI for RadioStreamer</description>
         <copyright>Copyright ©  Tauron 2014</copyright>
         <dependencies>
             <group targetFramework=".NETFramework4.5">
                 <dependency id="Ookii.Dialogs" />
                 <dependency id="JetBrains.Annotations" />
+                <dependency id="Mono.CSharp" />
+                <dependency id="Hardcodet.NotifyIcon.Wpf" />
                 <dependency id="Tauron.Application.Bass" />
                 <dependency id="Tauron.Application.Common" />
                 <dependency id="Tauron.Application.Common.Wpf" />

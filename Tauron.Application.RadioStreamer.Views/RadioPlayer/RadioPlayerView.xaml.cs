@@ -15,19 +15,14 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
     /// <summary>
     ///     Interaktionslogik für RadioPlayerView.xaml
     /// </summary>
-    [ExportView(AppConstants.DefaultContentTab, Order = 200)]
-    public partial class RadioPlayerView : IHeaderProvider
+    [ExportView(AppConstants.RadioPlayerViewModelName, Order = 200)]
+    public partial class RadioPlayerView
     {
         private Window _window;
 
         public RadioPlayerView()
         {
             InitializeComponent();
-        }
-
-        public object Header
-        {
-            get { return AppConstants.RadioPlayerHeader; }
         }
 
         private void RadioLoaded(object sender, RoutedEventArgs e)

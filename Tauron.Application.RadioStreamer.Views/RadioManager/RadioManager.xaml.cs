@@ -11,17 +11,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
     /// <summary>
     ///     Interaktionslogik für RadioManager.xaml
     /// </summary>
-    [ExportView(AppConstants.DefaultContentTab, Order = 100)]
-    public partial class RadioManagerView : IHeaderProvider
+    [ExportView(AppConstants.RadioManagerViewModelName, Order = 100)]
+    public partial class RadioManagerView
     {
         public RadioManagerView()
         {
             InitializeComponent();
-        }
-
-        public object Header
-        {
-            get { return "Radio Manager"; }
         }
     }
 }

@@ -457,3 +457,11 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Core\MainWindow.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Core\MainWindow.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Hardcodet.Wpf.TaskbarNotification.dll
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Hardcodet.Wpf.TaskbarNotification.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Hardcodet.Wpf.TaskbarNotification.xml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Core\DefaultContent.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Core\DefaultContent.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\Mono.CSharp.dll

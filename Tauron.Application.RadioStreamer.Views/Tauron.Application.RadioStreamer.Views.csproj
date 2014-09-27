@@ -33,6 +33,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
+    </Reference>
+    <Reference Include="Mono.CSharp">
+      <HintPath>..\packages\Mono.CSharp.3.6.1\lib\net40\Mono.CSharp.dll</HintPath>
+    </Reference>
     <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Ookii.Dialogs.1.0\lib\net35\Ookii.Dialogs.Wpf.dll</HintPath>
@@ -43,6 +49,8 @@
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Drawing" />
+    <Reference Include="System.IO.Compression" />
+    <Reference Include="System.IO.Compression.FileSystem" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xaml" />
     <Reference Include="Microsoft.CSharp" />
@@ -56,6 +64,15 @@
     <Compile Include="AddIns\AddInView.xaml.cs">
       <DependentUpon>AddInView.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\DefaultContent.xaml.cs">
+      <DependentUpon>DefaultContent.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\DefaultContentViewModel.cs" />
+    <Compile Include="Core\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\ManualHeaderTemplateContentLoader.cs" />
+    <Compile Include="Core\ViewSelector.cs" />
     <Compile Include="Helper\convertTextInputToVisibility.cs" />
     <Compile Include="Helper\FavoriteColorConverter.cs" />
     <Compile Include="Helper\LocalizeLabelTextConverter.cs" />
@@ -90,12 +107,24 @@
       <DependentUpon>SprectrumView.xaml</DependentUpon>
     </Compile>
     <Compile Include="RadioPlayer\Sprectrum\SprecturmViewModel.cs" />
+    <Compile Include="Styling\ControlRegistry.cs" />
+    <Compile Include="Styling\Manager.cs" />
+    <Compile Include="Styling\StaticPackUrihelper.cs" />
+    <Compile Include="Styling\StyleScriptCompiler.cs" />
     <Compile Include="ViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="AddIns\AddInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Core\DefaultContent.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\MainWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="MetadataWindow.xaml">
       <SubType>Designer</SubType>
@@ -172,6 +201,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Funktioniert nicht .txt" />
+    <Resource Include="Styling\Style Guid.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--To modify your build process, add your task inside one of the targets below and uncomment it. 

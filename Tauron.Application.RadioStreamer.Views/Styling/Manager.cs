@@ -9,15 +9,15 @@ using System.Windows;
 using System.Windows.Markup;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
-using NuGet;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.UI;
+using Tauron.Application.RadioStreamer.Styling;
 using Tauron.Application.Views;
 
-namespace Tauron.Application.RadioStreamer.Styling
+namespace Tauron.Application.RadioStreamer.Views.Styling
 {
     [Export(typeof(IStyleManager))]
     internal sealed class Manager : IStyleManager, INotifyBuildCompled
@@ -124,7 +124,7 @@ namespace Tauron.Application.RadioStreamer.Styling
 
                             using (var stream = entry.Open())
                             {
-                                comp.BuildUp(stream.ReadToEnd());
+                                comp.BuildUp(new StreamReader(stream).ReadToEnd());
                             }
 
                             ((ThemeLoaderBase)

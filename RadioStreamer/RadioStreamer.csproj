@@ -48,10 +48,6 @@
     <Reference Include="Bugsense.WPF">
       <HintPath>..\packages\Bugsense.WPF.1.0.5\lib\net40\Bugsense.WPF.dll</HintPath>
     </Reference>
-    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
-      <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
     <Reference Include="Microsoft.Web.XmlTransform">
       <HintPath>..\packages\Microsoft.Web.Xdt.2.1.1\lib\net40\Microsoft.Web.XmlTransform.dll</HintPath>
       <Private>True</Private>
@@ -80,13 +76,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App.cs" />
-    <Compile Include="Core\DefaultContent.xaml.cs">
-      <DependentUpon>DefaultContent.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Core\DefaultContentViewModel.cs" />
-    <Compile Include="Core\MainWindow.xaml.cs">
-      <DependentUpon>MainWindow.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Interop\NativeMethods.cs" />
     <Compile Include="PlugIns\AggregareFileAdder.cs" />
     <Compile Include="PlugIns\FileAdder.cs" />
@@ -110,10 +99,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="Styling\StyleScriptCompiler.cs" />
-    <Compile Include="Styling\ControlRegistry.cs" />
-    <Compile Include="Styling\Manager.cs" />
-    <Compile Include="Styling\StaticPackUrihelper.cs" />
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -127,9 +112,9 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
-    <None Include="RadioStreamer.nuspec">
+    <EmbeddedResource Include="RadioStreamer.nuspec">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </None>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config">
@@ -143,14 +128,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Core\DefaultContent.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Core\MainWindow.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="StartResources.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -202,9 +179,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="radio.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Styling\Style Guid.txt" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="RadioStreamer.png" />

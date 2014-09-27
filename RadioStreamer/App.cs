@@ -1,13 +1,18 @@
-﻿using System.Collections.Generic;
-using System.Reflection;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using System.Windows;
 using System.Windows.Input;
-using Bugsense.WPF;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.Views;
+#if !DEBUG
+using Bugsense.WPF;
+using System.Reflection;
+#endif
+using Tauron.JetBrains.Annotations;
+
 
 namespace Tauron.Application.RadioStreamer
 {
@@ -18,9 +23,11 @@ namespace Tauron.Application.RadioStreamer
 		{
 		}
 
-        public static void Setup(Mutex mutex, string channelName)
+        public static void Setup([NotNull] Mutex mutex, [NotNull] string channelName)
         {
-            #if !DEBUG
+            if (mutex == null) throw new ArgumentNullException("mutex");
+            if (channelName == null) throw new ArgumentNullException("channelName");
+#if !DEBUG
              var version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             BugSense.Init("w8cd1a17", version);
@@ -28,7 +35,7 @@ namespace Tauron.Application.RadioStreamer
 		    BugSense.DetachHandler();
             #else
             Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
-            #endif
+#endif
         }
 
 	    protected override void ConfigSplash()
