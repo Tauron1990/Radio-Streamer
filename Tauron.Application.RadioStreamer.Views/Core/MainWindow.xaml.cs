@@ -2,7 +2,7 @@
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.Views;
 
-namespace Tauron.Application.RadioStreamer.Core
+namespace Tauron.Application.RadioStreamer.Views.Core
 {
 	/// <summary>
 	/// Interaktionslogik für MainWindow.xaml

@@ -440,6 +440,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Radio Manager ähnelt.
+        /// </summary>
+        public static string RadioManagerTabTitle {
+            get {
+                return ResourceManager.GetString("RadioManagerTabTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Options ähnelt.
         /// </summary>
         public static string RadioPlayerEffectsOptionLabel {
@@ -472,6 +481,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string RadioPlayerStadeStopped {
             get {
                 return ResourceManager.GetString("RadioPlayerStadeStopped", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Radio Player ähnelt.
+        /// </summary>
+        public static string RadioPlayerTabTitle {
+            get {
+                return ResourceManager.GetString("RadioPlayerTabTitle", resourceCulture);
             }
         }
         

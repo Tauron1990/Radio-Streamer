@@ -24,6 +24,7 @@ using Tauron.Application.RadioStreamer.Contracts.Data.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
+using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.MedadataView;
 using Tauron.Application.RadioStreamer.Views.RadioManager.Controls;
@@ -264,7 +265,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
     }
 
     [ExportViewModel(AppConstants.RadioManagerViewModelName)]
-    public sealed class RadioManagerViewModel : ViewModelBase, INotifyBuildCompled
+    public sealed class RadioManagerViewModel : TabWorkspace, INotifyBuildCompled
     {
         private class InternalQualityQuery : IQualityQuery
         {
@@ -535,9 +536,20 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
         #region Common
 
-        [InjectRadioDatabase] private IRadioDatabase _database;
-        [InjectRadioEnviroment] private IRadioEnvironment _enviroment;
-        [Inject] private IEventAggregator _events;
+        public RadioManagerViewModel()
+            : base(RadioStreamerResources.RadioManagerTabTitle)
+        {
+            CanClose = false;
+        }
+
+        [InjectRadioDatabase] 
+        private IRadioDatabase _database;
+        [InjectRadioEnviroment] 
+        private IRadioEnvironment _enviroment;
+        [Inject] 
+        private IEventAggregator _events;
+        [Inject]
+        private ITabManager _tabManager;
 
         private RadioList _radios;
         private ListCollectionView _view;
@@ -546,6 +558,13 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
         public ListCollectionView Radios
         {
             get { return _view ?? (_view = (ListCollectionView) CollectionViewSource.GetDefaultView(_radios)); }
+        }
+
+        [NotNull]
+        public IEnumerable<ViewEntry> Views { get { return _tabManager.Views.Where(v => !v.IsDefault); } }
+
+        [CanBeNull]
+        public ViewEntry SelectedView { set { if (value != null) _tabManager.View(value.Id); }
         }
 
         private void AddRadios([NotNull] IEnumerable<RadioEntry> entrys)

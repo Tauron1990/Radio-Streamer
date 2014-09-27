@@ -21,9 +21,9 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 {
-    [ExportViewModel(AppConstants.RadioViewModelName)]
+    [ExportViewModel(AppConstants.RadioPlayerViewModelName)]
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-    public class RadioPlayerViewModel : ViewModelBase, IDisposable, INotifyBuildCompled
+    public class RadioPlayerViewModel : TabWorkspace, IDisposable, INotifyBuildCompled
     {
         public enum PlayerStade
         {
@@ -32,9 +32,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         }
 
         private DispatcherTimer _bufferTimer;
-        [Inject] private IEngineManager _engineManager;
-        [Inject] private IEventAggregator _events;
-        [InjectRadioPlayer] private IRadioPlayer _player;
+        [Inject] 
+        private IEngineManager _engineManager;
+        [Inject] 
+        private IEventAggregator _events;
+        [InjectRadioPlayer] 
+        private IRadioPlayer _player;
 
         public void Dispose()
         {
@@ -44,6 +47,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
         void INotifyBuildCompled.BuildCompled()
         {
+            CanClose = false;
+
             _events.GetEvent<PlayRadioEvent, PlayRadioEventArgs>().Subscribe(PlayRadioEventHandler);
             _events.GetEvent<RadioPlayerTitleRecived, string>().Subscribe(str => CurrentTitle.TrackName = str);
 
@@ -54,6 +59,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
             UpdateRecordingImage();
             ResetVolume();
+        }
+
+        public RadioPlayerViewModel()
+            : base(RadioStreamerResources.RadioPlayerTabTitle)
+        {
+            
         }
 
         #region RadioStade

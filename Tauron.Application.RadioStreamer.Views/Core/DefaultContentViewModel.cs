@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Media;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
@@ -10,21 +11,18 @@ using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Core
+namespace Tauron.Application.RadioStreamer.Views.Core
 {
 	[ExportViewModel(AppConstants.DefaultContentViewModel)]
-	public class DefaultContentViewModel : ViewModelBase, INotifyBuildCompled
+	public class DefaultContentViewModel : ViewModelBase, INotifyBuildCompled, IWorkspaceHolder
 	{
+        [Inject]
+	    private ITabManager _tabManager;
+
         [Inject]
 	    private IEventAggregator _eventAggregator;
 
-        [Inject]
-	    private IStyleManager _styleManager;
-
-        [Inject]
-	    private IDialogFactory _factory;
-
-		[StatusBarItemImport]
+	    [StatusBarItemImport]
 		private object[] _statusBarItems;
         
 	    [NotNull]
@@ -57,6 +55,7 @@ namespace Tauron.Application.RadioStreamer.Core
 	    }
 
         private ImageSource _toolTipImage;
+	    private WorkspaceManager<ITabWorkspace> _tabs;
 
 	    [NotNull]
 	    public ImageSource ToolTipImage
@@ -78,6 +77,13 @@ namespace Tauron.Application.RadioStreamer.Core
 	        get { return MenuItemService.GetMenu(MenuItemService.NotifyContextMenuName); }
 	    }
 
+	    [NotNull]
+	    public WorkspaceManager<ITabWorkspace> Tabs
+	    {
+	        get { return _tabs; }
+	        private set { _tabs = value; }
+	    }
+
 	    public void BuildCompled()
 	    {
 	        CurrentTrack = RadioStreamerResources.UnkownString;
@@ -93,6 +99,32 @@ namespace Tauron.Application.RadioStreamer.Core
 	                            CurrentTrack = RadioStreamerResources.RadioPlayerStadeStopped;
 	                            ToolTipImage = ImagesCache.ImageSources["StopImage"];
 	                        });
+            
+	        _tabManager.ViewSelected += entry => Tabs.Add((ITabWorkspace) ResolveViewModel(entry.Id));
+
+            Tabs = new WorkspaceManager<ITabWorkspace>(this);
+
+	        foreach (
+	            var workscpace in
+	                _tabManager.Views.Where(v => v.IsDefault).Select(v => ResolveViewModel(v.Id)).Cast<ITabWorkspace>())
+	        {
+                Tabs.Add(workscpace);
+	        }
+	    }
+
+	    public void Register(ITabWorkspace workspace)
+	    {
+	        workspace.Close += WorkspaceClose;
+	    }
+
+	    public void UnRegister(ITabWorkspace workspace)
+	    {
+	        workspace.Close -= WorkspaceClose;
+	    }
+
+	    private void WorkspaceClose([NotNull] ITabWorkspace workspace)
+	    {
+	        Tabs.Remove(workspace);
 	    }
 	}
 }

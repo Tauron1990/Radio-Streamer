@@ -23,18 +23,21 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         private static readonly XmlSerializer InstallSerializer = new XmlSerializer(typeof(UpdateManifest));
         private static readonly XmlSerializer DeleteSerializer = new XmlSerializer(typeof (List<string>));
 
+        private static string _fullUpdatePath;
+        private static string _fullDeletePath;
+
         [NotNull]
-        public static string FullUpdatePath 
+        public static string FullUpdatePath
         {
-            get
-            {
-                return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UpdatePath);
-            } 
+            get { return _fullUpdatePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UpdatePath); }
+            set { _fullUpdatePath = Path.Combine(value, UpdatePath); }
         }
 
+        [NotNull]
         public static string FullDeletePath
         {
-            get { return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeletePath); }
+            get { return _fullDeletePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeletePath); }
+            set { _fullDeletePath = Path.Combine(value, DeletePath); }
         }
 
         public static void InstallUpdates()

@@ -5,7 +5,7 @@ using System.Text;
 using Mono.CSharp;
 using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Styling
+namespace Tauron.Application.RadioStreamer.Views.Styling
 {
     public class StyleScriptCompiler
     {

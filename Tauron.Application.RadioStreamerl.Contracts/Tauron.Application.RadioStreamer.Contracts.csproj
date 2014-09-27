@@ -82,6 +82,8 @@
     <Compile Include="UI\ImagesCache.cs" />
     <Compile Include="UI\MenuItemService.cs" />
     <Compile Include="UI\ThemeLoaderBase.cs" />
+    <Compile Include="UI\ViewEntry.cs" />
+    <Compile Include="UI\ViewSelector.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">

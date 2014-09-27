@@ -5,12 +5,10 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
              xmlns:helper="clr-namespace:Tauron.Application.RadioStreamer.Views.Helper"
-             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              xmlns:radioManager="clr-namespace:Tauron.Application.RadioStreamer.Views.RadioManager"
              MaxHeight="{helper:MaxHeightExpanderSetter}"
              d:DesignHeight="300" d:DesignWidth="800"
              hlp:DataContextServices.Activate="True" Background="Transparent"
-             hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.RadioManagerViewModelName}"
              mc:Ignorable="d">
     <UserControl.Resources>
         <DataTemplate DataType="{x:Type radioManager:RadioManagerRadio}">
@@ -47,11 +45,16 @@
     </UserControl.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="2*"/>
             <ColumnDefinition MinWidth="410" Width="410" MaxWidth="410" />
         </Grid.ColumnDefinitions>
-        <DockPanel Grid.Column="0" Grid.Row="0" LastChildFill="False">
-            <StackPanel MinWidth="100" DockPanel.Dock="Left" Margin="20">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <StackPanel MinWidth="100" DockPanel.Dock="Left" Margin="20" Grid.RowSpan="2">
                 <Button MaxHeight="50" MaxWidth="50" Margin="10" hlp:CommandBinder.Command="Play:Play">
                     <Image Source="{StaticResource PlayImage}" />
                 </Button>
@@ -62,14 +65,16 @@
                     <Image Source="{StaticResource AddRadioImage}" />
                 </Button>
             </StackPanel>
-            <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0">
+        <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="0,20,0,0" Grid.Column="1" Grid.Row="0">
                 <CheckBox Content="{hlp:SimpleLocalize Name=FavoritesLabel}" Margin="4" VerticalAlignment="Top"
                           IsChecked="{Binding OnlyFavorites}" />
                 <TextBlock Text="{hlp:SimpleLocalize Name=SearchLabel}" Margin="3" />
                 <TextBox MinWidth="100" MaxWidth="200" Margin="5,0,0,30"
                          Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}" />
             </StackPanel>
-            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal">
+        <ComboBox Grid.Column="0" Grid.Row="2" Margin="5" ItemsSource="{Binding Views}"
+                  SelectedItem="{Binding SelectedView, Mode=OneWayToSource}"/>
+        <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Grid.Column="1" Grid.Row="2">
                 <Button Content="{hlp:SimpleLocalize Name=ViewMetadataLebel}" HorizontalAlignment="Left" Margin="10,5"
                         hlp:CommandBinder.Command="Metadata:MedtadataClick" />
                 <Button Content="{hlp:SimpleLocalize Name=AddFavoritesLabel}" HorizontalAlignment="Left" Margin="10, 5"
@@ -77,7 +82,7 @@
                 <Button Content="{hlp:SimpleLocalize Name=RemoveFavoritesLabel}" HorizontalAlignment="Left"
                         Margin="10, 5" hlp:CommandBinder.Command="RemoveFavorites:RemoveFromFavorites" />
             </StackPanel>
-            <StackPanel DockPanel.Dock="Left" DataContext="{Binding Radios.CurrentItem}">
+        <StackPanel DockPanel.Dock="Left" DataContext="{Binding Radios.CurrentItem}" Grid.Column="1" Grid.Row="1">
                 <StackPanel.Resources>
                     <Style TargetType="{x:Type TextBlock}">
                         <Setter Property="Margin" Value="5,2.5" />
@@ -93,8 +98,7 @@
                     Text="{Binding Entry.Description, Converter={helper:LocalizeLabelTextConverter Name=RadioItemDescriptionLabel}}"
                     TextWrapping="Wrap" />
             </StackPanel>
-        </DockPanel>
-        <DockPanel Grid.Column="1" Grid.Row="0">
+        <DockPanel Grid.Column="2" Grid.Row="0" Grid.RowSpan="3">
             <StackPanel DockPanel.Dock="Top" Orientation="Horizontal" Margin="10">
                 <TextBlock Text="{hlp:SimpleLocalize Name=LanguageLabel}" Margin="5" HorizontalAlignment="Center" />
                 <ComboBox Margin="5" MinWidth="150" ItemsSource="{Binding Languages}"

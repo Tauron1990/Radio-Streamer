@@ -1,7 +1,7 @@
 ﻿using System;
 using Tauron.Application.Composition;
 
-namespace Tauron.Application.RadioStreamer.Styling
+namespace Tauron.Application.RadioStreamer.Views.Styling
 {
     [JetBrains.Annotations.PublicAPI]
     public static class StaticPackUrihelper

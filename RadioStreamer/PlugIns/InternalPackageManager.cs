@@ -57,6 +57,25 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 // ReSharper disable once MemberCanBePrivate.Global
         public class CacheEntry
         {
+            public CacheEntry(Stream info)
+            {
+                using (info)
+                {
+                    var builder = new PackageBuilder(info, AppDomain.CurrentDomain.BaseDirectory);
+
+                    SemanticVersion = builder.Version;
+                    Path = string.Empty;
+                    Name = builder.Id;
+                    Files = new string[0];
+                    Dependencys = builder.DependencySets.First().Dependencies.Select(d => d.Id).ToArray();
+                }
+            }
+
+            public CacheEntry()
+            {
+                
+            }
+
             [XmlIgnore]
             public SemanticVersion SemanticVersion
             {
@@ -105,6 +124,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                     File.Delete(_location);
                     _versions = new List<CacheEntry>();
                 }
+            }
+
+            public void Add(CacheEntry entry)
+            {
+                _versions.Add(entry);
             }
 
             public void SaveVersions()
@@ -172,6 +196,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             string Root { get; }
 
             FileAdder Add(string name, SemanticVersion version, IEnumerable<string> dependencys);
+            void Add(CacheEntry entry);
+
             void Remove(string name);
 
 
@@ -201,6 +227,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public FileAdder Add(string name, SemanticVersion version, IEnumerable<string> dependencys)
             {
                 return new NullFileAdder();
+            }
+
+            public void Add(CacheEntry entry)
+            {
+            
             }
 
             public void Remove(string name)
@@ -295,6 +326,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 });
             }
 
+            public void Add(CacheEntry entry)
+            {
+                throw new NotSupportedException();
+            }
+
             public void Remove(string name)
             {
                 CacheEntry entry;
@@ -373,6 +409,12 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 _versionFile.SaveVersions();
 
                 return new NullFileAdder();
+            }
+
+            public void Add(CacheEntry entry)
+            {
+                _versionFile.Add(entry);
+                _versionFile.SaveVersions();
             }
 
             public void Remove(string name)
@@ -605,6 +647,14 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
         public bool CheckForUpdates()
         {
+            bool temp;
+            return CheckForUpdates(null, out temp);
+        }
+
+        public bool CheckForUpdates(IEnumerable<string> lockedPack, out bool requireCopyApp)
+        {
+            requireCopyApp = false;
+
             if (Cache is NullCache) return false;
             _updates = new List<IPackage>();
 
@@ -614,6 +664,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             }
 
             var flag = _parent != null && _parent.CheckForUpdates();
+
+            if (lockedPack != null)
+            {
+                requireCopyApp = _updates.Any(p => lockedPack.Contains(p.Id));
+            }
 
             return _updates.Count < 0 || flag;
         }
@@ -642,6 +697,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             return
                 _packageRepository.GetPackages()
                     .Where(p => p.Tags != null && p.Tags.Contains("AddIn") && !installed.Contains(p.Id));
+        }
+
+        public void RegisterPack(CacheEntry pack)
+        {
+            Cache.Add(pack);
         }
     }
 }

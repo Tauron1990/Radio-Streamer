@@ -1,4 +1,4 @@
-﻿<Window x:Class="Tauron.Application.RadioStreamer.Core.MainWindow"
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.Core.MainWindow"
         xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
         xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"

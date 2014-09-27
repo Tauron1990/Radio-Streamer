@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
+<<<<<<< HEAD
+=======
 using System.Linq;
+>>>>>>> Development
 using System.Reflection;
 using System.Runtime;
 using System.Runtime.ExceptionServices;
@@ -18,10 +21,12 @@ namespace Tauron.Application.RadioStreamer
 {
     public static class Programm
     {
+<<<<<<< HEAD
         private static bool _isRestart;
-
+=======
         private const string UpdateCommadLine = "-Update"; 
         private static bool _installUpdatesSolo;
+>>>>>>> Development
 
         private static readonly string[] AssemblysToInstall =
         {
@@ -71,6 +76,8 @@ namespace Tauron.Application.RadioStreamer
                 LoadApplication();
                 #endif
 
+<<<<<<< HEAD
+=======
                 if (_installUpdatesSolo)
                 {
                     SheduleSoloUpdate();
@@ -78,6 +85,7 @@ namespace Tauron.Application.RadioStreamer
                     return;
                 }
 
+>>>>>>> Development
                 StartApp(mutex, channelName);
             }
             catch

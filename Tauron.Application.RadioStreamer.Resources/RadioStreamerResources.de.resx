@@ -300,4 +300,10 @@
   <data name="ViewAddinManagerLabel" xml:space="preserve">
     <value>AddIns</value>
   </data>
+  <data name="RadioManagerTabTitle" xml:space="preserve">
+    <value>Radio Manager</value>
+  </data>
+  <data name="RadioPlayerTabTitle" xml:space="preserve">
+    <value>Radio Player</value>
+  </data>
 </root>

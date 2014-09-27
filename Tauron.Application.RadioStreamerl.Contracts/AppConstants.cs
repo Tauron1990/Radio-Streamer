@@ -4,9 +4,7 @@
     {
         public const string NotifyIconContextMenuEntry = "NotifyIconContextMenuEntry";
 
-        public const string DefaultContentTab = "ContentView";
-
-        public const string RadioViewModelName = "RadioViewModel";
+        public const string RadioPlayerViewModelName = "RadioViewModel";
 
         public const string RadioManagerViewModelName = "RadioManagerModel";
 

@@ -1,6 +1,5 @@
 ﻿#region Usings
 
-using System;
 using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Input;
@@ -10,7 +9,6 @@ using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
-using Tauron.Application.Views;
 using Tauron.JetBrains.Annotations;
 
 #endregion
@@ -29,14 +27,19 @@ namespace Tauron.Application.RadioStreamer.Views
         [Inject]
         private IProgramManager _programManager;
 
+        [Inject] 
+        private ITabManager _tabManager;
+
         [NotNull,AddinDescription]
         public AddinDescription GetDescription()
         {
             var asm = Assembly.GetExecutingAssembly();
             var name = asm.GetName();
             return new AddinDescription(name.Version,
+            // ReSharper disable PossibleNullReferenceException
                 asm.GetCustomAttribute<AssemblyDescriptionAttribute>().Description,
                 asm.GetCustomAttribute<AssemblyTitleAttribute>().Title);
+            // ReSharper restore PossibleNullReferenceException
         }
 
         public int Order
@@ -46,6 +49,9 @@ namespace Tauron.Application.RadioStreamer.Views
 
         public void Initialize(CommonApplication application)
         {
+            _tabManager.RegisterView(new ViewEntry(AppConstants.RadioManagerViewModelName, string.Empty, true));
+            _tabManager.RegisterView(new ViewEntry(AppConstants.RadioPlayerViewModelName, string.Empty, true));
+
             MenuItemService.RegisterNotify(
                 FillThemeMenu(new GenericMenuItem {Id = "ThemeMenu", Label = RadioStreamerResources.ThemeMenu}));
             MenuItemService.RegisterNotify(
