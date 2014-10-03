@@ -205,6 +205,24 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die All Files ähnelt.
+        /// </summary>
+        public static string FileFilterAllFiles {
+            get {
+                return ResourceManager.GetString("FileFilterAllFiles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Radiostreamer Database ähnelt.
+        /// </summary>
+        public static string FileFilterRsdFile {
+            get {
+                return ResourceManager.GetString("FileFilterRsdFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Installing ähnelt.
         /// </summary>
         public static string InstallingLabel {

@@ -204,3 +204,4 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.csprojResolveAssemblyReference.cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer\bin\Debug\Tauron.Application.Common.Wpf.nuspec

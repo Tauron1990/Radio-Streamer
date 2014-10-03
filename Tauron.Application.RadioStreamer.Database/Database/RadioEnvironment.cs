@@ -65,21 +65,20 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		    public Stream OpenNew()
 		    {
-                if (_cache != null && _cache.IsAlive)
-                {
-                    try
-                    {
-                        var tempS = (Stream)_cache.Target;
-                        tempS.Position = 0;
-                        tempS.Dispose();
-                        _cache = null;
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                    }
-                }
+		        if (_cache == null || !_cache.IsAlive)
+		            return new FileStream(_path, FileMode.Create, FileAccess.ReadWrite, _share, BufferSize, _options);
+		        try
+		        {
+		            var tempS = (Stream)_cache.Target;
+		            tempS.Position = 0;
+		            tempS.Dispose();
+		            _cache = null;
+		        }
+		        catch (ObjectDisposedException)
+		        {
+		        }
 
-                return new FileStream(_path, FileMode.Create, FileAccess.ReadWrite, _share, BufferSize, _options);
+		        return new FileStream(_path, FileMode.Create, FileAccess.ReadWrite, _share, BufferSize, _options);
 		    }
 
 		    #endregion
@@ -201,7 +200,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				    Name = name;
 				}
 
-			    public virtual void Init([NotNull] RadioSettings settings)
+			    public void Init([NotNull] RadioSettings settings)
 			    {
 			        Settings = settings;
 			    }
@@ -400,6 +399,36 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 			}
 
+            private sealed class PropertyStoreImpl : IPropertyStore
+            {
+                private readonly TauronProfile _profile;
+
+                public PropertyStoreImpl([NotNull] TauronProfile profile)
+                {
+                    _profile = profile;
+                }
+
+                public IEnumerator<string> GetEnumerator()
+                {
+                    return _profile.GetEnumerator();
+                }
+
+                IEnumerator IEnumerable.GetEnumerator()
+                {
+                    return GetEnumerator();
+                }
+
+                public string GetValue(string name, string defaultValue)
+                {
+                    return _profile.GetValue(name, defaultValue);
+                }
+
+                public void SetName(string name, string value)
+                {
+                    _profile.SetVaue(name, value);
+                }
+            }
+
 			public RadioSettings([NotNull] string defaultPath)
 				: base(AppConstants.AppName, defaultPath)
 
@@ -408,6 +437,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 			    _components.AddFactory(RadioFavorites.FavoritesKey, () => new RadioFavorites());
 			    _components.AddFactory(EqualizerDatabaseManager.EqualizerDatabaseKey, () => new EqualizerDatabaseManager());
+                PropertyStore = new PropertyStoreImpl(this);
                 Load("Default");
 			}
 
@@ -454,7 +484,9 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 			}
 
-			public override void Save()
+		    public IPropertyStore PropertyStore { get; private set; }
+
+		    public override void Save()
 			{
 				_components.Save();
 				base.Save();
@@ -635,6 +667,12 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			if (_settings != null)
 				_settings.Save();
 		}
-		public string[] DatabaseFiles { get; set; }
+
+	    public void ReloadSetting()
+	    {
+	        _settings = new RadioSettings(_enviroment.LocalApplicationData);
+	    }
+
+	    public string[] DatabaseFiles { get; set; }
 	}
 }

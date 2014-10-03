@@ -99,7 +99,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        switch (type)
 		        {
 		            case ChangeType.Name:
-                        OnValueChanged("Name");
+                        OnValueChanged("DisplayName");
 		                break;
 		            case ChangeType.MetaKey:
 		                OnValueChanged(oldContent);

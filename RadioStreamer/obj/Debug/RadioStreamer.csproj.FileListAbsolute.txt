@@ -167,3 +167,4 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.g.resources
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Properties.Resources.resources
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csproj.GenerateResource.Cache
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\Tauron.Application.Bass.nuspec

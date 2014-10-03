@@ -306,4 +306,10 @@
   <data name="RadioPlayerTabTitle" xml:space="preserve">
     <value>Radio Player</value>
   </data>
+  <data name="FileFilterAllFiles" xml:space="preserve">
+    <value>Alle Daten</value>
+  </data>
+  <data name="FileFilterRsdFile" xml:space="preserve">
+    <value>Radiostreamer Datenbank</value>
+  </data>
 </root>

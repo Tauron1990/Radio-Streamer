@@ -1,8 +1,10 @@
-﻿namespace Tauron.Application.RadioStreamer.Contracts
+﻿using Tauron.JetBrains.Annotations;
+
+namespace Tauron.Application.RadioStreamer.Contracts
 {
     public static class AppConstants
     {
-        public const string NotifyIconContextMenuEntry = "NotifyIconContextMenuEntry";
+        //public const string NotifyIconContextMenuEntry = "NotifyIconContextMenuEntry";
 
         public const string RadioPlayerViewModelName = "RadioViewModel";
 
@@ -25,5 +27,7 @@
         public const string RadioCreateViewModel = "RadioCreateModel";
 
         public const string AddInViewModel = "AddInViewModel";
+
+        public const string OptionsViewModel = "ptionsViewModel";
     }
 }

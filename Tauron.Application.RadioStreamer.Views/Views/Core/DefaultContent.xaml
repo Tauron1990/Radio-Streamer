@@ -37,7 +37,7 @@
                             <Image Grid.Row="1" Grid.Column="1" MaxHeight="15" MaxWidth="15" Source="{Binding ToolTipImage}"/>
                         </Grid>
                         <StackPanel Grid.Column="1" Grid.Row="0">
-                            <TextBlock Margin="10" Text="Radioplayer Tilte" TextAlignment="Center"/>
+                            <TextBlock Margin="10" Text="Radioplayer Title" TextAlignment="Center"/>
                         </StackPanel>
                     </Grid>
                 </Border>

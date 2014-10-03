@@ -54,6 +54,8 @@
     <Compile Include="Database\DatabaseInterface.cs" />
     <Compile Include="Database\ParseHelper.cs" />
     <Compile Include="Database\RadioEnvironment.cs" />
+    <Compile Include="IEEngine\ImportExportEngine.cs" />
+    <Compile Include="IEEngine\RadioStreamerExport.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Scripts\CSharp\Compiler.cs" />
     <Compile Include="Scripts\CSharp\CSharpEngine.cs" />
@@ -77,6 +79,10 @@
       <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
       <Name>Tauron.Application.Bass</Name>
       <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
+      <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
+      <Name>Tauron.Application.RadioStreamer.Resources</Name>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
       <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>

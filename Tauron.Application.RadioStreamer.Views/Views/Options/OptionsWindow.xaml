@@ -1,0 +1,48 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.Options.OptionsWindow"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:const="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
+             mc:Ignorable="d" MinHeight="300" MinWidth="500" SizeToContent="WidthAndHeight"
+             d:DesignHeight="300" d:DesignWidth="500" hlp:DataContextServices.Activate="True" 
+             hlp:CompositionServices.ImportViewModel="{x:Static const:AppConstants.OptionsViewModel}">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <TreeView MinWidth="100" MaxWidth="300" hlp:EventBinder.Events="NewItemSelect:SelectedItemChanged">
+            <TreeView.Resources>
+                <HierarchicalDataTemplate DataType="{x:Type contracts:OptionPath}" ItemsSource="{Binding Elements}">
+                    <TextBlock Text="{Binding DisplayName}"/>
+                </HierarchicalDataTemplate>
+                <DataTemplate DataType="{x:Type contracts:OptionGroup}">
+                    <TextBlock Text="{Binding DisplayName}"/>
+                </DataTemplate>
+            </TreeView.Resources>
+        </TreeView>
+        <ItemsControl Grid.Column="1" Grid.Row="0" ItemsSource="{Binding SelectedOptions}">
+            <ItemsControl.Resources>
+                <DataTemplate DataType="{x:Type contracts:Option}">
+                    <StackPanel Orientation="Horizontal">
+                        <TextBlock Text="{Binding DisplayName}" Margin="0,0,10,0"/>
+                        <ContentControl Content="{Binding UI}"/>
+                    </StackPanel>
+                </DataTemplate>
+            </ItemsControl.Resources>
+        </ItemsControl>
+        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
+            <Button Content="Import" Margin="10" hlp:CommandBinder.Command="Import:Import"/>
+            <Button Content="Export" Margin="10" hlp:CommandBinder.Command="Export:Export"/>
+            <Button Content="Speichern" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Save:Save"/>
+            <Button Content="Abbrechen" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Close:Close"/>
+        </DockPanel>
+    </Grid>
+</Window>

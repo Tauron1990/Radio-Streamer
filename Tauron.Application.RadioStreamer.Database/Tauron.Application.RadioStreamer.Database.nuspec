@@ -17,6 +17,7 @@
                 <dependency id="Tauron.Application.Bass" />
                 <dependency id="Tauron.Application.Common" />
                 <dependency id="Tauron.Application.RadioStreamer.Contracts" />
+                <dependency id="Tauron.Application.RadioStreamer.Resources" />
             </group>
         </dependencies>
     </metadata>

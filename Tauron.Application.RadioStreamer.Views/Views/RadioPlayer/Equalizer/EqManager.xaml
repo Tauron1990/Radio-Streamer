@@ -37,14 +37,14 @@
                     <Setter Property="Margin" Value="20,0" />
                 </Style>
             </Grid.Style>
-            <TextBlock Margin="5,2" Text="Name" Foreground="CadetBlue"
+            <TextBlock Margin="5,2" Text="DisplayName" Foreground="CadetBlue"
                        Visibility="{Binding ElementName=txtUserEntry, Path=Text.IsEmpty, Converter={hlp:BoolToVisibilityConverter}}" />
             <TextBox Name="txtUserEntry" Background="Transparent" BorderBrush="{StaticResource MiddleLightBrush}"
                      Text="{Binding CurrentPresentName, UpdateSourceTrigger=PropertyChanged}" />
         </Grid>
 
         <ComboBox ItemsSource="{Binding Presets}" SelectedItem="{Binding CurrentPresent}" Grid.Column="0" Grid.Row="0"
-                  VerticalAlignment="Center" Margin="10, 0" DisplayMemberPath="Name" />
+                  VerticalAlignment="Center" Margin="10, 0" DisplayMemberPath="DisplayName" />
         <CheckBox Margin="10,0" Grid.Column="0" Grid.Row="1" Content="{hlp:SimpleLocalize EqualizerActivate}"
                   VerticalAlignment="Center"
                   HorizontalAlignment="Left"

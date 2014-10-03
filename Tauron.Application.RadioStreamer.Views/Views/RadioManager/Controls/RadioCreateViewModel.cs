@@ -128,7 +128,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
         private void AddQ()
         {
             string result = Dialogs.GetText(_window, RadioStreamerResources.RadioCreationAddQualityNameInstruction,
-                string.Empty, "Name", true, null);
+                string.Empty, "DisplayName", true, null);
 
             if (string.IsNullOrWhiteSpace(result)) return;
 

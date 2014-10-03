@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
@@ -88,24 +85,24 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Enttitis
 			return Name;
 		}
 
-        [NotNull]
-        public static string BoxDataValue([NotNull] IEnumerable<string> data)
-        {
-            var builder = new StringBuilder();
-            foreach (var entry in data) builder.Append(entry).Append('\t');
+        //[NotNull]
+        //public static string BoxDataValue([NotNull] IEnumerable<string> data)
+        //{
+        //    var builder = new StringBuilder();
+        //    foreach (var entry in data) builder.Append(entry).Append('\t');
 
-            return builder.ToString();
-        }
+        //    return builder.ToString();
+        //}
 
-        [CanBeNull]
-        public static string[] UnBoxData([CanBeNull] string data)
-        {
-            return data == null ? null : data.Split(new[] {'\t'}, StringSplitOptions.RemoveEmptyEntries);
-        }
+        //[CanBeNull]
+        //public static string[] UnBoxData([CanBeNull] string data)
+        //{
+        //    return data == null ? null : data.Split(new[] {'\t'}, StringSplitOptions.RemoveEmptyEntries);
+        //}
 
-        public static int GetId([NotNull] IEnumerable<string> data)
-        {
-            return data.Aggregate(0, (current, ent) => current ^ ent.GetHashCode());
-        }
+        //public static int GetId([NotNull] IEnumerable<string> data)
+        //{
+        //    return data.Aggregate(0, (current, ent) => current ^ ent.GetHashCode());
+        //}
 	}
 }

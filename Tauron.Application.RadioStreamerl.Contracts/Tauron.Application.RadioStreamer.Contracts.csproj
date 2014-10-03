@@ -53,6 +53,7 @@
     <Compile Include="Core\IEqProfileDatabase.cs" />
     <Compile Include="Core\IRadioEnvironment.cs" />
     <Compile Include="Core\Attributes\StatusBarItemExport.cs" />
+    <Compile Include="Data\IDatabaseImportExportEngine.cs" />
     <Compile Include="IStyleManager.cs" />
     <Compile Include="Player\IRadioPlayer.cs" />
     <Compile Include="Data\Attributes\RadioDatabaseExport.cs" />
@@ -80,7 +81,14 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="UI\GenericMenuItem.cs" />
     <Compile Include="UI\ImagesCache.cs" />
+    <Compile Include="UI\IOptionElement.cs" />
+    <Compile Include="UI\IOptionHelper.cs" />
+    <Compile Include="UI\IUIOptionsManager.cs" />
     <Compile Include="UI\MenuItemService.cs" />
+    <Compile Include="UI\Option.cs" />
+    <Compile Include="UI\OptionGroup.cs" />
+    <Compile Include="UI\OptionPath.cs" />
+    <Compile Include="UI\OptionsChangedEventArgs.cs" />
     <Compile Include="UI\ThemeLoaderBase.cs" />
     <Compile Include="UI\ViewEntry.cs" />
     <Compile Include="UI\ViewSelector.cs" />

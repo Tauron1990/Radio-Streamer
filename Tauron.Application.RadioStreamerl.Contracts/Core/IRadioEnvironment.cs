@@ -62,6 +62,13 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 		bool Contains([NotNull] string radioName);
 	}
 
+    public interface IPropertyStore : IEnumerable<string>
+    {
+        [NotNull]
+        string GetValue([NotNull] string name, [NotNull] string defaultValue);
+        void SetName([NotNull] string name, [NotNull] string value);
+    }
+
     [PublicAPI]
 	public interface IRadioSettings
 	{
@@ -71,6 +78,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 		bool IsFirstStart { get; }
         [NotNull]
         IRadioFavorites Favorites { get; }
+
+        [NotNull]
+        IPropertyStore PropertyStore { get; }
 
         [NotNull]
         IEqualizerProfileDatabase EqualizerDatabase { get; }
@@ -116,6 +126,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         [NotNull]
         IRadioSettings Settings { get; }
+
+        void ReloadSetting();
 
         [NotNull]
         string[] DatabaseFiles { get; set; }
