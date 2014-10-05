@@ -65,7 +65,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
     public interface IPropertyStore : IEnumerable<string>
     {
         [NotNull]
-        string GetValue([NotNull] string name, [NotNull] string defaultValue);
+        string GetValue([NotNull] string name, [CanBeNull] string defaultValue);
         void SetName([NotNull] string name, [NotNull] string value);
     }
 
