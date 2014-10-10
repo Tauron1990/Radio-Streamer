@@ -1,0 +1,33 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="3629d325-3567-4413-9ad8-6f121a94123b1" Category="RadioPlayer" Bounds="-371,-326.451393781893,108.876666666667,25.96" Label="Encoder Settings" UseManualLocation="True" />
+    <Node Id="Encoder" Category="RadioPlayer" Bounds="-556.649977497667,-253.153675537109,62.95,25.96" UseManualLocation="True" />
+    <Node Id="RadioPlayer" Category="RadioPlayer" Bounds="-617.714241006782,-405.073972070312,144.014263509115,197.880396533203" Group="Expanded" Label="Radio Player" UseManualLocation="True" />
+    <Node Id="b1f21042-a829-4b77-852c-91ecf2f018041" Category="RadioPlayer" Bounds="-597.714241006782,-365.073872070312,81.5466666666666,25.96" Label="Aufnehmen" />
+    <Node Id="d9552ac7-a3f0-46a3-9eb7-bad6ecffce831" Category="RadioPlayer" Bounds="-396.699977497667,-217.491293781893,110.33,25.96" Label="Encoder Provider" UseManualLocation="True" />
+  </Nodes>
+  <Links>
+    <Link Source="3629d325-3567-4413-9ad8-6f121a94123b1" Target="d9552ac7-a3f0-46a3-9eb7-bad6ecffce831" Bounds="-336.549362175857,-300.491393781893,17.0127210799665,74.2275689662103" />
+    <Link Source="RadioPlayer" Target="Encoder" Category="Contains" />
+    <Link Source="RadioPlayer" Target="b1f21042-a829-4b77-852c-91ecf2f018041" Category="Contains" Bounds="-484.662604260883,-275.57989074707,109.423926629878,36.8381672308091" />
+    <Link Source="b1f21042-a829-4b77-852c-91ecf2f018041" Target="Encoder" Bounds="-553.256838252079,-339.113872070312,21.9404149954061,77.3021770405463" />
+    <Link Source="d9552ac7-a3f0-46a3-9eb7-bad6ecffce831" Target="Encoder" Bounds="-484.865009869987,-232.345593697888,88.2517453348679,17.1382482340545" />
+  </Links>
+  <Categories>
+    <Category Id="Contains" Label="Enthält" Description="Gibt an, ob die Quelle der Verknüpfung das Zielobjekt enthält" CanBeDataDriven="False" CanLinkedNodesBeDataDriven="True" IncomingActionLabel="Enthalten in" IsContainment="True" OutgoingActionLabel="Enthält" />
+    <Category Id="RadioPlayer" Label="Settings" IsTag="True" />
+  </Categories>
+  <Properties>
+    <Property Id="Bounds" DataType="System.Windows.Rect" />
+    <Property Id="CanBeDataDriven" Label="CanBeDataDriven" Description="CanBeDataDriven" DataType="System.Boolean" />
+    <Property Id="CanLinkedNodesBeDataDriven" Label="CanLinkedNodesBeDataDriven" Description="CanLinkedNodesBeDataDriven" DataType="System.Boolean" />
+    <Property Id="Group" Label="Gruppe" Description="Knoten als Gruppe anzeigen" DataType="Microsoft.VisualStudio.GraphModel.GraphGroupStyle" />
+    <Property Id="IncomingActionLabel" Label="IncomingActionLabel" Description="IncomingActionLabel" DataType="System.String" />
+    <Property Id="IsContainment" DataType="System.Boolean" />
+    <Property Id="IsTag" DataType="System.Boolean" />
+    <Property Id="Label" Label="Bezeichnung" Description="Anzeigbare Bezeichnung eines Objekts, das Anmerkungen einblenden werden kann" DataType="System.String" />
+    <Property Id="OutgoingActionLabel" Label="OutgoingActionLabel" Description="OutgoingActionLabel" DataType="System.String" />
+    <Property Id="UseManualLocation" DataType="System.Boolean" />
+  </Properties>
+</DirectedGraph>
