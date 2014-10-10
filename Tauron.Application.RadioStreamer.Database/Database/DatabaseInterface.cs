@@ -9,6 +9,7 @@ using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
+using Tauron.Application.RadioStreamer.Database.Database.Formats;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Database.Database

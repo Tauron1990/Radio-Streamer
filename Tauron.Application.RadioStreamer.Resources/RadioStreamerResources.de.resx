@@ -312,4 +312,19 @@
   <data name="FileFilterRsdFile" xml:space="preserve">
     <value>Radiostreamer Datenbank</value>
   </data>
+  <data name="AbortLabel" xml:space="preserve">
+    <value>Abbrechen</value>
+  </data>
+  <data name="ImportLabel" xml:space="preserve">
+    <value>Importieren</value>
+  </data>
+  <data name="ExportLabel" xml:space="preserve">
+    <value>Exportieren</value>
+  </data>
+  <data name="SaveExportLabel" xml:space="preserve">
+    <value>Datenbank Speichern</value>
+  </data>
+  <data name="LoadImportLabel" xml:space="preserve">
+    <value>Datenbank Laden</value>
+  </data>
 </root>

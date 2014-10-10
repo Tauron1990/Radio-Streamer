@@ -14,7 +14,7 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
     [Export(typeof(IEngineManager))]
     public class EngineManager : IEngineManager, INotifyBuildCompled
     {
-        private const string ScriptsPath = "Scripts";
+        private const string ScriptsPath = "Data\\Scripts";
         private const string Cachedll = "Cache.dll";
         [Inject]
         private List<IScriptEngine> _engines;

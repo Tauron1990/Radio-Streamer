@@ -1,17 +1,17 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using System.IO.Compression;
 using System.Linq;
 using System.Runtime.Serialization.Formatters.Binary;
-using Tauron.Application.Implement;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
-using Tauron.Application.RadioStreamer.Database.Database;
 using Tauron.Application.RadioStreamer.Resources;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Database.IEEngine
 {
@@ -57,20 +57,37 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
 
                 foreach (var exportRadio in exported.Radios)
                 {
+                    var name = exportRadio.Entries.FirstOrDefault(e => e.Key == RadioEntry.MetaName);
+                    if(name == null) continue;
+
                     bool cr;
-                    var ent = fac.AddOrGetEntry(exportRadio.Name, out cr);
+                    var ent = fac.AddOrGetEntry(name.Value, out cr);
+                    var meta = ent.Metadata;
+                    if (meta == null) continue;
 
-                    ent.Script = exportRadio.Script;
-                    ent.Language = exportRadio.Language;
-                    ent.Integrated = exportRadio.Integrated;
-                    ent.Genre = exportRadio.Genre;
-                    ent.Description = exportRadio.Description;
-                    ent.Country = exportRadio.Country;
+                    foreach (var metadataEntry in exportRadio.Entries)
+                        meta[metadataEntry.Key] = metadataEntry.Value;
 
-                    var qua = exported.Qualities.FirstOrDefault(q => q.Name == ent.Name);
-                    if(qua == null) continue;
+                    var qfac = new RadioQualityFactory(ent);
+                    var equality = exported.Qualities.FirstOrDefault(q => q.Name == ent.Name);
+                    if(equality == null) continue;
 
+                    foreach (var qualityEntry in equality.Qualitys)
+                    {
+                        name = qualityEntry.Entries.FirstOrDefault(e => e.Key == RadioQuality.MetaName);
+                        if(name == null) continue;
+
+                        var qua = qfac.Create(name.Value, string.Empty, string.Empty);
+                        meta = qua.Metadata;
+                        if(meta == null) continue;
+
+                        foreach (var metadataEntry in qualityEntry.Entries)
+                            meta[metadataEntry.Key] = metadataEntry.Value;
+                    }
                 }
+
+                _radioEnvironment.Settings.Save();
+                _radioDatabase.Save();
             }
             catch (Exception e)
             {
@@ -95,32 +112,34 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
 
             foreach (var radioEntry in _radioDatabase.GetRadios())
             {
-                export.Radios.Add(new ExportRadio
+                var entry = new ExportRadio();
+                var qentry = new ExportQuality {Name = radioEntry.Name};
+
+                if (radioEntry.Metadata == null) continue;
+
+                entry.Entries.AddRange(GetEntries(radioEntry.Metadata));
+
+                foreach (var quality in radioEntry.Metadata.GetQualitys())
                 {
-                    Country = radioEntry.Country,
-                    Description = radioEntry.Description,
-                    Genre = radioEntry.Genre,
-                    Integrated = radioEntry.Integrated,
-                    Language = radioEntry.Language,
-                    Name = radioEntry.Name,
-                    Script = radioEntry.Script
-                });
-            }
+                    var qent = new QualityEntry();
+                    qent.Entries.AddRange(GetEntries(radioEntry.Metadata.GetQuality(quality)));
+                    qentry.Qualitys.Add(qent);
+                }
 
-            foreach (var quality in _radioDatabase.GetQualitys())
-            {
-                var q = new ExportQuality {Name = quality.RadioName};
-
-                foreach (var name in quality.Qualitys) 
-                    q.Qualitys.Add(new QualityEntry {Name = name, Url = quality.Qualitys.Read(name)});
-
-                export.Qualities.Add(q);
+                export.Qualities.Add(qentry);
+                export.Radios.Add(entry);
             }
 
             using (var stream = new DeflateStream(new FileStream(filename, FileMode.Create),CompressionLevel.Optimal))
             {
                 new BinaryFormatter().Serialize(stream, export);
             }
+        }
+
+        [NotNull]
+        private IEnumerable<MetadataEntry> GetEntries([NotNull] Metadatascope scope)
+        {
+            return scope.Select(key => new MetadataEntry {Key = key, Value = scope[key]});
         }
     }
 }

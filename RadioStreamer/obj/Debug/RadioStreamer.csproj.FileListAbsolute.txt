@@ -5,3 +5,10 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStream
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.g.resources
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Properties.Resources.resources
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csproj.GenerateResource.Cache
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\bin\Debug\RadioStreamer.exe.config
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csprojResolveAssemblyReference.cache
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\StartResources.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer_MarkupCompile.cache
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.g.resources
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\Tauron.Application.RadioStreamer.Properties.Resources.resources
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\RadioStreamer\obj\Debug\RadioStreamer.csproj.GenerateResource.Cache

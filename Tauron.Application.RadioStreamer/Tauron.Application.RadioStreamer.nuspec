@@ -21,15 +21,15 @@
         </dependencies>
     </metadata>
     <files>
-        <file src="Dll\PlugIns\basswma.dll" target="lib\net45\Dll\PlugIns\basswma.dll" />
-        <file src="Dll\PlugIns\bass_aac.dll" target="lib\net45\Dll\PlugIns\bass_aac.dll" />
-        <file src="Dll\bass.dll" target="lib\net45\Dll\bass.dll" />
-        <file src="Dll\bassenc.dll" target="lib\net45\Dll\bassenc.dll" />
-        <file src="Dll\bassmix.dll" target="lib\net45\Dll\bassmix.dll" />
-        <file src="Dll\bass_fx.dll" target="lib\net45\Dll\bass_fx.dll" />
-        <file src="Dll\OptimFROG.dll" target="lib\net45\Dll\OptimFROG.dll" />
-        <file src="Dll\tags.dll" target="lib\net45\Dll\tags.dll" />
-        <file src="Scripts\Technobase.cs" target="lib\net45\Scripts\Technobase.cs" />
+        <file src="Data\Dll\PlugIns\basswma.dll" target="lib\net45\Dll\PlugIns\basswma.dll" />
+        <file src="Data\Dll\PlugIns\bass_aac.dll" target="lib\net45\Dll\PlugIns\bass_aac.dll" />
+        <file src="Data\Dll\bass.dll" target="lib\net45\Dll\bass.dll" />
+        <file src="Data\Dll\bassenc.dll" target="lib\net45\Dll\bassenc.dll" />
+        <file src="Data\Dll\bassmix.dll" target="lib\net45\Dll\bassmix.dll" />
+        <file src="Data\Dll\bass_fx.dll" target="lib\net45\Dll\bass_fx.dll" />
+        <file src="Data\Dll\OptimFROG.dll" target="lib\net45\Dll\OptimFROG.dll" />
+        <file src="Data\Dll\tags.dll" target="lib\net45\Dll\tags.dll" />
+        <file src="Data\Scripts\Technobase.cs" target="lib\net45\Scripts\Technobase.cs" />
         <file src="lame.exe" target="lib\net45\lame.exe" />
         <file src="Tauron.Application.RadioStreamer.dll" target="lib\net45\Tauron.Application.RadioStreamer.dll" />
         <file src="Tauron.Application.RadioStreamer.pdb" target="lib\net45\Tauron.Application.RadioStreamer.pdb" />

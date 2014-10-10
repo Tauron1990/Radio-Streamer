@@ -71,7 +71,7 @@ namespace Tauron.Application.RadioStreamer.Player
             //BassManager.InitRecord();
 
             _plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory,
-                                           "DLL".CombinePath("PlugIns")));
+                                           "Data\\DLL".CombinePath("PlugIns")));
             _bassEngine = new BassEngine();
         }
 

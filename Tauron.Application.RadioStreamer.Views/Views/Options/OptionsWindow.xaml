@@ -39,10 +39,10 @@
             </ItemsControl.Resources>
         </ItemsControl>
         <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
-            <Button Content="Import" Margin="10" hlp:CommandBinder.Command="Import:Import"/>
-            <Button Content="Export" Margin="10" hlp:CommandBinder.Command="Export:Export"/>
-            <Button Content="Speichern" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Save:Save"/>
-            <Button Content="Abbrechen" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Close:Close"/>
+            <Button Content="{hlp:SimpleLocalize ImportLabel}" Margin="10" hlp:CommandBinder.Command="Import:Import"/>
+            <Button Content="{hlp:SimpleLocalize ExportLabel}" Margin="10" hlp:CommandBinder.Command="Export:Export"/>
+            <Button Content="{hlp:SimpleLocalize SaveLabel}" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Save:Save"/>
+            <Button Content="{hlp:SimpleLocalize AbortLabel}" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Close:Close"/>
         </DockPanel>
     </Grid>
 </Window>

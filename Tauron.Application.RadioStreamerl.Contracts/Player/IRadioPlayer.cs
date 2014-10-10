@@ -1,5 +1,6 @@
 ﻿using System.Drawing;
 using Tauron.Application.BassLib.Misc;
+using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.JetBrains.Annotations;
@@ -17,7 +18,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
 
 		bool IsRecording { get; }
 
-		void StartRecording([NotNull] string location);
+		void StartRecording([NotNull] string location, CommonProfile profile);
 		void StopRecording();
 
         [CanBeNull]

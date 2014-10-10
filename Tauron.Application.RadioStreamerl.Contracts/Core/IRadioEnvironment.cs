@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Core
@@ -72,6 +73,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
     [PublicAPI]
 	public interface IRadioSettings
 	{
+        [NotNull]
+        IEncoderProfileDatabase EncoderProfiles { get; }
+
         [NotNull]
         string LastSprecturm { get; set; }
 

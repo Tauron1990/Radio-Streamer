@@ -7,6 +7,7 @@ using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.UI;
+using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.Options
@@ -47,10 +48,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
             else
             {
                 var group = newValue.NewValue as OptionGroup;
-                if (group != null)
-                    options = group.Options;
-                else
-                    options = Enumerable.Empty<Option>();
+                options = @group != null ? @group.Options : Enumerable.Empty<Option>();
             }
 
             SelectedOptions.Clear();
@@ -70,7 +68,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
             _window.Close();
         }
 
-        [CanBeNull]
+        [NotNull]
         private string OpenFileDialog(bool forSave, out bool? ok)
         {
             string erg;
@@ -78,16 +76,17 @@ namespace Tauron.Application.RadioStreamer.Views.Options
             if (forSave)
             {
                 erg = _dialogs.ShowSaveFileDialog(_window, true, true, true, _exportEngine.DefaultExtension, true,
-                    _exportEngine.FileFilter, true, true, XXX,
+                    _exportEngine.FileFilter, true, true, RadioStreamerResources.SaveExportLabel,
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), out ok);
             }
             else
             {
                 erg = _dialogs.ShowOpenFileDialog(_window, true, _exportEngine.DefaultExtension, true,
-                    _exportEngine.FileFilter, false, XXX, true, true, out ok).FirstOrDefault();
+                    _exportEngine.FileFilter, false, RadioStreamerResources.LoadImportLabel, true, true, out ok)
+                    .FirstOrDefault();
             }
 
-            return erg;
+            return erg ?? string.Empty;
         }
 
         [CommandTarget]

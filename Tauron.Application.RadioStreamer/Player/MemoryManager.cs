@@ -34,7 +34,7 @@ namespace Tauron.Application.RadioStreamer.Player
                 "tags.dll"
             };
 
-            string basePath = AppDomain.CurrentDomain.BaseDirectory.CombinePath("Dll");
+            string basePath = AppDomain.CurrentDomain.BaseDirectory.CombinePath("Data\\Dll");
 
             foreach (string dll in basedlls)
             {

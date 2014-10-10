@@ -12,6 +12,8 @@ using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
+using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
+using Tauron.Application.RadioStreamer.Database.Database.Formats;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Database.Database
@@ -295,111 +297,150 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 					return _favorites.Any(fav => fav.Name == radioName);
 				}
 			}
-			private sealed class EqualizerDatabaseManager : SettingComponent, IEqualizerProfileDatabase
-			{
-				public const string EqualizerDatabaseKey = "EqualizerDatabase";
 
-				private ObservableDictionary<string, float[]> _profiles;
+		    private sealed class EqualizerDatabaseManager : SettingComponent, IEqualizerProfileDatabase
+		    {
+		        public const string EqualizerDatabaseKey = "EqualizerDatabase";
+		        private const string EqualizerDbPresentPath = "Data\\Eqs";
 
-				public EqualizerDatabaseManager()
-					: base(EqualizerDatabaseKey)
-				{
-					_profiles = new ObservableDictionary<string, float[]>();
-				}
+		        private ObservableDictionary<string, float[]> _profiles;
+		        private HashSet<string> _presentFiles;  
+		        private readonly string _eqDatabasePresentPath = EqualizerDbPresentPath.GetFullPath();
 
-				private bool _isChanged;
+		        public EqualizerDatabaseManager()
+		            : base(EqualizerDatabaseKey)
+		        {
+		            _profiles = new ObservableDictionary<string, float[]>();
+                    _presentFiles = new HashSet<string>();
+		        }
 
-				public IEnumerable<string> Profiles
-				{
-					get { return _profiles.Keys; }
-				}
-				public void SetProfil(string name, IEqualizer equlizer)
-				{
-					float[] bands;
-					if (_profiles.TryGetValue(name, out bands))
-					{
-						equlizer.Band0 = bands[0];
-						equlizer.Band1 = bands[1];
-						equlizer.Band2 = bands[2];
-						equlizer.Band3 = bands[3];
-						equlizer.Band4 = bands[4];
-						equlizer.Band5 = bands[5];
-						equlizer.Band6 = bands[6];
-						equlizer.Band7 = bands[7];
-						equlizer.Band8 = bands[8];
-						equlizer.Band9 = bands[9];
-					}
-					else
-						equlizer.Enabled = false;
-				}
-				public void NewProfile(string name, IEqualizer equlizer)
-				{
-					_isChanged = true;
+		        private bool _isChanged;
 
-					var bands = new float[10];
+		        public IEnumerable<string> Profiles
+		        {
+		            get { return _profiles.Keys; }
+		        }
 
-					bands[0] = equlizer.Band0;
-					bands[1] = equlizer.Band1;
-					bands[2] = equlizer.Band2;
-					bands[3] = equlizer.Band3;
-					bands[4] = equlizer.Band4;
-					bands[5] = equlizer.Band5;
-					bands[6] = equlizer.Band6;
-					bands[7] = equlizer.Band7;
-					bands[8] = equlizer.Band8;
-					bands[9] = equlizer.Band9;
+		        public void SetProfil(string name, IEqualizer equlizer)
+		        {
+		            float[] bands;
+		            if (_profiles.TryGetValue(name, out bands))
+		            {
+		                equlizer.Band0 = bands[0];
+		                equlizer.Band1 = bands[1];
+		                equlizer.Band2 = bands[2];
+		                equlizer.Band3 = bands[3];
+		                equlizer.Band4 = bands[4];
+		                equlizer.Band5 = bands[5];
+		                equlizer.Band6 = bands[6];
+		                equlizer.Band7 = bands[7];
+		                equlizer.Band8 = bands[8];
+		                equlizer.Band9 = bands[9];
+		            }
+		            else
+		                equlizer.Enabled = false;
+		        }
 
-					_profiles[name] = bands;
-				}
-				public void DeleteProfile(string name)
-				{
-				    if (_profiles.Remove(name))
-				        _isChanged = true;
-				}
+		        public void NewProfile(string name, IEqualizer equlizer)
+		        {
+		            _isChanged = true;
 
-				protected override string EncodeImpl()
-				{
-					if (!_isChanged) return "Null";
+		            if (_presentFiles.Contains(name))
+		                _presentFiles.Remove(name);
 
-					var builder = new StringBuilder();
-					var coder = new Coder(builder);
-					var info = new string[11];
+		            var bands = new float[10];
 
-					foreach (var item in _profiles)
-					{
-						float[] bands = item.Value;
-						for (int i = 0; i < bands.Length; i++)
-						{
-							info[i + 1] = bands[i].ToString(CultureInfo.InvariantCulture);
-						}
+		            bands[0] = equlizer.Band0;
+		            bands[1] = equlizer.Band1;
+		            bands[2] = equlizer.Band2;
+		            bands[3] = equlizer.Band3;
+		            bands[4] = equlizer.Band4;
+		            bands[5] = equlizer.Band5;
+		            bands[6] = equlizer.Band6;
+		            bands[7] = equlizer.Band7;
+		            bands[8] = equlizer.Band8;
+		            bands[9] = equlizer.Band9;
 
-						info[0] = item.Key;
+		            _profiles[name] = bands;
+		        }
 
-						coder.Encode(info);
-					}
+		        public void DeleteProfile(string name)
+		        {
+		            if (_profiles.Remove(name))
+		                _isChanged = true;
+		        }
 
-					return builder.ToString();
-				}
-				protected override void DecodeImpl(string code)
-				{
-					var parser = new Parser(code);
+		        protected override string EncodeImpl()
+		        {
+		            if (!_isChanged) return "Null";
 
-					while (!parser.EndOfInput)
-					{
-						string name = parser.GetNextChars(parser.GetNumber());
-						var bands = new float[10];
+		            var builder = new StringBuilder();
+		            var coder = new Coder(builder);
+		            var info = new string[11];
 
-						for (int i = 0; i < bands.Length; i++)
-						{
-							bands[i] = Single.Parse(parser.GetNextChars(parser.GetNumber()));
-						}
+		            foreach (var item in _profiles)
+		            {
+                        if(_presentFiles.Contains(item.Key)) continue;
 
-						_profiles[name] = bands;
-					}
-				}
-			}
+		                float[] bands = item.Value;
+		                for (int i = 0; i < bands.Length; i++)
+		                {
+		                    info[i + 1] = bands[i].ToString(CultureInfo.InvariantCulture);
+		                }
 
-            private sealed class PropertyStoreImpl : IPropertyStore
+		                info[0] = item.Key;
+
+		                coder.Encode(info);
+		            }
+
+		            return builder.ToString();
+		        }
+
+		        protected override void DecodeImpl(string code)
+		        {
+		            var parser = new Parser(code);
+
+		            while (!parser.EndOfInput)
+		            {
+		                string name = parser.GetNextChars(parser.GetNumber());
+		                var bands = new float[10];
+
+		                for (int i = 0; i < bands.Length; i++)
+		                {
+		                    bands[i] = Single.Parse(parser.GetNextChars(parser.GetNumber()));
+		                }
+
+		                _profiles[name] = bands;
+		            }
+
+		            foreach (var name in XmlSerializeHelper.FindAllNames(_eqDatabasePresentPath))
+		            {
+                        if(!_presentFiles.Add(name)) continue;
+
+		                var profile = XmlSerializeHelper.DeserializeProfile(name, _eqDatabasePresentPath);
+		                if (profile == null) continue;
+		                var bands = new float[10];
+
+		                for (int i = 0; i < bands.Length; i++)
+		                    // ReSharper disable once AccessToModifiedClosure
+		                    profile.TrySetProperty(float.Parse, f => bands[i] = f, i.ToString(CultureInfo.InvariantCulture));
+
+		                _profiles[name] = bands;
+		            }
+		        }
+		    }
+
+            private sealed class EncoderDatabase : SettingComponent, IEncoderProfileDatabase
+            {
+                public const string EncoderDatabaseKey = "EncoderDatabase";
+
+                public EncoderDatabase() 
+                    : base(EncoderDatabaseKey)
+                {
+                }
+            }
+
+		    private sealed class PropertyStoreImpl : IPropertyStore
             {
                 private readonly TauronProfile _profile;
 
@@ -437,6 +478,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 			    _components.AddFactory(RadioFavorites.FavoritesKey, () => new RadioFavorites());
 			    _components.AddFactory(EqualizerDatabaseManager.EqualizerDatabaseKey, () => new EqualizerDatabaseManager());
+                _components.AddFactory(EncoderDatabase.EncoderDatabaseKey, () => new EncoderDatabase());
+                
                 PropertyStore = new PropertyStoreImpl(this);
                 Load("Default");
 			}
@@ -446,6 +489,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			private const string IsFirstStartKey = "IsFirstStart";
 		    private const string LastSprecturmKey = "LastSprecturm";
 		    private const string ThemeKey = "Theme";
+
+		    public IEncoderProfileDatabase EncoderProfiles { get { return (IEncoderProfileDatabase)_components[EncoderDatabase.EncoderDatabaseKey]; } }
 
 		    public string LastSprecturm
 		    {

@@ -74,6 +74,11 @@
     <Compile Include="Player\RadioPlayerPlay.cs" />
     <Compile Include="Player\RadioPlayerStop.cs" />
     <Compile Include="Player\RadioPlayerTitleRecived.cs" />
+    <Compile Include="Data\CommonProfile.cs" />
+    <Compile Include="Player\Recording\IEncoderFactory.cs" />
+    <Compile Include="Player\Recording\IEncoderProfileDatabase.cs" />
+    <Compile Include="Player\Recording\IEncoderProvider.cs" />
+    <Compile Include="Data\DataProperty.cs" />
     <Compile Include="Player\StopRadioEvent.cs" />
     <Compile Include="Scripts\IEngineManager.cs" />
     <Compile Include="Scripts\IScript.cs" />
@@ -114,6 +119,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Player\Encoder.dgml" />
     <None Include="Tauron.Application.RadioStreamer.Contracts.nuspec">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>

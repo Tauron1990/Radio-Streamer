@@ -53,7 +53,7 @@
     <Compile Include="Player\MemoryManager.cs" />
     <Compile Include="RadioStreamerModule.cs" />
     <None Include="packages.config" />
-    <None Include="Scripts\Technobase.cs">
+    <None Include="Data\Scripts\Technobase.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
     <None Include="Player\Temp.cs" />
@@ -64,28 +64,28 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Dll\bass.dll">
+    <Content Include="Data\Dll\bass.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\bassenc.dll">
+    <Content Include="Data\Dll\bassenc.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\bassmix.dll">
+    <Content Include="Data\Dll\bassmix.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\bass_fx.dll">
+    <Content Include="Data\Dll\bass_fx.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\OptimFROG.dll">
+    <Content Include="Data\Dll\OptimFROG.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\PlugIns\basswma.dll">
+    <Content Include="Data\Dll\PlugIns\basswma.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\PlugIns\bass_aac.dll">
+    <Content Include="Data\Dll\PlugIns\bass_aac.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Dll\tags.dll">
+    <Content Include="Data\Dll\tags.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="lame.exe">

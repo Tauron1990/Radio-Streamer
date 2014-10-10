@@ -61,6 +61,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Abort ähnelt.
+        /// </summary>
+        public static string AbortLabel {
+            get {
+                return ResourceManager.GetString("AbortLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Add To Favorites ähnelt.
         /// </summary>
         public static string AddFavoritesLabel {
@@ -196,6 +205,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Export ähnelt.
+        /// </summary>
+        public static string ExportLabel {
+            get {
+                return ResourceManager.GetString("ExportLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die View Fovorites ähnelt.
         /// </summary>
         public static string FavoritesLabel {
@@ -219,6 +237,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string FileFilterRsdFile {
             get {
                 return ResourceManager.GetString("FileFilterRsdFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Import ähnelt.
+        /// </summary>
+        public static string ImportLabel {
+            get {
+                return ResourceManager.GetString("ImportLabel", resourceCulture);
             }
         }
         
@@ -291,6 +318,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string LanguageLabel {
             get {
                 return ResourceManager.GetString("LanguageLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Load Database ähnelt.
+        /// </summary>
+        public static string LoadImportLabel {
+            get {
+                return ResourceManager.GetString("LoadImportLabel", resourceCulture);
             }
         }
         
@@ -544,6 +580,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string RemoveFavoritesLabel {
             get {
                 return ResourceManager.GetString("RemoveFavoritesLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Save Database ähnelt.
+        /// </summary>
+        public static string SaveExportLabel {
+            get {
+                return ResourceManager.GetString("SaveExportLabel", resourceCulture);
             }
         }
         
