@@ -12,6 +12,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
         void RegisterOptions([NotNull] IUIOptionsManager manager);
 
-        AudioEncoder Create(CommonProfile profile);
+        [CanBeNull]
+        AudioEncoder Create([CanBeNull] CommonProfile profile);
     }
 }

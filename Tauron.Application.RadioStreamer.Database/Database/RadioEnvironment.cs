@@ -12,6 +12,7 @@ using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
+using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.Application.RadioStreamer.Database.Database.Formats;
 using Tauron.JetBrains.Annotations;
@@ -154,6 +155,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				    [NotNull]
 				    public string GetNextChars(int count)
 				    {
+				        if (count == 0) return string.Empty;
+
 				        int pos = _position;
 				        _position += count;
 				        return _input.Substring(pos, count);
@@ -173,18 +176,24 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 					    _input = input;
 					}
 
-				    public void Encode([NotNull] IEnumerable<string> content)
+				    public void Encode([NotNull] params string[] content)
 				    {
-				        foreach (var item in content)
+				        foreach (var item in content.Where(s => s == null))
 				        {
 				            _input.Append(GetCodedNumber(item.Length))
 				                  .Append(item);
 				        }
 				    }
 
+				    public void Encode(int number)
+				    {
+				        _input.Append(GetCodedNumber(number));
+				    }
+
 				    [NotNull]
 				    private static string GetCodedNumber(int num)
 				    {
+				        if (num > 999) throw new InvalidOperationException("Number to Large");
 				        if (num > 99) return num.ToString(CultureInfo.InvariantCulture);
 				        if (num > 9) return "0" + num;
 				        return "00" + num;
@@ -415,7 +424,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		            foreach (var name in XmlSerializeHelper.FindAllNames(_eqDatabasePresentPath))
 		            {
-                        if(!_presentFiles.Add(name)) continue;
+                        if(!_presentFiles.Add(name) || _profiles.ContainsKey(name)) continue;
 
 		                var profile = XmlSerializeHelper.DeserializeProfile(name, _eqDatabasePresentPath);
 		                if (profile == null) continue;
@@ -423,7 +432,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		                for (int i = 0; i < bands.Length; i++)
 		                    // ReSharper disable once AccessToModifiedClosure
-		                    profile.TrySetProperty(float.Parse, f => bands[i] = f, i.ToString(CultureInfo.InvariantCulture));
+		                    profile.TryGetProperty(float.Parse, f => bands[i] = f, i.ToString(CultureInfo.InvariantCulture));
 
 		                _profiles[name] = bands;
 		            }
@@ -433,10 +442,96 @@ namespace Tauron.Application.RadioStreamer.Database.Database
             private sealed class EncoderDatabase : SettingComponent, IEncoderProfileDatabase
             {
                 public const string EncoderDatabaseKey = "EncoderDatabase";
+                private const string EncoderPath = "Data\\Encoder";
+
+                private readonly ObservableDictionary<string, CommonProfile> _profiles =
+                    new ObservableDictionary<string, CommonProfile>();
+                private string _defaultProfile;
 
                 public EncoderDatabase() 
                     : base(EncoderDatabaseKey)
                 {
+                }
+
+                protected override void DecodeImpl(string code)
+                {
+                    if(code.Length == 0) return;
+
+                    var parser = new Parser(code);
+                    _defaultProfile = parser.GetNextChars(parser.GetNumber());
+
+                    while (!parser.EndOfInput)
+                    {
+                        string name = parser.GetNextChars(parser.GetNumber());
+                        var profile = new CommonProfile(parser.GetNextChars(parser.GetNumber()));
+
+                        int count = parser.GetNumber();
+                        for (int i = 0; i < count; i++)
+                        {
+                            var prop = new DataProperty(parser.GetNextChars(parser.GetNumber()),
+                                parser.GetNextChars(parser.GetNumber()));
+
+                            profile.Properties.Add(prop);
+                        }
+
+                        _profiles[name] = profile;
+                    }
+
+                    foreach (
+                        var name in
+                            XmlSerializeHelper.FindAllNames(EncoderPath).Where(name => !_profiles.ContainsKey(name)))
+                    {
+                        _profiles[name] = null;
+                    }
+                }
+
+                protected override string EncodeImpl()
+                {
+                    var builder = new StringBuilder();
+                    var coder = new Coder(builder);
+
+                    coder.Encode(_defaultProfile);
+
+                    foreach (var profile in _profiles.Where(profile => profile.Value != null))
+                    {
+                        coder.Encode(profile.Key, profile.Value.Id);
+                        coder.Encode(profile.Value.Properties.Count);
+
+                        foreach (var dataProperty in profile.Value.Properties)
+                            coder.Encode(dataProperty.Key, dataProperty.Value);
+                    }
+
+                    return builder.ToString();
+                }
+
+                public CommonProfile Default
+                {
+                    get { return Deserialize(_defaultProfile); }
+                    set
+                    {
+                        if (value == null) return;
+                        
+                        Serialize(value.Id, value);
+                        _defaultProfile = value.Id;
+                    }
+                }
+
+                public IEnumerable<string> Profiles
+                {
+                    get { return _profiles.Keys; }
+                }
+
+                public void Serialize(string name, CommonProfile profile)
+                {
+                    _profiles[name] = profile;
+                }
+
+                public CommonProfile Deserialize(string name)
+                {
+                    CommonProfile profile;
+                    return _profiles.TryGetValue(name, out profile) && profile != null
+                        ? profile
+                        : XmlSerializeHelper.DeserializeProfile(name, EncoderPath);
                 }
             }
 

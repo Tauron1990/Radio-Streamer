@@ -20,7 +20,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             Options = new UISyncObservableCollection<Option>();
         }
 
-        public bool Save(IPropertyStore store)
+        public bool Save(IRadioEnvironment store)
         {
             bool ok = false;
             foreach (var option in Options)
@@ -33,7 +33,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             return ok;
         }
 
-        public void Load(IPropertyStore store)
+        public void Load(IRadioEnvironment store)
         {
             foreach (var option in Options)
             {

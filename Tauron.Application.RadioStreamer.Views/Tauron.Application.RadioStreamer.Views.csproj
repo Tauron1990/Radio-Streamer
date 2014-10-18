@@ -33,6 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
     <Reference Include="Hardcodet.Wpf.TaskbarNotification">
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
@@ -59,6 +60,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\Encoder\LameEncoderProfileOld.cs" />
+    <Compile Include="Helper\Options\LameEncodigEditor.xaml.cs">
+      <DependentUpon>LameEncodigEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Options\EncodingEditorHelper.cs" />
     <Compile Include="Views\AddIns\AddInViewModel.cs" />
     <Compile Include="Views\AddIns\InternalAddInInfo.cs" />
     <Compile Include="Views\AddIns\AddInView.xaml.cs">
@@ -119,6 +125,10 @@
     <Compile Include="ViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Page Include="Helper\Options\LameEncodigEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddIns\AddInView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

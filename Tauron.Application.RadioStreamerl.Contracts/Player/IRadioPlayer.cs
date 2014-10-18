@@ -18,7 +18,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
 
 		bool IsRecording { get; }
 
-		void StartRecording([NotNull] string location, CommonProfile profile);
+		void StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
 		void StopRecording();
 
         [CanBeNull]

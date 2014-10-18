@@ -85,17 +85,16 @@ namespace Tauron.Application.RadioStreamer.Views.Options
                 gr.Options.Add(option);
             }
 
-            option.Load(_radioEnvironment.Settings.PropertyStore);
+            option.Load(_radioEnvironment);
         }
 
         public void Save()
         {
-            var store = _radioEnvironment.Settings.PropertyStore;
             var saveSettings = false;
 
 // ReSharper disable once LoopCanBePartlyConvertedToQuery
             foreach (var optionPath in Options)
-                if (optionPath.Save(store))
+                if (optionPath.Save(_radioEnvironment))
                     saveSettings = true;
 
             if(saveSettings)

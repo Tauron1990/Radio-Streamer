@@ -13,7 +13,6 @@
         <dependencies>
             <group targetFramework=".NETFramework4.5">
                 <dependency id="Tauron.Application.Common" />
-                <dependency id="Mono.CSharp" />
                 <dependency id="Nuget.Core" />
                 <dependency id="Hardcodet.NotifyIcon.Wpf" />
                 <dependency id="Tauron.Application.Common.Wpf" />

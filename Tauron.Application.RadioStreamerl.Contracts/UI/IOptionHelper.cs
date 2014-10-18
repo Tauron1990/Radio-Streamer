@@ -8,8 +8,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         [NotNull]
         object LoadUI([NotNull] Option option);
 
-        bool Serialize([NotNull] IPropertyStore store, [NotNull] Option option);
+        bool Serialize([NotNull] IRadioEnvironment store, [NotNull] Option option);
 
-        void Deserialize([NotNull] IPropertyStore store, [NotNull] Option option, [CanBeNull] object defaultValue);
+        void Deserialize([NotNull] IRadioEnvironment store, [NotNull] Option option, [CanBeNull] object defaultValue);
     }
 }

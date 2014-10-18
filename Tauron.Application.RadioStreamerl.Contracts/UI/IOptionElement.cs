@@ -9,8 +9,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         [NotNull]
         string DisplayName { get; set; }
 
-        bool Save([NotNull] IPropertyStore store);
+        bool Save([NotNull] IRadioEnvironment store);
 
-        void Load([NotNull] IPropertyStore store);
+        void Load([NotNull] IRadioEnvironment store);
     }
 }

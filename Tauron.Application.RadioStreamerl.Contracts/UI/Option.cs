@@ -89,14 +89,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             _displayName = displayName;
         }
 
-        public bool Save(IPropertyStore store)
+        public bool Save(IRadioEnvironment store)
         {
             if (store == null) throw new ArgumentNullException("store");
 
             return Helper.Serialize(store, this);
         }
 
-        public void Load(IPropertyStore store)
+        public void Load(IRadioEnvironment store)
         {
             Helper.Deserialize(store, this, _defaultValue);
         }

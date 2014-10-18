@@ -9,6 +9,7 @@ using Tauron.Application.BassLib;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
+using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
@@ -38,6 +39,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         private IEventAggregator _events;
         [InjectRadioPlayer] 
         private IRadioPlayer _player;
+        [InjectRadioEnviroment] 
+        private IRadioEnvironment _radioEnvironment;
 
         public void Dispose()
         {
@@ -261,7 +264,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             if (_player.IsRecording)
                 _player.StopRecording();
             else
-                _player.StartRecording(path);
+                _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default);
             UpdateRecordingImage();
         }
 

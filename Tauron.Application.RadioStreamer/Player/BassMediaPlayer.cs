@@ -10,14 +10,15 @@ using Tauron.Application.BassLib.Misc;
 using Tauron.Application.BassLib.Recording;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
+using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.RadioStreamer.Player.Engine;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass;
 using Un4seen.Bass.AddOn.Tags;
-using Un4seen.Bass.Misc;
 
 namespace Tauron.Application.RadioStreamer.Player
 {
@@ -27,7 +28,9 @@ namespace Tauron.Application.RadioStreamer.Player
         private static readonly string IllegalFileNamePattern = "[" + new String(Path.GetInvalidFileNameChars()) + "]";
 
         [Inject]
-        private IEnumerable<Lazy<IPlaybackEngine, IPlaybackEngineMetadata>> _playbackEngines; 
+        private IEnumerable<Lazy<IPlaybackEngine, IPlaybackEngineMetadata>> _playbackEngines;
+        [Inject] 
+        private IEncoderProvider _encoderProvider;
 
         private Channel _currentChannel;
         private Channel _nextChannel;
@@ -40,6 +43,7 @@ namespace Tauron.Application.RadioStreamer.Player
         private string _url;
         private string _currentRecordingLocation;
         private TAG_INFO _tagInfo;
+        private CommonProfile _currentProfile;
 
         private readonly VisualHelper _visualHelper;
         private readonly MemoryManager _memoryManager;
@@ -227,30 +231,24 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
-        public void StartRecording(string location)
+        public void StartRecording(string location, CommonProfile profile)
         {
             _currentRecordingLocation = location;
-            if (_recorder == null) InitRecorder();
+            InitRecorder(profile);
 
             StartRecordingInternal();
         }
 
-        private void InitRecorder()
+        private void InitRecorder([NotNull] CommonProfile profile)
         {
             if (_currentChannel == null) return;
 
-            _recorder = new Recorder();
+            if(profile == _currentProfile && _recorder != null) return;
 
-            var encoder = Recorder.CreateLame(_currentChannel);
+            if(_recorder == null)
+                _recorder = new Recorder();
 
-            encoder.InputFile = null;
-            encoder.NoLimit = true;
-            encoder.Bitrate = BaseEncoder.BITRATE.kbps_128;
-            encoder.Mode = EncoderLAME.LAMEMode.JointStereo;
-            encoder.TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100;
-            encoder.Quality = EncoderLAME.LAMEQuality.Quality;
-
-            _recorder.Encoder = encoder;
+            _recorder.Encoder = _encoderProvider.CreateEncoder(profile, _currentChannel);
         }
 
         private void StartRecordingInternal()

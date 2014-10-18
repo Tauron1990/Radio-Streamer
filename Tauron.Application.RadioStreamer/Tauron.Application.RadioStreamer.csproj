@@ -45,6 +45,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Player\BassMediaPlayer.cs" />
+    <Compile Include="Player\EncoderProvider.cs" />
     <Compile Include="Player\Engine\ExportPlaybackEngine.cs" />
     <Compile Include="Player\Engine\Impl\FilePlayer.cs" />
     <Compile Include="Player\Engine\Impl\PlaybackEngineBase.cs" />

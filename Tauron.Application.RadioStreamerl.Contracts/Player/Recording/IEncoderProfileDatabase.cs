@@ -6,12 +6,15 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 {
     public interface IEncoderProfileDatabase
     {
+        [CanBeNull]
+        CommonProfile Default { get; set; }
+
         [NotNull]
-        IEnumerable<string> Profiles { get; set; }
+        IEnumerable<string> Profiles { get; }
 
         void Serialize([NotNull] string name, [NotNull] CommonProfile profile);
 
-        [NotNull]
+        [CanBeNull]
         CommonProfile Deserialize([NotNull] string name);
     }
 }

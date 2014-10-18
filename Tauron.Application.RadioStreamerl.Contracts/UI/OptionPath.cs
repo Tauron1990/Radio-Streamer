@@ -108,7 +108,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             Elements = new SortingCollection();
         }
 
-        public bool Save(IPropertyStore store)
+        public bool Save(IRadioEnvironment store)
         {
             if (store == null) throw new ArgumentNullException("store");
 
@@ -125,7 +125,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             return temp;
         }
 
-        public void Load(IPropertyStore store)
+        public void Load(IRadioEnvironment store)
         {
             if (store == null) throw new ArgumentNullException("store");
 
