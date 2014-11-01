@@ -528,10 +528,19 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
                 public CommonProfile Deserialize(string name)
                 {
+                    if(string.IsNullOrWhiteSpace(name)) return null;
+
                     CommonProfile profile;
                     return _profiles.TryGetValue(name, out profile) && profile != null
                         ? profile
                         : XmlSerializeHelper.DeserializeProfile(name, EncoderPath);
+                }
+
+                public void Delete(string profile)
+                {
+                    if(string.IsNullOrWhiteSpace(profile))  return;
+
+                    _profiles.Remove(profile);
                 }
             }
 

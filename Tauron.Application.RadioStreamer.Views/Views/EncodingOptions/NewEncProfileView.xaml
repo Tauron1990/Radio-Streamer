@@ -1,0 +1,32 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.EncodingOptions.NewEncProfileView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.NewEncodingProfileView}"
+             SizeToContent="Height" Width="350" Background="{StaticResource BackgroundBrush}" Title="{hlp:SimpleLocalize NewEncProfilTitle}"
+             WindowStyle="ToolWindow" hlp:ControlHelper.MarkWindow="CurrentWindow">
+    <Grid>
+       <Grid.ColumnDefinitions>
+           <ColumnDefinition Width="Auto"/>
+           <ColumnDefinition Width="*"/>
+           <ColumnDefinition Width="*"/>
+       </Grid.ColumnDefinitions>     
+       <Grid.RowDefinitions>
+           <RowDefinition Height="Auto"/>
+           <RowDefinition Height="Auto"/>
+           <RowDefinition Height="Auto"/>
+       </Grid.RowDefinitions>
+        <TextBlock Text="{hlp:SimpleLocalize NameLabel}" Margin="5"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Text="{Binding ProfileName}"/>
+        <TextBlock Text="{hlp:SimpleLocalize TypeLabel}" Margin="5" Grid.Column="0" Grid.Row="1"/>
+        <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding EncTypes}" 
+                  SelectedItem="{Binding CurrentEncType}"/>
+        <Button Content="{hlp:SimpleLocalize OkLabel}" Grid.Row="2" Grid.Column="2" Margin="5"
+                hlp:CommandBinder.Command="Ok:Ok"/>
+        <Button Grid.Row="2" Grid.Column="1" Margin="5" Content="{hlp:SimpleLocalize AbortLabel}"
+                hlp:CommandBinder.Command="Abort:Abort"/>
+    </Grid>
+</Window>

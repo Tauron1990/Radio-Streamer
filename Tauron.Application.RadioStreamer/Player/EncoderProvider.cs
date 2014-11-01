@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System.Collections.Generic;
+using System.Linq;
 using Tauron.Application.BassLib;
 using Tauron.Application.BassLib.Encoder;
 using Tauron.Application.BassLib.Recording;
@@ -20,6 +21,11 @@ namespace Tauron.Application.RadioStreamer.Player
         [Inject]
         private IUIOptionsManager _optionsManager;
 
+        public IEnumerable<string> EncoderIds
+        {
+            get { return _encoderFactories.Select(ef => ef.ID); }
+        }
+
         public AudioEncoder CreateEncoder(CommonProfile profile,Channel channel)
         {
             if (profile == null) return CreateDefault(channel);
@@ -27,7 +33,7 @@ namespace Tauron.Application.RadioStreamer.Player
             IEncoderFactory fac = _encoderFactories.FirstOrDefault(f => f.ID == profile.Id);
             if (fac == null) return CreateDefault(channel);
 
-            var rec = fac.Create(profile) ?? CreateDefault(channel);
+            var rec = fac.Create(profile, channel) ?? CreateDefault(channel);
 
             return rec;
         }

@@ -60,11 +60,20 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\Encoder\LameEncoderProfileOld.cs" />
-    <Compile Include="Helper\Options\LameEncodigEditor.xaml.cs">
+    <Compile Include="Views\EncodingOptions\CommonEncoderEditor.xaml.cs">
+      <DependentUpon>CommonEncoderEditor.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EncodingOptions\CommonEncoderUIViewModel.cs" />
+    <Compile Include="Views\EncodingOptions\IEncoderViewModel.cs" />
+    <Compile Include="Views\EncodingOptions\LameEncodigEditor.xaml.cs">
       <DependentUpon>LameEncodigEditor.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Helper\Options\EncodingEditorHelper.cs" />
+    <Compile Include="Views\EncodingOptions\EncodingEditorHelper.cs" />
+    <Compile Include="Views\EncodingOptions\LameEncodingEditorViewModel.cs" />
+    <Compile Include="Views\EncodingOptions\NewEncProfileView.xaml.cs">
+      <DependentUpon>NewEncProfileView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\EncodingOptions\NewEncProfileViewModel.cs" />
     <Compile Include="Views\AddIns\AddInViewModel.cs" />
     <Compile Include="Views\AddIns\InternalAddInInfo.cs" />
     <Compile Include="Views\AddIns\AddInView.xaml.cs">
@@ -83,7 +92,7 @@
     <Compile Include="Helper\FavoriteColorConverter.cs" />
     <Compile Include="Helper\LocalizeLabelTextConverter.cs" />
     <Compile Include="Helper\MaxHeightExpanderSetter.cs" />
-    <Compile Include="MetadataWindow.xaml.cs">
+    <Compile Include="Views\MedadataView\MetadataWindow.xaml.cs">
       <DependentUpon>MetadataWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\MedadataView\MetadataWindowViewModel.cs" />
@@ -125,7 +134,15 @@
     <Compile Include="ViewModule.cs" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="Helper\Options\LameEncodigEditor.xaml">
+    <Page Include="Views\EncodingOptions\CommonEncoderEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EncodingOptions\LameEncodigEditor.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\EncodingOptions\NewEncProfileView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -141,7 +158,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="MetadataWindow.xaml">
+    <Page Include="Views\MedadataView\MetadataWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -219,7 +236,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="Funktioniert nicht .txt" />
     <Resource Include="Styling\Style Guid.txt" />
   </ItemGroup>
   <ItemGroup />

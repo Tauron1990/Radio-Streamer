@@ -24,7 +24,7 @@ using Picture = System.Drawing.Image;
 namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 {
     [ExportViewModel(AppConstants.SprectrumViewModel)]
-    public sealed class SprecturmViewModel : ViewModelBase, INotifyBuildCompled
+    public sealed class SprecturmViewModel : ViewModelBase
     {
         private Spectrums _currentSpectrum;
         [Inject] private IEventAggregator _events;
@@ -70,7 +70,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             }
         }
 
-        void INotifyBuildCompled.BuildCompled()
+        public override void BuildCompled()
         {
             _events.GetEvent<PlayerViewVisibleChanged, bool>().Subscribe(PlayerVisibleChanged);
             _events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(Play);

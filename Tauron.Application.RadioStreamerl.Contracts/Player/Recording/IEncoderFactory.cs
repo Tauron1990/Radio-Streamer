@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Tauron.Application.BassLib;
 using Tauron.Application.BassLib.Encoder;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.UI;
@@ -8,11 +8,15 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 {
     public interface IEncoderFactory
     {
+        [NotNull]
+        string DisplayName { get; }
+
+        [NotNull]
         string ID { get; }
 
         void RegisterOptions([NotNull] IUIOptionsManager manager);
 
         [CanBeNull]
-        AudioEncoder Create([CanBeNull] CommonProfile profile);
+        AudioEncoder Create([CanBeNull] CommonProfile profile, [NotNull] Channel channel);
     }
 }

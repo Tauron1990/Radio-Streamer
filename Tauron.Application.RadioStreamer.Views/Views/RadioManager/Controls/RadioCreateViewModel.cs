@@ -19,7 +19,7 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
 {
     [ExportViewModel(AppConstants.RadioCreateViewModel)]
-    public class RadioCreateViewModel : ViewModelBase, INotifyBuildCompled
+    public class RadioCreateViewModel : ViewModelBase
     {
         public enum ScriptType
         {
@@ -53,7 +53,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
         [NotNull]
         public RadioScriptManager ScriptManager { get; private set; }
 
-        void INotifyBuildCompled.BuildCompled()
+        public override void BuildCompled()
         {
             if (Entry.IsEmpty) Model = new RadioEditModel {Language = CultureInfo.CurrentCulture.DisplayName};
             else

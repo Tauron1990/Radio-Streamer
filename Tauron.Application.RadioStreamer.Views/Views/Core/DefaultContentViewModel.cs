@@ -14,7 +14,7 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Views.Core
 {
 	[ExportViewModel(AppConstants.DefaultContentViewModel)]
-	public class DefaultContentViewModel : ViewModelBase, INotifyBuildCompled, IWorkspaceHolder
+	public class DefaultContentViewModel : ViewModelBase, IWorkspaceHolder
 	{
         [Inject]
 	    private ITabManager _tabManager;
@@ -84,7 +84,7 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 	        private set { _tabs = value; }
 	    }
 
-	    public void BuildCompled()
+	    public override void BuildCompled()
 	    {
 	        CurrentTrack = RadioStreamerResources.UnkownString;
 

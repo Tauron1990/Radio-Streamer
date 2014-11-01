@@ -160,6 +160,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Profile: ähnelt.
+        /// </summary>
+        public static string CommonEncodingEditorProfileLabel {
+            get {
+                return ResourceManager.GetString("CommonEncodingEditorProfileLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete Database File: {0} ähnelt.
         /// </summary>
         public static string DeleteDatabaseFilesMessage {
@@ -313,6 +322,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Custom Options ähnelt.
+        /// </summary>
+        public static string LameEditorCustomOptionGroup {
+            get {
+                return ResourceManager.GetString("LameEditorCustomOptionGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Language:  ähnelt.
         /// </summary>
         public static string LanguageLabel {
@@ -340,6 +358,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die New Profile ähnelt.
+        /// </summary>
+        public static string NewEncProfilTitle {
+            get {
+                return ResourceManager.GetString("NewEncProfilTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die New ähnelt.
         /// </summary>
         public static string NewLabel {
@@ -363,6 +390,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string NoneString {
             get {
                 return ResourceManager.GetString("NoneString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Ok ähnelt.
+        /// </summary>
+        public static string OkLabel {
+            get {
+                return ResourceManager.GetString("OkLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Encoder Profiles ähnelt.
+        /// </summary>
+        public static string OptionsPathEncoder {
+            get {
+                return ResourceManager.GetString("OptionsPathEncoder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Player ähnelt.
+        /// </summary>
+        public static string OptionsPathPlayer {
+            get {
+                return ResourceManager.GetString("OptionsPathPlayer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Recording ähnelt.
+        /// </summary>
+        public static string OptionsPathRecording {
+            get {
+                return ResourceManager.GetString("OptionsPathRecording", resourceCulture);
             }
         }
         
@@ -652,6 +715,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string ThemeSwichMessage {
             get {
                 return ResourceManager.GetString("ThemeSwichMessage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Type: ähnelt.
+        /// </summary>
+        public static string TypeLabel {
+            get {
+                return ResourceManager.GetString("TypeLabel", resourceCulture);
             }
         }
         

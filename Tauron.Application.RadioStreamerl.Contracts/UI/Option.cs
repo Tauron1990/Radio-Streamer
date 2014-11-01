@@ -76,7 +76,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         public Option([CanBeNull] string @group, [NotNull] IOptionHelper helper, [NotNull] string settingKey,
             [CanBeNull] object defaultValue, [NotNull] string displayName)
         {
-            if (@group == null) throw new ArgumentNullException("group");
             if (helper == null) throw new ArgumentNullException("helper");
             if (settingKey == null) throw new ArgumentNullException("settingKey");
             if (defaultValue == null) throw new ArgumentNullException("defaultValue");

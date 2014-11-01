@@ -53,6 +53,8 @@
     <Compile Include="Core\IEqProfileDatabase.cs" />
     <Compile Include="Core\IRadioEnvironment.cs" />
     <Compile Include="Core\Attributes\StatusBarItemExport.cs" />
+    <Compile Include="Data\Encoder\LameEncoderProfile.cs" />
+    <Compile Include="Data\ICommonProfileProvider.cs" />
     <Compile Include="Data\IDatabaseImportExportEngine.cs" />
     <Compile Include="IStyleManager.cs" />
     <Compile Include="Player\IRadioPlayer.cs" />
@@ -76,6 +78,7 @@
     <Compile Include="Player\RadioPlayerTitleRecived.cs" />
     <Compile Include="Data\CommonProfile.cs" />
     <Compile Include="Player\Recording\AudioEncoderBase.cs" />
+    <Compile Include="Player\Recording\EncoderFactoryBase.cs" />
     <Compile Include="Player\Recording\ExportEncodingEditor.cs" />
     <Compile Include="Player\Recording\IEncoderFactory.cs" />
     <Compile Include="Player\Recording\IEncoderProfileDatabase.cs" />
@@ -87,6 +90,7 @@
     <Compile Include="Scripts\IScript.cs" />
     <Compile Include="Scripts\IScriptEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="UI\CommonEncodingEditorModel.cs" />
     <Compile Include="UI\GenericMenuItem.cs" />
     <Compile Include="UI\ImagesCache.cs" />
     <Compile Include="UI\IOptionElement.cs" />

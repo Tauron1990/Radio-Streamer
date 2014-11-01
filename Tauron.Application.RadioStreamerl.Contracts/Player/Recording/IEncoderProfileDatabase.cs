@@ -16,5 +16,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
         [CanBeNull]
         CommonProfile Deserialize([NotNull] string name);
+
+        void Delete([CanBeNull] string profile);
     }
 }

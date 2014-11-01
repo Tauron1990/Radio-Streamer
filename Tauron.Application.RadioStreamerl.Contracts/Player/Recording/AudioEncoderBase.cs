@@ -12,7 +12,7 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 {
     [PublicAPI]
-    public abstract class AudioEncoderFactoryBase
+    public abstract class AudioEncoderFactoryBase : ObservableObject, ICommonProfileProvider
     {
         protected abstract class BaseMapper
         {
@@ -144,12 +144,15 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
             private readonly CommonProfile _profile;
             private readonly Func<Channel, TEncoder> _factory;
+            private readonly Action<string> _propChanged;
             private readonly  HashSet<MapperDataProperty> _dataProperties = new HashSet<MapperDataProperty>();
 
-            public GenericMapper([NotNull] CommonProfile profile, [NotNull] Func<Channel ,TEncoder> factory)
+            public GenericMapper([NotNull] CommonProfile profile, [NotNull] Func<Channel, TEncoder> factory,
+                [NotNull] Action<string> propChanged)
             {
                 _profile = profile;
                 _factory = factory;
+                _propChanged = propChanged;
             }
 
             [NotNull]
@@ -238,6 +241,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
                 mapperProp.Value = value;
                 _profile.SetProperty(value, name, type => mapperProp.Converter.Convert(value));
+                _propChanged(name);
             }
 
             public override TType Get<TType>(string name)
@@ -299,8 +303,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
         protected GenericMapper<TEncoder> CreateMapping<TEncoder>([NotNull] Func<Channel, TEncoder> creator)
             where TEncoder : AudioEncoder
         {
-            var mapper = new GenericMapper<TEncoder>(Profile, creator);
-         
+            var mapper = new GenericMapper<TEncoder>(Profile, creator, OnPropertyChangedExplicit);
+            _baseMapper = mapper;
+
             return mapper;
         }
 

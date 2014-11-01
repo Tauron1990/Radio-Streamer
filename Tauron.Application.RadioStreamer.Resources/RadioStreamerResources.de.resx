@@ -327,4 +327,28 @@
   <data name="LoadImportLabel" xml:space="preserve">
     <value>Datenbank Laden</value>
   </data>
+  <data name="OptionsPathPlayer" xml:space="preserve">
+    <value>Player</value>
+  </data>
+  <data name="OptionsPathRecording" xml:space="preserve">
+    <value>Aufnehmen</value>
+  </data>
+  <data name="OptionsPathEncoder" xml:space="preserve">
+    <value>Encoder Profile</value>
+  </data>
+  <data name="CommonEncodingEditorProfileLabel" xml:space="preserve">
+    <value>Profil:</value>
+  </data>
+  <data name="NewEncProfilTitle" xml:space="preserve">
+    <value>Neues Profil</value>
+  </data>
+  <data name="TypeLabel" xml:space="preserve">
+    <value>Type:</value>
+  </data>
+  <data name="OkLabel" xml:space="preserve">
+    <value>Ok</value>
+  </data>
+  <data name="LameEditorCustomOptionGroup" xml:space="preserve">
+    <value>Benutzer Options</value>
+  </data>
 </root>

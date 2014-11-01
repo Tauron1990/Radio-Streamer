@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System.Reflection;
 using System.Windows.Input;
 using Tauron.Application.Ioc;
+using Tauron.Application.Models;
 using Tauron.Application.Modules;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
+using Tauron.Application.RadioStreamer.Views.EncodingOptions;
 using Tauron.JetBrains.Annotations;
 
 #endregion
@@ -29,6 +31,9 @@ namespace Tauron.Application.RadioStreamer.Views
 
         [Inject] 
         private ITabManager _tabManager;
+
+        [Inject]
+        private IUIOptionsManager _optionsManager;
 
         [NotNull,AddinDescription]
         public AddinDescription GetDescription()
@@ -59,6 +64,12 @@ namespace Tauron.Application.RadioStreamer.Views
                 {
                     Label = RadioStreamerResources.ViewAddinManagerLabel
                 });
+
+            _optionsManager.RegisterOption(
+                RadioStreamerResources.OptionsPathPlayer.CombinePath(RadioStreamerResources.OptionsPathRecording,
+                    RadioStreamerResources.OptionsPathEncoder),
+                new Option(null, new EncodingEditorHelper(), string.Empty,
+                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption"));
 
             CommandBinder.Register(ApplicationCommands.Save);
 

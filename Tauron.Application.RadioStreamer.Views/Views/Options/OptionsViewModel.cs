@@ -17,10 +17,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
     {
         [Inject] 
         private OptionsModel _model;
-
-        [Inject]
-        private IDialogFactory _dialogs;
-
+        
         private IDatabaseImportExportEngine _exportEngine;
 
 
@@ -75,13 +72,13 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
             if (forSave)
             {
-                erg = _dialogs.ShowSaveFileDialog(_window, true, true, true, _exportEngine.DefaultExtension, true,
+                erg = Dialogs.ShowSaveFileDialog(_window, true, true, true, _exportEngine.DefaultExtension, true,
                     _exportEngine.FileFilter, true, true, RadioStreamerResources.SaveExportLabel,
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), out ok);
             }
             else
             {
-                erg = _dialogs.ShowOpenFileDialog(_window, true, _exportEngine.DefaultExtension, true,
+                erg = Dialogs.ShowOpenFileDialog(_window, true, _exportEngine.DefaultExtension, true,
                     _exportEngine.FileFilter, false, RadioStreamerResources.LoadImportLabel, true, true, out ok)
                     .FirstOrDefault();
             }

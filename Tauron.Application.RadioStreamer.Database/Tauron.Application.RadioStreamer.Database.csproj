@@ -58,6 +58,7 @@
     <Compile Include="Database\Formats\ChangeType.cs" />
     <Compile Include="Database\Formats\XmlSerializeHelper.cs" />
     <Compile Include="Database\RadioEnvironment.cs" />
+    <Compile Include="Encoder\LameEncoderFactory.cs" />
     <Compile Include="IEEngine\ExportQuality.cs" />
     <Compile Include="IEEngine\ExportRadio.cs" />
     <Compile Include="IEEngine\ImportExportEngine.cs" />

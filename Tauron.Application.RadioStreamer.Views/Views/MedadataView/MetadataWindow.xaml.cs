@@ -2,6 +2,7 @@
 
 using System.Windows;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
+using Tauron.JetBrains.Annotations;
 
 #endregion
 
@@ -10,7 +11,7 @@ namespace Tauron.Application.RadioStreamer.Views.MedadataView
     /// <summary>
     ///     Interaktionslogik für MetadataWindow.xaml
     /// </summary>
-    public partial class MetadataWindow : Window
+    public partial class MetadataWindow
     {
         public MetadataWindow(RadioEntry entry)
         {
@@ -19,7 +20,7 @@ namespace Tauron.Application.RadioStreamer.Views.MedadataView
             InitializeComponent();
         }
 
-        private void CloseClick(object sender, RoutedEventArgs e)
+        private void CloseClick([NotNull] object sender, [NotNull] RoutedEventArgs e)
         {
             Close();
         }

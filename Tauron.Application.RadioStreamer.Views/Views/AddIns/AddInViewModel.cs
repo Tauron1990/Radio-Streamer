@@ -11,14 +11,11 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Views.AddIns
 {
     [ExportViewModel(AppConstants.AddInViewModel)]
-    public sealed class AddInViewModel : ViewModelBase, INotifyBuildCompled
+    public sealed class AddInViewModel : ViewModelBase
     {
         [Inject]
         private IPlugInManager _plugInManager;
-
-        [Inject]
-        private IDialogFactory _dialogFactory;
-
+        
         [NotNull]
         public List<ModuleInfo> Modules { get; private set; }
 
@@ -28,7 +25,7 @@ namespace Tauron.Application.RadioStreamer.Views.AddIns
         [NotNull]
         public UISyncObservableCollection<InternalAddInInfo> ReadyAddIns { get; private set; }
 
-        public void BuildCompled()
+        public override void BuildCompled()
         {
             Modules = new List<ModuleInfo>(AddInListner.AddIns.Select(desc => new ModuleInfo(desc)));
 
@@ -58,7 +55,7 @@ namespace Tauron.Application.RadioStreamer.Views.AddIns
         private void Install([NotNull] IPackInfo obj)
         {
             string label = RadioStreamerResources.InstallingLabel;
-            var diag = _dialogFactory.CreateProgressDialog(label, label, MainWindow, progress =>
+            var diag = Dialogs.CreateProgressDialog(label, label, MainWindow, progress =>
             {
                 ((IInstallablePackInfo) obj).Install();
                 ResetAddIns();

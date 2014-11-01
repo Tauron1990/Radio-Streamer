@@ -265,7 +265,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
     }
 
     [ExportViewModel(AppConstants.RadioManagerViewModelName)]
-    public sealed class RadioManagerViewModel : TabWorkspace, INotifyBuildCompled
+    public sealed class RadioManagerViewModel : TabWorkspace
     {
         private class InternalQualityQuery : IQualityQuery
         {
@@ -598,7 +598,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
         #region Loading
 
-        void INotifyBuildCompled.BuildCompled()
+        public override void BuildCompled()
         {
             _events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(RadioPlay);
             _events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(RadioStop);

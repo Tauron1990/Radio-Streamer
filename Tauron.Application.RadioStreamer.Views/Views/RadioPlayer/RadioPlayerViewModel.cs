@@ -24,7 +24,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 {
     [ExportViewModel(AppConstants.RadioPlayerViewModelName)]
 // ReSharper disable once ClassWithVirtualMembersNeverInherited.Global
-    public class RadioPlayerViewModel : TabWorkspace, IDisposable, INotifyBuildCompled
+    public class RadioPlayerViewModel : TabWorkspace, IDisposable
     {
         public enum PlayerStade
         {
@@ -48,7 +48,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             _player.Deactivate();
         }
 
-        void INotifyBuildCompled.BuildCompled()
+        public override void BuildCompled()
         {
             CanClose = false;
 
