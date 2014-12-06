@@ -68,7 +68,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\bin\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.csprojResolveAssemblyReference.cache
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Core\MainWindow.baml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MetadataWindow.baml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Options\OptionsWindow.baml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\RadioPlayer\Equalizer\EqualizerTemplate.baml
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\RadioPlayer\Equalizer\EqualizerResources.baml
@@ -77,7 +76,6 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\AddIns\AddInView.g.cs
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Core\DefaultContent.g.cs
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Core\MainWindow.g.cs
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\MetadataWindow.g.cs
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Options\OptionsWindow.g.cs
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\RadioManager\Controls\RadioCreateView.g.cs
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\RadioPlayer\Equalizer\EqManager.g.cs
@@ -96,9 +94,11 @@ C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Appl
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
 C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\LameEncodigEditor.baml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\LameEncodigEditor.g.cs
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\CommonEncoderEditor.baml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\NewEncProfileView.baml
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\CommonEncoderEditor.g.cs
-C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Helper\EncodingOptions\NewEncProfileView.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\CommonEncoderEditor.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\LameEncodigEditor.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\NewEncProfileView.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\MedadataView\MetadataWindow.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\CommonEncoderEditor.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\LameEncodigEditor.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\EncodingOptions\NewEncProfileView.g.cs
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\MedadataView\MetadataWindow.g.cs

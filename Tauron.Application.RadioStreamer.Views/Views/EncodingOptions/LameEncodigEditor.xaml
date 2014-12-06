@@ -4,11 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.EncodingOptions"
              xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.Data.Encoder;assembly=Tauron.Application.RadioStreamer.Contracts"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:LameEncoderProfile.LameId}"
-             d:DesignHeight="300" d:DesignWidth="500">
+             d:DesignHeight="700" d:DesignWidth="500">
     <StackPanel>
-        <GroupBox Header="{hlp:SimpleLocalize LameEditorCustomOptionGroup}">
+        <Expander Header="{hlp:SimpleLocalize LameEditorCustomOptionGroup}">
             <Grid>
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition/>
@@ -19,12 +20,134 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-            <CheckBox Content="Only Custom Options" Grid.ColumnSpan="2" Margin="5" IsChecked="{Binding UseCustomOptionsOnly}"/>
-                <TextBlock Text="Custom Options: " Margin="5" Grid.Row="1" Grid.Column="0"/>
-                <TextBox Margin="5" Grid.Column="1" Grid.Row="1"/>
-                <TextBlock Text="Present:" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="2" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameCustomOptionsOnly}" Grid.ColumnSpan="2" Margin="5" 
+                          IsChecked="{Binding UseCustomOptionsOnly.Value}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameCustomOptionsLabel}" Margin="5" Grid.Row="1" Grid.Column="0"/>
+                <TextBox Margin="5" Grid.Column="1" Grid.Row="1" Text="{Binding CustomOptinos}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LamePresentLabel}" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="2" Margin="5" IsEnabled="{Binding IsCustomOptionsDisabled}" 
+                          ItemsSource="{Binding LamePresents.Items}" SelectedItem="{Binding LamePresents.CurrentItem}" />
             </Grid>
-        </GroupBox>
+        </Expander>
+        <Expander Header="{hlp:SimpleLocalize LameGroupCommon}" IsExpanded="True">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{hlp:SimpleLocalize LameScaleLabel}" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="0" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding Scale.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameModeLabel}" Margin="5" Grid.Row="1" Grid.Column="0"/>
+                <ComboBox Grid.Column="1" Grid.Row="1" Margin="5" ItemsSource="{Binding Modes.Items}" 
+                          SelectedItem="{Binding Modes.CurrentItem}" IsEnabled="{Binding IsPresentDisabled}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameQualityLabel}" Margin="5" Grid.Column="0" Grid.Row="2"/>
+                <ComboBox Grid.Column="1" Grid.Row="2" Margin="5" ItemsSource="{Binding Qualitys.Items}" 
+                          SelectedItem="{Binding Qualitys.CurrentItem}" IsEnabled="{Binding IsPresentDisabled}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameEnforceCbrLabel}" Grid.Column="0" Grid.ColumnSpan="2" 
+                          Grid.Row="3" Margin="5" IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding EnforceCbr.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameEnforceISOLabel}" Grid.Row="4" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding EnforceIso.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameDisableAllFiltersLabel}" Grid.Row="5" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding DisableAllFilters.Value}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameTargetSampleRateLabel}" Grid.Row="6" Grid.Column="0" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="6" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding TargetSampleRate.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameHighPassFrequencyLabel}" Grid.Column="0" Grid.Row="7" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="7" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameHighPassFreqenzcyWidthLabel}" Grid.Column="0" Grid.Row="8" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="8" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameLowPassFreqency}" Grid.Column="0" Grid.Row="9" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="9" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameLowPassFrecuencyWidth}" Grid.Column="0" Grid.Row="10" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="10" Margin="5"/>
+            </Grid>
+        </Expander>
+        <Expander Header="{hlp:SimpleLocalize LameVariableBitrateGroup}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <CheckBox Content="{hlp:SimpleLocalize LameUseVariableBitrate}" Margin="5" Grid.ColumnSpan="2"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameVBRDisableTag}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameAverageBitrate}" Grid.Column="0" Grid.Row="2" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameVRBQuality}" Grid.Column="0" Grid.Row="3" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="3" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameLimitVariableBitRate}" Grid.Column="0" Grid.Row="4" Margin="5" Grid.ColumnSpan="2"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameMaxBitrate}" Grid.Column="0" Grid.Row="5" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameEnforceMinimalBitrate}" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="5"/>
+            </Grid>
+        </Expander>
+        <Expander Header="{hlp:SimpleLocalize LamePSYGroup}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{hlp:SimpleLocalize LameShortBlocks}" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameNotTemp}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameSafeJoint}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameATHControl}" Grid.Row="3" Grid.Column="0" Margin="5"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+            </Grid>
+        </Expander>
+        <Expander Header="{hlp:SimpleLocalize LameMiscGroup}">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="2*"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                    <RowDefinition/>
+                </Grid.RowDefinitions>
+                <TextBlock Text="{hlp:SimpleLocalize LameReplayGain}" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameFreeFormat}" Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="2"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameCopyright}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameNonOriginal}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameErrorProtection}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameDisableBitReservoir}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <TextBlock Text="{hlp:SimpleLocalize LameNoAsm}" Grid.Row="6" Grid.Column="0" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="6"/>
+            </Grid>
+        </Expander>
     </StackPanel>
 </UserControl>

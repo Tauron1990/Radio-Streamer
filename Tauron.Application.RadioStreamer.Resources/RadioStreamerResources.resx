@@ -355,4 +355,157 @@
   <data name="LameEditorCustomOptionGroup" xml:space="preserve">
     <value>Custom Options</value>
   </data>
+  <data name="LameCustomOptionsOnly" xml:space="preserve">
+    <value>Only Custom Options</value>
+  </data>
+  <data name="LameCustomOptionsLabel" xml:space="preserve">
+    <value>Custom Options:</value>
+  </data>
+  <data name="LamePresentLabel" xml:space="preserve">
+    <value>Present:</value>
+  </data>
+  <data name="LamePresentNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="LamePresentMedium" xml:space="preserve">
+    <value>Medium</value>
+  </data>
+  <data name="LamePresentStandart" xml:space="preserve">
+    <value>Standard</value>
+  </data>
+  <data name="LamePresentExtreme" xml:space="preserve">
+    <value>Extreme</value>
+  </data>
+  <data name="LamePresentInsane" xml:space="preserve">
+    <value>Insane</value>
+  </data>
+  <data name="LameGroupCommon" xml:space="preserve">
+    <value>Common</value>
+  </data>
+  <data name="LameScaleLabel" xml:space="preserve">
+    <value>Scale:</value>
+  </data>
+  <data name="LameModeLabel" xml:space="preserve">
+    <value>Mode:</value>
+  </data>
+  <data name="LameQualityLabel" xml:space="preserve">
+    <value>Quality:</value>
+  </data>
+  <data name="LameEnforceCbrLabel" xml:space="preserve">
+    <value>Enforce Constant Bitrate</value>
+  </data>
+  <data name="LameEnforceISOLabel" xml:space="preserve">
+    <value>Enforce ISO</value>
+  </data>
+  <data name="LameTargetSampleRateLabel" xml:space="preserve">
+    <value>Target Sample Rate:</value>
+  </data>
+  <data name="LameHighPassFrequencyLabel" xml:space="preserve">
+    <value>High Pass Frequency:</value>
+  </data>
+  <data name="LameDisableAllFiltersLabel" xml:space="preserve">
+    <value>Disable All Filters</value>
+  </data>
+  <data name="LameHighPassFreqenzcyWidthLabel" xml:space="preserve">
+    <value>High Pass Frequenzcy Width:</value>
+  </data>
+  <data name="LameLowPassFreqency" xml:space="preserve">
+    <value>Low Pass Frequency:</value>
+  </data>
+  <data name="LameLowPassFrecuencyWidth" xml:space="preserve">
+    <value>Low Pass Frecquency Width:</value>
+  </data>
+  <data name="LameUseVariableBitrate" xml:space="preserve">
+    <value>Use Variable Bitrate</value>
+  </data>
+  <data name="LameVariableBitrateGroup" xml:space="preserve">
+    <value>Variable Bitrate</value>
+  </data>
+  <data name="LameVBRDisableTag" xml:space="preserve">
+    <value>Disable Tag</value>
+  </data>
+  <data name="LameAverageBitrate" xml:space="preserve">
+    <value>Average Bitrate:</value>
+  </data>
+  <data name="LameVRBQuality" xml:space="preserve">
+    <value>Quality:</value>
+  </data>
+  <data name="LameLimitVariableBitRate" xml:space="preserve">
+    <value>Limit Variable Bit Rate</value>
+  </data>
+  <data name="LameMaxBitrate" xml:space="preserve">
+    <value>Max Bitrate:</value>
+  </data>
+  <data name="LameEnforceMinimalBitrate" xml:space="preserve">
+    <value>Enforce Minimal Bitrate</value>
+  </data>
+  <data name="LamePSYGroup" xml:space="preserve">
+    <value>PSY</value>
+  </data>
+  <data name="LameUseShortBlocks" xml:space="preserve">
+    <value>Use Short Blocks</value>
+  </data>
+  <data name="LameShortBlocks" xml:space="preserve">
+    <value>Short Blocks:</value>
+  </data>
+  <data name="LameNotTemp" xml:space="preserve">
+    <value>Not Temporal Masking</value>
+  </data>
+  <data name="LameSafeJoint" xml:space="preserve">
+    <value>M/S switching criterion</value>
+  </data>
+  <data name="LameATHControl" xml:space="preserve">
+    <value>ATH Control</value>
+  </data>
+  <data name="LameMiscGroup" xml:space="preserve">
+    <value>Misc</value>
+  </data>
+  <data name="LameReplayGain" xml:space="preserve">
+    <value>ReplayGain:</value>
+  </data>
+  <data name="LameFreeFormat" xml:space="preserve">
+    <value>Free Format BitStream</value>
+  </data>
+  <data name="LameCopyright" xml:space="preserve">
+    <value>Copyright</value>
+  </data>
+  <data name="LameNonOriginal" xml:space="preserve">
+    <value>Non Original</value>
+  </data>
+  <data name="LameErrorProtection" xml:space="preserve">
+    <value>Error Protection</value>
+  </data>
+  <data name="LameDisableBitReservoir" xml:space="preserve">
+    <value>Disable Bit Reservoir</value>
+  </data>
+  <data name="LameNoAsm" xml:space="preserve">
+    <value>disable assembly optimizations for mmx/3dnow/sse</value>
+  </data>
+  <data name="LameDefaultMode" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="LameDualMoneMode" xml:space="preserve">
+    <value>Dual Mono</value>
+  </data>
+  <data name="LameForcedJointStereoMode" xml:space="preserve">
+    <value>Forced Joint Stereo</value>
+  </data>
+  <data name="LameJointStereoMode" xml:space="preserve">
+    <value>Joint Stereo</value>
+  </data>
+  <data name="LameMonoMode" xml:space="preserve">
+    <value>Mono</value>
+  </data>
+  <data name="LameStereoMode" xml:space="preserve">
+    <value>Stereo</value>
+  </data>
+  <data name="LameQualityNone" xml:space="preserve">
+    <value>None</value>
+  </data>
+  <data name="LameQualityQuality" xml:space="preserve">
+    <value>Quality</value>
+  </data>
+  <data name="LameQualitySpeed" xml:space="preserve">
+    <value>Speed</value>
+  </data>
 </root>

@@ -322,11 +322,470 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ATH Control ähnelt.
+        /// </summary>
+        public static string LameATHControl {
+            get {
+                return ResourceManager.GetString("LameATHControl", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Average Bitrate: ähnelt.
+        /// </summary>
+        public static string LameAverageBitrate {
+            get {
+                return ResourceManager.GetString("LameAverageBitrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Copyright ähnelt.
+        /// </summary>
+        public static string LameCopyright {
+            get {
+                return ResourceManager.GetString("LameCopyright", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Custom Options: ähnelt.
+        /// </summary>
+        public static string LameCustomOptionsLabel {
+            get {
+                return ResourceManager.GetString("LameCustomOptionsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Only Custom Options ähnelt.
+        /// </summary>
+        public static string LameCustomOptionsOnly {
+            get {
+                return ResourceManager.GetString("LameCustomOptionsOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Default ähnelt.
+        /// </summary>
+        public static string LameDefaultMode {
+            get {
+                return ResourceManager.GetString("LameDefaultMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Disable All Filters ähnelt.
+        /// </summary>
+        public static string LameDisableAllFiltersLabel {
+            get {
+                return ResourceManager.GetString("LameDisableAllFiltersLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Disable Bit Reservoir ähnelt.
+        /// </summary>
+        public static string LameDisableBitReservoir {
+            get {
+                return ResourceManager.GetString("LameDisableBitReservoir", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Dual Mono ähnelt.
+        /// </summary>
+        public static string LameDualMoneMode {
+            get {
+                return ResourceManager.GetString("LameDualMoneMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Custom Options ähnelt.
         /// </summary>
         public static string LameEditorCustomOptionGroup {
             get {
                 return ResourceManager.GetString("LameEditorCustomOptionGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enforce Constant Bitrate ähnelt.
+        /// </summary>
+        public static string LameEnforceCbrLabel {
+            get {
+                return ResourceManager.GetString("LameEnforceCbrLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enforce ISO ähnelt.
+        /// </summary>
+        public static string LameEnforceISOLabel {
+            get {
+                return ResourceManager.GetString("LameEnforceISOLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Enforce Minimal Bitrate ähnelt.
+        /// </summary>
+        public static string LameEnforceMinimalBitrate {
+            get {
+                return ResourceManager.GetString("LameEnforceMinimalBitrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Error Protection ähnelt.
+        /// </summary>
+        public static string LameErrorProtection {
+            get {
+                return ResourceManager.GetString("LameErrorProtection", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Forced Joint Stereo ähnelt.
+        /// </summary>
+        public static string LameForcedJointStereoMode {
+            get {
+                return ResourceManager.GetString("LameForcedJointStereoMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Free Format BitStream ähnelt.
+        /// </summary>
+        public static string LameFreeFormat {
+            get {
+                return ResourceManager.GetString("LameFreeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Common ähnelt.
+        /// </summary>
+        public static string LameGroupCommon {
+            get {
+                return ResourceManager.GetString("LameGroupCommon", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die High Pass Frequenzcy Width: ähnelt.
+        /// </summary>
+        public static string LameHighPassFreqenzcyWidthLabel {
+            get {
+                return ResourceManager.GetString("LameHighPassFreqenzcyWidthLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die High Pass Frequency: ähnelt.
+        /// </summary>
+        public static string LameHighPassFrequencyLabel {
+            get {
+                return ResourceManager.GetString("LameHighPassFrequencyLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Joint Stereo ähnelt.
+        /// </summary>
+        public static string LameJointStereoMode {
+            get {
+                return ResourceManager.GetString("LameJointStereoMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Limit Variable Bit Rate ähnelt.
+        /// </summary>
+        public static string LameLimitVariableBitRate {
+            get {
+                return ResourceManager.GetString("LameLimitVariableBitRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Low Pass Frecquency Width: ähnelt.
+        /// </summary>
+        public static string LameLowPassFrecuencyWidth {
+            get {
+                return ResourceManager.GetString("LameLowPassFrecuencyWidth", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Low Pass Frequency: ähnelt.
+        /// </summary>
+        public static string LameLowPassFreqency {
+            get {
+                return ResourceManager.GetString("LameLowPassFreqency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Max Bitrate: ähnelt.
+        /// </summary>
+        public static string LameMaxBitrate {
+            get {
+                return ResourceManager.GetString("LameMaxBitrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Misc ähnelt.
+        /// </summary>
+        public static string LameMiscGroup {
+            get {
+                return ResourceManager.GetString("LameMiscGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mode: ähnelt.
+        /// </summary>
+        public static string LameModeLabel {
+            get {
+                return ResourceManager.GetString("LameModeLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Mono ähnelt.
+        /// </summary>
+        public static string LameMonoMode {
+            get {
+                return ResourceManager.GetString("LameMonoMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die disable assembly optimizations for mmx/3dnow/sse ähnelt.
+        /// </summary>
+        public static string LameNoAsm {
+            get {
+                return ResourceManager.GetString("LameNoAsm", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Non Original ähnelt.
+        /// </summary>
+        public static string LameNonOriginal {
+            get {
+                return ResourceManager.GetString("LameNonOriginal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Not Temporal Masking ähnelt.
+        /// </summary>
+        public static string LameNotTemp {
+            get {
+                return ResourceManager.GetString("LameNotTemp", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Extreme ähnelt.
+        /// </summary>
+        public static string LamePresentExtreme {
+            get {
+                return ResourceManager.GetString("LamePresentExtreme", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Insane ähnelt.
+        /// </summary>
+        public static string LamePresentInsane {
+            get {
+                return ResourceManager.GetString("LamePresentInsane", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Present: ähnelt.
+        /// </summary>
+        public static string LamePresentLabel {
+            get {
+                return ResourceManager.GetString("LamePresentLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Medium ähnelt.
+        /// </summary>
+        public static string LamePresentMedium {
+            get {
+                return ResourceManager.GetString("LamePresentMedium", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No ähnelt.
+        /// </summary>
+        public static string LamePresentNo {
+            get {
+                return ResourceManager.GetString("LamePresentNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standard ähnelt.
+        /// </summary>
+        public static string LamePresentStandart {
+            get {
+                return ResourceManager.GetString("LamePresentStandart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die PSY ähnelt.
+        /// </summary>
+        public static string LamePSYGroup {
+            get {
+                return ResourceManager.GetString("LamePSYGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quality: ähnelt.
+        /// </summary>
+        public static string LameQualityLabel {
+            get {
+                return ResourceManager.GetString("LameQualityLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die None ähnelt.
+        /// </summary>
+        public static string LameQualityNone {
+            get {
+                return ResourceManager.GetString("LameQualityNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quality ähnelt.
+        /// </summary>
+        public static string LameQualityQuality {
+            get {
+                return ResourceManager.GetString("LameQualityQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Speed ähnelt.
+        /// </summary>
+        public static string LameQualitySpeed {
+            get {
+                return ResourceManager.GetString("LameQualitySpeed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die ReplayGain: ähnelt.
+        /// </summary>
+        public static string LameReplayGain {
+            get {
+                return ResourceManager.GetString("LameReplayGain", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die M/S switching criterion ähnelt.
+        /// </summary>
+        public static string LameSafeJoint {
+            get {
+                return ResourceManager.GetString("LameSafeJoint", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Scale: ähnelt.
+        /// </summary>
+        public static string LameScaleLabel {
+            get {
+                return ResourceManager.GetString("LameScaleLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Short Blocks: ähnelt.
+        /// </summary>
+        public static string LameShortBlocks {
+            get {
+                return ResourceManager.GetString("LameShortBlocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Stereo ähnelt.
+        /// </summary>
+        public static string LameStereoMode {
+            get {
+                return ResourceManager.GetString("LameStereoMode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Target Sample Rate: ähnelt.
+        /// </summary>
+        public static string LameTargetSampleRateLabel {
+            get {
+                return ResourceManager.GetString("LameTargetSampleRateLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use Short Blocks ähnelt.
+        /// </summary>
+        public static string LameUseShortBlocks {
+            get {
+                return ResourceManager.GetString("LameUseShortBlocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use Variable Bitrate ähnelt.
+        /// </summary>
+        public static string LameUseVariableBitrate {
+            get {
+                return ResourceManager.GetString("LameUseVariableBitrate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Variable Bitrate ähnelt.
+        /// </summary>
+        public static string LameVariableBitrateGroup {
+            get {
+                return ResourceManager.GetString("LameVariableBitrateGroup", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Disable Tag ähnelt.
+        /// </summary>
+        public static string LameVBRDisableTag {
+            get {
+                return ResourceManager.GetString("LameVBRDisableTag", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Quality: ähnelt.
+        /// </summary>
+        public static string LameVRBQuality {
+            get {
+                return ResourceManager.GetString("LameVRBQuality", resourceCulture);
             }
         }
         

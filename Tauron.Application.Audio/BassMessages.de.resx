@@ -181,7 +181,7 @@
     <value>Keine EAX Unterstützung</value>
   </data>
   <data name="BASS_ERROR_DEVICE" xml:space="preserve">
-    <value>Ungültige Geräte Nurmmer</value>
+    <value>Ungültige Geräte Nummer</value>
   </data>
   <data name="BASS_ERROR_NOPLAY" xml:space="preserve">
     <value>Spielt nicht</value>
@@ -214,7 +214,7 @@
     <value>Die angeforderten Daten sind nicht Verfügbar</value>
   </data>
   <data name="BASS_ERROR_DECODE" xml:space="preserve">
-    <value>Der Kanal ist ein "Decoder Kanal"</value>
+    <value>Der Kanal ist ein "Decoder Kanal" oder kein Decoder Kanal</value>
   </data>
   <data name="BASS_ERROR_DX" xml:space="preserve">
     <value>Keine geeignete DirectX Version Installiert</value>
