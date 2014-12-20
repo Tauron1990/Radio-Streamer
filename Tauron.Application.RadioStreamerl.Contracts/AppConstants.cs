@@ -28,7 +28,7 @@ namespace Tauron.Application.RadioStreamer.Contracts
 
         public const string AddInViewModel = "AddInViewModel";
 
-        public const string OptionsViewModel = "ptionsViewModel";
+        public const string OptionsViewModel = "OptionsViewModel";
 
         public const string CommonEncoderUI = "CommonEncoderOptionUI";
         public const string NewEncodingProfileView = "NewEncodingProfileViewModel";

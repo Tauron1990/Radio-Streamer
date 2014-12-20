@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Collections.Specialized;
+using System.Linq;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.JetBrains.Annotations;
 
@@ -97,15 +99,71 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
                     handler(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
+        private sealed class FilteringCollection<TType> : IEnumerable<TType>, INotifyCollectionChanged
+            where TType : IOptionElement
+        {
+            public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+            private readonly List<TType> _filteredList;
+            private readonly SortingCollection _collection;
+            private bool _needReset;
+
+            private void OnCollectionChanged()
+            {
+                NotifyCollectionChangedEventHandler handler = CollectionChanged;
+                if (handler != null) handler(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
+            }
+
+            public FilteringCollection([NotNull] SortingCollection collection)
+
+            {
+                if (collection == null) throw new ArgumentNullException("collection");
+                _collection = collection;
+                _filteredList = new List<TType>();
+                _needReset = true;
+
+                collection.CollectionChanged += Reset;
+            }
+
+            private void Reset([NotNull] object sender, [NotNull] NotifyCollectionChangedEventArgs e)
+            {
+                _needReset = true;
+                OnCollectionChanged();
+            }
+
+            public IEnumerator<TType> GetEnumerator()
+            {
+                if (!_needReset) return _filteredList.GetEnumerator();
+                
+                _filteredList.Clear();
+                _filteredList.AddRange(_collection.OfType<TType>());
+                _needReset = false;
+
+                return _filteredList.GetEnumerator();
+            }
+
+            IEnumerator IEnumerable.GetEnumerator()
+            {
+                return GetEnumerator();
+            }
+        }
+
+        private FilteringCollection<OptionPath> _pathFilter; 
 
         public string DisplayName { get; set; }
 
         [NotNull, UsedImplicitly]
         public ICollection<IOptionElement> Elements { get; private set; }
 
+
+        [NotNull]
+        public IEnumerable<OptionPath> OptionPaths { get { return _pathFilter; } }
+
         public OptionPath()
         {
-            Elements = new SortingCollection();
+            var temp = new SortingCollection();
+            Elements = temp;
+            _pathFilter = new FilteringCollection<OptionPath>(temp);
         }
 
         public bool Save(IRadioEnvironment store)

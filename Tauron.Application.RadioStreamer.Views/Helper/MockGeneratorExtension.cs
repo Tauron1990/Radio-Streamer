@@ -34,9 +34,8 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
             var type = assembly.DefineDynamicModule("MockGenerator").DefineType(Type.Name + "Mock");
 
 
-            MethodAttributes getSetAttr =
-                MethodAttributes.Public | MethodAttributes.SpecialName |
-                MethodAttributes.HideBySig;
+            const MethodAttributes getSetAttr = MethodAttributes.Public | MethodAttributes.SpecialName |
+                                                MethodAttributes.HideBySig;
 
             foreach (var propertyInfo in Type.GetProperties())
             {
@@ -56,14 +55,20 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
                     generator = methodBuilder.GetILGenerator();
                     generator.Emit(OpCodes.Ldnull);
                     generator.Emit(OpCodes.Ret);
-                }
-                if (propertyInfo.CanWrite)
-                {
-                    methodBuilder = type.DefineMethod("set_" + propertyInfo.Name, getSetAttr, null, propertyInfo.PropertyType)
-                }
-            }
 
-            return Activator.CreateInstance(type);
+                    pbuilder.SetGetMethod(methodBuilder);
+                }
+                if (!propertyInfo.CanWrite) continue;
+                methodBuilder = type.DefineMethod("set_" + propertyInfo.Name, getSetAttr, null,
+                    new[] {propertyInfo.PropertyType});
+
+                generator = methodBuilder.GetILGenerator();
+                generator.Emit(OpCodes.Ret);
+
+                pbuilder.SetSetMethod(methodBuilder);
+            }
+            
+            return Activator.CreateInstance(type.CreateType());
         }
     }
 }

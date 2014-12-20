@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Windows.Controls;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
@@ -19,8 +20,8 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
         [InjectRadioEnviroment]
         private IRadioEnvironment _radioEnvironment;
 
-        [Inject(typeof(UserControl), ContractName = "EncodingEditor")]
-        private List<InstanceResolver<object, IEncodingEditorMetadata>> _encoderEditors;
+        //[Inject(typeof(UserControl), ContractName = "EncodingEditor")]
+        //private List<InstanceResolver<object, IEncodingEditorMetadata>> _encoderEditors;
         
         private List<Tuple<string, CommonProfile>> _modifed;
         private string _currentProfile;
@@ -30,6 +31,9 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
 
         private object _currentEditor;
 
+        [Inject(typeof(UserControl), ContractName = "EncodingEditor")]
+        private List<InstanceResolver<UserControl, IEncodingEditorMetadata>> _editors;
+       
         [NotNull]
         public UISyncObservableCollection<string> Profiles { get; private set; }
 
@@ -50,10 +54,14 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             _editorModel.Name = _currentProfile;
             _editorModel.CurrentProfile = _radioEnvironment.Settings.EncoderProfiles.Deserialize(_currentProfile);
 
-            CurrentEditor = ViewManager.CreateView(_editorModel.CurrentProfile.Id);
+            if (_editorModel.CurrentProfile != null)
+                CurrentEditor =
+                    Synchronize.Invoke(
+                        () => _editors.First(e => e.Metadata.EncoderId == _editorModel.CurrentProfile.Id).Resolve());
+            else CurrentEditor = null;
         }
 
-        [NotNull]
+        [CanBeNull]
         public object CurrentEditor
         {
             get { return _currentEditor; }

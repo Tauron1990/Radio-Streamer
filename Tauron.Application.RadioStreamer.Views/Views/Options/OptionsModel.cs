@@ -11,6 +11,11 @@ namespace Tauron.Application.RadioStreamer.Views.Options
     [Export(typeof (IUIOptionsManager))]
     public sealed class OptionsModel : IUIOptionsManager
     {
+        public OptionsModel()
+        {
+            
+        }
+
         [Inject]
         private IRadioEnvironment _radioEnvironment;
 

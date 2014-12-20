@@ -16,7 +16,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
     public class OptionsViewModel : ViewModelBase
     {
         [Inject] 
-        private OptionsModel _model;
+        private IUIOptionsManager _model;
         
         private IDatabaseImportExportEngine _exportEngine;
 
@@ -24,7 +24,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
         [NotNull]
         public IEnumerable<OptionPath> OptionPaths { get { return _model.Options; } }
 
-        [WindowTarget]
+        [WindowTarget("Window")]
         private IWindow _window;
 
         [NotNull]

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Windows.Input;
 using System.Windows.Media;
+using Tauron.Application.Commands;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.UI
@@ -13,11 +15,13 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         private ImageSource _imageSource;
         private string _label;
         private bool _isEnabled;
+        private ICommand _clickCommand;
 
-        public GenericMenuItem(params Action<GenericMenuItem>[] clickActions)
+        public GenericMenuItem([NotNull] params Action<GenericMenuItem>[] clickActions)
         {
             ClickActions = new List<Action<GenericMenuItem>>(clickActions);
             IsEnabled = true;
+            ClickCommand = new SimpleCommand(Click);
         }
 
         [NotNull]
@@ -50,8 +54,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             set { _isEnabled = value; OnPropertyChanged(); }
         }
 
-        [EventTarget]
-        public void Click()
+        [NotNull]
+        public ICommand ClickCommand
+        {
+            get { return _clickCommand; }
+            private set { _clickCommand = value; OnPropertyChanged();}
+        }
+
+        public void Click([CanBeNull] object temp)
         {
             foreach (var clickAction in ClickActions)
             {

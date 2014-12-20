@@ -65,18 +65,26 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
         }
     }
 
+    public enum ShortBlockUsage
+    {
+        None,
+        UseShortBlock,
+        UseOnlyShortBlocks,
+        UseNoShortBlocks,
+    }
+
     [ExportViewModel(LameEncoderProfile.LameId)]
     [NotShared]
     public sealed class LameEncodingEditorViewModel : ViewModelBase
     {
         public abstract class HelperBase<TType> : ObservableObject
         {
-            public event Action ValueChanedEvent;
+            public event Action<TType> ValueChanedEvent;
 
-            protected void OnValueChanedEvent()
+            protected void OnValueChanedEvent(TType e)
             {
-                Action handler = ValueChanedEvent;
-                if (handler != null) handler();
+                Action<TType> handler = ValueChanedEvent;
+                if (handler != null) handler(e);
             }
 
             private Action<TType> _internalSetter;
@@ -84,13 +92,21 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             protected readonly Action<TType> Setter;
             protected readonly Func<TType> Getter;
 
-            protected HelperBase([NotNull] Expression<Func<object>> name)
+            protected HelperBase([CanBeNull] Expression<Func<object>> name)
             {
-                if (name == null) throw new ArgumentNullException("name");
+                if (name == null)
+                {
+                    Getter = () => default(TType);
+                    Setter = OnValueChanedEvent;
+                    return;
+                }
 
-                var expression = (MemberExpression)name.Body;
-                var targetExpression = ((ConstantExpression) expression.Expression);
-                var target = targetExpression.Value;
+                var firstlevelbody = name.Body;
+                var expression = firstlevelbody as MemberExpression ??
+                                 ((MemberExpression) ((UnaryExpression) firstlevelbody).Operand);
+                var firstmemberexp = (MemberExpression) expression.Expression;
+                var targetExpression = (ConstantExpression) firstmemberexp.Expression;
+                var target = firstmemberexp.Member.GetInvokeMember<object>(targetExpression.Value);
 
                 var info = expression.Member as PropertyInfo;
                 if(info == null)
@@ -102,7 +118,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
                 Setter = value =>
                 {
                     _internalSetter(value);
-                    OnValueChanedEvent();
+                    OnValueChanedEvent(value);
                 };
             }
         }
@@ -175,7 +191,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
                 }
             }
 
-            public ComboboxHelper([NotNull] Expression<Func<object>> name, [NotNull] params ComboItem<TEnum>[] items) 
+            public ComboboxHelper([CanBeNull] Expression<Func<object>> name, [NotNull] params ComboItem<TEnum>[] items) 
                 : base(name)
             {
                 Items = items;
@@ -245,7 +261,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
 
             protected override string ToString(int value)
             {
-                return value.ToString();
+                return value.ToString(CultureInfo.CurrentUICulture);
             }
         }
 
@@ -290,18 +306,138 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
         public BoolHelper DisableAllFilters { get; private set; }
 
         [NotNull]
-        public IntTextHelper TargetSampleRate { get; set; }
+        public IntTextHelper TargetSampleRate { get; private set; }
+
+        [NotNull]
+        public IntTextHelper HighPassFrequency { get; private set; }
+
+        [NotNull]
+        public IntTextHelper HighPassFreqenzcyWidth { get; private set; }
+
+        [NotNull]
+        public IntTextHelper LowPassFreqency { get; private set; }
+
+        [NotNull]
+        public IntTextHelper LowPassFrecuencyWidth { get; private set; }
+
+        public bool IsVariableBitrateEnabled { get { return UseVariableBitrate.Value == true && IsPresentDisabled; } }
+
+        [NotNull]
+        public BoolHelper UseVariableBitrate { get; private set; }
+
+        [NotNull]
+        public BoolHelper VbrDisableTag { get; private set; }
+
+        [NotNull]
+        public IntTextHelper AverageBitrate { get; private set; }
+
+        [NotNull]
+        public ComboboxHelper<EncoderLAME.LAMEVBRQuality> VbrQuality { get; private set; }
+
+        [NotNull]
+        public BoolHelper LimitVariableBitRate { get; private set; }
+
+        [NotNull]
+        public IntTextHelper MaxBitrate { get; private set; }
+
+        [NotNull]
+        public BoolHelper EnforceMinimalBitrate { get; private set; }
+
+        [NotNull]
+        public ComboboxHelper<ShortBlockUsage> ShortBlocks { get; private set; }
+
+        [NotNull]
+        public BoolHelper NoTemp { get; private set; }
+
+        [NotNull]
+        public BoolHelper SafeJoint { get; private set; }
+
+        [NotNull]
+        public ComboboxHelper<EncoderLAME.LAMEATH> AthControl { get; private set; }
+
+        [NotNull]
+        public ComboboxHelper<EncoderLAME.LAMEReplayGain> ReplayGain { get; private set; }
+
+        [NotNull]
+        public BoolHelper FreeFormat { get; private set; }
+
+        [NotNull]
+        public BoolHelper Copyright { get; private set; }
+
+        [NotNull]
+        public BoolHelper NonOriginal { get; private set; }
+
+        [NotNull]
+        public BoolHelper ErrorProtection { get; private set; }
+
+        [NotNull]
+        public BoolHelper DisableBitReservoir { get; private set; }
+
+        [NotNull]
+        public ComboboxHelper<EncoderLAME.LAMENOASM> NoAsm { get; private set; }
 
         public override void BuildCompled()
         {
             EncoderProfile = new LameEncoderProfile(_editorModel.CurrentProfile);
-
+            
             UseCustomOptionsOnly = new BoolHelper(() => EncoderProfile.UseCustomOptionsOnly);
             Scale = new FloatTextHelper(() => EncoderProfile.Scale);
             EnforceCbr = new BoolHelper(() => EncoderProfile.EnforceCbr);
             EnforceIso = new BoolHelper(() => EncoderProfile.EnforceIso);
             DisableAllFilters = new BoolHelper(() => EncoderProfile.DisableAllFilters);
             TargetSampleRate = new IntTextHelper(() => EncoderProfile.TargetSampleRate);
+            HighPassFrequency = new IntTextHelper(() => EncoderProfile.HighPassFreq);
+            HighPassFreqenzcyWidth = new IntTextHelper(() => EncoderProfile.HighPassFreqWidth);
+            LowPassFreqency = new IntTextHelper(() => EncoderProfile.LowPassFreq);
+            LowPassFrecuencyWidth = new IntTextHelper(() => EncoderProfile.HighPassFreqWidth);
+            UseVariableBitrate = new BoolHelper(() => EncoderProfile.UseVbr);
+            VbrDisableTag = new BoolHelper(() => EncoderProfile.VbrDisableTag);
+            AverageBitrate = new IntTextHelper(() => EncoderProfile.AbrBitrate);
+            LimitVariableBitRate = new BoolHelper(() => EncoderProfile.LimitVbr);
+            MaxBitrate = new IntTextHelper(() => EncoderProfile.VbrMaxBitrate);
+            EnforceMinimalBitrate = new BoolHelper(() => EncoderProfile.VbrEnforceMinBitrate);
+            NoTemp = new BoolHelper(() => EncoderProfile.PsYnoTemp);
+            SafeJoint = new BoolHelper(() => EncoderProfile.PsYnsSafeJoint);
+            FreeFormat = new BoolHelper(() => EncoderProfile.FreeFormat);
+            Copyright = new BoolHelper(() => EncoderProfile.Copyright);
+            NonOriginal = new BoolHelper(() => EncoderProfile.NonOriginal);
+            ErrorProtection = new BoolHelper(() => EncoderProfile.Protect);
+            DisableBitReservoir = new BoolHelper(() => EncoderProfile.DisableBitReservoir);
+            NoAsm = new ComboboxHelper<EncoderLAME.LAMENOASM>(() => EncoderProfile.NoAsm,
+                new ComboItem<EncoderLAME.LAMENOASM>(EncoderLAME.LAMENOASM.Default, RadioStreamerResources.LameNoAsmDefault),
+                new ComboItem<EncoderLAME.LAMENOASM>(EncoderLAME.LAMENOASM.NO_3DNOW, RadioStreamerResources.LameNoAsmNo3DNow),
+                new ComboItem<EncoderLAME.LAMENOASM>(EncoderLAME.LAMENOASM.NO_MMX, RadioStreamerResources.LameNoAsmNoMMX),
+                new ComboItem<EncoderLAME.LAMENOASM>(EncoderLAME.LAMENOASM.NO_SSE, RadioStreamerResources.LameNoASMNoSSE));
+
+            ReplayGain = new ComboboxHelper<EncoderLAME.LAMEReplayGain>(() => EncoderProfile.ReplayGain,
+                new ComboItem<EncoderLAME.LAMEReplayGain>(EncoderLAME.LAMEReplayGain.None, RadioStreamerResources.LameReplayGainNone),
+                new ComboItem<EncoderLAME.LAMEReplayGain>(EncoderLAME.LAMEReplayGain.Default, RadioStreamerResources.LameReplayGainDefault),
+                new ComboItem<EncoderLAME.LAMEReplayGain>(EncoderLAME.LAMEReplayGain.Fast, RadioStreamerResources.LameReplayGainFast),
+                new ComboItem<EncoderLAME.LAMEReplayGain>(EncoderLAME.LAMEReplayGain.Accurate, RadioStreamerResources.LameReplayGainAccurate));
+
+            AthControl = new ComboboxHelper<EncoderLAME.LAMEATH>(() => EncoderProfile.AthControl,
+                new ComboItem<EncoderLAME.LAMEATH>(EncoderLAME.LAMEATH.Default, RadioStreamerResources.LameATHDefault),
+                new ComboItem<EncoderLAME.LAMEATH>(EncoderLAME.LAMEATH.Disable, RadioStreamerResources.LameATHNo),
+                new ComboItem<EncoderLAME.LAMEATH>(EncoderLAME.LAMEATH.OnlyShortBlocks, RadioStreamerResources.LameATHOnlyShortBlocks),
+                new ComboItem<EncoderLAME.LAMEATH>(EncoderLAME.LAMEATH.Only, RadioStreamerResources.LameATHOnly));
+
+            ShortBlocks = new ComboboxHelper<ShortBlockUsage>(null,
+                new ComboItem<ShortBlockUsage>(ShortBlockUsage.None, RadioStreamerResources.LameShortBlocksNone),
+                new ComboItem<ShortBlockUsage>(ShortBlockUsage.UseNoShortBlocks, RadioStreamerResources.LameShortBlocksUseDont),
+                new ComboItem<ShortBlockUsage>(ShortBlockUsage.UseShortBlock, RadioStreamerResources.LameShortBlocksUse),
+                new ComboItem<ShortBlockUsage>(ShortBlockUsage.UseOnlyShortBlocks, RadioStreamerResources.LameShortBlockUseOnly));
+
+            VbrQuality = new ComboboxHelper<EncoderLAME.LAMEVBRQuality>(() => EncoderProfile.VbrQuality,
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q0, "Q0"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q1, "Q1"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q2, "Q2"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q3, "Q3"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q4, "Q4"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q5, "Q5"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q6, "Q6"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q7, "Q7"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q8, "Q8"),
+                new ComboItem<EncoderLAME.LAMEVBRQuality>(EncoderLAME.LAMEVBRQuality.VBR_Q9, "Q9"));
 
             Modes =new ComboboxHelper<EncoderLAME.LAMEMode>(() => EncoderProfile.Mode,
                 new ComboItem<EncoderLAME.LAMEMode>(EncoderLAME.LAMEMode.Default, RadioStreamerResources.LameDefaultMode),
@@ -311,7 +447,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
                 new ComboItem<EncoderLAME.LAMEMode>(EncoderLAME.LAMEMode.Mono, RadioStreamerResources.LameMonoMode),
                 new ComboItem<EncoderLAME.LAMEMode>(EncoderLAME.LAMEMode.Stereo, RadioStreamerResources.LameStereoMode));
 
-            Qualitys = new ComboboxHelper<EncoderLAME.LAMEQuality>(() => EncoderProfile,
+            Qualitys = new ComboboxHelper<EncoderLAME.LAMEQuality>(() => EncoderProfile.Quality,
                 new ComboItem<EncoderLAME.LAMEQuality>(EncoderLAME.LAMEQuality.None, RadioStreamerResources.LameQualityNone),
                 new ComboItem<EncoderLAME.LAMEQuality>(EncoderLAME.LAMEQuality.Q0),
                 new ComboItem<EncoderLAME.LAMEQuality>(EncoderLAME.LAMEQuality.Q1),
@@ -333,7 +469,46 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
                 new SimpleComboItem("extreme", RadioStreamerResources.LamePresentExtreme),
                 new SimpleComboItem("insane", RadioStreamerResources.LamePresentInsane));
 
-            LamePresents.ValueChanedEvent += () => OnPropertyChanged(() => IsPresentDisabled);
+            UseVariableBitrate.ValueChanedEvent += v => OnPropertyChanged(() => IsVariableBitrateEnabled);
+            LamePresents.ValueChanedEvent += v =>
+            {
+                OnPropertyChanged(() => IsPresentDisabled);
+                OnPropertyChanged(() => IsVariableBitrateEnabled);
+            };
+            UseCustomOptionsOnly.ValueChanedEvent += v =>
+            {
+                OnPropertyChanged(() => IsPresentDisabled);
+                OnPropertyChanged(() => IsCustomOptionsDisabled);
+                OnPropertyChanged(() => IsVariableBitrateEnabled);
+            };
+            ShortBlocks.ValueChanedEvent += usage =>
+            {
+                switch (usage)
+                {
+                    case ShortBlockUsage.None:
+                        EncoderProfile.PsYallShortBlocks = false;
+                        EncoderProfile.PsYnoShortBlocks = false;
+                        EncoderProfile.PsYuseShortBlocks = false;
+                        break;
+                    case ShortBlockUsage.UseShortBlock:
+                        EncoderProfile.PsYallShortBlocks = false;
+                        EncoderProfile.PsYnoShortBlocks = false;
+                        EncoderProfile.PsYuseShortBlocks = true;
+                        break;
+                    case ShortBlockUsage.UseOnlyShortBlocks:
+                        EncoderProfile.PsYallShortBlocks = true;
+                        EncoderProfile.PsYnoShortBlocks = false;
+                        EncoderProfile.PsYuseShortBlocks = false;
+                        break;
+                    case ShortBlockUsage.UseNoShortBlocks:
+                        EncoderProfile.PsYallShortBlocks = false;
+                        EncoderProfile.PsYnoShortBlocks = true;
+                        EncoderProfile.PsYuseShortBlocks = false;
+                        break;
+                    default:
+                        throw new ArgumentOutOfRangeException("usage");
+                }
+            };
         }
     }
 }

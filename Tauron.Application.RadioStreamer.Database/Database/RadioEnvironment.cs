@@ -178,7 +178,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 				    public void Encode([NotNull] params string[] content)
 				    {
-				        foreach (var item in content.Where(s => s == null))
+				        foreach (var item in content.Where(s => s != null))
 				        {
 				            _input.Append(GetCodedNumber(item.Length))
 				                  .Append(item);

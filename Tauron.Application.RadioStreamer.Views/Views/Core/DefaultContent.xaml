@@ -47,7 +47,7 @@
                     <ContextMenu.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type conUI:GenericMenuItem}" ItemsSource="{Binding MenuItems}">
                             <MenuItem Header="{Binding Label}" IsEnabled="{Binding IsEnabled}" Icon="{Binding ImageSource}"
-                                      hlp:DataContextServices.Activate="True" hlp:EventBinder.Events="Click:Click"/>
+                                      Command="{Binding ClickCommand}"/>
                         </HierarchicalDataTemplate>
                     </ContextMenu.Resources>
                 </ContextMenu>

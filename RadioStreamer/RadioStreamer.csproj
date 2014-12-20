@@ -141,13 +141,25 @@
       <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
       <Name>Tauron.Application.Common</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Database\Tauron.Application.RadioStreamer.Database.csproj">
+      <Project>{04359b61-d252-4f63-ad43-c27437b3b74c}</Project>
+      <Name>Tauron.Application.RadioStreamer.Database</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
       <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
       <Name>Tauron.Application.RadioStreamer.Resources</Name>
     </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Views\Tauron.Application.RadioStreamer.Views.csproj">
+      <Project>{adae8e24-7a4c-4a42-a68f-f2ba755ded46}</Project>
+      <Name>Tauron.Application.RadioStreamer.Views</Name>
+    </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
       <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>
       <Name>Tauron.Application.RadioStreamer.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer\Tauron.Application.RadioStreamer.csproj">
+      <Project>{26b0dd34-198a-4379-af18-0abbcce569a2}</Project>
+      <Name>Tauron.Application.RadioStreamer</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>

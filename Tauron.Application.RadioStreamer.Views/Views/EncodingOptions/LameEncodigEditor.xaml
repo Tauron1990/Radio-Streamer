@@ -4,7 +4,6 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.EncodingOptions"
              xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.Data.Encoder;assembly=Tauron.Application.RadioStreamer.Contracts"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:LameEncoderProfile.LameId}"
              d:DesignHeight="700" d:DesignWidth="500">
@@ -67,13 +66,17 @@
                 <TextBox Grid.Column="1" Grid.Row="6" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
                          Text="{Binding TargetSampleRate.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameHighPassFrequencyLabel}" Grid.Column="0" Grid.Row="7" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="7" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="7" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding HighPassFrequency.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameHighPassFreqenzcyWidthLabel}" Grid.Column="0" Grid.Row="8" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="8" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="8" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding HighPassFreqenzcyWidth.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameLowPassFreqency}" Grid.Column="0" Grid.Row="9" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="9" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="9" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding LowPassFreqency.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameLowPassFrecuencyWidth}" Grid.Column="0" Grid.Row="10" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="10" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="10" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                         Text="{Binding LowPassFrecuencyWidth.Text, UpdateSourceTrigger=PropertyChanged, Delay=500}"/>
             </Grid>
         </Expander>
         <Expander Header="{hlp:SimpleLocalize LameVariableBitrateGroup}">
@@ -91,16 +94,23 @@
                     <RowDefinition/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
-                <CheckBox Content="{hlp:SimpleLocalize LameUseVariableBitrate}" Margin="5" Grid.ColumnSpan="2"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameVBRDisableTag}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" Margin="5"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameUseVariableBitrate}" Margin="5" Grid.ColumnSpan="2"
+                          IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding UseVariableBitrate.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameVBRDisableTag}" Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1" 
+                          Margin="5" IsEnabled="{Binding IsVariableBitrateEnabled}" IsChecked="{Binding VbrDisableTag.value}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameAverageBitrate}" Grid.Column="0" Grid.Row="2" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="2" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="2" Margin="5" IsEnabled="{Binding IsVariableBitrateEnabled}"
+                         Text="{Binding AverageBitrate.Text, Delay=500}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameVRBQuality}" Grid.Column="0" Grid.Row="3" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="3" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameLimitVariableBitRate}" Grid.Column="0" Grid.Row="4" Margin="5" Grid.ColumnSpan="2"/>
+                <ComboBox Grid.Column="1" Grid.Row="3" Margin="5" IsEnabled="{Binding IsVariableBitrateEnabled}"
+                          ItemsSource="{Binding VbrQuality.Items}" SelectedItem="{Binding VbrQuality.CurrentItem}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameLimitVariableBitRate}" Grid.Column="0" Grid.Row="4" 
+                          Margin="5" Grid.ColumnSpan="2" IsEnabled="{Binding IsVariableBitrateEnabled}" IsChecked="{Binding LimitVariableBitRate.Value}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameMaxBitrate}" Grid.Column="0" Grid.Row="5" Margin="5"/>
-                <TextBox Grid.Column="1" Grid.Row="5" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameEnforceMinimalBitrate}" Grid.Column="0" Grid.Row="6" Grid.ColumnSpan="2" Margin="5"/>
+                <TextBox Grid.Column="1" Grid.Row="5" Margin="5" IsEnabled="{Binding IsVariableBitrateEnabled}"
+                         Text="{Binding MaxBitrate.Text}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameEnforceMinimalBitrate}" Grid.Column="0" Grid.Row="6" 
+                          Grid.ColumnSpan="2" Margin="5" IsEnabled="{Binding IsVariableBitrateEnabled}" IsChecked="{Binding EnforceMinimalBitrate.Value}"/>
             </Grid>
         </Expander>
         <Expander Header="{hlp:SimpleLocalize LamePSYGroup}">
@@ -116,11 +126,15 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{hlp:SimpleLocalize LameShortBlocks}" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="0"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameNotTemp}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameSafeJoint}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" ItemsSource="{Binding ShortBlocks.Items}" SelectedItem="{Binding ShortBlocks.CurrentItem}"
+                          IsEnabled="{Binding IsPresentDisabled}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameNotTemp}" Grid.Row="1" Grid.Column="0" Grid.ColumnSpan="2" 
+                          Margin="5" IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding NoTemp.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameSafeJoint}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" 
+                          Margin="5" IsEnabled="{Binding IsPresentDisabled}" IsChecked="{Binding SafeJoint.Value}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameATHControl}" Grid.Row="3" Grid.Column="0" Margin="5"/>
-                <ComboBox Grid.Row="3" Grid.Column="1" Margin="5"/>
+                <ComboBox Grid.Row="3" Grid.Column="1" Margin="5" IsEnabled="{Binding IsPresentDisabled}"
+                          ItemsSource="{Binding AthControl.Items}" SelectedItem="{Binding AthControl.CurrentItem}"/>
             </Grid>
         </Expander>
         <Expander Header="{hlp:SimpleLocalize LameMiscGroup}">
@@ -139,14 +153,21 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 <TextBlock Text="{hlp:SimpleLocalize LameReplayGain}" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="0" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameFreeFormat}" Grid.Row="1" Grid.Column="0" Margin="5" Grid.ColumnSpan="2"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameCopyright}" Grid.Row="2" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameNonOriginal}" Grid.Row="3" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameErrorProtection}" Grid.Row="4" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
-                <CheckBox Content="{hlp:SimpleLocalize LameDisableBitReservoir}" Grid.Row="5" Grid.Column="0" Grid.ColumnSpan="2" Margin="5"/>
+                <ComboBox Grid.Column="1" Grid.Row="0" Margin="5" ItemsSource="{Binding ReplayGain.Items}" 
+                          SelectedItem="{Binding ReplayGain.CurrentItem}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameFreeFormat}" Grid.Row="1" Grid.Column="0" Margin="5" 
+                          Grid.ColumnSpan="2" IsChecked="{Binding FreeFormat.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameCopyright}" Grid.Row="2" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsChecked="{Binding Copyright.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameNonOriginal}" Grid.Row="3" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsChecked="{Binding NonOriginal.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameErrorProtection}" Grid.Row="4" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsChecked="{Binding ErrorProtection.Value}"/>
+                <CheckBox Content="{hlp:SimpleLocalize LameDisableBitReservoir}" Grid.Row="5" Grid.Column="0" 
+                          Grid.ColumnSpan="2" Margin="5" IsChecked="{Binding DisableBitReservoir.Value}"/>
                 <TextBlock Text="{hlp:SimpleLocalize LameNoAsm}" Grid.Row="6" Grid.Column="0" Margin="5"/>
-                <ComboBox Grid.Column="1" Grid.Row="6"/>
+                <ComboBox Grid.Column="1" Grid.Row="6" ItemsSource="{Binding NoAsm.Items}" 
+                          SelectedItem="{Binding NoAsm.CurrentItem}"/>
             </Grid>
         </Expander>
     </StackPanel>

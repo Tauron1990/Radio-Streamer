@@ -508,4 +508,55 @@
   <data name="LameQualitySpeed" xml:space="preserve">
     <value>Speed</value>
   </data>
+  <data name="LameShortBlocksNone" xml:space="preserve">
+    <value>No Option</value>
+  </data>
+  <data name="LameShortBlockUseOnly" xml:space="preserve">
+    <value>Use Only Short Blocks</value>
+  </data>
+  <data name="LameShortBlocksUseDont" xml:space="preserve">
+    <value>Don't use short blocks</value>
+  </data>
+  <data name="LameShortBlocksUse" xml:space="preserve">
+    <value>Use Short Blocks</value>
+  </data>
+  <data name="LameATHDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="LameATHOnly" xml:space="preserve">
+    <value>Only</value>
+  </data>
+  <data name="LameATHNo" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="LameATHOnlyShortBlocks" xml:space="preserve">
+    <value>Only Short Blokes</value>
+  </data>
+  <data name="LameReplayGainNone" xml:space="preserve">
+    <value>No ReplayGain</value>
+  </data>
+  <data name="LameReplayGainDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="LameReplayGainFast" xml:space="preserve">
+    <value>Fast</value>
+  </data>
+  <data name="LameReplayGainAccurate" xml:space="preserve">
+    <value>Accurate</value>
+  </data>
+  <data name="LameNoAsmDefault" xml:space="preserve">
+    <value>Default</value>
+  </data>
+  <data name="LameNoAsmNoMMX" xml:space="preserve">
+    <value>No MMX</value>
+  </data>
+  <data name="LameNoAsmNo3DNow" xml:space="preserve">
+    <value>No 3DNow</value>
+  </data>
+  <data name="LameNoASMNoSSE" xml:space="preserve">
+    <value>No SSE</value>
+  </data>
+  <data name="ViewOptionsLabel" xml:space="preserve">
+    <value>Options</value>
+  </data>
 </root>

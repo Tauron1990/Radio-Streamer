@@ -115,6 +115,12 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             CurrentWindow.DialogResult = false;
         }
 
+        [EventTarget]
+        public void Initialized()
+        {
+            ValidateAll();
+        }
+
         public override void BuildCompled()
         {
             ValidatorContext.Items[EncoderProfileNameRule.ContextName] =

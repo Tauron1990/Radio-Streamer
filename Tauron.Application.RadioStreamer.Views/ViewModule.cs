@@ -64,12 +64,16 @@ namespace Tauron.Application.RadioStreamer.Views
                 {
                     Label = RadioStreamerResources.ViewAddinManagerLabel
                 });
+            MenuItemService.RegisterNotify(new GenericMenuItem(i => _programManager.ShowWindow(AppConstants.OptionsViewModel, true))
+            {
+                Label = RadioStreamerResources.ViewOptionsLabel
+            });
 
             _optionsManager.RegisterOption(
                 RadioStreamerResources.OptionsPathPlayer.CombinePath(RadioStreamerResources.OptionsPathRecording,
                     RadioStreamerResources.OptionsPathEncoder),
                 new Option(null, new EncodingEditorHelper(), string.Empty,
-                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption"));
+                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption") { IsNameVisibly = false});
 
             CommandBinder.Register(ApplicationCommands.Save);
 

@@ -215,7 +215,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
                 [NotNull] Action<TEncoder, TType> encoderSetter,
                 TType defaultValue = default(TType))
             {
-                if (!typeof (TType).IsAssignableFrom(typeof (Enum)))
+                if (!typeof (Enum).IsAssignableFrom(typeof (TType)))
                     throw new InvalidOperationException("No Enum (TType)");
 
                 return CreateProperty(property, encoderSetter, null, s => (TType)Enum.Parse(typeof (TType), s),

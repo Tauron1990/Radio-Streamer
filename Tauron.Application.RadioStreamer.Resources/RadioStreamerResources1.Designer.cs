@@ -331,6 +331,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Default ähnelt.
+        /// </summary>
+        public static string LameATHDefault {
+            get {
+                return ResourceManager.GetString("LameATHDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No ähnelt.
+        /// </summary>
+        public static string LameATHNo {
+            get {
+                return ResourceManager.GetString("LameATHNo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Only ähnelt.
+        /// </summary>
+        public static string LameATHOnly {
+            get {
+                return ResourceManager.GetString("LameATHOnly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Only Short Blokes ähnelt.
+        /// </summary>
+        public static string LameATHOnlyShortBlocks {
+            get {
+                return ResourceManager.GetString("LameATHOnlyShortBlocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Average Bitrate: ähnelt.
         /// </summary>
         public static string LameAverageBitrate {
@@ -574,6 +610,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Default ähnelt.
+        /// </summary>
+        public static string LameNoAsmDefault {
+            get {
+                return ResourceManager.GetString("LameNoAsmDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No 3DNow ähnelt.
+        /// </summary>
+        public static string LameNoAsmNo3DNow {
+            get {
+                return ResourceManager.GetString("LameNoAsmNo3DNow", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No MMX ähnelt.
+        /// </summary>
+        public static string LameNoAsmNoMMX {
+            get {
+                return ResourceManager.GetString("LameNoAsmNoMMX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No SSE ähnelt.
+        /// </summary>
+        public static string LameNoASMNoSSE {
+            get {
+                return ResourceManager.GetString("LameNoASMNoSSE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Non Original ähnelt.
         /// </summary>
         public static string LameNonOriginal {
@@ -700,6 +772,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Accurate ähnelt.
+        /// </summary>
+        public static string LameReplayGainAccurate {
+            get {
+                return ResourceManager.GetString("LameReplayGainAccurate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Default ähnelt.
+        /// </summary>
+        public static string LameReplayGainDefault {
+            get {
+                return ResourceManager.GetString("LameReplayGainDefault", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Fast ähnelt.
+        /// </summary>
+        public static string LameReplayGainFast {
+            get {
+                return ResourceManager.GetString("LameReplayGainFast", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No ReplayGain ähnelt.
+        /// </summary>
+        public static string LameReplayGainNone {
+            get {
+                return ResourceManager.GetString("LameReplayGainNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die M/S switching criterion ähnelt.
         /// </summary>
         public static string LameSafeJoint {
@@ -723,6 +831,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string LameShortBlocks {
             get {
                 return ResourceManager.GetString("LameShortBlocks", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Option ähnelt.
+        /// </summary>
+        public static string LameShortBlocksNone {
+            get {
+                return ResourceManager.GetString("LameShortBlocksNone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use Short Blocks ähnelt.
+        /// </summary>
+        public static string LameShortBlocksUse {
+            get {
+                return ResourceManager.GetString("LameShortBlocksUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Don&apos;t use short blocks ähnelt.
+        /// </summary>
+        public static string LameShortBlocksUseDont {
+            get {
+                return ResourceManager.GetString("LameShortBlocksUseDont", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Use Only Short Blocks ähnelt.
+        /// </summary>
+        public static string LameShortBlockUseOnly {
+            get {
+                return ResourceManager.GetString("LameShortBlockUseOnly", resourceCulture);
             }
         }
         
@@ -1228,6 +1372,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string ViewMetadataLebel {
             get {
                 return ResourceManager.GetString("ViewMetadataLebel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Options ähnelt.
+        /// </summary>
+        public static string ViewOptionsLabel {
+            get {
+                return ResourceManager.GetString("ViewOptionsLabel", resourceCulture);
             }
         }
     }

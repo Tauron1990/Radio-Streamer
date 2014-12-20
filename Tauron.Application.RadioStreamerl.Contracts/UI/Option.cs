@@ -73,6 +73,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             }
         }
 
+        public bool IsNameVisibly { get; set; }
+
         public Option([CanBeNull] string @group, [NotNull] IOptionHelper helper, [NotNull] string settingKey,
             [CanBeNull] object defaultValue, [NotNull] string displayName)
         {

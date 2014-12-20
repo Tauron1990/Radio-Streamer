@@ -7,7 +7,7 @@
              xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.NewEncodingProfileView}"
              SizeToContent="Height" Width="350" Background="{StaticResource BackgroundBrush}" Title="{hlp:SimpleLocalize NewEncProfilTitle}"
-             WindowStyle="ToolWindow" hlp:ControlHelper.MarkWindow="CurrentWindow">
+             WindowStyle="ToolWindow" hlp:ControlHelper.MarkWindow="CurrentWindow" hlp:EventBinder.Events="Initialized:Initialized">
     <Grid>
        <Grid.ColumnDefinitions>
            <ColumnDefinition Width="Auto"/>
@@ -20,12 +20,12 @@
            <RowDefinition Height="Auto"/>
        </Grid.RowDefinitions>
         <TextBlock Text="{hlp:SimpleLocalize NameLabel}" Margin="5"/>
-        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Text="{Binding ProfileName}"/>
+        <TextBox Grid.Row="0" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" Text="{Binding ProfileName, Delay=100, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBlock Text="{hlp:SimpleLocalize TypeLabel}" Margin="5" Grid.Column="0" Grid.Row="1"/>
         <ComboBox Grid.Row="1" Grid.Column="1" Grid.ColumnSpan="2" Margin="5" ItemsSource="{Binding EncTypes}" 
                   SelectedItem="{Binding CurrentEncType}"/>
         <Button Content="{hlp:SimpleLocalize OkLabel}" Grid.Row="2" Grid.Column="2" Margin="5"
-                hlp:CommandBinder.Command="Ok:Ok"/>
+                hlp:CommandBinder.Command="Ok:Ok" IsEnabled="{Binding HasNoErrors}"/>
         <Button Grid.Row="2" Grid.Column="1" Margin="5" Content="{hlp:SimpleLocalize AbortLabel}"
                 hlp:CommandBinder.Command="Abort:Abort"/>
     </Grid>
