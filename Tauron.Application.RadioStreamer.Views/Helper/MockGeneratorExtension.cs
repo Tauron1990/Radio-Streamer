@@ -28,6 +28,8 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
 
         public override object ProvideValue(IServiceProvider serviceProvider)
         {
+
+
             var assembly = AppDomain.CurrentDomain.DefineDynamicAssembly(new AssemblyName {Name = "MockGenerator"},
                 AssemblyBuilderAccess.Run);
 

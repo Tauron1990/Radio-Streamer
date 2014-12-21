@@ -11,10 +11,6 @@ namespace Tauron.Application.RadioStreamer.Views.Options
     [Export(typeof (IUIOptionsManager))]
     public sealed class OptionsModel : IUIOptionsManager
     {
-        public OptionsModel()
-        {
-            
-        }
 
         [Inject]
         private IRadioEnvironment _radioEnvironment;
@@ -104,6 +100,22 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
             if(saveSettings)
                 _radioEnvironment.Settings.Save();
+        }
+
+        public void Reset()
+        {
+            foreach (var optionPath in Options)
+            {
+                optionPath.Reset();
+            }
+        }
+
+        public void Deserialize()
+        {
+            foreach (var optionPath in Options)
+            {
+                optionPath.Load(_radioEnvironment);
+            }
         }
     }
 }

@@ -15,5 +15,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         void RegisterOption([NotNull]string path, [NotNull] Option option);
 
         void Save();
+
+        void Reset();
+        void Deserialize();
     }
 }

@@ -38,7 +38,8 @@
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
     </Reference>
-    <Reference Include="Hardcodet.Wpf.TaskbarNotification">
+    <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
     <Reference Include="Mono.CSharp">
@@ -64,6 +65,7 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\CommonComboBoxItem.cs" />
     <Compile Include="Helper\DesignHelper.cs" />
     <Compile Include="Helper\MockGeneratorExtension.cs" />
     <Compile Include="Views\EncodingOptions\CommonEncoderEditor.xaml.cs">
@@ -108,6 +110,7 @@
     <Compile Include="Views\Options\OptionsWindow.xaml.cs">
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\Options\UiHelpers\DefaultProfileHelper.cs" />
     <Compile Include="Views\RadioManager\Controls\RadioCreateView.xaml.cs">
       <DependentUpon>RadioCreateView.xaml</DependentUpon>
     </Compile>
@@ -243,6 +246,9 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Styling\Style Guid.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PossybleOptions.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!--To modify your build process, add your task inside one of the targets below and uncomment it. 

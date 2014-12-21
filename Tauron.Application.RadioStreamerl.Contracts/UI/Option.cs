@@ -9,7 +9,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         private string _group;
         private IOptionHelper _helper;
         private string _settingKey;
-        private readonly object _defaultValue;
         private object _settingValue;
         private string _displayName;
 
@@ -75,6 +74,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
 
         public bool IsNameVisibly { get; set; }
 
+        [CanBeNull]
+        public object DefaultValue { get; private set; }
+
         public Option([CanBeNull] string @group, [NotNull] IOptionHelper helper, [NotNull] string settingKey,
             [CanBeNull] object defaultValue, [NotNull] string displayName)
         {
@@ -86,8 +88,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             _group = @group;
             _helper = helper;
             _settingKey = settingKey;
-            _defaultValue = defaultValue;
+            DefaultValue = defaultValue;
             _displayName = displayName;
+            IsNameVisibly = true;
         }
 
         public bool Save(IRadioEnvironment store)
@@ -99,7 +102,12 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
 
         public void Load(IRadioEnvironment store)
         {
-            Helper.Deserialize(store, this, _defaultValue);
+            Helper.Deserialize(store, this, DefaultValue);
+        }
+
+        public void Reset()
+        {
+            Helper.Reset(this);
         }
 
         public override string ToString()

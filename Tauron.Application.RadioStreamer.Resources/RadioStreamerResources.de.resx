@@ -1,4 +1,3 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -554,5 +553,11 @@
   </data>
   <data name="ViewOptionsLabel" xml:space="preserve">
     <value>Optionen</value>
+  </data>
+  <data name="NoneThemeLabel" xml:space="preserve">
+    <value>Keines</value>
+  </data>
+  <data name="DefaultProfileOptionName" xml:space="preserve">
+    <value>Standard Profile:</value>
   </data>
 </root>

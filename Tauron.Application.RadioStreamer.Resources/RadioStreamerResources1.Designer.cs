@@ -169,6 +169,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Standard Profile: ähnelt.
+        /// </summary>
+        public static string DefaultProfileOptionName {
+            get {
+                return ResourceManager.GetString("DefaultProfileOptionName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Delete Database File: {0} ähnelt.
         /// </summary>
         public static string DeleteDatabaseFilesMessage {
@@ -993,6 +1002,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string NoneString {
             get {
                 return ResourceManager.GetString("NoneString", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die None ähnelt.
+        /// </summary>
+        public static string NoneThemeLabel {
+            get {
+                return ResourceManager.GetString("NoneThemeLabel", resourceCulture);
             }
         }
         

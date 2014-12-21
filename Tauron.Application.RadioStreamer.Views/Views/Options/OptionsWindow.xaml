@@ -35,8 +35,8 @@
             <ItemsControl ItemsSource="{Binding SelectedOptions}">
                 <ItemsControl.Resources>
                     <DataTemplate DataType="{x:Type contracts:Option}">
-                        <StackPanel Orientation="Horizontal">
-                            <TextBlock Text="{Binding DisplayName}" Margin="0,0,10,0" Visibility="{hlp:}"/>
+                        <StackPanel Orientation="Horizontal" CanHorizontallyScroll="True" CanVerticallyScroll="True">
+                            <TextBlock Text="{Binding DisplayName}" Margin="0,0,10,0" Visibility="{Binding IsNameVisibly, Converter={hlp:BoolToVisibilityConverter}}"/>
                             <ContentControl Content="{Binding UI}"/>
                         </StackPanel>
                     </DataTemplate>

@@ -264,7 +264,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             if (_player.IsRecording)
                 _player.StopRecording();
             else
-                _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default);
+                _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default.Item2);
             UpdateRecordingImage();
         }
 

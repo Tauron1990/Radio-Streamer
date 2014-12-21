@@ -23,7 +23,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
         //[Inject(typeof(UserControl), ContractName = "EncodingEditor")]
         //private List<InstanceResolver<object, IEncodingEditorMetadata>> _encoderEditors;
         
-        private List<Tuple<string, CommonProfile>> _modifed;
+        private List<Tuple<string, CommonProfile>> _modifed = new List<Tuple<string, CommonProfile>>();
         private string _currentProfile;
 
         [InjectModel(AppConstants.CommonEncoderUI)]
@@ -55,9 +55,12 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             _editorModel.CurrentProfile = _radioEnvironment.Settings.EncoderProfiles.Deserialize(_currentProfile);
 
             if (_editorModel.CurrentProfile != null)
+            {
                 CurrentEditor =
                     Synchronize.Invoke(
                         () => _editors.First(e => e.Metadata.EncoderId == _editorModel.CurrentProfile.Id).Resolve());
+                _modifed.Add(Tuple.Create(_editorModel.Name, _editorModel.CurrentProfile));
+            }
             else CurrentEditor = null;
         }
 
@@ -117,5 +120,9 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             Profiles = new UISyncObservableCollection<string>(_radioEnvironment.Settings.EncoderProfiles.Profiles);
         }
 
+        public void Reset()
+        {
+            CurrentProfile = null;
+        }
     }
 }

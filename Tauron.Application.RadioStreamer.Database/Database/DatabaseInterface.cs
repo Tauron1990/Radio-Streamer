@@ -241,7 +241,23 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			_startLock.Set();
 		}
 
-		public System.Threading.ManualResetEventSlim StartLock
+	    public event EventHandler DatabaseCleared;
+
+	    protected virtual void OnDatabaseCleared()
+	    {
+	        var handler = DatabaseCleared;
+	        if (handler != null) handler(this, EventArgs.Empty);
+	    }
+
+	    public event EventHandler<RadioCreatedEventArgs> RadioAdded;
+
+	    protected virtual void OnRadioAdded([NotNull] RadioCreatedEventArgs e)
+	    {
+	        var handler = RadioAdded;
+	        if (handler != null) handler(this, e);
+	    }
+
+	    public System.Threading.ManualResetEventSlim StartLock
 		{
 			get { return _startLock; }
 		}
@@ -267,7 +283,12 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			var entry = _radios.AddEntry(name, out created);
 			var quality = _qualitys.AddEntry(name, out temp);
 
-			return new RadioEntry(new Metadatascope(new RadioDatabaseInterface(entry, quality)));
+            var temp2 = new RadioEntry(new Metadatascope(new RadioDatabaseInterface(entry, quality)));
+
+		    if (created)
+		        OnRadioAdded(new RadioCreatedEventArgs(temp2));
+
+		    return temp2;
 		}
 
 		public void DeleteRadio(string name)
@@ -322,6 +343,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		{
 			_radios.Clear();
 			_qualitys.Clear();
+            OnDatabaseCleared();
 		}
 	}
 }

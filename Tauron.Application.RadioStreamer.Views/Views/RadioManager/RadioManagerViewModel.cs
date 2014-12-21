@@ -578,13 +578,18 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
             foreach (var entry in entrys)
             {
-                _radios.Add(new RadioManagerRadio(entry, favorites.Contains(entry.Name), new InternalQualityQuery(entry),
-                    OnRadioDelete));
-                languages.Add(entry.Language);
+                AddRadio(entry, languages, favorites);
             }
 
             Languages = languages;
             _radios.CompledChanging();
+        }
+
+        private void AddRadio(RadioEntry entry, [NotNull] HashSet<string> languages, [NotNull] IRadioFavorites favorites)
+        {
+            _radios.Add(new RadioManagerRadio(entry, favorites.Contains(entry.Name), new InternalQualityQuery(entry),
+                                              OnRadioDelete));
+            languages.Add(entry.Language);
         }
 
         private void OnRadioDelete([NotNull] RadioManagerRadio radio)
@@ -609,6 +614,13 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
             var list = Radios;
 
             AddRadios(_database.GetRadios());
+
+            _database.DatabaseCleared += (sender, args) => _radios.Clear();
+            _database.RadioAdded += (sender, args) =>
+            {
+                AddRadio(args.RadioEntry, Languages, _enviroment.Settings.Favorites);
+                OnPropertyChanged(() => Languages);
+            };
 
             var textLogger = new StringBuilder();
             try

@@ -18,6 +18,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
         [Inject] 
         private IUIOptionsManager _model;
         
+        [Inject]
         private IDatabaseImportExportEngine _exportEngine;
 
 
@@ -55,6 +56,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
         [CommandTarget]
         private void Close()
         {
+            _model.Reset();
             _window.Close();
         }
 
@@ -72,7 +74,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
             if (forSave)
             {
-                erg = Dialogs.ShowSaveFileDialog(_window, true, true, true, _exportEngine.DefaultExtension, true,
+                erg = Dialogs.ShowSaveFileDialog(_window, true, false, true, _exportEngine.DefaultExtension, true,
                     _exportEngine.FileFilter, true, true, RadioStreamerResources.SaveExportLabel,
                     Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), out ok);
             }
@@ -106,6 +108,8 @@ namespace Tauron.Application.RadioStreamer.Views.Options
             if(ok != true) return;
 
             _exportEngine.ImportFiles(file, false);
+            _model.Deserialize();
+            _model.Reset();
         }
     }
 }

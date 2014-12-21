@@ -163,8 +163,9 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				    }
 
 				    public int GetNumber()
-					{
-						return Int32.Parse(GetNextChars(3));
+				    {
+				        string number = GetNextChars(3);
+						return Int32.Parse(number);
 					}
 				}
 				protected class Coder
@@ -459,6 +460,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
                     var parser = new Parser(code);
                     _defaultProfile = parser.GetNextChars(parser.GetNumber());
+                    if (_defaultProfile == "none") _defaultProfile = null;
 
                     while (!parser.EndOfInput)
                     {
@@ -490,7 +492,10 @@ namespace Tauron.Application.RadioStreamer.Database.Database
                     var builder = new StringBuilder();
                     var coder = new Coder(builder);
 
-                    coder.Encode(_defaultProfile);
+                    string realDefaultEncoder = _defaultProfile;
+                    if (string.IsNullOrEmpty(realDefaultEncoder)) realDefaultEncoder = "none";
+
+                    coder.Encode(realDefaultEncoder);
 
                     foreach (var profile in _profiles.Where(profile => profile.Value != null))
                     {
@@ -504,21 +509,24 @@ namespace Tauron.Application.RadioStreamer.Database.Database
                     return builder.ToString();
                 }
 
-                public CommonProfile Default
+                public Tuple<string, CommonProfile> Default
                 {
-                    get { return Deserialize(_defaultProfile); }
+                    get { return Tuple.Create(_defaultProfile, Deserialize(_defaultProfile)); }
                     set
                     {
-                        if (value == null) return;
-                        
-                        Serialize(value.Id, value);
-                        _defaultProfile = value.Id;
+                        Serialize(value.Item1, value.Item2);
+                        _defaultProfile = value.Item1;
                     }
+                }
+
+                public void SetDefault(string name)
+                {
+                    _defaultProfile = name;
                 }
 
                 public IEnumerable<string> Profiles
                 {
-                    get { return _profiles.Keys; }
+                    get { return _profiles.Where(p => p.Value != null).Select(p => p.Key); }
                 }
 
                 public void Serialize(string name, CommonProfile profile)

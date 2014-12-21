@@ -41,6 +41,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
             }
         }
 
+        public void Reset()
+        {
+            foreach (var option in Options)
+            {
+                option.Reset();
+            }
+        }
+
         public override string ToString()
         {
             return DisplayName;

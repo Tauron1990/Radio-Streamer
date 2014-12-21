@@ -68,6 +68,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
         [NotNull]
         string GetValue([NotNull] string name, [CanBeNull] string defaultValue);
         void SetName([NotNull] string name, [NotNull] string value);
+
+        void SaveRaw();
     }
 
     [PublicAPI]

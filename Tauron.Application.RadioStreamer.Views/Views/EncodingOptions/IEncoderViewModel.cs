@@ -4,5 +4,6 @@
     {
         void Serialize();
         void Deserialize();
+        void Reset();
     }
 }

@@ -195,5 +195,13 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         {
             return DisplayName;
         }
+
+        public void Reset()
+        {
+            foreach (var optionElement in Elements)
+            {
+                optionElement.Reset();
+            }
+        }
     }
 }

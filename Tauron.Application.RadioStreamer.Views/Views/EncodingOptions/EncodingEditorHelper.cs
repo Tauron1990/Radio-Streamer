@@ -33,5 +33,13 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
 
             provider.Deserialize();
         }
+
+        public void Reset(Option option)
+        {
+            var provider = option.DefaultValue as IEncoderViewModel;
+            if(provider == null) return;
+
+            provider.Reset();
+        }
     }
 }

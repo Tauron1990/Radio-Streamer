@@ -1,7 +1,9 @@
 ﻿#region Usings
 
 using System.Collections.Generic;
+using System.IO;
 using System.Reflection;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
@@ -11,6 +13,7 @@ using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.EncodingOptions;
+using Tauron.Application.RadioStreamer.Views.Options.UiHelpers;
 using Tauron.JetBrains.Annotations;
 
 #endregion
@@ -69,11 +72,16 @@ namespace Tauron.Application.RadioStreamer.Views
                 Label = RadioStreamerResources.ViewOptionsLabel
             });
 
-            _optionsManager.RegisterOption(
-                RadioStreamerResources.OptionsPathPlayer.CombinePath(RadioStreamerResources.OptionsPathRecording,
-                    RadioStreamerResources.OptionsPathEncoder),
+            string oPlayerRoot = RadioStreamerResources.OptionsPathPlayer;
+            string oRecordingRoot = oPlayerRoot.CombinePath(RadioStreamerResources.OptionsPathRecording);
+            string oEncoderRoot = oRecordingRoot.CombinePath(RadioStreamerResources.OptionsPathEncoder);
+
+            _optionsManager.RegisterOption(oEncoderRoot,
                 new Option(null, new EncodingEditorHelper(), string.Empty,
                     ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption") { IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oRecordingRoot,
+                new Option(null, new DefaultProfileHelper(), string.Empty, string.Empty, RadioStreamerResources.DefaultProfileOptionName));
 
             CommandBinder.Register(ApplicationCommands.Save);
 
@@ -93,6 +101,12 @@ namespace Tauron.Application.RadioStreamer.Views
         private GenericMenuItem FillThemeMenu([NotNull] GenericMenuItem item)
         {
             item.MenuItems = new List<GenericMenuItem>();
+
+            if (_styleManager.Themes.Length == 0)
+            {
+                item.MenuItems.Add(new GenericMenuItem { IsEnabled = false, Label = RadioStreamerResources.NoneThemeLabel});
+                return item;
+            }
 
             foreach (var theme in _styleManager.Themes)
             {

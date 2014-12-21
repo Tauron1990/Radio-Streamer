@@ -33,7 +33,7 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
             }
         }
 
-        public string DefaultExtension { get { return ".rsd"; } }
+        public string DefaultExtension { get { return "rsd"; } }
 
         public void ImportFiles(string file, bool merge)
         {
@@ -86,7 +86,8 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
                     }
                 }
 
-                _radioEnvironment.Settings.Save();
+                _radioEnvironment.Settings.PropertyStore.SaveRaw();
+                _radioEnvironment.ReloadSetting();
                 _radioDatabase.Save();
             }
             catch (Exception e)

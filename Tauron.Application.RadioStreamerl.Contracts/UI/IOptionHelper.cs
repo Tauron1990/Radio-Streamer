@@ -11,5 +11,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         bool Serialize([NotNull] IRadioEnvironment store, [NotNull] Option option);
 
         void Deserialize([NotNull] IRadioEnvironment store, [NotNull] Option option, [CanBeNull] object defaultValue);
+
+        void Reset([NotNull] Option option);
     }
 }

@@ -12,5 +12,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         bool Save([NotNull] IRadioEnvironment store);
 
         void Load([NotNull] IRadioEnvironment store);
+
+        void Reset();
     }
 }

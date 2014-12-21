@@ -1,10 +1,21 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Threading;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Data
 {
+    public sealed class RadioCreatedEventArgs : EventArgs
+    {
+        public RadioEntry RadioEntry { get; private set; }
+
+        public RadioCreatedEventArgs(RadioEntry radioEntry)
+        {
+            RadioEntry = radioEntry;
+        }
+    }
+
     [PublicAPI]
 	public class RadioQualityPair
 	{
@@ -22,7 +33,11 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data
 	}
     [PublicAPI]
 	public interface IRadioDatabase
-	{
+    {
+        event EventHandler DatabaseCleared;
+
+        event EventHandler<RadioCreatedEventArgs> RadioAdded; 
+
         [NotNull]
         ManualResetEventSlim StartLock { get; }
 
