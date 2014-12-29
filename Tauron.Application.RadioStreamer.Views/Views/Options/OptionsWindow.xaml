@@ -7,7 +7,7 @@
              xmlns:const="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
              mc:Ignorable="d" MinHeight="500" MaxHeight="600" MinWidth="600" MaxWidth="1200" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow"
-             d:DesignHeight="300" d:DesignWidth="500" hlp:DataContextServices.Activate="True" 
+             d:DesignHeight="300" d:DesignWidth="500" hlp:DataContextServices.Activate="True" Background="{StaticResource BackgroundBrush}"
              hlp:CompositionServices.ImportViewModel="{x:Static const:AppConstants.OptionsViewModel}"
              hlp:ControlHelper.MarkWindow="Window">
     <Grid>
@@ -20,7 +20,7 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
         <TreeView MinWidth="150" MaxWidth="350" hlp:EventBinder.Events="SelectedItemChanged:NewItemSelect" 
-                  ItemsSource="{Binding OptionPaths}" Margin="5,5,0,5">
+                  ItemsSource="{Binding OptionPaths}" Margin="5,5,0,5" Background="Transparent">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type contracts:OptionPath}" ItemsSource="{Binding OptionPaths}">
                     <TextBlock Text="{Binding DisplayName}"/>

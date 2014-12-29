@@ -214,6 +214,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 			    public void Init([NotNull] RadioSettings settings)
 			    {
+			        settings.PropertyStore.SettingsModifed += (sender, args) =>
+			        {
+                        if(args.Name == Name)
+                            DecodeImpl(args.Value);
+			        };
 			        Settings = settings;
 			    }
 
@@ -571,7 +576,17 @@ namespace Tauron.Application.RadioStreamer.Database.Database
                     return GetEnumerator();
                 }
 
-                public string GetValue(string name, string defaultValue)
+		        public event EventHandler<SettingsModifedEventArgs> SettingsModifed;
+
+		        private void OnSettingsModifed([NotNull] SettingsModifedEventArgs e)
+		        {
+		            var handler = SettingsModifed;
+		            if (handler != null) handler(this, e);
+		        }
+
+		        public int Count { get { return _profile.Count; } }
+
+		        public string GetValue(string name, string defaultValue)
                 {
                     return _profile.GetValue(name, defaultValue);
                 }
@@ -579,6 +594,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
                 public void SetName(string name, string value)
                 {
                     _profile.SetVaue(name, value);
+                    OnSettingsModifed(new SettingsModifedEventArgs(name, value));
                 }
             }
 

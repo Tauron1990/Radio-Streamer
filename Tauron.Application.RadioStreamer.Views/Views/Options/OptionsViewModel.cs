@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 using System.Windows;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
@@ -91,12 +92,18 @@ namespace Tauron.Application.RadioStreamer.Views.Options
         [CommandTarget]
         private void Export()
         {
-            bool? ok; 
+            bool? ok;
             string file = OpenFileDialog(true, out ok);
 
-            if(ok != true) return;
+            if (ok != true) return;
 
-            _exportEngine.ExportFiles(file);
+            GetSettings().ContinueWith(t =>
+            {
+                var result = t.Result;
+                if (result == null) return;
+
+                StartProcessDialog(p => _exportEngine.ExportFiles(file, result, p));
+            });
         }
 
         [CommandTarget]
@@ -107,9 +114,39 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
             if(ok != true) return;
 
-            _exportEngine.ImportFiles(file, false);
-            _model.Deserialize();
-            _model.Reset();
+            GetSettings().ContinueWith(t =>
+            {
+                var result = t.Result;
+                if(result == null) return;
+
+                StartProcessDialog(p =>
+                {
+                    _exportEngine.ImportFiles(file, false, result, p);
+                    _model.Deserialize();
+                    _model.Reset();
+                });
+            });
+        }
+
+        [NotNull]
+        private Task<ImportExportSettings> GetSettings()
+        {
+            var win = ViewManager.CreateWindow(AppConstants.ImportExportSettingsWindow);
+            return win.ShowDialog(MainWindow)
+               .ContinueWith(t =>
+               {
+                   if (win.DialogResult == true) return (ImportExportSettings) win.Result;
+                   return null;
+               });
+        }
+
+        private void StartProcessDialog([NotNull] Action<IProgress<ActiveProgress>> worker)
+        {
+            if (worker == null) throw new ArgumentNullException("worker");
+
+            string text = RadioStreamerResources.ImportExportProcessingTitle;
+            var diag = Dialogs.CreateProgressDialog(text, text, MainWindow, worker);
+            diag.Start();
         }
     }
 }

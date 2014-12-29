@@ -626,7 +626,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             }
         }
 
-        private FrameworkName SelectCorrectVersion(IPackage pack)
+        private static FrameworkName SelectCorrectVersion(IPackage pack)
         {
             var targetFramework = new FrameworkName(".NETFramework", new Version(4, 5));
 
@@ -634,7 +634,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             return frameworkNames.OrderByDescending(n => n.Version).FirstOrDefault(n => VersionUtility.IsCompatible(targetFramework, new [] { n }));
         }
 
-        private IEnumerable<IPackageFile> SelectFiles(IPackage pack, FrameworkName targetVersion)
+        private static IEnumerable<IPackageFile> SelectFiles(IPackage pack, FrameworkName targetVersion)
         {
             return
                 pack.GetLibFiles()

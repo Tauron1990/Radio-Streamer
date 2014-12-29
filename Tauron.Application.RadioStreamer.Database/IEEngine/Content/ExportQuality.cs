@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Database.IEEngine
+namespace Tauron.Application.RadioStreamer.Database.IEEngine.Content
 {
     [Serializable]
     public class ExportQuality

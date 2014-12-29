@@ -32,5 +32,7 @@ namespace Tauron.Application.RadioStreamer.Contracts
 
         public const string CommonEncoderUI = "CommonEncoderOptionUI";
         public const string NewEncodingProfileView = "NewEncodingProfileViewModel";
+
+        public const string ImportExportSettingsWindow = "ImportExportSettingsWindow";
     }
 }

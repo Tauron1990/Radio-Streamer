@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.IO;
 using System.Linq;
@@ -30,6 +31,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 			    _database = radioInterface;
 			}
 
+		    public void BeginChanging()
+		    {
+		        _database.BeginBulkMode();
+		    }
+
 		    public RadioEntry AddOrGetEntry(string name, out bool newEntry)
 			{
 				var r = _database.CreateRadio(name, out newEntry);
@@ -37,13 +43,14 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        return r;
 			}
 
-			public void Save()
-			{
-				_database.Save();
-			}
+		    public void Compled()
+		    {
+		        _database.EndBulkMode();
+                _database.Save();
+		    }
 		}
 
-		private class DatabaseInterface : IDatabaseInterface, IChangedHandler
+	    private class DatabaseInterface : IDatabaseInterface, IChangedHandler
 		{
 		    [NotNull]
 		    protected DatabaseHelper.DatabaseEntry BaseEntry { get; private set; } 
@@ -218,6 +225,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		private DatabaseHelper _qualitys;
 
 		private RadioFactory _factory;
+	    private bool _bulkMode;
+	    private List<RadioEntry> _bulks; 
 
 		public RadioDatabase()
 		{
@@ -250,12 +259,36 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	    }
 
 	    public event EventHandler<RadioCreatedEventArgs> RadioAdded;
+	    public event EventHandler<ManyRadiosCreatedEvent> RadiosAdded;
+
+	    protected virtual void OnRadiosAdded([NotNull] ManyRadiosCreatedEvent e)
+	    {
+	        var handler = RadiosAdded;
+	        if (handler != null) handler(this, e);
+	    }
 
 	    protected virtual void OnRadioAdded([NotNull] RadioCreatedEventArgs e)
 	    {
 	        var handler = RadioAdded;
 	        if (handler != null) handler(this, e);
 	    }
+
+        public void BeginBulkMode()
+        {
+            _bulkMode = true;
+            _bulks = new List<RadioEntry>();
+        }
+
+	    public void EndBulkMode()
+	    {
+	        if (!_bulkMode) return;
+
+	        _bulkMode = false;
+            OnRadiosAdded(new ManyRadiosCreatedEvent(new ReadOnlyCollection<RadioEntry>(_bulks)));
+	        _bulks = null;
+	    }
+
+	    public int Count { get { return _radios.DatabasElements; }}
 
 	    public System.Threading.ManualResetEventSlim StartLock
 		{
@@ -285,8 +318,10 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
             var temp2 = new RadioEntry(new Metadatascope(new RadioDatabaseInterface(entry, quality)));
 
-		    if (created)
-		        OnRadioAdded(new RadioCreatedEventArgs(temp2));
+		    if (!created) return temp2;
+		    
+            if (_bulkMode) _bulks.Add(temp2);
+		    else OnRadioAdded(new RadioCreatedEventArgs(temp2));
 
 		    return temp2;
 		}

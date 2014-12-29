@@ -16,6 +16,18 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data
         }
     }
 
+    public sealed class ManyRadiosCreatedEvent : EventArgs
+    {
+        [NotNull]
+        public IEnumerable<RadioEntry> Entries { get; private set; }
+
+        public ManyRadiosCreatedEvent([NotNull] IEnumerable<RadioEntry> entries)
+        {
+            if (entries == null) throw new ArgumentNullException("entries");
+            Entries = entries;
+        }
+    }
+
     [PublicAPI]
 	public class RadioQualityPair
 	{
@@ -36,7 +48,11 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data
     {
         event EventHandler DatabaseCleared;
 
-        event EventHandler<RadioCreatedEventArgs> RadioAdded; 
+        event EventHandler<RadioCreatedEventArgs> RadioAdded;
+
+        event EventHandler<ManyRadiosCreatedEvent> RadiosAdded;
+
+        int Count { get; }
 
         [NotNull]
         ManualResetEventSlim StartLock { get; }
