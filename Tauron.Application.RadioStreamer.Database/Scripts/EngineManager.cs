@@ -24,9 +24,15 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
 
         private Dictionary<string, Lazy<IScript>> _scripts = new Dictionary<string, Lazy<IScript>>();
 
+        public IEnumerable<string> FileNames { get { return ScriptsPath.GetFullPath().EnumerateAllFiles(); } }
         public string[] ScriptNames { get; private set; }
         public string[] EngineNames { get; private set; }
         public string[] Extensions { get; private set; }
+
+        public void CopyFile(string fileName, byte[] content)
+        {
+            File.WriteAllBytes(ScriptsPath.GetFullPath().CombinePath(fileName), content);
+        }
 
         public IScript SearchForScript(string script)
         {

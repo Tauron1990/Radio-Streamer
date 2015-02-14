@@ -6,6 +6,23 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Core
 {
+    public sealed class SettingsModifedEventArgs : EventArgs
+    {
+        [NotNull]
+        public string Name { get; private set; }
+
+        [NotNull]
+        public string Value { get; private set; }
+
+        public SettingsModifedEventArgs([NotNull] string name, [NotNull] string value)
+        {
+            if (name == null) throw new ArgumentNullException("name");
+            if (value == null) throw new ArgumentNullException("value");
+            Name = name;
+            Value = value;
+        }
+    }
+
     [PublicAPI]
 	public interface IStreamReference
 	{
@@ -65,11 +82,13 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
     public interface IPropertyStore : IEnumerable<string>
     {
+        event EventHandler<SettingsModifedEventArgs> SettingsModifed;
+
+        int Count { get; }
+
         [NotNull]
         string GetValue([NotNull] string name, [CanBeNull] string defaultValue);
         void SetName([NotNull] string name, [NotNull] string value);
-
-        void SaveRaw();
     }
 
     [PublicAPI]

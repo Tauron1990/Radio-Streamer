@@ -232,6 +232,42 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Include Plug-ins  ähnelt.
+        /// </summary>
+        public static string ExportPlugInsLabel {
+            get {
+                return ResourceManager.GetString("ExportPlugInsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Include Radios ähnelt.
+        /// </summary>
+        public static string ExportRadiosLabel {
+            get {
+                return ResourceManager.GetString("ExportRadiosLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Include Scripts ähnelt.
+        /// </summary>
+        public static string ExportScriptsLabel {
+            get {
+                return ResourceManager.GetString("ExportScriptsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Include Settings ähnelt.
+        /// </summary>
+        public static string ExportSettingsLabel {
+            get {
+                return ResourceManager.GetString("ExportSettingsLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die View Fovorites ähnelt.
         /// </summary>
         public static string FavoritesLabel {
@@ -255,6 +291,15 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string FileFilterRsdFile {
             get {
                 return ResourceManager.GetString("FileFilterRsdFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Content ähnelt.
+        /// </summary>
+        public static string ImportExportProcessingTitle {
+            get {
+                return ResourceManager.GetString("ImportExportProcessingTitle", resourceCulture);
             }
         }
         
@@ -1291,6 +1336,69 @@ namespace Tauron.Application.RadioStreamer.Resources {
         public static string SearchLabel {
             get {
                 return ResourceManager.GetString("SearchLabel", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Saving Database. ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingDatabaseSave {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingDatabaseSave", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Archive File ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingFile {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingFile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Plug-ins. ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingPlugIns {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingPlugIns", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Executing Script Compiling ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingPrecompile {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingPrecompile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Radios. ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingRadios {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingRadios", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Scripts. ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingScripts {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingScripts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Processing Settings. ähnelt.
+        /// </summary>
+        public static string SettingIEProcessingSettings {
+            get {
+                return ResourceManager.GetString("SettingIEProcessingSettings", resourceCulture);
             }
         }
         

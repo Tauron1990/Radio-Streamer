@@ -564,4 +564,40 @@
   <data name="DefaultProfileOptionName" xml:space="preserve">
     <value>Standard Profile:</value>
   </data>
+  <data name="SettingIEProcessingFile" xml:space="preserve">
+    <value>Processing Archive File</value>
+  </data>
+  <data name="SettingIEProcessingRadios" xml:space="preserve">
+    <value>Processing Radios.</value>
+  </data>
+  <data name="SettingIEProcessingSettings" xml:space="preserve">
+    <value>Processing Settings.</value>
+  </data>
+  <data name="SettingIEProcessingPlugIns" xml:space="preserve">
+    <value>Processing Plug-ins.</value>
+  </data>
+  <data name="SettingIEProcessingScripts" xml:space="preserve">
+    <value>Processing Scripts.</value>
+  </data>
+  <data name="SettingIEProcessingDatabaseSave" xml:space="preserve">
+    <value>Saving Database.</value>
+  </data>
+  <data name="SettingIEProcessingPrecompile" xml:space="preserve">
+    <value>Executing Script Compiling</value>
+  </data>
+  <data name="ExportSettingsLabel" xml:space="preserve">
+    <value>Include Settings</value>
+  </data>
+  <data name="ExportRadiosLabel" xml:space="preserve">
+    <value>Include Radios</value>
+  </data>
+  <data name="ExportScriptsLabel" xml:space="preserve">
+    <value>Include Scripts</value>
+  </data>
+  <data name="ExportPlugInsLabel" xml:space="preserve">
+    <value>Include Plug-ins </value>
+  </data>
+  <data name="ImportExportProcessingTitle" xml:space="preserve">
+    <value>Processing Content</value>
+  </data>
 </root>

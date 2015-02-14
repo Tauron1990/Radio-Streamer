@@ -20,7 +20,7 @@ namespace Tauron.Scripts
                             ? trackContent.ChildNodes[1].InnerText
                             : trackContent.InnerText;
 
-                title.Trim();
+                title = title.Trim();
             }
             catch
             {

@@ -621,6 +621,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 AddRadio(args.RadioEntry, Languages, _enviroment.Settings.Favorites);
                 OnPropertyChanged(() => Languages);
             };
+            _database.RadiosAdded += (sender, @event) =>
+            {
+                _radios.BeginChanging();
+                foreach (var entry in @event.Entries) AddRadio(entry, Languages, _enviroment.Settings.Favorites);
+                _radios.CompledChanging();
+            };
 
             var textLogger = new StringBuilder();
             try

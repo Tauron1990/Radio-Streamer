@@ -105,6 +105,10 @@
     </Compile>
     <Compile Include="Views\MedadataView\MetadataWindowViewModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\Options\ImortExportSettingUIView.xaml.cs">
+      <DependentUpon>ImortExportSettingUIView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\Options\ImportExportSettingUIWindowViewModel.cs" />
     <Compile Include="Views\Options\OptionsModel.cs" />
     <Compile Include="Views\Options\OptionsViewModel.cs" />
     <Compile Include="Views\Options\OptionsWindow.xaml.cs">
@@ -168,6 +172,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Views\MedadataView\MetadataWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\Options\ImortExportSettingUIView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

@@ -1,0 +1,36 @@
+﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.Options.ImortExportSettingUIView"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:const="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts" Background="{StaticResource BackgroundBrush}"
+             mc:Ignorable="d" WindowStyle="ToolWindow" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static const:AppConstants.ImportExportSettingsWindow}"
+             d:DesignHeight="300" d:DesignWidth="300" hlp:ControlHelper.MarkWindow="Window" SizeToContent="WidthAndHeight">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition Width="Auto"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Content="{hlp:SimpleLocalize ExportSettingsLabel}" IsChecked="{Binding ExportSettings}"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="0"/>
+        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Content="{hlp:SimpleLocalize ExportRadiosLabel}" IsChecked="{Binding ExportRadios}"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="1"/>
+        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Content="{hlp:SimpleLocalize ExportScriptsLabel}" IsChecked="{Binding ExportScripts}"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="2"/>
+        <CheckBox VerticalAlignment="Center" HorizontalAlignment="Left" Margin="10" Content="{hlp:SimpleLocalize ExportPlugInsLabel}" IsChecked="{Binding ExportPlugIns}"
+                  Grid.Column="0" Grid.ColumnSpan="3" Grid.Row="3"/>
+        <Button Content="{hlp:SimpleLocalize OkLabel}" Grid.Row="4" Grid.Column="2" Margin="5"
+                hlp:CommandBinder.Command="Ok:Ok" IsDefault="True"/>
+        <Button Grid.Row="4" Grid.Column="1" Margin="5" Content="{hlp:SimpleLocalize AbortLabel}"
+                hlp:CommandBinder.Command="Abort:Abort" IsCancel="True"/>
+    </Grid>
+</Window>
