@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Globalization;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.JetBrains.Annotations;
 
@@ -76,6 +77,18 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
 
         [CanBeNull]
         public object DefaultValue { get; private set; }
+
+        [NotNull]
+        public string SettingString
+        {
+            get
+            {
+                if (SettingValue == null) return string.Empty;
+                var format = SettingValue as IFormattable;
+                if (format != null) return format.ToString(null, CultureInfo.InvariantCulture);
+                return SettingValue.ToString();
+            }
+        }
 
         public Option([CanBeNull] string @group, [NotNull] IOptionHelper helper, [NotNull] string settingKey,
             [CanBeNull] object defaultValue, [NotNull] string displayName)

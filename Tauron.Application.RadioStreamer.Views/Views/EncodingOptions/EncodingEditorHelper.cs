@@ -25,7 +25,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
             return true;
         }
 
-        public void Deserialize(IRadioEnvironment store, Option option, object defaultValue)
+        public void Deserialize(IRadioEnvironment store, Option option, string defaultValue)
         {
             var provider = defaultValue as IEncoderViewModel;
             if(provider == null) return;
