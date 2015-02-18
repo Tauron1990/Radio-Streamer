@@ -1,4 +1,5 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.UI;
@@ -6,7 +7,35 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
 {
-    public sealed class CheckBoxHelper : ObservableObject, IOptionHelper
+    //public sealed class CheckBoxHelper : OptionHelperBase<bool?, bool>
+    //{
+    //    public CheckBoxHelper([CanBeNull] Action<bool?> serialized = null, [CanBeNull] Action<bool?> deserialized = null) 
+    //        : base(serialized, deserialized)
+    //    {
+    //    }
+
+    //    public override object LoadUI(Option option)
+    //    {
+            
+    //    }
+
+    //    protected override bool SerializeImpl(IRadioEnvironment store, Option option)
+    //    {
+    //    ???
+    //    }
+
+    //    protected override void DeserializeImpl(IRadioEnvironment store, Option option, object defaultValue)
+    //    {
+    //    ???
+    //    }
+
+    //    public override void Reset(Option option)
+    //    {
+    //    ???
+    //    }
+    //}
+
+    public sealed class CheckBoxHelperOld : ObservableObject, IOptionHelper
     {
         private bool? _currentValue;
         private bool LastValue { get; set; }

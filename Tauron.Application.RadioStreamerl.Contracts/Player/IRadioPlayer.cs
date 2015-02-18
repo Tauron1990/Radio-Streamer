@@ -13,12 +13,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
 		void Activate();
 		void Deactivate();
 
-		void Play(RadioQuality radio, [CanBeNull] IScript script);
+        [NotNull]
+        PlayerStade Play(RadioQuality radio, [CanBeNull] IScript script);
 		void Stop();
 
 		bool IsRecording { get; }
 
-		void StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
+        [NotNull]
+        RecordingStade StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
 		void StopRecording();
 
         [CanBeNull]

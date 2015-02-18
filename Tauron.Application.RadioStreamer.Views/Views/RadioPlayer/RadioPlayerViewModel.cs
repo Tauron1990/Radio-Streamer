@@ -136,7 +136,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
         private bool _isInitialized;
 
-        private void SendError([NotNull] BassException ex)
+        private void SendError([NotNull] Exception ex)
         {
             const string caption = "Error";
             string text = String.Format(RadioStreamerResources.BassErrorMessage, ex.Message);
@@ -174,13 +174,43 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
             try
             {
-                _player.Play(radio, _engineManager.SearchForScript(script));
-                ResetVolume();
-                CurrentTitle.State = PlayerStade.Playing;
-                _time.Start();
+                var status = _player.Play(radio, _engineManager.SearchForScript(script));
+
+                if (status.PlayerErrorStade == PlayerErrorStade.Success)
+                {
+                    ResetVolume();
+                    CurrentTitle.State = PlayerStade.Playing;
+                    _time.Start();
+                }
+                else
+                {
+                    string errorMessage;
+
+                    switch (status.PlayerErrorStade)
+                    {
+                        case PlayerErrorStade.Error:
+                            errorMessage = status.Exception != null
+                                ? status.Exception.ToString()
+                                : "Error Reciving Message";
+                            break;
+                        case PlayerErrorStade.NoEngine:
+                            errorMessage = RadioStreamerResources.ErrorNoPlayableEngine;
+                            break;
+                        case PlayerErrorStade.NoQuality:
+                            errorMessage = RadioStreamerResources.ErrorNoQuality;
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    Dialogs.ShowMessageBox(MainWindow, errorMessage, "Error", MsgBoxButton.Ok, MsgBoxImage.Exclamation,
+                        null);
+                }
             }
-            catch (BassException e)
+            catch (Exception e)
             {
+                if (CriticalExceptions.IsCriticalApplicationException(e)) throw;
+                
                 SendError(e);
             }
         }
@@ -258,14 +288,46 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         [CommandTarget]
         private void Record()
         {
-            string path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).CombinePath("Radio Streamer");
-            path.CreateDirectoryIfNotExis();
+            try
+            {
+                string path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).CombinePath("Radio Streamer");
+                path.CreateDirectoryIfNotExis();
 
-            if (_player.IsRecording)
-                _player.StopRecording();
-            else
-                _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default.Item2);
-            UpdateRecordingImage();
+                if (_player.IsRecording)
+                    _player.StopRecording();
+
+                var status = _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default.Item2);
+
+                if (status.ErrorStade != RecordingErrorStade.Sucess)
+                {
+                    string errorMessage;
+
+                    switch (status.ErrorStade)
+                    {
+                        case RecordingErrorStade.NotPlaying:
+                            errorMessage = RadioStreamerResources.ErrorNotPlaying;
+                            break;
+                        case RecordingErrorStade.Error:
+                            errorMessage = status.Exception != null
+                                ? status.Exception.ToString()
+                                : "Error Reciving Message";
+                            break;
+                        default:
+                            throw new ArgumentOutOfRangeException();
+                    }
+
+                    Dialogs.ShowMessageBox(MainWindow, errorMessage, "Error", MsgBoxButton.Ok, MsgBoxImage.Exclamation,
+                        null);
+                }
+                else 
+                    UpdateRecordingImage();
+            }
+            catch (Exception exception)
+            {
+                if (CriticalExceptions.IsCriticalApplicationException(exception)) throw;
+
+                SendError(exception);
+            }
         }
 
         private void UpdateRecordingImage()

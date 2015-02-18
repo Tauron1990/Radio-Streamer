@@ -44,6 +44,7 @@ namespace Tauron.Application.RadioStreamer.Player
         private string _currentRecordingLocation;
         private TAG_INFO _tagInfo;
         private CommonProfile _currentProfile;
+        private bool _isPlaying;
 
         private readonly VisualHelper _visualHelper;
         private readonly MemoryManager _memoryManager;
@@ -99,37 +100,53 @@ namespace Tauron.Application.RadioStreamer.Player
             BassManager.Free();
         }
 
-        public void Play(RadioQuality radio, IScript script)
+        public PlayerStade Play(RadioQuality radio, IScript script)
         {
-            _script = script;
-            string url = radio.Url;
-            IPlaybackEngine engine = _playbackEngines.First(en => en.Metadata.Name == string.Empty).Value;
+            if(radio.IsEmpty || string.IsNullOrWhiteSpace(radio.Url))
+                return new PlayerStade(PlayerErrorStade.NoQuality, null);
 
-            if (url[0] == '[')
+            try
             {
-                int index = url.IndexOf(']');
-                if (index != -1)
-                {
-                    string[] values = url.Split(new[] {']'}, 2, StringSplitOptions.RemoveEmptyEntries);
-                    values[0] = values[0].Substring(1);
+                _script = script;
+                string url = radio.Url;
+                var lazyEngine = _playbackEngines.FirstOrDefault(en => en.Metadata.Name == string.Empty);
+                if (lazyEngine == null) return new PlayerStade(PlayerErrorStade.NoEngine, null);
+            
+                IPlaybackEngine engine = lazyEngine.Value;
 
-                    var tempEngine = _playbackEngines.FirstOrDefault(en => en.Metadata.Name == values[0]);
-                    if (tempEngine != null)
+                if (url[0] == '[')
+                {
+                    int index = url.IndexOf(']');
+                    if (index != -1)
                     {
-                        try
+                        string[] values = url.Split(new[] {']'}, 2, StringSplitOptions.RemoveEmptyEntries);
+                        values[0] = values[0].Substring(1);
+
+                        var tempEngine = _playbackEngines.FirstOrDefault(en => en.Metadata.Name == values[0]);
+                        if (tempEngine != null)
                         {
-                            engine = tempEngine.Value;
-                            url = values[1];
-                        }
-                        catch (Exception)
-                        {
-                            url = radio.Url;
+                            try
+                            {
+                                engine = tempEngine.Value;
+                                url = values[1];
+                            }
+                            catch (Exception)
+                            {
+                                url = radio.Url;
+                            }
                         }
                     }
                 }
+
+                BeginPlayback(url, engine);
+            }
+            catch (BassException bassException)
+            {
+                return new PlayerStade(PlayerErrorStade.Error, bassException);
             }
 
-            BeginPlayback(url, engine);
+            _isPlaying = true;
+            return new PlayerStade(PlayerErrorStade.Success, null);
         }
 
         private void BeginPlayback([NotNull] string url, [NotNull] IPlaybackEngine playbackEngine)
@@ -215,6 +232,9 @@ namespace Tauron.Application.RadioStreamer.Player
             if(IsRecording)
                 StopRecording();
 
+            if(!_isPlaying) return;
+
+            _isPlaying = false;
             _mixer.Dispose();
             _currentChannel.Dispose();
             _nextChannel = null;
@@ -231,15 +251,26 @@ namespace Tauron.Application.RadioStreamer.Player
             }
         }
 
-        public void StartRecording(string location, CommonProfile profile)
+        public RecordingStade StartRecording(string location, CommonProfile profile)
         {
-            _currentRecordingLocation = location;
-            InitRecorder(profile);
+            if(!_isPlaying) return new RecordingStade(RecordingErrorStade.NotPlaying, null);
 
-            StartRecordingInternal();
+            try
+            {
+                _currentRecordingLocation = location;
+                InitRecorder(profile);
+
+                StartRecordingInternal();
+            }
+            catch (BassException exception)
+            {
+                return new RecordingStade(RecordingErrorStade.Error, exception);
+            }
+
+            return new RecordingStade(RecordingErrorStade.Sucess, null);
         }
 
-        private void InitRecorder([NotNull] CommonProfile profile)
+        private void InitRecorder([CanBeNull] CommonProfile profile)
         {
             if (_currentChannel == null) return;
 

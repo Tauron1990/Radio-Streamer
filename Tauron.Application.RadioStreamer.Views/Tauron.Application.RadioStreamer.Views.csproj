@@ -116,6 +116,7 @@
     </Compile>
     <Compile Include="Views\Options\UiHelpers\CheckBoxHelper.cs" />
     <Compile Include="Views\Options\UiHelpers\DefaultProfileHelper.cs" />
+    <Compile Include="Views\Options\UiHelpers\OptionHelperBase.cs" />
     <Compile Include="Views\RadioManager\Controls\RadioCreateView.xaml.cs">
       <DependentUpon>RadioCreateView.xaml</DependentUpon>
     </Compile>

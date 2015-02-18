@@ -39,3 +39,4 @@ C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.A
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\de\Tauron.Application.RadioStreamer.Resources.resources.dll
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.dll
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Resources\obj\Debug\Tauron.Application.RadioStreamer.Resources.csprojResolveAssemblyReference.cache

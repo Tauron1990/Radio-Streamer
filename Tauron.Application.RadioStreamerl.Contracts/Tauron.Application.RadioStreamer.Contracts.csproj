@@ -58,6 +58,7 @@
     <Compile Include="Data\IDatabaseImportExportEngine.cs" />
     <Compile Include="Data\ImportExportSettings.cs" />
     <Compile Include="IStyleManager.cs" />
+    <Compile Include="Player\PlayerErrorStade.cs" />
     <Compile Include="Player\IRadioPlayer.cs" />
     <Compile Include="Data\Attributes\RadioDatabaseExport.cs" />
     <Compile Include="Data\Enttitis\IQualityQuery.cs" />
@@ -71,6 +72,7 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Data\IRadioDataBaseInterface.cs" />
+    <Compile Include="Player\PlayerStade.cs" />
     <Compile Include="Player\PlayRadioEvent.cs" />
     <Compile Include="Player\PlayRadioEventArgs.cs" />
     <Compile Include="Player\RadioPlayerDownloadStopped.cs" />
@@ -78,6 +80,8 @@
     <Compile Include="Player\RadioPlayerStop.cs" />
     <Compile Include="Player\RadioPlayerTitleRecived.cs" />
     <Compile Include="Data\CommonProfile.cs" />
+    <Compile Include="Player\RecordingStade.cs" />
+    <Compile Include="Player\RecordingErrorStade.cs" />
     <Compile Include="Player\Recording\AudioEncoderBase.cs" />
     <Compile Include="Player\Recording\EncoderFactoryBase.cs" />
     <Compile Include="Player\Recording\ExportEncodingEditor.cs" />

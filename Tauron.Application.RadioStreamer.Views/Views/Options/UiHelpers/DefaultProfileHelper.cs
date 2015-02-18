@@ -43,7 +43,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
             return returnVal;
         }
 
-        public void Deserialize(IRadioEnvironment store, Option option, string defaultValue)
+        public void Deserialize(IRadioEnvironment store, Option option, object defaultValue)
         {
             var encoder = store.Settings.EncoderProfiles.Default;
             _old = encoder.Item2 != null ? encoder.Item1 : null;

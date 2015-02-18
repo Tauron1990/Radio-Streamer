@@ -1,3 +1,4 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
   <!-- 
     Microsoft ResX Schema 
@@ -595,5 +596,14 @@
   </data>
   <data name="ImportExportProcessingTitle" xml:space="preserve">
     <value>Verarbeite Inhalt</value>
+  </data>
+  <data name="ErrorNoPlayableEngine" xml:space="preserve">
+    <value>Keine Playback Engine Gefunden</value>
+  </data>
+  <data name="ErrorNoQuality" xml:space="preserve">
+    <value>Keine Qualität zu Spielen Übergeben</value>
+  </data>
+  <data name="ErrorNotPlaying" xml:space="preserve">
+    <value>Der Radio Spielt nicht</value>
   </data>
 </root>

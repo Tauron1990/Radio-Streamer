@@ -223,6 +223,33 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Engine For Playing Found ähnelt.
+        /// </summary>
+        public static string ErrorNoPlayableEngine {
+            get {
+                return ResourceManager.GetString("ErrorNoPlayableEngine", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die No Quality To Play Found ähnelt.
+        /// </summary>
+        public static string ErrorNoQuality {
+            get {
+                return ResourceManager.GetString("ErrorNoQuality", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Player is Not Playing ähnelt.
+        /// </summary>
+        public static string ErrorNotPlaying {
+            get {
+                return ResourceManager.GetString("ErrorNotPlaying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Export ähnelt.
         /// </summary>
         public static string ExportLabel {

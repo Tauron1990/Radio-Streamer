@@ -249,3 +249,5 @@ C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.A
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.g.resources
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.dll
 C:\Users\Alexander\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Tauron.Application.RadioStreamer.Views.pdb
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Options\ImortExportSettingUIView.baml
+C:\Users\ACERi7\Documents\Visual Studio 2013\Projects\Radio-Streamer\Tauron.Application.RadioStreamer.Views\obj\Debug\Views\Options\ImortExportSettingUIView.g.cs
