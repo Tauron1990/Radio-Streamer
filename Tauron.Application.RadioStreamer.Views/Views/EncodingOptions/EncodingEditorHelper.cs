@@ -1,4 +1,6 @@
-﻿using Tauron.Application.RadioStreamer.Contracts;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.Views;
@@ -7,11 +9,11 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
 {
     public class EncodingEditorHelper : IOptionHelper
     {
-        public object LoadUI(Option option)
+        public FrameworkElement LoadUI(Option option)
         {
             var temp = ViewManager.Manager.CreateView(AppConstants.CommonEncoderUI);
             new FrameworkObject(temp, false).DataContext = option.SettingValue;
-            return temp;
+            return (Control)temp;
         }
 
         public bool Serialize(IRadioEnvironment store, Option option)

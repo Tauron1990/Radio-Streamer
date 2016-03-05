@@ -1,11 +1,4 @@
-﻿Start mit windows
-Wiedergabe nach start
-Auto Update
-In System Tray minimiren
-RadioInfo in Systemtray
-Recrding Pfad
-Verhalten bei vorhandenen Title
-Title mit weniger als 90 sec löschen
+﻿Title mit weniger als 90 sec löschen
 Audio Driver
 
 Future Futures

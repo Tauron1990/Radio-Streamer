@@ -7,17 +7,12 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 {
     public sealed class AggregareFileAdder : FileAdder
     {
-        private readonly List<FileAdder> _fileAdder;
-
         public AggregareFileAdder(params  FileAdder[] fileAdder)
         {
-            _fileAdder = new List<FileAdder>(fileAdder);
+            FileAdder = new List<FileAdder>(fileAdder);
         }
 
-        public List<FileAdder> FileAdder
-        {
-            get { return _fileAdder; }
-        }
+        public List<FileAdder> FileAdder { get; }
 
         public override string AddFile(string effiectivePath, Stream stream)
         {

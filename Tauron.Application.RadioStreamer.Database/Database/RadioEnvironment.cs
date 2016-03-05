@@ -150,7 +150,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 					    _input = input;
 					}
 
-				    public bool EndOfInput { get { return _input.Length == _position; } }
+				    public bool EndOfInput => _input.Length == _position;
 
 				    [NotNull]
 				    public string GetNextChars(int count)
@@ -202,14 +202,14 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 
 			    [NotNull]
-			    public string Name { get; private set; }
+			    public string Name { get; }
 
 			    [NotNull]
 			    private RadioSettings Settings { get; set; }
 
 			    protected SettingComponent([NotNull] string name)
-				{
-				    Name = name;
+			    {
+			        Name = name;
 				}
 
 			    public void Init([NotNull] RadioSettings settings)
@@ -331,10 +331,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 		        private bool _isChanged;
 
-		        public IEnumerable<string> Profiles
-		        {
-		            get { return _profiles.Keys; }
-		        }
+		        public IEnumerable<string> Profiles => _profiles.Keys;
 
 		        public void SetProfil(string name, IEqualizer equlizer)
 		        {
@@ -581,17 +578,18 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		        private void OnSettingsModifed([NotNull] SettingsModifedEventArgs e)
 		        {
 		            var handler = SettingsModifed;
-		            if (handler != null) handler(this, e);
+		            handler?.Invoke(this, e);
 		        }
 
-		        public int Count { get { return _profile.Count; } }
+		        public int Count => _profile.Count;
 
 		        public string GetValue(string name, string defaultValue)
                 {
+		            // ReSharper disable once AssignNullToNotNullAttribute
                     return _profile.GetValue(name, defaultValue);
                 }
 
-                public void SetName(string name, string value)
+                public void SetValue(string name, string value)
                 {
                     _profile.SetVaue(name, value);
                     OnSettingsModifed(new SettingsModifedEventArgs(name, value));
@@ -618,7 +616,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    private const string LastSprecturmKey = "LastSprecturm";
 		    private const string ThemeKey = "Theme";
 
-		    public IEncoderProfileDatabase EncoderProfiles { get { return (IEncoderProfileDatabase)_components[EncoderDatabase.EncoderDatabaseKey]; } }
+		    public IEncoderProfileDatabase EncoderProfiles => (IEncoderProfileDatabase)_components[EncoderDatabase.EncoderDatabaseKey];
 
 		    public string LastSprecturm
 		    {
@@ -649,13 +647,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				}
 			}
 
-			public IRadioFavorites Favorites
-			{
-				get 
-				{
-					return (IRadioFavorites)_components[RadioFavorites.FavoritesKey];
-				}
-			}
+			public IRadioFavorites Favorites => (IRadioFavorites)_components[RadioFavorites.FavoritesKey];
 
 		    public IPropertyStore PropertyStore { get; private set; }
 
@@ -672,10 +664,50 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    }
 
 
-		    public IEqualizerProfileDatabase EqualizerDatabase
-			{
-				get { return (IEqualizerProfileDatabase)_components[EqualizerDatabaseManager.EqualizerDatabaseKey]; }
-			}
+		    public IEqualizerProfileDatabase EqualizerDatabase => (IEqualizerProfileDatabase)_components[EqualizerDatabaseManager.EqualizerDatabaseKey];
+
+		    public bool PlayAfterStart
+            {
+                get { return bool.Parse(GetValue("PlayAfterStart", "false")); }
+
+                set
+                {
+                    SetVaue("PlayAfterStart", value);
+                }
+            }
+
+            public bool MinimizeInTray
+            {
+                get { return bool.Parse(GetValue("Minimizeintray", "false")); }
+
+                set
+                {
+                    SetVaue("Minimizeintray", value);
+                }
+            }
+
+            public string RecodingPath
+            {
+                get { return GetValue("RecodingPath", string.Empty); }
+
+                set { SetVaue("RecodingPath", value); }
+            }
+
+            public FileExisBehavior FileExisBehavior
+            {
+                get { return GetValue("FileExisBehavior", "Override").ParseEnum<FileExisBehavior>(); }
+
+                set
+                {
+                    SetVaue("FileExisBehavior", value);
+                }
+            }
+
+		    public bool Delete90SecTitles
+		    {
+		        get { return bool.Parse(GetValue("Delete90SecTitles", "false")); }
+		        set { SetVaue("Delete90SecTitles", value); }
+		    }
 		}
 
 		public const string RadioStremaer = "RadioStreamer";
@@ -801,7 +833,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				case EnviromentLocation.Other:
 					return Directory.EnumerateFiles(EnsureEnviromentLocation(location)).Select(Path.GetFileName);
 				default:
-					throw new ArgumentOutOfRangeException("location");
+					throw new ArgumentOutOfRangeException(nameof(location));
 			}
 		}
 		[DebuggerStepThrough]
@@ -816,7 +848,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 				case EnviromentLocation.Other:
 					return Path.Combine(EnsureEnviromentLocation(location), name);
 				default:
-					throw new ArgumentOutOfRangeException("location");
+					throw new ArgumentOutOfRangeException(nameof(location));
 			}
 		}
 
@@ -836,10 +868,9 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	    }
 
 	    public void Dispose()
-		{
-			if (_settings != null)
-				_settings.Save();
-		}
+	    {
+	        _settings?.Save();
+	    }
 
 	    public void ReloadSetting()
 	    {

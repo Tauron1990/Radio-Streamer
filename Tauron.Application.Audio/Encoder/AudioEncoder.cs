@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Windows.Markup;
 using Tauron.JetBrains.Annotations;
-using Un4seen.Bass.AddOn.Enc;
 using Un4seen.Bass.AddOn.Tags;
 using Un4seen.Bass.Misc;
 
@@ -10,25 +8,21 @@ namespace Tauron.Application.BassLib.Encoder
     [PublicAPI]
     public abstract class AudioEncoder : IDisposable
     {
-        private readonly BaseEncoder _encoder;
         private Channel _channel;
 
         protected AudioEncoder([NotNull] BaseEncoder encoder, [NotNull] Channel channel)
         {
-            if (encoder == null) throw new ArgumentNullException("encoder");
-            if (channel == null) throw new ArgumentNullException("channel");
+            if (encoder == null) throw new ArgumentNullException(nameof(encoder));
+            if (channel == null) throw new ArgumentNullException(nameof(channel));
             
-            _encoder = encoder;
+            BassEncoder = encoder;
             _channel = channel;
         }
 
         [NotNull]
-        internal BaseEncoder BassEncoder
-        {
-            get { return _encoder; }
-        }
+        internal BaseEncoder BassEncoder { get; }
 
-        public bool SupportsStdout { get { return BassEncoder.SupportsSTDOUT; } }
+        public bool SupportsStdout => BassEncoder.SupportsSTDOUT;
 
         [NotNull]
         public Channel Channel

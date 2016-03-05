@@ -51,6 +51,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         public override void BuildCompled()
         {
             CanClose = false;
+            IsNotMuted = true;
 
             _events.GetEvent<PlayRadioEvent, PlayRadioEventArgs>().Subscribe(PlayRadioEventHandler);
             _events.GetEvent<RadioPlayerTitleRecived, string>().Subscribe(str => CurrentTitle.TrackName = str);
@@ -62,6 +63,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
             UpdateRecordingImage();
             ResetVolume();
+
+            if(_radioEnvironment.Settings.PlayAfterStart)
+                Play();
         }
 
         public RadioPlayerViewModel()
@@ -83,10 +87,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             get
             {
                 TimeSpan span = _time.Elapsed;
-                return String.Format("{0} {1}:{2}",
-                    RadioStreamerResources.ElapsedTime,
-                    span.Minutes,
-                    span.Seconds);
+                return $"{RadioStreamerResources.ElapsedTime} {span.Minutes}:{span.Seconds}";
             }
         }
 
@@ -136,10 +137,10 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
         private bool _isInitialized;
 
-        private void SendError([NotNull] Exception ex)
+        private void SendError([NotNull] BassException ex)
         {
             const string caption = "Error";
-            string text = String.Format(RadioStreamerResources.BassErrorMessage, ex.Message);
+            string text = string.Format(RadioStreamerResources.BassErrorMessage, ex.Message);
 
             Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok,
                 MsgBoxImage.Error, null);
@@ -156,7 +157,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             catch (BassException e)
             {
                 const string caption = "Error";
-                string text = String.Format(RadioStreamerResources.BassInitErrorMessage, e.Message);
+                string text = string.Format(RadioStreamerResources.BassInitErrorMessage, e.Message);
 
                 Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption,
                     MsgBoxButton.Ok,
@@ -174,43 +175,13 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
             try
             {
-                var status = _player.Play(radio, _engineManager.SearchForScript(script));
-
-                if (status.PlayerErrorStade == PlayerErrorStade.Success)
-                {
-                    ResetVolume();
-                    CurrentTitle.State = PlayerStade.Playing;
-                    _time.Start();
-                }
-                else
-                {
-                    string errorMessage;
-
-                    switch (status.PlayerErrorStade)
-                    {
-                        case PlayerErrorStade.Error:
-                            errorMessage = status.Exception != null
-                                ? status.Exception.ToString()
-                                : "Error Reciving Message";
-                            break;
-                        case PlayerErrorStade.NoEngine:
-                            errorMessage = RadioStreamerResources.ErrorNoPlayableEngine;
-                            break;
-                        case PlayerErrorStade.NoQuality:
-                            errorMessage = RadioStreamerResources.ErrorNoQuality;
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    Dialogs.ShowMessageBox(MainWindow, errorMessage, "Error", MsgBoxButton.Ok, MsgBoxImage.Exclamation,
-                        null);
-                }
+                _player.Play(radio, _engineManager.SearchForScript(script));
+                ResetVolume();
+                CurrentTitle.State = PlayerStade.Playing;
+                _time.Start();
             }
-            catch (Exception e)
+            catch (BassException e)
             {
-                if (CriticalExceptions.IsCriticalApplicationException(e)) throw;
-                
                 SendError(e);
             }
         }
@@ -288,46 +259,16 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         [CommandTarget]
         private void Record()
         {
-            try
-            {
-                string path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).CombinePath("Radio Streamer");
-                path.CreateDirectoryIfNotExis();
+            string path =_radioEnvironment.Settings.RecodingPath;
+            if(string.IsNullOrEmpty(path))
+                path = Environment.GetFolderPath(Environment.SpecialFolder.MyMusic).CombinePath("Radio Streamer");
+            path.CreateDirectoryIfNotExis();
 
-                if (_player.IsRecording)
-                    _player.StopRecording();
-
-                var status = _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default.Item2);
-
-                if (status.ErrorStade != RecordingErrorStade.Sucess)
-                {
-                    string errorMessage;
-
-                    switch (status.ErrorStade)
-                    {
-                        case RecordingErrorStade.NotPlaying:
-                            errorMessage = RadioStreamerResources.ErrorNotPlaying;
-                            break;
-                        case RecordingErrorStade.Error:
-                            errorMessage = status.Exception != null
-                                ? status.Exception.ToString()
-                                : "Error Reciving Message";
-                            break;
-                        default:
-                            throw new ArgumentOutOfRangeException();
-                    }
-
-                    Dialogs.ShowMessageBox(MainWindow, errorMessage, "Error", MsgBoxButton.Ok, MsgBoxImage.Exclamation,
-                        null);
-                }
-                else 
-                    UpdateRecordingImage();
-            }
-            catch (Exception exception)
-            {
-                if (CriticalExceptions.IsCriticalApplicationException(exception)) throw;
-
-                SendError(exception);
-            }
+            if (_player.IsRecording)
+                _player.StopRecording();
+            else
+                _player.StartRecording(path, _radioEnvironment.Settings.EncoderProfiles.Default.Item2);
+            UpdateRecordingImage();
         }
 
         private void UpdateRecordingImage()
@@ -428,7 +369,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         [CommandTarget]
         private void MuteVolume()
         {
-            if (IsNotMuted)
+            if (!IsNotMuted)
             {
                 UpdateVolume(0);
                 IsNotMuted = false;

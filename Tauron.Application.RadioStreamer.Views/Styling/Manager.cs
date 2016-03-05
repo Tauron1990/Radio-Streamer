@@ -14,8 +14,8 @@ using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.UI;
-using Tauron.Application.RadioStreamer.Styling;
 using Tauron.Application.Views;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.Styling
 {
@@ -26,7 +26,7 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
         private const string ThemeExt = "skin";
         private const string ResourceAssembly = "Tauron.Application.RadioStreamer.Resources";
 
-        [InjectRadioEnviroment]
+        [InjectRadioEnviroment] [NotNull]
         private IRadioEnvironment _tauronEnviroment;
 
         private readonly string[] _themes;
@@ -47,12 +47,12 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
         private void OnThemeChanged()
         {
             EventHandler handler = ThemeChanged;
-            if (handler != null) handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
-        public string CurrentTheme { get { return _tauronEnviroment.Settings.Theme; } }
+        public string CurrentTheme => _tauronEnviroment.Settings.Theme;
 
-        public string[] Themes { get { return _themes; } }
+        public string[] Themes => _themes;
 
         public void SetTheme(string name)
         {
@@ -91,14 +91,13 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
                                                                                 StringSplitOptions.RemoveEmptyEntries))
                                                                  .Where(parts => parts.Length == 2))
                                 {
-                                    switch (parts[0])
+                                    if (parts[0] == "package")
                                     {
-                                        case "package":
-                                            _plugInManager.LoadPakage(parts[1]);
-                                            break;
-                                        case "plugin":
-                                            _plugInManager.InstallPlugIn(parts[1]);
-                                            break;
+                                        _plugInManager.LoadPakage(parts[1]);
+                                    }
+                                    else if (parts[0] == "plugin")
+                                    {
+                                        _plugInManager.InstallPlugIn(parts[1]);
                                     }
                                 }
                             }
@@ -154,8 +153,10 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
 
                     return;
                 }
-                catch (Exception)
+                catch (Exception e)
                 {
+                    if (CriticalExceptions.IsCriticalApplicationException(e))
+                        throw; 
                     SetTheme(string.Empty);
                 }
 
@@ -164,7 +165,7 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
                 resources.MergedDictionaries.Clear();
 
                 //Colors
-                resources["BackgroundBrush"] = Brushes.FloralWhite;
+                resources["BackgroundBrush"] = Brushes.WhiteSmoke;
                 resources["MiddleLightBrush"] = Brushes.LightBlue;
                 resources["FavoriteBrush"] = Brushes.DarkGoldenrod;
                 resources["FavoriteNormalColor"] = Brushes.White;

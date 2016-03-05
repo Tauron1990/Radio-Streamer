@@ -93,7 +93,7 @@ namespace Tauron.Application.RadioStreamer.Views.EncodingOptions
         private void New()
         {
             var view = ViewManager.CreateWindow(AppConstants.NewEncodingProfileView);
-            view.ShowDialog(MainWindow).ContinueWith(t =>
+            view.ShowDialogAsync(MainWindow).ContinueWith(t =>
             {
                 if (view.DialogResult == false) return;
                 var result = view.Result as Tuple<string, CommonProfile>;

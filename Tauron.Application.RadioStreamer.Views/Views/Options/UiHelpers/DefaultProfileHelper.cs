@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
@@ -22,15 +23,16 @@ namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
         [NotNull]
         public CommonComboBoxItem CurrentEncoder { get; set; }
 
-        public object LoadUI(Option option)
+        public FrameworkElement LoadUI(Option option)
         {
             var box = new ComboBox
             {
+                MinWidth = 100,
+                DataContext = this,
                 ItemsSource = Profiles
             };
 
             box.SetBinding(Selector.SelectedItemProperty, new Binding("CurrentEncoder"));
-            box.DataContext = this;
 
             return box;
         }
@@ -53,8 +55,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
 
 
             Reset(option);
-            if (Profiles != null) 
-                Profiles.Add(_nullItem);
+            Profiles?.Add(_nullItem);
         }
 
         public void Reset(Option option)

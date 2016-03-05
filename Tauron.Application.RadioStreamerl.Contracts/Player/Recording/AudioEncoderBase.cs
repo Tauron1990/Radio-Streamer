@@ -72,7 +72,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
                 public ActionWrapperImpl([NotNull] Action<TEncoder, TType> action)
                 {
-                    if (action == null) throw new ArgumentNullException("action");
+                    if (action == null) throw new ArgumentNullException(nameof(action));
                     _action = action;
                 }
 
@@ -293,7 +293,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
 
         protected AudioEncoderFactoryBase([NotNull] string id, [CanBeNull]CommonProfile profile)
         {
-            if (id == null) throw new ArgumentNullException("id");
+            if (id == null) throw new ArgumentNullException(nameof(id));
             _id = id;
 // ReSharper disable once AssignNullToNotNullAttribute
             Profile = profile;
@@ -309,15 +309,19 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
             return mapper;
         }
 
-        protected TType GetValue<TType>([NotNull,CallerMemberName] string name = null)
+        protected TType GetValue<TType>([CallerMemberName] [NotNull] string name = null)
         {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+
             EnsureBaseMapper();
 // ReSharper disable once AssignNullToNotNullAttribute
             return _baseMapper.Get<TType>(name);
         }
 
-        protected void SetValue<TType>(TType value, [NotNull,CallerMemberName] string name = null)
+        protected void SetValue<TType>(TType value, [CallerMemberName] [NotNull] string name = null)
         {
+            if (name == null) throw new ArgumentNullException(nameof(name));
+
             EnsureBaseMapper();
 // ReSharper disable once AssignNullToNotNullAttribute
             _baseMapper.Set(value, name);

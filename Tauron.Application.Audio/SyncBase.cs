@@ -10,7 +10,7 @@ namespace Tauron.Application.BassLib
         private void OnEnd(bool oneTime)
         {
             var handler = End;
-            if (handler != null) handler(this, oneTime);
+            handler?.Invoke(this, oneTime);
         }
 
         internal readonly SYNCPROC Syncproc;

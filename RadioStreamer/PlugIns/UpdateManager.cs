@@ -29,14 +29,14 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         [NotNull]
         public static string FullUpdatePath
         {
-            get { return _fullUpdatePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UpdatePath); }
+            private get { return _fullUpdatePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, UpdatePath); }
             set { _fullUpdatePath = Path.Combine(value, UpdatePath); }
         }
 
         [NotNull]
         public static string FullDeletePath
         {
-            get { return _fullDeletePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeletePath); }
+            private get { return _fullDeletePath ?? Path.Combine(AppDomain.CurrentDomain.BaseDirectory, DeletePath); }
             set { _fullDeletePath = Path.Combine(value, DeletePath); }
         }
 
@@ -61,7 +61,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                             var targetPath = file.Replace(directory, manifest.TargetLocation);
 
                             string copydic = Path.GetDirectoryName(targetPath);
-                            if (!Directory.Exists(copydic)) Directory.CreateDirectory(copydic);
+                            if (copydic != null && !Directory.Exists(copydic)) Directory.CreateDirectory(copydic);
 
                             File.Copy(file, targetPath, true);
                         }
@@ -123,8 +123,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
         public static FileAdder PutUpdate([NotNull] string name, [NotNull] string targetPath)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (targetPath == null) throw new ArgumentNullException("targetPath");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (targetPath == null) throw new ArgumentNullException(nameof(targetPath));
 
             string updateLocation = Path.Combine(FullUpdatePath, name);
 

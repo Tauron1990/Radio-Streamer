@@ -211,7 +211,7 @@
     <value>Suchen: </value>
   </data>
   <data name="UnkownString" xml:space="preserve">
-    <value>Unbekannt</value>
+    <value>Unbekannter</value>
   </data>
   <data name="UpdateAvailableCaption" xml:space="preserve">
     <value>Update Verfügbar!</value>
@@ -597,13 +597,67 @@
   <data name="ImportExportProcessingTitle" xml:space="preserve">
     <value>Verarbeite Inhalt</value>
   </data>
-  <data name="ErrorNoPlayableEngine" xml:space="preserve">
-    <value>Keine Playback Engine Gefunden</value>
+  <data name="OptionsPathGenral" xml:space="preserve">
+    <value>Allgemein</value>
   </data>
-  <data name="ErrorNoQuality" xml:space="preserve">
-    <value>Keine Qualität zu Spielen Übergeben</value>
+  <data name="StartOnWindowsOtpion" xml:space="preserve">
+    <value>Mit Windows Starten</value>
   </data>
-  <data name="ErrorNotPlaying" xml:space="preserve">
-    <value>Der Radio Spielt nicht</value>
+  <data name="PlayAfterStartOption" xml:space="preserve">
+    <value>Abspielen nach dem Start</value>
+  </data>
+  <data name="AutoUpdateOption" xml:space="preserve">
+    <value>Automatisches Update</value>
+  </data>
+  <data name="MinimizeintrayOption" xml:space="preserve">
+    <value>In System Tray minimiren</value>
+  </data>
+  <data name="QuitLabel" xml:space="preserve">
+    <value>Beenden</value>
+  </data>
+  <data name="ViewMainWindowMenuLabel" xml:space="preserve">
+    <value>Öffnen</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimerLabel" xml:space="preserve">
+    <value>Abschalt Timer:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTitleLabel" xml:space="preserve">
+    <value>Abschalt Timer</value>
+  </data>
+  <data name="RadioPlayerShutdownPCShutdownLabel" xml:space="preserve">
+    <value>PC Herunterfahren</value>
+  </data>
+  <data name="RadioPlayerShutdownHintLabel" xml:space="preserve">
+    <value>Hinweis:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimeLeftLabel" xml:space="preserve">
+    <value>Verbleibende Zeit:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerActiveLabel" xml:space="preserve">
+    <value>Timer Aktiv </value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimeLeftValueOff" xml:space="preserve">
+    <value>Aus</value>
+  </data>
+  <data name="PathNotExisting" xml:space="preserve">
+    <value>Der Ordner Pfad Existiert nicht</value>
+  </data>
+  <data name="PathSeeking" xml:space="preserve">
+    <value>Bitte Ordner Wählen</value>
+  </data>
+  <data name="OptionsRecordingPath" xml:space="preserve">
+    <value>Aufnahme Pfad: </value>
+  </data>
+  <data name="OptionsFileExisBehavior" xml:space="preserve">
+    <value>Wenn Datei Existiert:</value>
+  </data>
+  <data name="OptionsFileExisBehaviorOverrideText" xml:space="preserve">
+    <value>Überschreiben</value>
+  </data>
+  <data name="OptionsFileExisBehaviorRenameText" xml:space="preserve">
+    <value>Neu benennen</value>
+  </data>
+  <data name="OptionsFileExisBehaviorSkipText" xml:space="preserve">
+    <value>Überspringen</value>
   </data>
 </root>

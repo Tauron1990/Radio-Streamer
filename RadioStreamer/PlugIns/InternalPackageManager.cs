@@ -384,21 +384,15 @@ namespace Tauron.Application.RadioStreamer.PlugIns
         {
             private readonly VersionFileSerializer _versionFile;
 
-            public bool IsFilePresent
-            {
-                get { return _versionFile.IsFilePresent; }
-            }
+            public bool IsFilePresent => _versionFile.IsFilePresent;
 
-            public bool IsVersionCache
-            {
-                get { return true; }
-            }
+            public bool IsVersionCache => true;
 
-            public string Root { get; private set; }
+            public string Root { get; }
 
             public VersionCache(string cachePath)
             {
-                if (cachePath == null) throw new ArgumentNullException("cachePath");
+                if (cachePath == null) throw new ArgumentNullException(nameof(cachePath));
                 _versionFile = new VersionFileSerializer(cachePath);
                 Root = cachePath;
             }
@@ -455,17 +449,11 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
         private readonly InternalPackageManager _parent;
 
-        public bool IsVersionFilePresent
-        {
-            get { return Cache.IsFilePresent; }
-        }
+        public bool IsVersionFilePresent => Cache.IsFilePresent;
 
-        private ICache Cache { get; set; }
+        private ICache Cache { get; }
 
-        public IPackageRepository PackageRepository
-        {
-            get { return _packageRepository; }
-        }
+        public IPackageRepository PackageRepository => _packageRepository;
 
         private InternalPackageManager(string url, string targetPath,
                                       bool keepInCache = false, string cachePath = null, bool useVersionOnly = false)

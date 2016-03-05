@@ -8,7 +8,7 @@ using Tauron.Application.Views;
 using Tauron.Application.Views.Core;
 using Tauron.JetBrains.Annotations;
 
-namespace Tauron.Application.RadioStreamer.Styling
+namespace Tauron.Application.RadioStreamer.Views.Styling
 {
     public class ControlRegistry : CommonLocatorBase
     {
@@ -24,8 +24,8 @@ namespace Tauron.Application.RadioStreamer.Styling
 
         public void Register([NotNull] string name, [NotNull] string xaml)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (xaml == null) throw new ArgumentNullException("xaml");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (xaml == null) throw new ArgumentNullException(nameof(xaml));
             _xaml[name] = xaml;
         }
 
@@ -54,7 +54,7 @@ namespace Tauron.Application.RadioStreamer.Styling
 
         public override IWindow CreateWindowImpl(string name, object[] parameters)
         {
-            bool test = WpfApplication.CurrentWpfApplication.Dispatcher.CheckAccess();
+            WpfApplication.CurrentWpfApplication.Dispatcher.CheckAccess();
             string value;
             return _xaml.TryGetValue(name, out value) ? UiSynchronize.Synchronize.Invoke(() => new WpfWindow((Window) XamlReader.Parse(value))) : _baseLocator.CreateWindowImpl(name, parameters);
         }

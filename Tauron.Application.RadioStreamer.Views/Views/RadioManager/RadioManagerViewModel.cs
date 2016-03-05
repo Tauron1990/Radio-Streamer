@@ -63,10 +63,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
             // ReSharper restore PossibleNullReferenceException
         }
 
-        public RadioEntry Entry
-        {
-            get { return _entry; }
-        }
+        public RadioEntry Entry => _entry;
 
         public bool Favorite
         {
@@ -79,16 +76,10 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
         }
 
         [NotNull]
-        public string RadioTitle
-        {
-            get { return _entry.Name; }
-        }
+        public string RadioTitle => _entry.Name;
 
         [NotNull]
-        public string Genres
-        {
-            get { return _entry.Genre; }
-        }
+        public string Genres => _entry.Genre;
 
         [NotNull]
         public QualityList Qualitys
@@ -116,7 +107,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
             {
                 if (_selectedIndex == value) return;
 
-                QualitySelected(this, EventArgs.Empty);
+                QualitySelected?.Invoke(this, EventArgs.Empty);
                 _selectedIndex = value;
                 OnPropertyChanged();
             }
@@ -161,7 +152,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 if (SelectedIndex < 0) return new RadioQuality();
 
                 var q = Qualitys[SelectedIndex] as NormalQuality;
-                return q == null ? new RadioQuality() : q.Quality;
+                return q?.Quality ?? new RadioQuality();
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -187,10 +178,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 _quality = quality;
             }
 
-            public RadioQuality Quality
-            {
-                get { return _quality; }
-            }
+            public RadioQuality Quality => _quality;
 
             public override string ToString()
             {
@@ -225,7 +213,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
             public void Reset([NotNull] IQualityQuery query)
             {
-                if (query == null) throw new ArgumentNullException("query");
+                if (query == null) throw new ArgumentNullException(nameof(query));
                 Clear();
                 Interlocked.Exchange(ref _finisht, 0);
 
@@ -294,15 +282,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 return GetEnumerator();
             }
 
-            public int Count
-            {
-                get { return _scope == null ? 0 : _qualitys.Length; }
-            }
+            public int Count => _scope == null ? 0 : _qualitys.Length;
 
-            public bool IsCompled
-            {
-                get { return true; }
-            }
+            public bool IsCompled => true;
 
             public void Reset()
             {
@@ -555,10 +537,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
         private ListCollectionView _view;
 
         [NotNull]
-        public ListCollectionView Radios
-        {
-            get { return _view ?? (_view = (ListCollectionView) CollectionViewSource.GetDefaultView(_radios)); }
-        }
+        public ListCollectionView Radios => _view ?? (_view = (ListCollectionView) CollectionViewSource.GetDefaultView(_radios));
 
         [NotNull]
         public IEnumerable<ViewEntry> Views { get { return _tabManager.Views.Where(v => !v.IsDefault); } }
@@ -773,7 +752,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
 
             IWindow win = ViewManager.CreateWindow(AppConstants.RadioCreateViewModel);
 
-            Task t = win.ShowDialog(ViewManager.GetWindow(AppConstants.MainWindowName));
+            Task t = win.ShowDialogAsync(ViewManager.GetWindow(AppConstants.MainWindowName));
 
             Async.StartNew(() =>
             {

@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2013
-VisualStudioVersion = 12.0.30723.0
+# Visual Studio 14
+VisualStudioVersion = 14.0.24720.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{295E4B1E-FFB3-43CB-B837-A201F82FDC7A}"
 EndProject
@@ -30,6 +30,7 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Info", "Info", "{6EBEBE6E-60B8-4A07-85B8-1C509CDBEA54}"
 	ProjectSection(SolutionItems) = preProject
 		Roadmap.docx = Roadmap.docx
+		TODO.txt = TODO.txt
 	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppThemes", "AppThemes", "{F8CC257B-DEA3-4D36-B1BF-ED4AD2B6E1D4}"
@@ -132,5 +133,13 @@ Global
 		{03F1490A-9173-4E75-9D6E-FBE5A37AA649} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{2CC827C8-5084-4334-8A68-0515DA46465E} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
 		{E714D32E-1F12-47A5-A671-15EC83D85E75} = {295E4B1E-FFB3-43CB-B837-A201F82FDC7A}
+	EndGlobalSection
+	GlobalSection(AutomaticVersions) = postSolution
+		AssemblyInfoFilePath.Debug|Any CPU = Properties\AssemblyInfo.cs
+		PrimaryVersionType.Debug|Any CPU = AssemblyVersionAttribute
+		UpdateAssemblyVersion.Debug|Any CPU = True
+		UpdateAssemblyFileVersion.Debug|Any CPU = False
+		UpdateAssemblyInfoVersion.Debug|Any CPU = False
+		AssemblyVersionSettings.Debug|Any CPU = IncrementOnDemand.MonthStamp.Increment.None
 	EndGlobalSection
 EndGlobal

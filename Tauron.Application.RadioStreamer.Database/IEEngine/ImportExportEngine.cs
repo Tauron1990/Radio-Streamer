@@ -51,12 +51,9 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
             {
                 private int _currentAmount;
                 
-                public int TotalAmount { get; private set; }
+                public int TotalAmount { get; }
 
-                public double Percent
-                {
-                    get { return 100d / TotalAmount * _currentAmount; }
-                }
+                public double Percent => 100d / TotalAmount * _currentAmount;
 
                 [NotNull]
                 public string Text { get; private set; }
@@ -78,15 +75,9 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
             private int _currentAmount;
             private ReportStep _currentStep;
 
-            private double OverallPercent
-            {
-                get { return 100d / _maximumAmount * _currentAmount; }
-            }
+            private double OverallPercent => 100d / _maximumAmount * _currentAmount;
 
-            private double Percent
-            {
-                get { return _currentStep.Percent; }
-            }
+            private double Percent => _currentStep.Percent;
 
             public void Step([CanBeNull]string message = null)
             {
@@ -106,7 +97,7 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
 
             public ReportingHelper([NotNull] ImportExportSettings settings, [NotNull] IProgress<ActiveProgress> reporter, [NotNull] Func<ReportingStepType, StepInfo> getAmount)
             {
-                if (reporter == null) throw new ArgumentNullException("reporter");
+                if (reporter == null) throw new ArgumentNullException(nameof(reporter));
                 _reporter = reporter;
 
                 _entries = new Dictionary<ReportingStepType, ReportStep>();
@@ -138,22 +129,16 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
         [Inject]
         private IEngineManager _scriptEngine;
 
-        public string FileFilter
-        {
-            get
-            {
-                return RadioStreamerResources.FileFilterAllFiles + "|*.*|" + RadioStreamerResources.FileFilterRsdFile +
-                       "|*.rsd";
-            }
-        }
+        public string FileFilter => RadioStreamerResources.FileFilterAllFiles + "|*.*|" + RadioStreamerResources.FileFilterRsdFile +
+                                    "|*.rsd";
 
-        public string DefaultExtension { get { return "rsd"; } }
+        public string DefaultExtension => "rsd";
 
         public void ImportFiles(string file, bool merge, ImportExportSettings settings, IProgress<ActiveProgress> progress)
         {
-            if (file == null) throw new ArgumentNullException("file");
-            if (settings == null) throw new ArgumentNullException("settings");
-            if (progress == null) throw new ArgumentNullException("progress");
+            if (file == null) throw new ArgumentNullException(nameof(file));
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+            if (progress == null) throw new ArgumentNullException(nameof(progress));
 
             try
             {
@@ -191,7 +176,7 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
                     foreach (var setting in exported.RadioSettings)
                     {
                         helper.Step();
-                        store.SetName(setting.Key, setting.Value);
+                        store.SetValue(setting.Key, setting.Value);
                     }
 
                     _radioEnvironment.Settings.Save();
@@ -278,9 +263,9 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
 
         public void ExportFiles(string filename, ImportExportSettings settings, IProgress<ActiveProgress> progress)
         {
-            if (filename == null) throw new ArgumentNullException("filename");
-            if (settings == null) throw new ArgumentNullException("settings");
-            if (progress == null) throw new ArgumentNullException("progress");
+            if (filename == null) throw new ArgumentNullException(nameof(filename));
+            if (settings == null) throw new ArgumentNullException(nameof(settings));
+            if (progress == null) throw new ArgumentNullException(nameof(progress));
 
             var helper = new ReportingHelper(settings, progress, type =>
             {
@@ -296,7 +281,7 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
                     case ReportingStepType.Settings:
                         return new StepInfo(RadioStreamerResources.SettingIEProcessingSettings, _radioEnvironment.Settings.PropertyStore.Count);
                     default:
-                        throw new ArgumentOutOfRangeException("type");
+                        throw new ArgumentOutOfRangeException(nameof(type));
                 }
             });
 

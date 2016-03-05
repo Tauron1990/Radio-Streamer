@@ -601,13 +601,67 @@
   <data name="ImportExportProcessingTitle" xml:space="preserve">
     <value>Processing Content</value>
   </data>
-  <data name="ErrorNoPlayableEngine" xml:space="preserve">
-    <value>No Engine For Playing Found</value>
+  <data name="OptionsPathGenral" xml:space="preserve">
+    <value>General</value>
   </data>
-  <data name="ErrorNoQuality" xml:space="preserve">
-    <value>No Quality To Play Found</value>
+  <data name="StartOnWindowsOtpion" xml:space="preserve">
+    <value>Start on Windows</value>
   </data>
-  <data name="ErrorNotPlaying" xml:space="preserve">
-    <value>Player is Not Playing</value>
+  <data name="PlayAfterStartOption" xml:space="preserve">
+    <value>Play After Start</value>
+  </data>
+  <data name="AutoUpdateOption" xml:space="preserve">
+    <value>Auto Update</value>
+  </data>
+  <data name="MinimizeintrayOption" xml:space="preserve">
+    <value>Minimize in tray</value>
+  </data>
+  <data name="QuitLabel" xml:space="preserve">
+    <value>Quit</value>
+  </data>
+  <data name="ViewMainWindowMenuLabel" xml:space="preserve">
+    <value>Show</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimerLabel" xml:space="preserve">
+    <value>Shutdown Timer:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTitleLabel" xml:space="preserve">
+    <value>Shutdown Timer</value>
+  </data>
+  <data name="RadioPlayerShutdownPCShutdownLabel" xml:space="preserve">
+    <value>PC Shutdown</value>
+  </data>
+  <data name="RadioPlayerShutdownHintLabel" xml:space="preserve">
+    <value>Hint:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimeLeftLabel" xml:space="preserve">
+    <value>Time Left:</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerActiveLabel" xml:space="preserve">
+    <value>Timer Active</value>
+  </data>
+  <data name="RadioPlayerShutdownTimerTimeLeftValueOff" xml:space="preserve">
+    <value>Off</value>
+  </data>
+  <data name="PathNotExisting" xml:space="preserve">
+    <value>Path Not Existing</value>
+  </data>
+  <data name="PathSeeking" xml:space="preserve">
+    <value>Select Path</value>
+  </data>
+  <data name="OptionsRecordingPath" xml:space="preserve">
+    <value>Recording Path:</value>
+  </data>
+  <data name="OptionsFileExisBehavior" xml:space="preserve">
+    <value>Action On Existing File:</value>
+  </data>
+  <data name="OptionsFileExisBehaviorOverrideText" xml:space="preserve">
+    <value>Override</value>
+  </data>
+  <data name="OptionsFileExisBehaviorRenameText" xml:space="preserve">
+    <value>Rename</value>
+  </data>
+  <data name="OptionsFileExisBehaviorSkipText" xml:space="preserve">
+    <value>Skip</value>
   </data>
 </root>

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using Tauron.Application.RadioStreamer.Contracts.Core;
@@ -7,38 +8,13 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
 {
-    //public sealed class CheckBoxHelper : OptionHelperBase<bool?, bool>
-    //{
-    //    public CheckBoxHelper([CanBeNull] Action<bool?> serialized = null, [CanBeNull] Action<bool?> deserialized = null) 
-    //        : base(serialized, deserialized)
-    //    {
-    //    }
-
-    //    public override object LoadUI(Option option)
-    //    {
-            
-    //    }
-
-    //    protected override bool SerializeImpl(IRadioEnvironment store, Option option)
-    //    {
-    //    ???
-    //    }
-
-    //    protected override void DeserializeImpl(IRadioEnvironment store, Option option, object defaultValue)
-    //    {
-    //    ???
-    //    }
-
-    //    public override void Reset(Option option)
-    //    {
-    //    ???
-    //    }
-    //}
-
-    public sealed class CheckBoxHelperOld : ObservableObject, IOptionHelper
+    public sealed class CheckBoxHelper : OptionHelperBaseClass
     {
+        private readonly Action<bool> _saveAction;
         private bool? _currentValue;
         private bool LastValue { get; set; }
+        private CheckBox _checkBox;
+        private object _content;
 
         [UsedImplicitly(ImplicitUseKindFlags.Default)]
         public bool? CurrentValue
@@ -51,35 +27,38 @@ namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
             }
         }
 
-        public object LoadUI(Option option)
+        public CheckBoxHelper([CanBeNull]Action<bool> saveAction, [CanBeNull] object content = null)
         {
-            var temp = new CheckBox {DataContext = this, Content = option};
+            _saveAction = saveAction;
+            _content = content;
+        }
 
-            temp.SetBinding(ToggleButton.IsCheckedProperty, "CurrentValue");
+        public override FrameworkElement LoadUI(Option option)
+        {
+            if (_checkBox != null) return _checkBox;
 
+            _checkBox = new CheckBox { DataContext = this, Content = _content ?? option.DisplayName };
+            _checkBox.SetBinding(ToggleButton.IsCheckedProperty, "CurrentValue");
+
+            return _checkBox;
+        }
+
+        protected override string GetCurrentValue()
+        {
+            return _currentValue.ToString();
+        }
+
+        protected override void SetValue(string value)
+        {
+            CurrentValue = bool.Parse(value);
+        }
+
+
+        public override bool Serialize(IRadioEnvironment store, Option option)
+        {
+            var temp = base.Serialize(store, option);
+            _saveAction?.Invoke(CurrentValue ?? false);
             return temp;
-        }
-
-        public bool Serialize(IRadioEnvironment store, Option option)
-        {
-            option.SettingValue = CurrentValue;
-            store.Settings.PropertyStore.SetName(option.SettingKey, option.SettingString);
-            return true;
-        }
-
-        public void Deserialize(IRadioEnvironment store, Option option, object defaultValue)
-        {
-            if (defaultValue == null)
-                defaultValue = bool.FalseString;
-            LastValue = bool.Parse(store.Settings.PropertyStore.GetValue(option.SettingKey, defaultValue.ToString()));
-            CurrentValue = LastValue;
-            option.SettingValue = CurrentValue;
-        }
-
-        public void Reset(Option option)
-        {
-            CurrentValue = LastValue;
-            option.SettingValue = CurrentValue;
         }
     }
 }

@@ -22,8 +22,8 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             public InstalledPackInfo([NotNull] InternalPackageManager.CacheEntry cacheEntry,
                 [NotNull] IPackageRepository repository)
             {
-                if (cacheEntry == null) throw new ArgumentNullException("cacheEntry");
-                if (repository == null) throw new ArgumentNullException("repository");
+                if (cacheEntry == null) throw new ArgumentNullException(nameof(cacheEntry));
+                if (repository == null) throw new ArgumentNullException(nameof(repository));
 
                 var versionSpec = new VersionSpec(cacheEntry.SemanticVersion);
                 var package = MachineCache.FindPackage(cacheEntry.Name, versionSpec, true, true)
@@ -37,15 +37,15 @@ namespace Tauron.Application.RadioStreamer.PlugIns
                 Version = package.Version.Version;
             }
 
-            public bool CanUnInstall { get; private set; }
+            public bool CanUnInstall { get; }
             public void UnInstall()
             {
                 InternalPackageManager.BuildPluginManager().UnInstall(_name);
             }
 
-            public string Name { get; private set; }
-            public string Description { get; private set; }
-            public Version Version { get; private set; }
+            public string Name { get; }
+            public string Description { get; }
+            public Version Version { get; }
         }
         private class InstallablePackInfo : IInstallablePackInfo
         {
@@ -54,16 +54,17 @@ namespace Tauron.Application.RadioStreamer.PlugIns
 
             public InstallablePackInfo([NotNull] IPackage package, [NotNull] InternalPackageManager manager)
             {
-                if (package == null) throw new ArgumentNullException("package");
-                if (manager == null) throw new ArgumentNullException("manager");
+                if (package == null) throw new ArgumentNullException(nameof(package));
+                if (manager == null) throw new ArgumentNullException(nameof(manager));
 
                 _package = package;
                 _manager = manager;
             }
 
-            public string Name { get { return _package.Title; } }
-            public string Description { get { return _package.Description; } }
-            public Version Version { get { return _package.Version.Version; } }
+            public string Name => _package.Title;
+            public string Description => _package.Description;
+            public Version Version => _package.Version.Version;
+
             public void Install()
             {
                 _manager.InstallPackage(_package);

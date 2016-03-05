@@ -16,7 +16,7 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Database.Database
 {
 	[RadioDatabaseExport]
-	public class RadioDatabase : IRadioDatabase, INotifyBuildCompled
+	public sealed class RadioDatabase : IRadioDatabase, INotifyBuildCompled
 	{
 		private const string RadioDatabaseString = "RadioDatabase";
 		private const string QualityDatabase = "QualityDatabase";
@@ -66,7 +66,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    protected void OnValueChanged([NotNull] string e)
 		    {
 		        var handler = ValueChanged;
-		        if (handler != null) handler(this, new PropertyChangingEventArgs(e));
+		        handler?.Invoke(this, new PropertyChangingEventArgs(e));
 		    }
 
 		    public event Action ElementDeleted;
@@ -74,7 +74,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    protected void OnElementDeleted()
 		    {
 		        Action handler = ElementDeleted;
-		        if (handler != null) handler();
+		        handler?.Invoke();
 		    }
 
 		    public virtual string Read(string key)
@@ -119,7 +119,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
                         OnElementDeleted();
 		                break;
 		            default:
-		                throw new ArgumentOutOfRangeException("type");
+		                throw new ArgumentOutOfRangeException(nameof(type));
 		        }
 		    }
 		}
@@ -154,7 +154,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 		    protected void OnQualityChanged()
 		    {
 		        Action handler = QualityChanged;
-		        if (handler != null) handler();
+		        handler?.Invoke();
 		    }
 
 		    public void DeleteQuality(string name)
@@ -252,25 +252,25 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 	    public event EventHandler DatabaseCleared;
 
-	    protected virtual void OnDatabaseCleared()
+	    public void OnDatabaseCleared()
 	    {
 	        var handler = DatabaseCleared;
-	        if (handler != null) handler(this, EventArgs.Empty);
+	        handler?.Invoke(this, EventArgs.Empty);
 	    }
 
 	    public event EventHandler<RadioCreatedEventArgs> RadioAdded;
 	    public event EventHandler<ManyRadiosCreatedEvent> RadiosAdded;
 
-	    protected virtual void OnRadiosAdded([NotNull] ManyRadiosCreatedEvent e)
+	    private void OnRadiosAdded([NotNull] ManyRadiosCreatedEvent e)
 	    {
 	        var handler = RadiosAdded;
-	        if (handler != null) handler(this, e);
+	        handler?.Invoke(this, e);
 	    }
 
-	    protected virtual void OnRadioAdded([NotNull] RadioCreatedEventArgs e)
+	    private void OnRadioAdded([NotNull] RadioCreatedEventArgs e)
 	    {
 	        var handler = RadioAdded;
-	        if (handler != null) handler(this, e);
+	        handler?.Invoke(this, e);
 	    }
 
         public void BeginBulkMode()
@@ -288,14 +288,11 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	        _bulks = null;
 	    }
 
-	    public int Count { get { return _radios.DatabasElements; }}
+	    public int Count => _radios.DatabasElements;
 
-	    public System.Threading.ManualResetEventSlim StartLock
-		{
-			get { return _startLock; }
-		}
+	    public System.Threading.ManualResetEventSlim StartLock => _startLock;
 
-		public IRadioEntryFactory GetEntryFactory()
+	    public IRadioEntryFactory GetEntryFactory()
 		{
 			return _factory;
 		}

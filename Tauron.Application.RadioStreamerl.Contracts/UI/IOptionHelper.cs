@@ -1,4 +1,6 @@
-﻿using Tauron.Application.RadioStreamer.Contracts.Core;
+﻿using System.Windows;
+using System.Windows.Controls;
+using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.UI
@@ -6,7 +8,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
     public interface IOptionHelper
     {
         [NotNull]
-        object LoadUI([NotNull] Option option);
+        FrameworkElement LoadUI([NotNull] Option option);
 
         bool Serialize([NotNull] IRadioEnvironment store, [NotNull] Option option);
 

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.AddOn.Tags;
 using Un4seen.Bass.Misc;
@@ -15,31 +16,20 @@ namespace Tauron.Application.BassLib.Misc
 
         public AudioBroadCast([NotNull] AudioStreaminServer server)
         {
-            if (server == null) throw new ArgumentNullException("server");
+            if (server == null) throw new ArgumentNullException(nameof(server));
 
             Server = server;
             _broadCast = new BroadCast(server.Server);
         }
 
-        public bool IsConnected
-        {
-            get { return Server.IsConnected; }
-        }
+        public bool IsConnected => Server.IsConnected;
 
-        public bool IsStarted
-        {
-            get { return _broadCast.IsStarted; }
-        }
+        public bool IsStarted => _broadCast.IsStarted;
 
-        public BroadCast.BROADCASTSTATUS Status
-        {
-            get { return _broadCast.Status; }
-        }
+        public BroadCast.BROADCASTSTATUS Status => _broadCast.Status;
 
-        public bool AutomaticMode
-        {
-            get { return _broadCast.AutomaticMode; }
-        }
+        public bool AutomaticMode => _broadCast.AutomaticMode;
+
         public bool AutoReconnect
         {
             get { return _broadCast.AutoReconnect; }
@@ -52,15 +42,9 @@ namespace Tauron.Application.BassLib.Misc
             set { _broadCast.ReconnectTimeout = value; }
         }
         
-        public long TotalBytesSend
-        {
-            get { return _broadCast.TotalBytesSend; }
-        }
+        public long TotalBytesSend => _broadCast.TotalBytesSend;
 
-        public TimeSpan TotalConnectionTime
-        {
-            get { return _broadCast.TotalConnectionTime; }
-        }
+        public TimeSpan TotalConnectionTime => _broadCast.TotalConnectionTime;
 
         public event BroadCastEventHandler Notification;
 
@@ -81,23 +65,23 @@ namespace Tauron.Application.BassLib.Misc
 
         public bool UpdateTitle([NotNull] string song, [NotNull] string url)
         {
-            if (song == null) throw new ArgumentNullException("song");
-            if (url == null) throw new ArgumentNullException("url");
+            if (song == null) throw new ArgumentNullException(nameof(song));
+            if (url == null) throw new ArgumentNullException(nameof(url));
 
             return _broadCast.UpdateTitle(song, url);
         }
 
         public bool UpdateTitle([NotNull] TAG_INFO tag, [NotNull] string url)
         {
-            if (tag == null) throw new ArgumentNullException("tag");
-            if (url == null) throw new ArgumentNullException("url");
+            if (tag == null) throw new ArgumentNullException(nameof(tag));
+            if (url == null) throw new ArgumentNullException(nameof(url));
 
             return _broadCast.UpdateTitle(tag, url);
         }
 
         public int GetListeners([NotNull] string password)
         {
-            if (password == null) throw new ArgumentNullException("password");
+            if (password == null) throw new ArgumentNullException(nameof(password));
             return _broadCast.GetListeners(password);
         }
 

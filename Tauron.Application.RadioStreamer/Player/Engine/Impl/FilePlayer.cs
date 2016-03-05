@@ -19,13 +19,7 @@ namespace Tauron.Application.RadioStreamer.Player.Engine.Impl
         private string[] _supportetExtensions;
         private FileChannel _currentChannel;
 
-        public override double BufferPercentage
-        {
-            get
-            {
-                return _currentChannel.Progress;
-            }
-        }
+        public override double BufferPercentage => _currentChannel.Progress;
 
         public override void Initialize(BassEngine engine, Dictionary<int, string> plugins)
         {

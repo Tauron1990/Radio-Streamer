@@ -21,16 +21,15 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
         public void OnOptionsChanged([NotNull] OptionsChangedEventArgs e)
         {
-            EventHandler<OptionsChangedEventArgs> handler = OptionsChanged;
-            if (handler != null) handler(this, e);
+            OptionsChanged?.Invoke(this, e);
         }
 
-        public IEnumerable<OptionPath> Options { get { return _options; } }
+        public IEnumerable<OptionPath> Options => _options;
 
         public void RegisterOption(string path, Option option)
         {
-            if (path == null) throw new ArgumentNullException("path");
-            if (option == null) throw new ArgumentNullException("option");
+            if (path == null) throw new ArgumentNullException(nameof(path));
+            if (option == null) throw new ArgumentNullException(nameof(option));
 
             string[] segemnts = path.Split('\\');
 

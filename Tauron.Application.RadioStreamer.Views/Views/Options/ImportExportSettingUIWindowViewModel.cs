@@ -8,10 +8,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
     [ExportViewModel(AppConstants.ImportExportSettingsWindow)]
     public sealed class ImportExportSettingUIWindowViewModel : ViewModelBase, IResultProvider
     {
-        public object Result
-        {
-            get { return new ImportExportSettings(ExportRadios, ExportSettings, ExportPlugIns, ExportScripts); }
-        }
+        public object Result => new ImportExportSettings(ExportRadios, ExportSettings, ExportPlugIns, ExportScripts);
 
         public bool ExportSettings { get; set; }
 

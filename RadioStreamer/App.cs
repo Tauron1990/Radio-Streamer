@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Input;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Contracts;
+using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.Views;
 #if !DEBUG
@@ -18,6 +19,8 @@ namespace Tauron.Application.RadioStreamer
 {
 	internal class App : WpfApplication, ISingleInstanceApp
 	{
+	    private IProgramManager _programManager;
+
 	    public App()
 			: base(true)
 		{
@@ -25,15 +28,15 @@ namespace Tauron.Application.RadioStreamer
 
         public static void Setup([NotNull] Mutex mutex, [NotNull] string channelName)
         {
-            if (mutex == null) throw new ArgumentNullException("mutex");
-            if (channelName == null) throw new ArgumentNullException("channelName");
+            if (mutex == null) throw new ArgumentNullException(nameof(mutex));
+            if (channelName == null) throw new ArgumentNullException(nameof(channelName));
 #if !DEBUG
              var version = Assembly.GetEntryAssembly().GetName().Version.ToString();
 
             BugSense.Init("w8cd1a17", version);
-            Run<App>();
+            Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
 		    BugSense.DetachHandler();
-            #else
+#else
             Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
             #endif
         }
@@ -59,7 +62,8 @@ namespace Tauron.Application.RadioStreamer
 	    }
         
 	    protected override IWindow DoStartup(CommandLineProcessor prcessor)
-		{
+	    {
+	        _programManager = Container.Resolve<IProgramManager>();
 			var temp = ViewManager.Manager.CreateWindow(AppConstants.MainWindowName);
 
 	        CurrentWpfApplication.Dispatcher.Invoke(() =>
@@ -85,9 +89,17 @@ namespace Tauron.Application.RadioStreamer
 		    //CurrentWpfApplication.Apply(Theme.Dark, AccentBrushes.Purple, null);
 		}
 
+	    protected override void MainWindowClosed(object sender, EventArgs e)
+	    {
+            if(_programManager.Shutdown)
+                Shutdown();
+            else if (!Container.Resolve<IRadioEnvironment>().Settings.MinimizeInTray)
+	            base.MainWindowClosed(sender, e);
+	    }
+
 	    public bool SignalExternalCommandLineArgs(IList<string> args)
 	    {
-	        if (MainWindow != null) MainWindow.Focus();
+	        MainWindow?.Focus();
 	        return true;
 	    }
 

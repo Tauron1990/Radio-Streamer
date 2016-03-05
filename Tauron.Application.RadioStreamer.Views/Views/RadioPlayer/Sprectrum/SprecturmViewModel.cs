@@ -115,7 +115,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
                     _sprectrumPicture.Height - 20)
                 : null;
 
-            if (pic != null) pic.Dispose();
+            pic?.Dispose();
         }
 
         private void PlayerVisibleChanged(bool obj)

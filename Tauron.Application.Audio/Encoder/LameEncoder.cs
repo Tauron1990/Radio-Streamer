@@ -12,7 +12,7 @@ namespace Tauron.Application.BassLib.Encoder
         }
 
         [NotNull]
-        private EncoderLAME Lame { get { return (EncoderLAME) BassEncoder; } }
+        private EncoderLAME Lame => (EncoderLAME) BassEncoder;
 
         [NotNull]
         public string CustomOptions { get { return Lame.LAME_CustomOptions; } set { Lame.LAME_CustomOptions = value; }
@@ -52,6 +52,6 @@ namespace Tauron.Application.BassLib.Encoder
         public int LowPassFreq { get { return Lame.LAME_LowPassFreq; } set { Lame.LAME_LowPassFreq = value; } }
         public int LowPassFreqWidth { get { return Lame.LAME_LowPassFreqWidth; } set { Lame.LAME_LowPassFreqWidth = value; } }
         public EncoderLAME.LAMEATH AthControl { get { return Lame.LAME_ATHControl; } set { Lame.LAME_ATHControl = value; } }
-        public bool EncoderExists { get { return Lame.EncoderExists; } }
+        public bool EncoderExists => Lame.EncoderExists;
     }
 }

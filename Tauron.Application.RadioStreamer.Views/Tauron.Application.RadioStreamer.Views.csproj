@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tauron.Application.RadioStreamer.Views</RootNamespace>
     <AssemblyName>Tauron.Application.RadioStreamer.Views</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,8 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <NoWarn>0169, 0649</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -35,15 +38,16 @@
   <ItemGroup>
     <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
     <Reference Include="Castle.Core, Version=3.3.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\packages\Castle.Core.3.3.1\lib\net45\Castle.Core.dll</HintPath>
+      <HintPath>..\packages\Castle.Core.3.3.3\lib\net45\Castle.Core.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Hardcodet.Wpf.TaskbarNotification, Version=1.0.5.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\packages\Hardcodet.NotifyIcon.Wpf.1.0.5\lib\net45\Hardcodet.Wpf.TaskbarNotification.dll</HintPath>
     </Reference>
-    <Reference Include="Mono.CSharp">
-      <HintPath>..\packages\Mono.CSharp.3.6.1\lib\net40\Mono.CSharp.dll</HintPath>
+    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.CSharp.4.0.0.143\lib\4.5\Mono.CSharp.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="Ookii.Dialogs.Wpf, Version=1.0.0.0, Culture=neutral, PublicKeyToken=0c15020868fd6249, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
@@ -65,9 +69,11 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helper\BindableChild.cs" />
     <Compile Include="Helper\CommonComboBoxItem.cs" />
     <Compile Include="Helper\DesignHelper.cs" />
     <Compile Include="Helper\MockGeneratorExtension.cs" />
+    <Compile Include="Views\Core\MainWindowViewModel.cs" />
     <Compile Include="Views\EncodingOptions\CommonEncoderEditor.xaml.cs">
       <DependentUpon>CommonEncoderEditor.xaml</DependentUpon>
     </Compile>
@@ -115,8 +121,10 @@
       <DependentUpon>OptionsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Options\UiHelpers\CheckBoxHelper.cs" />
+    <Compile Include="Views\Options\UiHelpers\ComboboxHelper.cs" />
     <Compile Include="Views\Options\UiHelpers\DefaultProfileHelper.cs" />
-    <Compile Include="Views\Options\UiHelpers\OptionHelperBase.cs" />
+    <Compile Include="Views\Options\UiHelpers\OptionHelperBaseClass.cs" />
+    <Compile Include="Views\Options\UiHelpers\TextBoxHelper.cs" />
     <Compile Include="Views\RadioManager\Controls\RadioCreateView.xaml.cs">
       <DependentUpon>RadioCreateView.xaml</DependentUpon>
     </Compile>
@@ -138,6 +146,10 @@
     <Compile Include="Views\RadioManager\RadioManager.xaml.cs">
       <DependentUpon>RadioManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\RadioPlayer\ShutdownAutimatic\ShutdownAutomaticView.xaml.cs">
+      <DependentUpon>ShutdownAutomaticView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\RadioPlayer\ShutdownAutimatic\ShutdownAutomaticViewModel.cs" />
     <Compile Include="Views\RadioPlayer\Sprectrum\SprectrumView.xaml.cs">
       <DependentUpon>SprectrumView.xaml</DependentUpon>
     </Compile>
@@ -209,6 +221,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\RadioPlayer\ShutdownAutimatic\ShutdownAutomaticView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\RadioPlayer\Sprectrum\SprectrumView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -255,7 +271,9 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Styling\Style Guid.txt" />
+    <Resource Include="Styling\Style Guid.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Resource>
   </ItemGroup>
   <ItemGroup>
     <Content Include="PossybleOptions.txt" />

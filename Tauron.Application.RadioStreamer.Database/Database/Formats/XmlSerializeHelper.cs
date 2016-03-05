@@ -14,7 +14,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
         [NotNull]
         public static IEnumerable<string> FindAllNames([NotNull] string location)
         {
-            if (location == null) throw new ArgumentNullException("location");
+            if (location == null) throw new ArgumentNullException(nameof(location));
             location.CreateDirectoryIfNotExis();
 
             return location.GetFiles().Select(s => s.GetFileNameWithoutExtension());
@@ -23,8 +23,8 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
         [CanBeNull]
         public static CommonProfile DeserializeProfile([NotNull] string name, [NotNull] string location)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (location == null) throw new ArgumentNullException("location");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (location == null) throw new ArgumentNullException(nameof(location));
 
             string fullPath = location.CombinePath(name + Extension);
 
@@ -64,9 +64,9 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
 
         public static void Serialize([NotNull] string name, [NotNull] string location, [NotNull] CommonProfile profile)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (location == null) throw new ArgumentNullException("location");
-            if (profile == null) throw new ArgumentNullException("profile");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (location == null) throw new ArgumentNullException(nameof(location));
+            if (profile == null) throw new ArgumentNullException(nameof(profile));
 
             var ele = new XElement("Profile", new XAttribute("ID", profile.Id));
 

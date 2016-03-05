@@ -20,9 +20,6 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             InitializeComponent();
         }
 
-        public object Header
-        {
-            get { return RadioStreamerResources.SprectumHeaderLabel; }
-        }
+        public object Header => RadioStreamerResources.SprectumHeaderLabel;
     }
 }

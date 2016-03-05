@@ -27,7 +27,7 @@ namespace Tauron.Application.BassLib
 
             public EndSync([NotNull] Action action)
             {
-                if (action == null) throw new ArgumentNullException("action");
+                if (action == null) throw new ArgumentNullException(nameof(action));
 
                 _action = action;
             }
@@ -88,10 +88,7 @@ namespace Tauron.Application.BassLib
         private SyncManagerList _syncManager;
 
         [NotNull]
-        protected SyncManagerList SyncManager
-        {
-            get { return _syncManager ?? (_syncManager = new SyncManagerList(Handle)); }
-        }
+        protected SyncManagerList SyncManager => _syncManager ?? (_syncManager = new SyncManagerList(Handle));
 
         [CanBeNull]
         public Mix Mix
@@ -99,10 +96,8 @@ namespace Tauron.Application.BassLib
             get { return _mix; }
             set
             {
-                if(_mix != null)
-                    _mix.DeAttach(Handle);
-                if(value != null)
-                    value.Attach(Handle);
+                _mix?.DeAttach(Handle);
+                value?.Attach(Handle);
                 _mix = value;
             }
         }
@@ -124,7 +119,7 @@ namespace Tauron.Application.BassLib
             }
         }
 
-        public int Handle { get; private set; }
+        public int Handle { get; }
 
         protected Channel(int handle)
         {
@@ -157,21 +152,9 @@ namespace Tauron.Application.BassLib
             get;
         }
 
-        public bool IsActive
-        {
-            get
-            {
-                return Bass.BASS_ChannelIsActive(Handle) == BASSActive.BASS_ACTIVE_PLAYING;
-            }
-        }
+        public bool IsActive => Bass.BASS_ChannelIsActive(Handle) == BASSActive.BASS_ACTIVE_PLAYING;
 
-        public long Position
-        {
-            get
-            {
-                return Bass.BASS_ChannelGetPosition(Handle);
-            }
-        }
+        public long Position => Bass.BASS_ChannelGetPosition(Handle);
 
         public void Dispose()
         {
@@ -188,8 +171,7 @@ namespace Tauron.Application.BassLib
 
         protected int HandleFree()
         {
-            if (_syncManager != null)
-                _syncManager.Dispose();
+            _syncManager?.Dispose();
 
             Mix = null;
             _syncManager = null;
@@ -201,7 +183,7 @@ namespace Tauron.Application.BassLib
         {
             if (ReferenceEquals(null, obj)) return false;
             if (ReferenceEquals(this, obj)) return true;
-            if (obj.GetType() != this.GetType()) return false;
+            if (obj.GetType() != GetType()) return false;
             return Equals((Channel) obj);
         }
     }

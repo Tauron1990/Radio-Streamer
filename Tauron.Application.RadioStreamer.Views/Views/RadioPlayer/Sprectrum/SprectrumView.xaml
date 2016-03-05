@@ -1,12 +1,14 @@
 ﻿<UserControl x:Class="Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum.SprectrumView"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
-             mc:Ignorable="d" hlp:DataContextServices.Activate="True"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
              hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.SprectrumViewModel}"
-             d:DesignHeight="300" d:DesignWidth="300">
-    <WindowsFormsHost hlp:ControlHelper.MarkControl="SprectrumHost" Margin="10" Visibility="Hidden" Width="500" />
+             hlp:DataContextServices.Activate="True"
+             mc:Ignorable="d">
+    <WindowsFormsHost Width="580" Margin="10" Visibility="Hidden" hlp:ControlHelper.MarkControl="SprectrumHost" />
 </UserControl>

@@ -22,10 +22,7 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
         {
             var provider = serviceProvider.GetService<IRootObjectProvider>();
 
-            if (provider == null)
-                return 300d;
-
-            var root = provider.RootObject as FrameworkElement;
+            var root = provider?.RootObject as FrameworkElement;
             if (root == null)
                 return 300d;
 
@@ -49,6 +46,8 @@ namespace Tauron.Application.RadioStreamer.Views.Helper
         {
             double curr = _win.ActualHeight - 150;
             if (_last == curr) return;
+
+            if (curr < 0) curr = 0;
 
             _targetElement.MaxHeight = curr;
             _last = curr;

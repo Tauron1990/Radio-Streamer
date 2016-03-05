@@ -5,6 +5,7 @@ using System.Windows.Media;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
+using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.UI;
@@ -24,7 +25,10 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 
 	    [StatusBarItemImport]
 		private object[] _statusBarItems;
-        
+
+	    [Inject]
+        private IProgramManager _programManager;
+
 	    [NotNull]
 	    public object[] StatusBarItems
 		{
@@ -55,7 +59,6 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 	    }
 
         private ImageSource _toolTipImage;
-	    private WorkspaceManager<ITabWorkspace> _tabs;
 
 	    [NotNull]
 	    public ImageSource ToolTipImage
@@ -72,17 +75,10 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 	    }
 
 	    [NotNull]
-	    public IEnumerable<GenericMenuItem> NotifyContextMenu
-	    {
-	        get { return MenuItemService.GetMenu(MenuItemService.NotifyContextMenuName); }
-	    }
+	    public IEnumerable<GenericMenuItem> NotifyContextMenu => MenuItemService.GetMenu(MenuItemService.NotifyContextMenuName);
 
 	    [NotNull]
-	    public WorkspaceManager<ITabWorkspace> Tabs
-	    {
-	        get { return _tabs; }
-	        private set { _tabs = value; }
-	    }
+	    public WorkspaceManager<ITabWorkspace> Tabs { get; private set; }
 
 	    public override void BuildCompled()
 	    {
@@ -126,5 +122,14 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 	    {
 	        Tabs.Remove(workspace);
 	    }
-	}
+
+        [CommandTarget]
+	    private void ViewMainMenu()
+	    {
+	        if(_programManager.MainWindow.IsVisible == true) return;
+
+            _programManager.MainWindow.Show();
+	    }
+
+    }
 }

@@ -23,6 +23,7 @@ namespace Tauron.Application.RadioStreamer.Views.Core
 			aggregator.GetEvent<PlayRadioEvent, PlayRadioEventArgs>().Subscribe(Play);
 			_playerVisibleEvent = aggregator.GetEvent<PlayerViewVisibleChanged, bool>();
 	        InitializeComponent();
+            
 		}
 
 		private void Play([NotNull] PlayRadioEventArgs obj)

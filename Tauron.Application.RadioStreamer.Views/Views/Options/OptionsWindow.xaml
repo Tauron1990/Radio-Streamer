@@ -1,53 +1,88 @@
 ﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.Options.OptionsWindow"
-             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
-             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             xmlns:const="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
-             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
-             mc:Ignorable="d" MinHeight="500" MaxHeight="600" MinWidth="600" MaxWidth="1200" SizeToContent="WidthAndHeight" WindowStyle="ToolWindow"
-             d:DesignHeight="300" d:DesignWidth="500" hlp:DataContextServices.Activate="True" Background="{StaticResource BackgroundBrush}"
-             hlp:CompositionServices.ImportViewModel="{x:Static const:AppConstants.OptionsViewModel}"
-             hlp:ControlHelper.MarkWindow="Window">
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:const="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+        xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+        xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Views.Helper"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        MinWidth="600"
+        MinHeight="500"
+        MaxWidth="1200"
+        MaxHeight="600"
+        Background="{StaticResource BackgroundBrush}"
+        SizeToContent="WidthAndHeight"
+        WindowStyle="ToolWindow"
+        d:DesignHeight="300"
+        d:DesignWidth="500"
+        hlp:CompositionServices.ImportViewModel="{x:Static const:AppConstants.OptionsViewModel}"
+        hlp:ControlHelper.MarkWindow="Window"
+        hlp:DataContextServices.Activate="True"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <DataTemplate DataType="{x:Type contracts:Option}">
+            <StackPanel CanHorizontallyScroll="True" Margin="2"
+                        CanVerticallyScroll="True"
+                        Orientation="Horizontal">
+                <TextBlock Margin="0,0,10,0" MinWidth="150"
+                           Text="{Binding DisplayName}"
+                           Visibility="{Binding IsNameVisibly,
+                                                Converter={hlp:BoolToVisibilityConverter IsHidden=False}}" />
+                <!--<Decorator local:BindableChild.BindableChild="{Binding UI}" />-->
+                <ContentControl Content="{Binding UI}" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="Auto"/>
-            <ColumnDefinition Width="*"/>
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="*"/>
-            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" />
         </Grid.RowDefinitions>
-        <TreeView MinWidth="150" MaxWidth="350" hlp:EventBinder.Events="SelectedItemChanged:NewItemSelect" 
-                  ItemsSource="{Binding OptionPaths}" Margin="5,5,0,5" Background="Transparent">
+        <TreeView MinWidth="150"
+                  MaxWidth="350"
+                  Margin="5,5,0,5"
+                  Background="Transparent"
+                  ItemsSource="{Binding OptionPaths}"
+                  hlp:EventBinder.Events="SelectedItemChanged:NewItemSelect">
             <TreeView.Resources>
                 <HierarchicalDataTemplate DataType="{x:Type contracts:OptionPath}" ItemsSource="{Binding OptionPaths}">
                     <TextBlock Text="{Binding DisplayName}"/>
                 </HierarchicalDataTemplate>
                 <DataTemplate DataType="{x:Type contracts:OptionGroup}">
-                    <TextBlock Text="{Binding DisplayName}"/>
+                    <TextBlock Text="{Binding DisplayName}" />
                 </DataTemplate>
             </TreeView.Resources>
         </TreeView>
-        <Border Grid.Column="1" Grid.Row="0" Margin="5" Padding="5" BorderBrush="{StaticResource RadioTitleBrush}" 
-                BorderThickness="0.7">
-            <ItemsControl ItemsSource="{Binding SelectedOptions}">
-                <ItemsControl.Resources>
-                    <DataTemplate DataType="{x:Type contracts:Option}">
-                        <StackPanel Orientation="Horizontal" CanHorizontallyScroll="True" CanVerticallyScroll="True">
-                            <TextBlock Text="{Binding DisplayName}" Margin="0,0,10,0" Visibility="{Binding IsNameVisibly, Converter={hlp:BoolToVisibilityConverter}}"/>
-                            <ContentControl Content="{Binding UI}"/>
-                        </StackPanel>
-                    </DataTemplate>
-                </ItemsControl.Resources>
-            </ItemsControl>
+        <Border Grid.Row="0"
+                Grid.Column="1"
+                Margin="5"
+                BorderBrush="{StaticResource RadioTitleBrush}"
+                BorderThickness="0.7"
+                Padding="5">
+            <ItemsControl ItemsSource="{Binding SelectedOptions}" />
         </Border>
-        <DockPanel Grid.Column="1" Grid.Row="1" LastChildFill="False">
-            <Button Content="{hlp:SimpleLocalize ImportLabel}" Margin="10" hlp:CommandBinder.Command="Import:Import"/>
-            <Button Content="{hlp:SimpleLocalize ExportLabel}" Margin="10" hlp:CommandBinder.Command="Export:Export"/>
-            <Button Content="{hlp:SimpleLocalize SaveLabel}" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Save:Save"/>
-            <Button Content="{hlp:SimpleLocalize AbortLabel}" Margin="10" DockPanel.Dock="Right" hlp:CommandBinder.Command="Close:Close"/>
+        <DockPanel Grid.Row="1"
+                   Grid.Column="1"
+                   LastChildFill="False">
+            <Button Margin="10"
+                    Content="{hlp:SimpleLocalize ImportLabel}"
+                    hlp:CommandBinder.Command="Import:Import" />
+            <Button Margin="10"
+                    Content="{hlp:SimpleLocalize ExportLabel}"
+                    hlp:CommandBinder.Command="Export:Export" />
+            <Button Margin="10"
+                    Content="{hlp:SimpleLocalize SaveLabel}"
+                    DockPanel.Dock="Right"
+                    hlp:CommandBinder.Command="Save:Save" />
+            <Button Margin="10"
+                    Content="{hlp:SimpleLocalize AbortLabel}"
+                    DockPanel.Dock="Right"
+                    hlp:CommandBinder.Command="Close:Close" />
         </DockPanel>
     </Grid>
 </Window>

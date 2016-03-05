@@ -1,15 +1,17 @@
 ﻿#region Usings
 
+using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Reflection;
-using System.Windows.Forms;
+using System.Security;
 using System.Windows.Input;
+using Microsoft.Win32;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.Modules;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
+using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.Application.RadioStreamer.Views.EncodingOptions;
@@ -50,15 +52,17 @@ namespace Tauron.Application.RadioStreamer.Views
             // ReSharper restore PossibleNullReferenceException
         }
 
-        public int Order
-        {
-            get { return 1000; }
-        }
+        public int Order => 1000;
 
         public void Initialize(CommonApplication application)
         {
             _tabManager.RegisterView(new ViewEntry(AppConstants.RadioManagerViewModelName, string.Empty, true));
             _tabManager.RegisterView(new ViewEntry(AppConstants.RadioPlayerViewModelName, string.Empty, true));
+
+            MenuItemService.RegisterNotify(new GenericMenuItem(i =>
+            {
+                if (_programManager.MainWindow.IsVisible == false) _programManager.MainWindow.Show();
+            }) {Id = "ViewMainWindow", Label = RadioStreamerResources.ViewMainWindowMenuLabel});
 
             MenuItemService.RegisterNotify(
                 FillThemeMenu(new GenericMenuItem {Id = "ThemeMenu", Label = RadioStreamerResources.ThemeMenu}));
@@ -67,21 +71,66 @@ namespace Tauron.Application.RadioStreamer.Views
                 {
                     Label = RadioStreamerResources.ViewAddinManagerLabel
                 });
-            MenuItemService.RegisterNotify(new GenericMenuItem(i => _programManager.ShowWindow(AppConstants.OptionsViewModel, true))
+            MenuItemService.RegisterNotify(
+                new GenericMenuItem(i => _programManager.ShowWindow(AppConstants.OptionsViewModel, true))
+                {
+                    Label = RadioStreamerResources.ViewOptionsLabel
+                });
+            MenuItemService.RegisterNotify(new GenericMenuItem(i =>
             {
-                Label = RadioStreamerResources.ViewOptionsLabel
-            });
+                _programManager.Shutdown = true;
+                if (_programManager.MainWindow.IsVisible == true)
+                    _programManager.MainWindow.Close();
+                else
+                    CommonApplication.Current.Shutdown();
+            }) {Label = RadioStreamerResources.QuitLabel});
 
             string oPlayerRoot = RadioStreamerResources.OptionsPathPlayer;
+            string oGeneralRoot = RadioStreamerResources.OptionsPathGenral;
             string oRecordingRoot = oPlayerRoot.CombinePath(RadioStreamerResources.OptionsPathRecording);
             string oEncoderRoot = oRecordingRoot.CombinePath(RadioStreamerResources.OptionsPathEncoder);
 
             _optionsManager.RegisterOption(oEncoderRoot,
                 new Option(null, new EncodingEditorHelper(), string.Empty,
-                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption") { IsNameVisibly = false});
+                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption")
+                {
+                    IsNameVisibly = false
+                });
 
             _optionsManager.RegisterOption(oRecordingRoot,
-                new Option(null, new DefaultProfileHelper(), string.Empty, string.Empty, RadioStreamerResources.DefaultProfileOptionName));
+                new Option(null, new DefaultProfileHelper(), string.Empty, string.Empty,
+                    RadioStreamerResources.DefaultProfileOptionName));
+
+            _optionsManager.RegisterOption(oRecordingRoot,
+                new Option(null, new TextBoxHelper(true, true, _dialogFactory), "RecodingPath", string.Empty,
+                    RadioStreamerResources.OptionsRecordingPath));
+
+            _optionsManager.RegisterOption(oRecordingRoot,
+                new Option(null,
+                    new ComboboxHelper(
+                        new ComboboxHelperItem(nameof(FileExisBehavior.Override),
+                            RadioStreamerResources.OptionsFileExisBehaviorOverrideText),
+                        new ComboboxHelperItem(nameof(FileExisBehavior.ReName),
+                            RadioStreamerResources.OptionsFileExisBehaviorRenameText),
+                        new ComboboxHelperItem(nameof(FileExisBehavior.Skip),
+                            RadioStreamerResources.OptionsFileExisBehaviorSkipText)), "FileExisBehavior",
+                    nameof(FileExisBehavior.Override), RadioStreamerResources.OptionsFileExisBehavior));
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(StartWithWindowsOption), "StartWithWindows", false,
+                    RadioStreamerResources.StartOnWindowsOtpion) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(null), "PlayAfterStart", false,
+                    RadioStreamerResources.PlayAfterStartOption) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(AutoUpdateCallBack), "AutoUpdate", "False",
+                    RadioStreamerResources.AutoUpdateOption) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(null), "Minimizeintray", "False",
+                    RadioStreamerResources.MinimizeintrayOption) {IsNameVisibly = false});
 
             CommandBinder.Register(ApplicationCommands.Save);
 
@@ -95,6 +144,34 @@ namespace Tauron.Application.RadioStreamer.Views
             CommandBinder.Register(RadioStreamerResources.RemoveFavoritesLabel, "RemoveFavorites");
 
             SimpleLocalize.Register(RadioStreamerResources.ResourceManager, GetType().Assembly);
+        }
+
+        private void AutoUpdateCallBack(bool obj)
+        {
+            _programManager.AutoUpdate = obj;
+        }
+
+        private void StartWithWindowsOption(bool add)
+        {
+            try
+            {
+                using (RegistryKey key = Registry.CurrentUser.OpenSubKey(@"Software\Microsoft\Windows\CurrentVersion\Run", true))
+                {
+                    if(key == null) return;
+                    if (add)
+                    {
+                        //Surround path with " " to make sure that there are no problems
+                        //if path contains spaces.
+                        key.SetValue("RadioStreamerSlim", "\"" + System.Windows.Forms.Application.ExecutablePath + "\"");
+                    }
+                    else
+                        key.DeleteValue("RadioStreamerSlim");
+
+                    key.Close();
+                }
+            }
+            catch (SecurityException) { }
+            catch (UnauthorizedAccessException) { }
         }
 
         [NotNull]

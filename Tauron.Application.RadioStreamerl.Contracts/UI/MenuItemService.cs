@@ -25,7 +25,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         [NotNull]
         public static Action<GenericMenuItem> RegisterMenu([NotNull] string name)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null) throw new ArgumentNullException(nameof(name));
 
             var list = new List<GenericMenuItem>();
             MenuItemRegistry.Add(name, list);
@@ -41,14 +41,14 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
 
         public static void RegisterNotify([NotNull] GenericMenuItem item)
         {
-            if (item == null) throw new ArgumentNullException("item");
+            if (item == null) throw new ArgumentNullException(nameof(item));
             AddItem(NotifyContextMenuName, item);
         }
 
         public static void AddItem([NotNull] string name, [NotNull] GenericMenuItem menuItem)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (menuItem == null) throw new ArgumentNullException("menuItem");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (menuItem == null) throw new ArgumentNullException(nameof(menuItem));
             GenericAdd(MenuItemRegistry[name], menuItem);
         }
 

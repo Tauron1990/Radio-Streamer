@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.ComponentModel;
+using System.Drawing;
 using Tauron.Application.BassLib.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
@@ -8,19 +9,17 @@ using Tauron.JetBrains.Annotations;
 namespace Tauron.Application.RadioStreamer.Contracts.Player
 {
     [PublicAPI]
-    public interface IRadioPlayer
+    public interface IRadioPlayer : INotifyPropertyChanged
 	{
 		void Activate();
 		void Deactivate();
 
-        [NotNull]
-        PlayerStade Play(RadioQuality radio, [CanBeNull] IScript script);
+		void Play(RadioQuality radio, [CanBeNull] IScript script);
 		void Stop();
 
 		bool IsRecording { get; }
 
-        [NotNull]
-        RecordingStade StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
+		void StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
 		void StopRecording();
 
         [CanBeNull]
@@ -29,6 +28,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
         double BufferPercentage { get; }
 
         double Volume { set; get; }
+
+        bool Playing { get; }
 
         [NotNull]
         IEqualizer Equalizer { get; }

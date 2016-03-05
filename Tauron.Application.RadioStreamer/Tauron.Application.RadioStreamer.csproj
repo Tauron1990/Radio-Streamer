@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -9,10 +9,11 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>Tauron.Application.RadioStreamer</RootNamespace>
     <AssemblyName>Tauron.Application.RadioStreamer</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -23,6 +24,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <PlatformTarget>x86</PlatformTarget>
+    <RunCodeAnalysis>false</RunCodeAnalysis>
+    <NoWarn>0169, 0649, 0067</NoWarn>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -33,9 +37,8 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Bass.Net, Version=2.4.10.3, Culture=neutral, PublicKeyToken=b7566c273e6ef480, processorArchitecture=MSIL" />
-    <Reference Include="HtmlAgilityPack">
-      <HintPath>..\packages\HtmlAgilityPack.1.4.8\lib\Net45\HtmlAgilityPack.dll</HintPath>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="System" />
@@ -44,8 +47,9 @@
     <Reference Include="System.Drawing" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Player\BassMediaPlayer.cs" />
+    <Compile Include="Player\CoreMediaPlayer.cs" />
     <Compile Include="Player\EncoderProvider.cs" />
+    <Compile Include="Player\Encoder\LameEncoderProfile.cs" />
     <Compile Include="Player\Engine\ExportPlaybackEngine.cs" />
     <Compile Include="Player\Engine\Impl\FilePlayer.cs" />
     <Compile Include="Player\Engine\Impl\PlaybackEngineBase.cs" />
@@ -53,10 +57,10 @@
     <Compile Include="Player\Engine\IPlaybackEngineMetadata.cs" />
     <Compile Include="Player\MemoryManager.cs" />
     <Compile Include="RadioStreamerModule.cs" />
-    <None Include="packages.config" />
     <None Include="Data\Scripts\Technobase.cs">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <None Include="packages.config" />
     <None Include="Player\Temp.cs" />
     <Compile Include="Player\Engine\IPlaybackEngine.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -106,7 +110,6 @@
     <ProjectReference Include="..\Tauron.Application.Audio\Tauron.Application.Bass.csproj">
       <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
       <Name>Tauron.Application.Bass</Name>
-      <Private>True</Private>
     </ProjectReference>
     <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
       <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>

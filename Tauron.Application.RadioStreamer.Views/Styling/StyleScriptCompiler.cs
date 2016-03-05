@@ -53,7 +53,7 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
 
         public void BuildUp([NotNull] string source)
         {
-            if (source == null) throw new ArgumentNullException("source");
+            if (source == null) throw new ArgumentNullException(nameof(source));
 
             var context = CreateContext(source);
             var container = CreateModuleContainer(context);
@@ -153,9 +153,9 @@ namespace Tauron.Application.RadioStreamer.Views.Styling
 
         public void Init([NotNull] TextWriter logger, [NotNull] AssemblyBuilder builder, [NotNull] string moduleName)
         {
-            if (logger == null) throw new ArgumentNullException("logger");
-            if (builder == null) throw new ArgumentNullException("builder");
-            if (moduleName == null) throw new ArgumentNullException("moduleName");
+            if (logger == null) throw new ArgumentNullException(nameof(logger));
+            if (builder == null) throw new ArgumentNullException(nameof(builder));
+            if (moduleName == null) throw new ArgumentNullException(nameof(moduleName));
 
             _logger = logger;
             _builder = builder;

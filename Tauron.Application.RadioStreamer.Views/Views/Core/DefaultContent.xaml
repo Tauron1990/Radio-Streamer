@@ -1,43 +1,63 @@
 ﻿<UserControl x:Class="Tauron.Application.RadioStreamer.Views.Core.DefaultContent"
-			 xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-			 xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-			 xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
-			 xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-			 xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             xmlns:hard="http://www.hardcodet.net/taskbar"
-			 xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:conUI="clr-namespace:Tauron.Application.RadioStreamer.Contracts.UI;assembly=Tauron.Application.RadioStreamer.Contracts"
-			 xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Core"
-			 xmlns:core="clr-namespace:Tauron.Application.RadioStreamer.Views.Core"
-			 mc:Ignorable="d" 
-			 d:DesignHeight="300" d:DesignWidth="300"
-			 hlp:DataContextServices.Activate="True"
-			 hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.DefaultContentViewModel}">
-	<DockPanel>
-        <hard:TaskbarIcon DockPanel.Dock="Bottom" IconSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico"
-                          ToolTipText="{Binding CurrentTrack}">
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             xmlns:core="clr-namespace:Tauron.Application.RadioStreamer.Views.Core"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:hard="http://www.hardcodet.net/taskbar"
+             xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+             xmlns:local="clr-namespace:Tauron.Application.RadioStreamer.Core"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             d:DesignHeight="300"
+             d:DesignWidth="300"
+             hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.DefaultContentViewModel}"
+             hlp:DataContextServices.Activate="True"
+             mc:Ignorable="d">
+    <DockPanel>
+        <hard:TaskbarIcon DockPanel.Dock="Bottom" Name="TaskbarIcon"
+                          IconSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico"
+                          ToolTipText="{Binding CurrentTrack}"
+                          hlp:CommandBinder.Command="ViewMainMenu:ViewMainMenu"
+                          hlp:CommandBinder.CustomPropertyName="DoubleClickCommand">
             <hard:TaskbarIcon.TrayToolTip>
-                <Border BorderThickness="1" BorderBrush="Black" Background="{StaticResource BackgroundBrush}">
+                <Border Background="{StaticResource BackgroundBrush}"
+                        BorderBrush="Black"
+                        BorderThickness="1">
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition/>
+                            <ColumnDefinition Width="60" />
+                            <ColumnDefinition />
                         </Grid.ColumnDefinitions>
-                        <Grid Grid.Column="0" Grid.Row="0" MaxHeight="30" MaxWidth="30">
+                        <Grid Grid.Row="0"
+                              Grid.Column="0"
+                              MaxWidth="30"
+                              MaxHeight="30">
                             <Grid.RowDefinitions>
-                                <RowDefinition/>
-                                <RowDefinition Height="15"/>
+                                <RowDefinition />
+                                <RowDefinition Height="15" />
                             </Grid.RowDefinitions>
                             <Grid.ColumnDefinitions>
-                                <ColumnDefinition/>
-                                <ColumnDefinition Width="15"/>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="15" />
                             </Grid.ColumnDefinitions>
-                            <Image Grid.Row="0" Grid.RowSpan="2" Grid.Column="0" Grid.ColumnSpan="2" 
-                                   Source="/RadioStreamer;component/RadioStreamer.png" MaxHeight="35" MaxWidth="35"/>
-                            <Image Grid.Row="1" Grid.Column="1" MaxHeight="15" MaxWidth="15" Source="{Binding ToolTipImage}"/>
+                            <Image Grid.Row="0"
+                                   Grid.RowSpan="2"
+                                   Grid.Column="0"
+                                   Grid.ColumnSpan="2"
+                                   MaxWidth="35"
+                                   MaxHeight="35"
+                                   Source="/RadioStreamer;component/RadioStreamer.png" />
+                            <Image Grid.Row="1"
+                                   Grid.Column="1"
+                                   MaxWidth="15"
+                                   MaxHeight="15"
+                                   Source="{Binding ToolTipImage}" />
                         </Grid>
-                        <StackPanel Grid.Column="1" Grid.Row="0">
-                            <TextBlock Margin="10" Text="Radioplayer Title" TextAlignment="Center"/>
+                        <StackPanel Grid.Row="0" Grid.Column="1">
+                            <TextBlock Margin="10"
+                                       Text="Radioplayer Title"
+                                       TextAlignment="Center" />
                         </StackPanel>
                     </Grid>
                 </Border>
@@ -46,39 +66,58 @@
                 <ContextMenu ItemsSource="{Binding NotifyContextMenu}">
                     <ContextMenu.Resources>
                         <HierarchicalDataTemplate DataType="{x:Type conUI:GenericMenuItem}" ItemsSource="{Binding MenuItems}">
-                            <MenuItem Header="{Binding Label}" IsEnabled="{Binding IsEnabled}" Icon="{Binding ImageSource}"
-                                      Command="{Binding ClickCommand}"/>
+                            <MenuItem Command="{Binding ClickCommand}"
+                                      Header="{Binding Label}"
+                                      Icon="{Binding ImageSource}"
+                                      IsEnabled="{Binding IsEnabled}" />
                         </HierarchicalDataTemplate>
                     </ContextMenu.Resources>
                 </ContextMenu>
             </hard:TaskbarIcon.ContextMenu>
         </hard:TaskbarIcon>
         <!--<hlp:LabeledTextbox DockPanel.Dock="Top" LabelText="hallo" Text="welt"/>-->
-		<ContentControl Content="{StaticResource MainLabel}" DockPanel.Dock="Top"/>
-		<StatusBar DockPanel.Dock="Bottom" MinHeight="30" MaxHeight="30" ItemsSource="{Binding StatusBarItems}" Background="Transparent"/>
-        <TabControl Name="RadioSelector" Background="Transparent" SelectionChanged="TabControlSelectionChanged" x:FieldModifier="private"
-                    ItemsSource="{Binding Tabs}">
+        <ContentControl Content="{StaticResource MainLabel}" DockPanel.Dock="Top" />
+        <StatusBar MinHeight="30"
+                   MaxHeight="30"
+                   Background="Transparent"
+                   DockPanel.Dock="Bottom"
+                   ItemsSource="{Binding StatusBarItems}" />
+        <TabControl Name="RadioSelector"
+                    Background="Transparent"
+                    ItemsSource="{Binding Tabs}"
+                    SelectionChanged="TabControlSelectionChanged"
+                    x:FieldModifier="private">
             <TabControl.Resources>
                 <DataTemplate x:Key="TabHeaderTemplate">
                     <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Text="{Binding Title}" Foreground="{StaticResource TextColor}" FontSize="20"/>
-                        <Button Content="X" Command="{Binding CloseWorkspace}" Margin="10,0,0,0" MaxWidth="10"
-                                DockPanel.Dock="Left" Visibility="{Binding CanClose, Converter={hlp:BoolToVisibilityConverter}}">
+                        <TextBlock DockPanel.Dock="Left"
+                                   FontSize="20"
+                                   Foreground="{StaticResource TextColor}"
+                                   Text="{Binding Title}" />
+                        <Button MaxWidth="10"
+                                Margin="10,0,0,0"
+                                Command="{Binding CloseWorkspace}"
+                                Content="X"
+                                DockPanel.Dock="Left"
+                                Visibility="{Binding CanClose,
+                                                     Converter={hlp:BoolToVisibilityConverter}}">
                             <Button.Template>
                                 <ControlTemplate TargetType="Button">
-                                    <ContentControl Content="{TemplateBinding Content}" VerticalContentAlignment="Center" 
-                                                    HorizontalContentAlignment="Left" FontSize="20"/>
+                                    <ContentControl HorizontalContentAlignment="Left"
+                                                    VerticalContentAlignment="Center"
+                                                    Content="{TemplateBinding Content}"
+                                                    FontSize="20" />
 
                                 </ControlTemplate>
                             </Button.Template>
                         </Button>
                     </DockPanel>
                 </DataTemplate>
-                <Style TargetType="{x:Type TabItem}" BasedOn="{StaticResource {x:Type TabItem}}">
-                    <Setter Property="Header" Value="{Binding Converter={core:ManualHeaderTemplateContentLoader}, ConverterParameter={StaticResource TabHeaderTemplate}}"/>
-                    <Setter Property="Content" Value="{Binding Converter={hlp:ViewModelConverter}}"/>
+                <Style BasedOn="{StaticResource {x:Type TabItem}}" TargetType="{x:Type TabItem}">
+                    <Setter Property="Header" Value="{Binding Converter={core:ManualHeaderTemplateContentLoader}, ConverterParameter={StaticResource TabHeaderTemplate}}" />
+                    <Setter Property="Content" Value="{Binding Converter={hlp:ViewModelConverter}}" />
                 </Style>
             </TabControl.Resources>
         </TabControl>
-	</DockPanel>
+    </DockPanel>
 </UserControl>

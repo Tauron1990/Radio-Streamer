@@ -16,8 +16,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         public SettingsModifedEventArgs([NotNull] string name, [NotNull] string value)
         {
-            if (name == null) throw new ArgumentNullException("name");
-            if (value == null) throw new ArgumentNullException("value");
+            if (name == null) throw new ArgumentNullException(nameof(name));
+            if (value == null) throw new ArgumentNullException(nameof(value));
             Name = name;
             Value = value;
         }
@@ -44,10 +44,10 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 	public sealed class RadioFavorite
 	{
 	    [NotNull]
-	    public string Name { get; private set; }
+	    public string Name { get; }
 
 	    [NotNull]
-	    public string QualityName { get; private set; }
+	    public string QualityName { get; }
 
 		public RadioFavorite([NotNull] string name, [NotNull] string qualityName)
 		{
@@ -88,7 +88,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         [NotNull]
         string GetValue([NotNull] string name, [CanBeNull] string defaultValue);
-        void SetName([NotNull] string name, [NotNull] string value);
+        void SetValue([NotNull] string name, [NotNull] string value);
     }
 
     [PublicAPI]
@@ -115,7 +115,17 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
 
         [NotNull]
         string Theme { get; set; }
-	}
+
+        bool PlayAfterStart { get; set; }
+
+        bool MinimizeInTray { get; set; }
+
+        string RecodingPath { get; set; }
+
+        FileExisBehavior FileExisBehavior { get; set; }
+
+        bool Delete90SecTitles { get; set; }
+    }
 
     [PublicAPI]
 	public interface IRadioEnvironment

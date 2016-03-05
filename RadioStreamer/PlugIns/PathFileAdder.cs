@@ -18,10 +18,7 @@ namespace Tauron.Application.RadioStreamer.PlugIns
             _files = new List<string>();
         }
 
-        public IEnumerable<string> Files
-        {
-            get { return _files; }
-        }
+        public IEnumerable<string> Files => _files;
 
         public override string AddFile(string effiectivePath, Stream stream)
         {

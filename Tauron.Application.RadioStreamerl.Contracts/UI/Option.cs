@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Globalization;
+using System.Windows;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.JetBrains.Annotations;
 
@@ -14,10 +15,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         private string _displayName;
 
         [NotNull]
-        public object UI
-        {
-            get { return Helper.LoadUI(this); }
-        }
+        public FrameworkElement UI => Helper.LoadUI(this);
 
         [CanBeNull]
         public string Group
@@ -91,12 +89,12 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         }
 
         public Option([CanBeNull] string @group, [NotNull] IOptionHelper helper, [NotNull] string settingKey,
-            [CanBeNull] object defaultValue, [NotNull] string displayName)
+            [CanBeNull] object defaultValue, [CanBeNull] string displayName)
         {
             if (helper == null) throw new ArgumentNullException("helper");
             if (settingKey == null) throw new ArgumentNullException("settingKey");
             if (defaultValue == null) throw new ArgumentNullException("defaultValue");
-            if (displayName == null) throw new ArgumentNullException("displayName");
+            //if (displayName == null) throw new ArgumentNullException("displayName");
 
             _group = @group;
             _helper = helper;
@@ -108,7 +106,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
 
         public bool Save(IRadioEnvironment store)
         {
-            if (store == null) throw new ArgumentNullException("store");
+            if (store == null) throw new ArgumentNullException(nameof(store));
 
             return Helper.Serialize(store, this);
         }

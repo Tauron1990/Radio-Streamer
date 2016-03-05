@@ -14,6 +14,7 @@ namespace Tauron.Application.RadioStreamer.Contracts
         public const string DefaultContentViewName = "DefaultContentView";
 
         public const string MainWindowName = "MainWindow";
+        public const string MainWindowsViewModelName = "MainWindowViewModel";
 
         public const string AppName = "RadioStreamer";
         public const string RadioPlayerHeader = "Radio Player";
@@ -34,5 +35,7 @@ namespace Tauron.Application.RadioStreamer.Contracts
         public const string NewEncodingProfileView = "NewEncodingProfileViewModel";
 
         public const string ImportExportSettingsWindow = "ImportExportSettingsWindow";
+
+        public const string ShutdownAutomaticViewModelName = "ShutdownAutomaticViewModel";
     }
 }

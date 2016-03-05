@@ -32,7 +32,7 @@ namespace Tauron.Application.RadioStreamer.Interop
     }
     internal static class NativeMethods
     {
-        public static readonly Guid ProgressDialog = new Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4");
+        private static readonly Guid ProgressDialog = new Guid("F8383852-FCD3-11d1-A6B9-006097DF5BD4");
 
         [NotNull]
         public static IWinProgressDialog CreateProgressDialog()

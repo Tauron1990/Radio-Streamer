@@ -26,9 +26,8 @@ namespace Tauron.Application.BassLib.Recording
                 if(_encoder != null && !_encoder.SupportsStdout)
                     throw new InvalidOperationException("Only SupportsSTDOUT is Supported");
 
-                if(_isRecording)
-                    if (_encoder != null) 
-                        _encoder.Dispose();
+                if (_isRecording)
+                    _encoder?.Dispose();
 
                 IsRecording = false;
                 OnPropertyChanged();
@@ -66,7 +65,7 @@ namespace Tauron.Application.BassLib.Recording
 
         public void ChangeChannel([NotNull] Channel channel)
         {
-            if (channel == null) throw new ArgumentNullException("channel");
+            if (channel == null) throw new ArgumentNullException(nameof(channel));
             if (Encoder == null) return;
 
             Encoder.Channel = channel;

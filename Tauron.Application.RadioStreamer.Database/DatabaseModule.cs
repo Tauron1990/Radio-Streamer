@@ -17,7 +17,8 @@ namespace Tauron.Application.RadioStreamer.Database
                 asm.GetCustomAttribute<AssemblyTitleAttribute>().Title);
         }
 
-        public int Order { get { return 1000; } }
+        public int Order => 1000;
+
         public void Initialize(CommonApplication application)
         {
         

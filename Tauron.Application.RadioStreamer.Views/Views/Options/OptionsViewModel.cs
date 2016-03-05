@@ -24,13 +24,13 @@ namespace Tauron.Application.RadioStreamer.Views.Options
 
 
         [NotNull]
-        public IEnumerable<OptionPath> OptionPaths { get { return _model.Options; } }
+        public IEnumerable<OptionPath> OptionPaths => _model.Options;
 
         [WindowTarget("Window")]
         private IWindow _window;
 
         [NotNull]
-        public UISyncObservableCollection<Option> SelectedOptions { get; private set; }
+        public UISyncObservableCollection<Option> SelectedOptions { get; }
 
         public OptionsViewModel()
         {
@@ -47,7 +47,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
             else
             {
                 var group = newValue.NewValue as OptionGroup;
-                options = @group != null ? @group.Options : Enumerable.Empty<Option>();
+                options = @group?.Options ?? Enumerable.Empty<Option>();
             }
 
             SelectedOptions.Clear();
@@ -132,7 +132,7 @@ namespace Tauron.Application.RadioStreamer.Views.Options
         private Task<ImportExportSettings> GetSettings()
         {
             var win = ViewManager.CreateWindow(AppConstants.ImportExportSettingsWindow);
-            return win.ShowDialog(MainWindow)
+            return win.ShowDialogAsync(MainWindow)
                .ContinueWith(t =>
                {
                    if (win.DialogResult == true) return (ImportExportSettings) win.Result;

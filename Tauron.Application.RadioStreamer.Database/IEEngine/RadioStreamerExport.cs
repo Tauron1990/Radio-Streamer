@@ -29,7 +29,7 @@ namespace Tauron.Application.RadioStreamer.Database.IEEngine
 
         public RadioStreamerExport([NotNull] ImportExportSettings importExportSettings)
         {
-            if (importExportSettings == null) throw new ArgumentNullException("importExportSettings");
+            if (importExportSettings == null) throw new ArgumentNullException(nameof(importExportSettings));
 
             ImportExportSettings = importExportSettings;
             

@@ -84,7 +84,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data
 
         public void SetProperty<TType>([NotNull]TType vaule, [NotNull] string name, [CanBeNull]Func<TType, string> converter = null)
         {
-            if (name == null) throw new ArgumentNullException("name");
+            if (name == null) throw new ArgumentNullException(nameof(name));
 
             Func<TType, string> realConverter = converter;
             if (converter == null)

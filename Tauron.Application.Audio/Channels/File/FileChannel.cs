@@ -21,21 +21,9 @@ namespace Tauron.Application.BassLib.Channels
             }
         }
 
-        public long Length
-        {
-            get
-            {
-                return Bass.BASS_ChannelGetLength(Handle);
-            }
-        }
+        public long Length => Bass.BASS_ChannelGetLength(Handle);
 
-        public double Progress
-        {
-            get
-            {
-                return 100d/Length*Position;
-            }
-        }
+        public double Progress => 100d/Length*Position;
 
         [NotNull]
         public IDisposable SetEntSync([NotNull] Action action)

@@ -4,7 +4,7 @@ using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Data.Attributes
 {
-    [PublicAPI]
+    [PublicAPI, MeansImplicitUse(ImplicitUseKindFlags.Assign)]
 	[AttributeUsage(AttributeTargets.Class | AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Field, AllowMultiple = true, Inherited = false)]
 	public sealed class RadioDatabaseExport : ExportAttribute
 	{
@@ -16,7 +16,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Data.Attributes
 	}
 
     [PublicAPI]
-	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false, Inherited = false)]
+	[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter), MeansImplicitUse(ImplicitUseKindFlags.Assign)]
 	public sealed class InjectRadioDatabase : InjectAttribute
 	{
 		public InjectRadioDatabase()

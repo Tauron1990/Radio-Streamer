@@ -56,7 +56,7 @@
         </StackPanel>
         <TextBlock Grid.Column="2" Grid.Row="1" Text="{Binding RunTime}" HorizontalAlignment="Center" />
         <TabControl Grid.ColumnSpan="3" Grid.Column="0" Margin="100, 10,30, 10" HorizontalAlignment="Center"
-                    Grid.Row="2" Width="Auto" Name="RadioViewExtensions"
+                    Grid.Row="2" Width="Auto" Name="RadioViewExtensions" MinWidth="500"
                     hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.RadioPlayerExtenionViews}">
             <TabControl.Resources>
                 <Style TargetType="TabControl">
@@ -67,9 +67,9 @@
                                     <Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
                                         <StackPanel IsItemsHost="True" Margin="3" MinWidth="70" />
                                     </Border>
-                                    <Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3">
-                                        <ContentPresenter Name="ContentSite" Margin="{TemplateBinding Padding}"
-                                                          Content="{TemplateBinding SelectedContent}"
+                                    <Border BorderThickness="1" CornerRadius="3" BorderBrush="Black" Margin="3" MinWidth="430">
+                                        <ContentPresenter x:Name="ContentSite" Margin="{TemplateBinding Padding}" HorizontalAlignment="Stretch"
+                                                          Content="{TemplateBinding SelectedContent}" MinWidth="600"
                                                           ContentTemplate="{TemplateBinding SelectedContentTemplate}"
                                                           ContentTemplateSelector="{TemplateBinding SelectedContentTemplateSelector}" />
                                     </Border>

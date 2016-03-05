@@ -1,5 +1,6 @@
 ﻿using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Core.Attributes
 {
@@ -12,6 +13,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core.Attributes
 		}
 	}
 
+    [MeansImplicitUse(ImplicitUseKindFlags.Assign)]
 	public sealed class InjectRadioPlayer : InjectAttribute
 	{
 		public InjectRadioPlayer()

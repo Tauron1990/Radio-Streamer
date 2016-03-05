@@ -20,7 +20,7 @@ namespace Tauron.Application.BassLib
                     _value = percent*100;
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("mode");
+                    throw new ArgumentOutOfRangeException(nameof(mode));
             }
 
             Validate();
@@ -37,7 +37,7 @@ namespace Tauron.Application.BassLib
                     _value = (int) (percent*100);
                     break;
                 default:
-                    throw new ArgumentOutOfRangeException("mode");
+                    throw new ArgumentOutOfRangeException(nameof(mode));
             }
             Validate();
         }
@@ -65,7 +65,7 @@ namespace Tauron.Application.BassLib
                 case PercentMode.ZeroOne:
                     return _value/100f;
                 default:
-                    throw new ArgumentOutOfRangeException("mode");
+                    throw new ArgumentOutOfRangeException(nameof(mode));
             }
         }
 
@@ -78,7 +78,7 @@ namespace Tauron.Application.BassLib
                 case PercentMode.ZeroOne:
                     return _value / 100;
                 default:
-                    throw new ArgumentOutOfRangeException("mode");
+                    throw new ArgumentOutOfRangeException(nameof(mode));
             }
         }
 

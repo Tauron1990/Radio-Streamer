@@ -33,13 +33,7 @@ namespace Tauron.Application.BassLib.Channels
             _interceptor = interceptor;
         }
 
-        public double BufferPercentage
-        {
-            get
-            {
-                return BassHelper.GetBufferPercentage(Handle);
-            }
-        }
+        public double BufferPercentage => BassHelper.GetBufferPercentage(Handle);
 
         public Percentage PreBufferFill
         {
@@ -57,7 +51,7 @@ namespace Tauron.Application.BassLib.Channels
         [NotNull]
         public IDisposable SetMetaUpdate([NotNull] Action<bool, TAG_INFO> action)
         {
-            if (action == null) throw new ArgumentNullException("action");
+            if (action == null) throw new ArgumentNullException(nameof(action));
 
             var sync = new MetaSync(action);
             SyncManager.Register(sync, 0, BASSSync.BASS_SYNC_META);

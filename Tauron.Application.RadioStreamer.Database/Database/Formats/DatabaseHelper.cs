@@ -43,7 +43,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
             }
 
             private int _count;
-            public int Count { get { return _count; } }
+            public int Count => _count;
 
             private TElement[] _elements = new TElement[0];
 			
@@ -89,7 +89,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 for (i = sourceIndex; i < _elements.Length; i++)
                 {
                     TElement ele = _elements[i];
-                    int result = string.CompareOrdinal(ele != null ? ele.CompareKey : null, key);
+                    int result = string.CompareOrdinal(ele?.CompareKey, key);
                     if (result == 0) return i;
                     if (result > 0) return ~i;
                 }
@@ -140,7 +140,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 for (index = entry.IndexValue; index < _elements.Length; index++)
                 {
                     ele = _elements[index];
-                    result = string.CompareOrdinal(ele != null ? ele.CompareKey : null, key);
+                    result = string.CompareOrdinal(ele?.CompareKey, key);
                     if (result == 0) break;
                     if (result > 0) return null;
                 }
@@ -156,10 +156,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 return ele;
             }
 
-            public TElement this[int index]
-            {
-                get { return _elements[index]; }
-            }
+            public TElement this[int index] => _elements[index];
 
             private void ResizeArray()
             {
@@ -241,10 +238,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 foreach (var handler in _handlers) handler.Changed(type, CompareName, oldContent, content);
             }
 
-            string ICompareName.CompareKey
-            {
-                get { return CompareName; }
-            }
+            string ICompareName.CompareKey => CompareName;
         }
         public class Metadata : ChangedHelper
         {
@@ -253,7 +247,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
             {
             }
 
-            protected override string CompareName { get { return _key; } }
+            protected override string CompareName => _key;
 
             private string _key;
 
@@ -293,16 +287,10 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 private readonly DatabaseEntry _entry;
 
                 [NotNull]
-                public DatabaseArray<Metadata> MetadataAcc
-                {
-                    get { return _entry._metadata; }
-                }
+                public DatabaseArray<Metadata> MetadataAcc => _entry._metadata;
 
                 [NotNull]
-                public HashSet<string> MetaNames
-                {
-                    get { return _entry._metaNames; }
-                }
+                public HashSet<string> MetaNames => _entry._metaNames;
 
                 public DatabaseEntryAcessor([NotNull] DatabaseEntry entry)
                 {
@@ -310,7 +298,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                 }
             }
 
-            protected override string CompareName { get { return _name; } }
+            protected override string CompareName => _name;
 
             private string _name;
 
@@ -337,10 +325,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
             }
 
             [NotNull]
-            public IEnumerable<string> Keys
-            {
-                get { return new ReadOnlyEnumerator<string>(_metaNames); }
-            }
+            public IEnumerable<string> Keys => new ReadOnlyEnumerator<string>(_metaNames);
 
             [NotNull]
             public Metadata FindMetadata([NotNull] string key)
@@ -366,7 +351,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
             [NotNull]
             public Metadata AddMetadata([NotNull] string key, out bool added)
             {
-                if (String.IsNullOrWhiteSpace(key)) throw new ArgumentNullException("key");
+                if (string.IsNullOrWhiteSpace(key)) throw new ArgumentNullException(nameof(key));
 
                 try
                 {
@@ -403,8 +388,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
                     var meta = _metadata.Remove(name);
                     _metaNames.Remove(name);
 
-                    if(meta != null)
-                        meta.Changed(ChangeType.Deleted, name, string.Empty);
+                    meta?.Changed(ChangeType.Deleted, name, string.Empty);
 
                     Interlocked.Exchange(ref Database._isDirty, 1);
                 }
@@ -588,10 +572,10 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
         }
 
         private DatabaseArray<DatabaseEntry> _entrys = new DatabaseArray<DatabaseEntry>();
-        public int DatabasElements { get { return _entrys.Count; } }
-        private HashSet<string> _databaseNames = new HashSet<string>();
+        public int DatabasElements => _entrys.Count;
+        private HashSet<string> _databaseNames;
         private int _isDirty;
-        public bool IsDirty { get { return _isDirty == 1; } }
+        public bool IsDirty => _isDirty == 1;
 
         [NotNull]
         public ReaderWriterLockSlim Locker { get; private set; }
@@ -625,10 +609,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
         }
 
         [NotNull]
-        public IEnumerable<string> Names
-        {
-            get { return new ReadOnlyEnumerator<string>(_databaseNames); }
-        }
+        public IEnumerable<string> Names => new ReadOnlyEnumerator<string>(_databaseNames);
 
         [NotNull]
         public DatabaseEntry FindEntry([NotNull] string name)
@@ -654,7 +635,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
         [NotNull]
         public DatabaseEntry AddEntry([NotNull] string name, out bool added)
         {
-            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException("name");
+            if (String.IsNullOrWhiteSpace(name)) throw new ArgumentNullException(nameof(name));
 
             try
             {
@@ -690,8 +671,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database.Formats
 
                 var ent = _entrys.Remove(name);
                 _databaseNames.Remove(name);
-                if(ent != null)
-                    ent.Changed(ChangeType.Deleted, name, string.Empty);
+                ent?.Changed(ChangeType.Deleted, name, string.Empty);
 
                 Interlocked.Exchange(ref _isDirty, 1);
             }

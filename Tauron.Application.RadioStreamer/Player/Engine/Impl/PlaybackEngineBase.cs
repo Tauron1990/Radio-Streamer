@@ -15,7 +15,7 @@ namespace Tauron.Application.RadioStreamer.Player.Engine.Impl
         protected virtual void OnEnd()
         {
             var handler = End;
-            if (handler != null) handler();
+            handler?.Invoke();
         }
 
         protected virtual void OnChannelSwitched([NotNull] Channel channel, [CanBeNull] TAG_INFO info, bool newChannel)

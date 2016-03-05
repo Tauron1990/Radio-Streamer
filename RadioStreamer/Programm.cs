@@ -12,6 +12,7 @@ using System.Threading;
 using Tauron.Application.Implement;
 using Tauron.Application.RadioStreamer.Interop;
 using Tauron.Application.RadioStreamer.PlugIns;
+using Tauron.Application.RadioStreamer.Properties;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer
@@ -96,8 +97,8 @@ namespace Tauron.Application.RadioStreamer
 
         private static void SignalFirstInstance([NotNull] string channelName, [NotNull] string applicationIdentifier)
         {
-            if (channelName == null) throw new ArgumentNullException("channelName");
-            if (applicationIdentifier == null) throw new ArgumentNullException("applicationIdentifier");
+            if (channelName == null) throw new ArgumentNullException(nameof(channelName));
+            if (applicationIdentifier == null) throw new ArgumentNullException(nameof(applicationIdentifier));
 
             SingleInstance<App>.SignalFirstInstance(channelName,
                 SingleInstance<App>.GetCommandLineArgs(applicationIdentifier));
@@ -177,39 +178,42 @@ namespace Tauron.Application.RadioStreamer
                             Assembly.GetExecutingAssembly().GetManifestResourceStream("RadioStreamer.nuspec")));
                 }
 
-                progressDialog.SetLine(2, "Check for Updates", false, IntPtr.Zero);
-
-                var managers = new List<InternalPackageManager>();
-
-                bool needCopy;
-                if (packManager.CheckForUpdates(new[] { "RadioStreamer" }, out needCopy))
-                    managers.Add(packManager);
-                CheckCancel(progressDialog);
-                packManager = InternalPackageManager.BuildPackManager();
-                if(packManager.CheckForUpdates())
-                    managers.Add(packManager);
-                CheckCancel(progressDialog);
-                packManager = InternalPackageManager.BuildPluginManager();
-                if(packManager.CheckForUpdates())
-                    managers.Add(packManager);
-                CheckCancel(progressDialog);
-
-                progressDialog.SetLine(2, "Downloading Updates", false, IntPtr.Zero);
-
-                foreach (var manager in managers)
-                    manager.InstallUpdates();
-                CheckCancel(progressDialog);
-
-                progressDialog.SetLine(2, "Install Updates", false, IntPtr.Zero);
-
-                if (needCopy)
+                if(Settings.Default.AutoUpdate)
                 {
-                    _installUpdatesSolo = true;
-                    progressDialog.StopProgressDialog(); 
-                    return;
-                }
+                    progressDialog.SetLine(2, "Check for Updates", false, IntPtr.Zero);
 
-                UpdateManager.InstallUpdates();
+                    var managers = new List<InternalPackageManager>();
+
+                    bool needCopy;
+                    if (packManager.CheckForUpdates(new[] { "RadioStreamer" }, out needCopy))
+                        managers.Add(packManager);
+                    CheckCancel(progressDialog);
+                    packManager = InternalPackageManager.BuildPackManager();
+                    if(packManager.CheckForUpdates())
+                        managers.Add(packManager);
+                    CheckCancel(progressDialog);
+                    packManager = InternalPackageManager.BuildPluginManager();
+                    if(packManager.CheckForUpdates())
+                        managers.Add(packManager);
+                    CheckCancel(progressDialog);
+
+                    progressDialog.SetLine(2, "Downloading Updates", false, IntPtr.Zero);
+
+                    foreach (var manager in managers)
+                        manager.InstallUpdates();
+                    CheckCancel(progressDialog);
+
+                    progressDialog.SetLine(2, "Install Updates", false, IntPtr.Zero);
+
+                    if (needCopy)
+                    {
+                        _installUpdatesSolo = true;
+                        progressDialog.StopProgressDialog(); 
+                        return;
+                    }
+
+                    UpdateManager.InstallUpdates();
+                }
 
                 progressDialog.StopProgressDialog();
             }

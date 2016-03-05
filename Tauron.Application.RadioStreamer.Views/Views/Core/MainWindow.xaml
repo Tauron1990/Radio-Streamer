@@ -1,17 +1,25 @@
 ﻿<Window x:Class="Tauron.Application.RadioStreamer.Views.Core.MainWindow"
-        xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-        xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="Radio Streamer" WindowState="Maximized"
-		ResizeMode="CanResize" Width="800" Height="600" Background="{StaticResource BackgroundBrush}"
+        xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+        xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
+        Title="Radio Streamer"
+        Width="800"
+        Height="600"
+        Background="{StaticResource BackgroundBrush}"
+        ResizeMode="CanResize"
+        WindowState="Maximized"
+        hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.MainWindowsViewModelName}"
+        hlp:EventBinder.Events="Closing:Closing"
         hlp:ViewManager.ImportView="{x:Static contracts:AppConstants.DefaultContentViewName}">
     <Window.Icon>
-        <BitmapImage UriSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico" DecodePixelHeight="30" DecodePixelWidth="30"/>
+        <BitmapImage DecodePixelHeight="30"
+                     DecodePixelWidth="30"
+                     UriSource="pack://application:,,,/Tauron.Application.RadioStreamer.Resources;component/radio.ico" />
     </Window.Icon>
     <Window.Resources>
         <Style TargetType="{x:Type TextBlock}">
-            <Setter Property="Foreground" Value="{StaticResource TextColor}"/>
+            <Setter Property="Foreground" Value="{StaticResource TextColor}" />
         </Style>
     </Window.Resources>
 </Window>
