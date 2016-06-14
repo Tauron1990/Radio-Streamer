@@ -1087,6 +1087,33 @@ namespace Tauron.Application.RadioStreamer.Resources {
         }
         
         /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Sound Device: ähnelt.
+        /// </summary>
+        public static string OptionsDefaultDevice {
+            get {
+                return ResourceManager.GetString("OptionsDefaultDevice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Default Device ähnelt.
+        /// </summary>
+        public static string OptionsDefaultDeviceDefaultValue {
+            get {
+                return ResourceManager.GetString("OptionsDefaultDeviceDefaultValue", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Sucht eine lokalisierte Zeichenfolge, die Delete 90Sec Titles ähnelt.
+        /// </summary>
+        public static string OptionsDelete90SecTitlesText {
+            get {
+                return ResourceManager.GetString("OptionsDelete90SecTitlesText", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Sucht eine lokalisierte Zeichenfolge, die Action On Existing File: ähnelt.
         /// </summary>
         public static string OptionsFileExisBehavior {

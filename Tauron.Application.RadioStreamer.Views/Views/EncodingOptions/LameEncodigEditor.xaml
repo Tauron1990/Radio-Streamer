@@ -4,8 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:hlp="http://schemas.Tauron-Hobby-Studio.org/xaml/presentation"
-             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts.Data.Encoder;assembly=Tauron.Application.RadioStreamer.Contracts"
-             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:LameEncoderProfile.LameId}"
+             xmlns:contracts="clr-namespace:Tauron.Application.RadioStreamer.Contracts;assembly=Tauron.Application.RadioStreamer.Contracts"
+             mc:Ignorable="d" hlp:DataContextServices.Activate="True" hlp:CompositionServices.ImportViewModel="{x:Static contracts:AppConstants.LameId}"
              d:DesignHeight="700" d:DesignWidth="500" Background="Transparent">
     <StackPanel>
         <Expander Header="{hlp:SimpleLocalize LameEditorCustomOptionGroup}">

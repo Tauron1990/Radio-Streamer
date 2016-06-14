@@ -4,7 +4,7 @@ using System.Globalization;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Runtime.CompilerServices;
-using Tauron.Application.BassLib.Encoder;
+using Tauron.Application.BassLib.Misc;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.BassLib.Recording

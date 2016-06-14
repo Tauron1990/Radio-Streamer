@@ -2,10 +2,6 @@
 using System.DirectoryServices;
 using System.IO;
 using Un4seen.Bass;
-using Un4seen.Bass.AddOn.Mix;
-using Un4seen.Bass.Misc;
-using Un4seen.BassAsio;
-using Un4seen.BassWasapi;
 
 namespace ConsoleApplication
 {
@@ -16,11 +12,12 @@ namespace ConsoleApplication
             Console.WindowWidth = 150;
             Console.Title = "Test Application";
 
-            DirectoryEntry entry = new DirectoryEntry(Uri.UriSchemeFile + "://" + Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments));
-            foreach (var directoryEntry in entry.Children)
-            {
-                Console.WriteLine(directoryEntry);
-            }
+            BassNet.Registration("Game-over-Alexander@web.de", "2X1533726322323");
+            bool temp  = Bass.BASS_Init(-1, 44100, BASSInit.BASS_DEVICE_DEFAULT, IntPtr.Zero);
+
+            var plugins = Bass.BASS_PluginLoadDirectory(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "plugins"));
+
+            //var ch = Bass.BASS_StreamCreateURL()
         }
     }
 }

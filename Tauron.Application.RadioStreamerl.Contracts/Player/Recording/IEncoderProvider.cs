@@ -1,6 +1,4 @@
 ﻿using System.Collections.Generic;
-using Tauron.Application.BassLib;
-using Tauron.Application.BassLib.Encoder;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.JetBrains.Annotations;
 
@@ -12,6 +10,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
         IEnumerable<string> EncoderIds { get; }
         
         [NotNull]
-        AudioEncoder CreateEncoder([CanBeNull] CommonProfile profile, [NotNull]Channel channel);
+        IEncoder CreateEncoder([CanBeNull] CommonProfile profile, [NotNull]IPlayerStream channel);
     }
 }

@@ -10,21 +10,15 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player.Recording
         public ExportEncodingEditor([NotNull] string id) 
             : base(typeof (UserControl))
         {
-            if (id == null) throw new ArgumentNullException("id");
+            if (id == null) throw new ArgumentNullException(nameof(id));
             ContractName = "EncodingEditor";
             EncoderId = id;
         }
 
         public string EncoderId { get; private set; }
 
-        public override string DebugName
-        {
-            get { return "EncodingEditor" + EncoderId; }
-        }
+        public override string DebugName => "EncodingEditor" + EncoderId;
 
-        protected override bool HasMetadata
-        {
-            get { return true; }
-        }
+        protected override bool HasMetadata => true;
     }
 }

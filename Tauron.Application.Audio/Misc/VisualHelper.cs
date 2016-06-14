@@ -149,7 +149,7 @@ namespace Tauron.Application.BassLib.Misc
         [CanBeNull]
         public Channel Channel { get; set; }
 
-        public VisualHelper([NotNull] Channel channel)
+        public VisualHelper([CanBeNull] Channel channel)
             : this()
         {
             Channel = channel;

@@ -17,9 +17,6 @@ namespace Tauron.Application.RadioStreamer.Player.Engine
             Name = name;
         }
 
-        protected override bool HasMetadata
-        {
-            get { return true; }
-        }
+        protected override bool HasMetadata => true;
     }
 }

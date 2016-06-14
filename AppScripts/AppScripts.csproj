@@ -1,0 +1,119 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="14.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{138CA9DB-45FA-4523-A1B9-87248277BEC7}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Tauron.Scripts</RootNamespace>
+    <AssemblyName>AppScripts</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release Debug|AnyCPU'">
+    <OutputPath>bin\Release Debug\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="HtmlAgilityPack, Version=1.4.9.0, Culture=neutral, PublicKeyToken=bd319b19eaf3b43a, processorArchitecture=MSIL">
+      <HintPath>..\packages\HtmlAgilityPack.1.4.9\lib\Net45\HtmlAgilityPack.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="Mono.CSharp, Version=4.0.0.0, Culture=neutral, PublicKeyToken=0738eb9f132ed756, processorArchitecture=MSIL">
+      <HintPath>..\packages\Mono.CSharp.4.0.0.143\lib\4.5\Mono.CSharp.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Data\Scripts\Technobase.cs">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\Tauron-Application-Common\JetBrains.Annotations\JetBrains.Annotations.csproj">
+      <Project>{df97133f-565a-4d1a-afe3-4155b31a89e5}</Project>
+      <Name>JetBrains.Annotations</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf.Controls\Tauron.Application.Common.Wpf.Controls.csproj">
+      <Project>{2cc827c8-5084-4334-8a68-0515da46465e}</Project>
+      <Name>Tauron.Application.Common.Wpf.Controls</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common.Wpf\Tauron.Application.Common.Wpf.csproj">
+      <Project>{03f1490a-9173-4e75-9d6e-fbe5a37aa649}</Project>
+      <Name>Tauron.Application.Common.Wpf</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Tauron-Application-Common\Tauron.Application.Common\Tauron.Application.Common.csproj">
+      <Project>{0d50ee98-a718-41b2-a1b6-57d23fdf5223}</Project>
+      <Name>Tauron.Application.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\RadioStreamer\RadioStreamer.csproj">
+      <Project>{43cc796e-ba52-40af-8d89-cb2b1ddad87c}</Project>
+      <Name>RadioStreamer</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.Audio\Tauron.Application.Bass.csproj">
+      <Project>{af2af397-1ff3-46c0-9944-4b047c6967d3}</Project>
+      <Name>Tauron.Application.Bass</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Database\Tauron.Application.RadioStreamer.Database.csproj">
+      <Project>{04359b61-d252-4f63-ad43-c27437b3b74c}</Project>
+      <Name>Tauron.Application.RadioStreamer.Database</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer.Resources\Tauron.Application.RadioStreamer.Resources.csproj">
+      <Project>{403c6920-9ad7-4b61-b920-1705e4a87eed}</Project>
+      <Name>Tauron.Application.RadioStreamer.Resources</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamerl.Contracts\Tauron.Application.RadioStreamer.Contracts.csproj">
+      <Project>{e45a701f-0b24-4986-8183-b4f5c1270539}</Project>
+      <Name>Tauron.Application.RadioStreamer.Contracts</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Tauron.Application.RadioStreamer\Tauron.Application.RadioStreamer.csproj">
+      <Project>{26b0dd34-198a-4379-af18-0abbcce569a2}</Project>
+      <Name>Tauron.Application.RadioStreamer</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

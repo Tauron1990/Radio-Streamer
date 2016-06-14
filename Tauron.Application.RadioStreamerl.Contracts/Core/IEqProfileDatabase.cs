@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using Tauron.Application.BassLib.Misc;
+using Tauron.Application.RadioStreamer.Contracts.Player.Misc;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Core
@@ -10,8 +10,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
         [NotNull]
         IEnumerable<string> Profiles { get; }
 
-		void SetProfil([NotNull] string name, [NotNull] IEqualizer equlizer);
-		void NewProfile([NotNull] string name, [NotNull] IEqualizer equlizer);
+		void SetProfil([NotNull] string name, [NotNull] Equalizer equlizer);
+		void NewProfile([NotNull] string name, [NotNull] Equalizer equlizer);
 
 		void DeleteProfile([NotNull] string name);
 	}

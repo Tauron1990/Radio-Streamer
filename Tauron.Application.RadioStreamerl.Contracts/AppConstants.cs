@@ -37,5 +37,7 @@ namespace Tauron.Application.RadioStreamer.Contracts
         public const string ImportExportSettingsWindow = "ImportExportSettingsWindow";
 
         public const string ShutdownAutomaticViewModelName = "ShutdownAutomaticViewModel";
+
+        public const string LameId = "LameEncoder";
     }
 }

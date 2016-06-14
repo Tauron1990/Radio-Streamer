@@ -11,9 +11,10 @@ namespace Tauron.Application.RadioStreamer.Views.Options.UiHelpers
 {
     public sealed class ComboboxHelperItem
     {
-        public string Value { get; private set; }
+        public string Value { get; }
 
-        public string DisplyName { get; private set; }
+        [UsedImplicitly(ImplicitUseKindFlags.Access)]
+        public string DisplyName { get; }
 
         public ComboboxHelperItem(string value, string displyName)
         {

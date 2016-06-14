@@ -267,6 +267,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 _scope = radio.Metadata;
                 // ReSharper disable once PossibleNullReferenceException
                 _qualitys = _scope.GetQualitys().ToArray();
+                _scope.QualityChanged += () => { ValueChangedEvent?.Invoke(); Reset(); };
             }
 
             public IEnumerator<RadioQuality> GetEnumerator()
@@ -282,6 +283,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
                 return GetEnumerator();
             }
 
+            public event Action ValueChangedEvent;
+
             public int Count => _scope == null ? 0 : _qualitys.Length;
 
             public bool IsCompled => true;
@@ -289,6 +292,14 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
             public void Reset()
             {
                 _qualitys = _scope.GetQualitys().ToArray();
+                OnCollectionChanged();
+            }
+
+            public event NotifyCollectionChangedEventHandler CollectionChanged;
+
+            protected void OnCollectionChanged()
+            {
+                CollectionChanged?.Invoke(this, new NotifyCollectionChangedEventArgs(NotifyCollectionChangedAction.Reset));
             }
         }
 
@@ -588,7 +599,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
             _events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(RadioStop);
 
             _radios = CurrentDispatcher.Invoke(() => new RadioList(_enviroment.Settings.Favorites));
-            BindingOperations.EnableCollectionSynchronization(_radios, new Object());
+            BindingOperations.EnableCollectionSynchronization(_radios, new object());
 
             var list = Radios;
 
@@ -747,23 +758,22 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager
         [CommandTarget(Synchronize = true)]
         private void AddRadio()
         {
-            if (Radios.CurrentItem != null)
-                RadioCreateViewModel.Entry = ((RadioManagerRadio) Radios.CurrentItem).Entry;
+            RadioCreateViewModel.Entry = new RadioEntry();
 
             IWindow win = ViewManager.CreateWindow(AppConstants.RadioCreateViewModel);
 
             Task t = win.ShowDialogAsync(ViewManager.GetWindow(AppConstants.MainWindowName));
 
-            Async.StartNew(() =>
-            {
-                t.Wait();
-// ReSharper disable once ConditionIsAlwaysTrueOrFalse
-                if (RadioCache.Cache == null || RadioCache.Cache.Count != 1) return;
+//            Async.StartNew(() =>
+//            {
+//                t.Wait();
+//// ReSharper disable once ConditionIsAlwaysTrueOrFalse
+//                if (RadioCache.Cache == null || RadioCache.Cache.Count != 1) return;
 
-                _radios.Add(new RadioManagerRadio(RadioCache.Cache[0], false,
-                    new InternalQualityQuery(RadioCache.Cache[0]),
-                    OnRadioDelete));
-            });
+//                _radios.Add(new RadioManagerRadio(RadioCache.Cache[0], false,
+//                    new InternalQualityQuery(RadioCache.Cache[0]),
+//                    OnRadioDelete));
+//            });
         }
 
         #endregion Metadata

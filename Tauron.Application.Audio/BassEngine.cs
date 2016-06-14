@@ -18,10 +18,10 @@ namespace Tauron.Application.BassLib
         public WebStream CreateWeb([NotNull] string url, int offset = 0,
             WebStreamFlags flags = WebStreamFlags.Default, [CanBeNull] DownloadInterceptor download = null)
         {
-            if (url == null) throw new ArgumentNullException("url");
+            if (url == null) throw new ArgumentNullException(nameof(url));
 
             int handle = Bass.BASS_StreamCreateURL(url, offset, (BASSFlag) flags,
-                download == null ? null : download.Downloadproc, IntPtr.Zero);
+                download?.Downloadproc, IntPtr.Zero);
             return new WebStream(handle, download);
         }
 
@@ -29,7 +29,7 @@ namespace Tauron.Application.BassLib
         public FileChannel CreateFile([NotNull] string file, long offset = 0, long lenght = 0,
                                       FileFlags flags = FileFlags.Default)
         {
-            if (file == null) throw new ArgumentNullException("file");
+            if (file == null) throw new ArgumentNullException(nameof(file));
 
             int handle = Bass.BASS_StreamCreateFile(file, offset, lenght, (BASSFlag) flags);
             return new FileChannel(handle);

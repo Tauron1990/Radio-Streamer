@@ -1,5 +1,4 @@
 ﻿using System;
-using Tauron.Application.BassLib.Encoder;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.Misc;
 
@@ -10,7 +9,7 @@ namespace Tauron.Application.BassLib.Misc
         public ShoutCastServer([NotNull] AudioEncoder encoder)
             : base(new SHOUTcast(encoder.BassEncoder))
         {
-            if (encoder == null) throw new ArgumentNullException("encoder");
+            if (encoder == null) throw new ArgumentNullException(nameof(encoder));
         }
 
         [CanBeNull]
@@ -21,10 +20,7 @@ namespace Tauron.Application.BassLib.Misc
         }
 
         [NotNull]
-        private SHOUTcast ShoutCast
-        {
-            get { return (SHOUTcast) Server; }
-        }
+        private SHOUTcast ShoutCast => (SHOUTcast) Server;
 
         [NotNull]
         public string ServerAddress

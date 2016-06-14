@@ -660,4 +660,13 @@
   <data name="OptionsFileExisBehaviorSkipText" xml:space="preserve">
     <value>Überspringen</value>
   </data>
+  <data name="OptionsDelete90SecTitlesText" xml:space="preserve">
+    <value>Unter 90 Sek Titel Löschen</value>
+  </data>
+  <data name="OptionsDefaultDevice" xml:space="preserve">
+    <value>Sound Device:</value>
+  </data>
+  <data name="OptionsDefaultDeviceDefaultValue" xml:space="preserve">
+    <value>Standard Device</value>
+  </data>
 </root>

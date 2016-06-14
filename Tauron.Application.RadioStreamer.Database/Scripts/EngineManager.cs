@@ -23,9 +23,10 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
         private ITauronEnviroment _enviroment;
 
         private Dictionary<string, Lazy<IScript>> _scripts = new Dictionary<string, Lazy<IScript>>();
+        private readonly List<string> _scriptNames = new List<string>(); 
 
-        public IEnumerable<string> FileNames { get { return ScriptsPath.GetFullPath().EnumerateAllFiles(); } }
-        public string[] ScriptNames { get; private set; }
+        public IEnumerable<string> FileNames => ScriptsPath.GetFullPath().EnumerateAllFiles();
+        public string[] ScriptNames => _scriptNames.ToArray();
         public string[] EngineNames { get; private set; }
         public string[] Extensions { get; private set; }
 
@@ -79,7 +80,8 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             ExecuteCompileStep(dll, logger, scriptsPath);
             new PreCompilerCache(DateTime.Now.AddMinutes(3)).Serialize(info);
 
-            ScriptNames = _scripts.Keys.ToArray();
+            foreach (var key in _scripts.Keys)
+                _scriptNames.Add(key);
         }
 
         private void ExecuteCompileStep([NotNull] string dll, [NotNull] TextWriter logger, [NotNull]string scriptPath)
@@ -112,7 +114,8 @@ namespace Tauron.Application.RadioStreamer.Database.Scripts
             var asm = Assembly.LoadFile(dll);
 
             foreach (var scriptEngine in _engines) scriptEngine.ReadScripts(asm, _scripts);
-            ScriptNames = _scripts.Keys.ToArray();
+            foreach (var key in _scripts.Keys)
+                _scriptNames.Add(key);
         }
 
         public void BuildCompled()

@@ -10,15 +10,15 @@ namespace Tauron.Application.BassLib.Misc
         private readonly IStreamingServer _server;
 
         [NotNull]
-        public IStreamingServer Server {get { return _server; }}
+        public IStreamingServer Server => _server;
 
         protected AudioStreaminServer([NotNull] IStreamingServer server)
         {
-            if (server == null) throw new ArgumentNullException("server");
+            if (server == null) throw new ArgumentNullException(nameof(server));
             _server = server;
         }
 
-        public bool UseBASS { get { return _server.UseBASS; } }
-        public bool IsConnected { get { return _server.IsConnected; } }
+        public bool UseBASS => _server.UseBASS;
+        public bool IsConnected => _server.IsConnected;
     }
 }

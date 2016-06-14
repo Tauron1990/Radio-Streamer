@@ -2,8 +2,10 @@
 
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Reflection;
 using System.Security;
+using System.Windows.Forms;
 using System.Windows.Input;
 using Microsoft.Win32;
 using Tauron.Application.Ioc;
@@ -11,6 +13,7 @@ using Tauron.Application.Models;
 using Tauron.Application.Modules;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
+using Tauron.Application.RadioStreamer.Contracts.Player.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
@@ -39,6 +42,9 @@ namespace Tauron.Application.RadioStreamer.Views
 
         [Inject]
         private IUIOptionsManager _optionsManager;
+
+        [Inject]
+        private IDeviceManager _deviceManager;
 
         [NotNull,AddinDescription]
         public AddinDescription GetDescription()
@@ -85,17 +91,33 @@ namespace Tauron.Application.RadioStreamer.Views
                     CommonApplication.Current.Shutdown();
             }) {Label = RadioStreamerResources.QuitLabel});
 
-            string oPlayerRoot = RadioStreamerResources.OptionsPathPlayer;
             string oGeneralRoot = RadioStreamerResources.OptionsPathGenral;
+            string oPlayerRoot = RadioStreamerResources.OptionsPathPlayer;
             string oRecordingRoot = oPlayerRoot.CombinePath(RadioStreamerResources.OptionsPathRecording);
             string oEncoderRoot = oRecordingRoot.CombinePath(RadioStreamerResources.OptionsPathEncoder);
 
-            _optionsManager.RegisterOption(oEncoderRoot,
-                new Option(null, new EncodingEditorHelper(), string.Empty,
-                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption")
-                {
-                    IsNameVisibly = false
-                });
+          
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(StartWithWindowsOption), "StartWithWindows", false,
+                    RadioStreamerResources.StartOnWindowsOtpion) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(null), "PlayAfterStart", false,
+                    RadioStreamerResources.PlayAfterStartOption) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(AutoUpdateCallBack), "AutoUpdate", false,
+                    RadioStreamerResources.AutoUpdateOption) {IsNameVisibly = false});
+
+            _optionsManager.RegisterOption(oGeneralRoot,
+                new Option(null, new CheckBoxHelper(null), "Minimizeintray", false,
+                    RadioStreamerResources.MinimizeintrayOption) {IsNameVisibly = false});
+
+            BuildDeviceOptions(oGeneralRoot);
+
+            _optionsManager.RegisterOption(oPlayerRoot,
+                new Option(null, new CheckBoxHelper(null), "Delete90SecTitles", true,
+                    RadioStreamerResources.OptionsDelete90SecTitlesText) { IsNameVisibly = false });
 
             _optionsManager.RegisterOption(oRecordingRoot,
                 new Option(null, new DefaultProfileHelper(), string.Empty, string.Empty,
@@ -116,21 +138,12 @@ namespace Tauron.Application.RadioStreamer.Views
                             RadioStreamerResources.OptionsFileExisBehaviorSkipText)), "FileExisBehavior",
                     nameof(FileExisBehavior.Override), RadioStreamerResources.OptionsFileExisBehavior));
 
-            _optionsManager.RegisterOption(oGeneralRoot,
-                new Option(null, new CheckBoxHelper(StartWithWindowsOption), "StartWithWindows", false,
-                    RadioStreamerResources.StartOnWindowsOtpion) {IsNameVisibly = false});
-
-            _optionsManager.RegisterOption(oGeneralRoot,
-                new Option(null, new CheckBoxHelper(null), "PlayAfterStart", false,
-                    RadioStreamerResources.PlayAfterStartOption) {IsNameVisibly = false});
-
-            _optionsManager.RegisterOption(oGeneralRoot,
-                new Option(null, new CheckBoxHelper(AutoUpdateCallBack), "AutoUpdate", "False",
-                    RadioStreamerResources.AutoUpdateOption) {IsNameVisibly = false});
-
-            _optionsManager.RegisterOption(oGeneralRoot,
-                new Option(null, new CheckBoxHelper(null), "Minimizeintray", "False",
-                    RadioStreamerResources.MinimizeintrayOption) {IsNameVisibly = false});
+            _optionsManager.RegisterOption(oEncoderRoot,
+                new Option(null, new EncodingEditorHelper(), string.Empty,
+                    ViewModelBase.ResolveViewModel(AppConstants.CommonEncoderUI), "ProfileOption")
+                {
+                    IsNameVisibly = false
+                });
 
             CommandBinder.Register(ApplicationCommands.Save);
 
@@ -211,6 +224,18 @@ namespace Tauron.Application.RadioStreamer.Views
             }
 
             return item;
+        }
+
+        private void BuildDeviceOptions(string path)
+        {
+            List<ComboboxHelperItem> items = new List<ComboboxHelperItem>
+            {
+                new ComboboxHelperItem("null", RadioStreamerResources.OptionsDefaultDeviceDefaultValue)
+            };
+
+            items.AddRange(_deviceManager.Select(device => new ComboboxHelperItem(device.Id ?? device.Name, device.Name)));
+
+            _optionsManager.RegisterOption(path, new Option(null, new ComboboxHelper(items.ToArray()), "DefaultDevice", "null", RadioStreamerResources.OptionsDefaultDevice));
         }
     }
 }

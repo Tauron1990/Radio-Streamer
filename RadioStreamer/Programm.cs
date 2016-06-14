@@ -4,7 +4,6 @@ using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Reflection;
-using System.Runtime;
 using System.Runtime.ExceptionServices;
 using System.Security;
 using System.Security.Principal;
@@ -42,7 +41,8 @@ namespace Tauron.Application.RadioStreamer
         [STAThread]
         public static void Main()
         {
-            if (ExecuteSoloUpdate())
+
+           if (ExecuteSoloUpdate())
             {
                 return;
             }
@@ -57,12 +57,6 @@ namespace Tauron.Application.RadioStreamer
             {
                 if (!first)
                     SignalFirstInstance(channelName, applicationIdentifier);
-
-                string profileOptimizionPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Jitter");
-                if (!Directory.Exists(profileOptimizionPath)) Directory.CreateDirectory(profileOptimizionPath);
-
-                ProfileOptimization.SetProfileRoot(profileOptimizionPath);
-                ProfileOptimization.StartProfile("Main.jit");
 
                 var domain = AppDomain.CurrentDomain;
                 domain.SetPrincipalPolicy(PrincipalPolicy.WindowsPrincipal);

@@ -1,12 +1,11 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
-using Tauron.Application.BassLib;
-using Tauron.Application.BassLib.Encoder;
-using Tauron.Application.BassLib.Recording;
 using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Data;
+using Tauron.Application.RadioStreamer.Contracts.Player;
 using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.Application.RadioStreamer.Contracts.UI;
+using Tauron.Application.RadioStreamer.Player.Encoder;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.Misc;
 
@@ -23,14 +22,14 @@ namespace Tauron.Application.RadioStreamer.Player
 
         public IEnumerable<string> EncoderIds
         {
-            get { return _encoderFactories.Select(ef => ef.ID); }
+            get { return _encoderFactories.Select(ef => ef.Id); }
         }
 
-        public AudioEncoder CreateEncoder(CommonProfile profile,Channel channel)
+        public IEncoder CreateEncoder(CommonProfile profile, IPlayerStream channel)
         {
             if (profile == null) return CreateDefault(channel);
 
-            IEncoderFactory fac = _encoderFactories.FirstOrDefault(f => f.ID == profile.Id);
+            IEncoderFactory fac = _encoderFactories.FirstOrDefault(f => f.Id == profile.Id);
             if (fac == null) return CreateDefault(channel);
 
             var rec = fac.Create(profile, channel) ?? CreateDefault(channel);
@@ -39,16 +38,18 @@ namespace Tauron.Application.RadioStreamer.Player
         }
 
         [NotNull]
-        private static AudioEncoder CreateDefault([NotNull] Channel channel)
+        private static IEncoder CreateDefault([NotNull] IPlayerStream channel)
         {
-            var temp = Recorder.CreateLame(channel);
+            var temp = new LameEncoder(channel)
+            {
+                InputFile = null,
+                NoLimit = true,
+                Bitrate = BaseEncoder.BITRATE.kbps_128,
+                Mode = EncoderLAME.LAMEMode.Default,
+                TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100,
+                Quality = EncoderLAME.LAMEQuality.Quality
+            };
 
-            temp.InputFile = null;
-            temp.NoLimit = true;
-            temp.Bitrate = BaseEncoder.BITRATE.kbps_128;
-            temp.Mode = EncoderLAME.LAMEMode.Default;
-            temp.TargetSampleRate = (int) BaseEncoder.SAMPLERATE.Hz_44100;
-            temp.Quality = EncoderLAME.LAMEQuality.Quality;
 
             return temp;
         }

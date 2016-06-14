@@ -2,10 +2,10 @@
 
 using System;
 using System.Diagnostics;
+using System.Linq;
 using System.Text;
 using System.Windows.Media;
 using System.Windows.Threading;
-using Tauron.Application.BassLib;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
@@ -13,6 +13,7 @@ using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Core.Attributes;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.Player.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.Application.RadioStreamer.Contracts.UI;
 using Tauron.Application.RadioStreamer.Resources;
@@ -41,6 +42,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         private IRadioPlayer _player;
         [InjectRadioEnviroment] 
         private IRadioEnvironment _radioEnvironment;
+        [Inject]
+        private IDeviceManager _deviceManager;
 
         public void Dispose()
         {
@@ -98,6 +101,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         {
             get
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_percentCache != -2) return _percentCache;
 
                 if (CurrentTitle.State != PlayerStade.Playing) return 0;
@@ -126,9 +130,9 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
         {
             _percentCache = -2;
 
-            OnPropertyChanged(() => RunTime);
-            OnPropertyChanged(() => PercentageBuffer);
-            OnPropertyChanged(() => PercentageString);
+            OnPropertyChangedExplicit(nameof(RunTime));
+            OnPropertyChangedExplicit(nameof(PercentageBuffer));
+            OnPropertyChangedExplicit(nameof(PercentageString));
         }
 
         #endregion
@@ -137,13 +141,17 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
         private bool _isInitialized;
 
-        private void SendError([NotNull] BassException ex)
+        private bool SendError([NotNull] Exception ex)
         {
+            if (ex.GetType().Name != "BassException")
+                return false;
             const string caption = "Error";
             string text = string.Format(RadioStreamerResources.BassErrorMessage, ex.Message);
 
             Dialogs.ShowMessageBox(ViewManager.GetWindow(AppConstants.MainWindowName), text, caption, MsgBoxButton.Ok,
                 MsgBoxImage.Error, null);
+
+            return true;
         }
 
         private bool Initialize()
@@ -152,10 +160,19 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
 
             try
             {
+                string name =_radioEnvironment.Settings.DefaultDevice;
+
+                var dev = name != "null" ? _deviceManager.FirstOrDefault(d => d.Id == name) ??
+                          _deviceManager.FirstOrDefault(d => d.Name == name) : null;
+
+                _player.Device = dev;
                 _player.Activate();
             }
-            catch (BassException e)
+            catch (Exception e)
             {
+                if (e.GetType().Name != "BassException")
+                    throw;
+
                 const string caption = "Error";
                 string text = string.Format(RadioStreamerResources.BassInitErrorMessage, e.Message);
 
@@ -180,9 +197,10 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
                 CurrentTitle.State = PlayerStade.Playing;
                 _time.Start();
             }
-            catch (BassException e)
+            catch (Exception e)
             {
-                SendError(e);
+                if (!SendError(e))
+                    throw;
             }
         }
 
@@ -317,6 +335,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer
             get { return _volume; }
             set
             {
+                // ReSharper disable once CompareOfFloatsByEqualityOperator
                 if (_volume == value) return;
 
                 UpdateVolume(value);

@@ -16,10 +16,7 @@ namespace Tauron.Application.BassLib
         //
         private BASSError _error;
 
-        public BASSError Error
-        {
-            get { return _error; }
-        }
+        public BASSError Error => _error;
 
         public BassException()
         {
@@ -31,13 +28,7 @@ namespace Tauron.Application.BassLib
             _error = error;
         }
 
-        public override string Message
-        {
-            get
-            {
-                return BassMessages.ResourceManager.GetString(Error.ToString()) ?? BassMessages.ErrorUnkown;
-            }
-        }
+        public override string Message => BassMessages.ResourceManager.GetString(Error.ToString()) ?? BassMessages.ErrorUnkown;
 
         protected BassException([NotNull] SerializationInfo info,
             StreamingContext context) : base(info, context)

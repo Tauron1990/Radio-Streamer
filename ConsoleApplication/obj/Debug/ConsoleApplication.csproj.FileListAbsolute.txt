@@ -117,3 +117,16 @@ C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleAppl
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.exe
 C:\Users\Tauron\Documents\Visual Studio 2013\Projects\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.pdb
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\bass.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\bassenc.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\bassmix.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\bass_fx.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\OptimFROG.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe.config
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.exe
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\ConsoleApplication.pdb
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\Bass.Net.dll
+D:\Githan\Radio-Streamer\ConsoleApplication\bin\Debug\Bass.Net.xml
+D:\Githan\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.csprojResolveAssemblyReference.cache
+D:\Githan\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.exe
+D:\Githan\Radio-Streamer\ConsoleApplication\obj\Debug\ConsoleApplication.pdb

@@ -28,10 +28,12 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
             Script
         }
 
-        [Inject] private IEngineManager _engineManager;
+        [Inject]
+        private IEngineManager _engineManager;
 
         private RadioEditModel _model;
-        [Inject] private IRadioDatabase _radioDatabase;
+        [Inject]
+        private IRadioDatabase _radioDatabase;
 
         [WindowTarget("Window")] private IWindow _window;
         public static RadioEntry Entry { get; set; }
@@ -357,7 +359,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioManager.Controls
         {
             public RadioScriptModel([NotNull] string internalName, ScriptType scriptType)
             {
-                if (internalName == null) throw new ArgumentNullException("internalName");
+                if (internalName == null) throw new ArgumentNullException(nameof(internalName));
 
                 InternalName = internalName;
                 ScriptType = scriptType;

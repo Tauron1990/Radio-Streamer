@@ -3,16 +3,17 @@
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows;
 using System.Windows.Forms.Integration;
 using System.Windows.Threading;
 using Ookii.Dialogs.Wpf;
-using Tauron.Application.BassLib.Misc;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Contracts.Player;
+using Tauron.Application.RadioStreamer.Contracts.Player.Misc;
 using Tauron.Application.RadioStreamer.Resources;
 using Tauron.JetBrains.Annotations;
 using SprectrumPictureBox = System.Windows.Forms.PictureBox;
@@ -26,11 +27,16 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
     [ExportViewModel(AppConstants.SprectrumViewModel)]
     public sealed class SprecturmViewModel : ViewModelBase
     {
-        private Spectrums _currentSpectrum;
-        [Inject] private IEventAggregator _events;
-        [Inject] private IRadioPlayer _player;
+        private SpectrumEntry _currentSpectrum;
+        [Inject]
+        private IEventAggregator _events;
+        [Inject]
+        private IRadioPlayer _player;
+        [Inject]
+        private IRadioEnvironment _radioEnvironment;
+        [Inject]
+        private ISpecrumProvider _specrumProvider;
 
-        [Inject] private IRadioEnvironment _radioEnvironment;
         private WindowsFormsHost _sprectrumHost;
         private SprectrumPictureBox _sprectrumPicture;
         private DispatcherTimer _sprectrumTimer;
@@ -76,7 +82,8 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             _events.GetEvent<RadioPlayerPlay, EventArgs>().Subscribe(Play);
             _events.GetEvent<RadioPlayerStop, EventArgs>().Subscribe(Stop);
 
-            _currentSpectrum = _radioEnvironment.Settings.LastSprecturm.ParseEnum<Spectrums>();
+            _currentSpectrum = _specrumProvider.SpectrumEntries.FirstOrDefault(e => e.Name == _radioEnvironment.Settings.LastSprecturm) ??
+                               _specrumProvider.SpectrumEntries.First();
 
             _sprectrumTimer = new DispatcherTimer(TimeSpan.FromMilliseconds(50), DispatcherPriority.Normal,
                 UpdateSprectrum, SystemDispatcher);
@@ -90,7 +97,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 
         private void SprectrumPictureOnClick([NotNull] object sender, [NotNull] EventArgs eventArgs)
         {
-            _currentSpectrum = new SpectumChoiceBox(_currentSpectrum).Show(
+            _currentSpectrum = new SpectumChoiceBox(_currentSpectrum, _specrumProvider).Show(
                 System.Windows.Application.Current.MainWindow);
 
             _radioEnvironment.Settings.LastSprecturm = _currentSpectrum.ToString();
@@ -111,7 +118,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
             Picture pic = _sprectrumPicture.Image;
 
             _sprectrumPicture.Image = IsVisble == Visibility.Visible
-                ? _player.CreateSprectrum(_currentSpectrum, _sprectrumPicture.Width - 20,
+                ? _specrumProvider.CreateSprectrum(_currentSpectrum, _sprectrumPicture.Width - 20,
                     _sprectrumPicture.Height - 20)
                 : null;
 
@@ -125,20 +132,20 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
 
         private class SpectumChoiceBox
         {
-            private readonly Spectrums _currentSpectrums;
+            private readonly SpectrumEntry _currentSpectrums;
             private readonly TaskDialog _dialog;
 
             private readonly TaskDialogButton _okButton;
 
-            private readonly Dictionary<TaskDialogRadioButton, string> _spectrumMapping =
-                new Dictionary<TaskDialogRadioButton, string>();
+            private readonly Dictionary<TaskDialogRadioButton, SpectrumEntry> _spectrumMapping =
+                new Dictionary<TaskDialogRadioButton, SpectrumEntry>();
 
-            private Spectrums _choice;
+            private SpectrumEntry _choice;
 
-            public SpectumChoiceBox(Spectrums currentSpectrums)
+            public SpectumChoiceBox(SpectrumEntry currentSpectrum, ISpecrumProvider provider)
             {
-                _currentSpectrums = currentSpectrums;
-                _choice = currentSpectrums;
+                _currentSpectrums = currentSpectrum;
+                _choice = currentSpectrum;
 
                 var icon = RadioStreamerResources.RadioIcon;
 
@@ -154,14 +161,14 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
                 _dialog.Buttons.Add(_okButton);
                 _dialog.Buttons.Add(new TaskDialogButton(ButtonType.Close));
 
-                foreach (var name in Enum.GetNames(typeof (Spectrums)))
+                foreach (var name in provider.SpectrumEntries)
                 {
-                    var btn = new TaskDialogRadioButton {Text = SpectrumResources.ResourceManager.GetString(name)};
+                    var btn = new TaskDialogRadioButton {Text = name.Name};
 
                     _dialog.RadioButtons.Add(btn);
 
                     _spectrumMapping[btn] = name;
-                    if (currentSpectrums.ToString() == name) btn.Checked = true;
+                    if (currentSpectrum.ID == name.ID) btn.Checked = true;
                 }
 
                 _dialog.RadioButtonClicked += DialogOnRadioButtonClicked;
@@ -173,10 +180,10 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Sprectrum
                 var btn = taskDialogItemClickedEventArgs.Item as TaskDialogRadioButton;
                 if (btn == null) return;
 
-                _choice = _spectrumMapping[btn].ParseEnum<Spectrums>();
+                _choice = _spectrumMapping[btn];
             }
 
-            public Spectrums Show([NotNull] Window window)
+            public SpectrumEntry Show([NotNull] Window window)
             {
                 var result = _dialog.ShowDialog(window) == _okButton ? _choice : _currentSpectrums;
                 _dialog.Dispose();

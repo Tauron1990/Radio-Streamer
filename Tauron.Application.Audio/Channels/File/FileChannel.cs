@@ -23,6 +23,8 @@ namespace Tauron.Application.BassLib.Channels
 
         public long Length => Bass.BASS_ChannelGetLength(Handle);
 
+        public double Seconds => Bass.BASS_ChannelBytes2Seconds(Handle, Length);
+ 
         public double Progress => 100d/Length*Position;
 
         [NotNull]

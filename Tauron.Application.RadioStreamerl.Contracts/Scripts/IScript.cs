@@ -1,5 +1,5 @@
-﻿using Tauron.JetBrains.Annotations;
-using Un4seen.Bass.AddOn.Tags;
+﻿using Tauron.Application.RadioStreamer.Contracts.Scripts.Tags;
+using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.Scripts
 {
@@ -7,6 +7,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.Scripts
     public interface IScript
     {
         [CanBeNull]
-        TAG_INFO GetTitleInfo([NotNull] string url, [NotNull] TAG_INFO meta, out string title);
+        ITagInfo GetTitleInfo([NotNull] string url, [NotNull] ITagInfo meta, out string title);
     }
 }

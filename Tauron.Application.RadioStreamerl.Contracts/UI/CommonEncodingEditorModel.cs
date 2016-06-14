@@ -16,7 +16,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         private void OnProfileSwitched()
         {
             EventHandler handler = ProfileSwitched;
-            if (handler != null) handler(this, EventArgs.Empty);
+            handler?.Invoke(this, EventArgs.Empty);
         }
 
         [CanBeNull]

@@ -1,17 +1,11 @@
 ﻿using System;
-using Tauron.Application.BassLib.Encoder;
+using Tauron.Application.BassLib.Misc;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.BassLib.Recording
 {
     public sealed class Recorder : ObservableObject, IDisposable
     {
-        [NotNull]
-        public static LameEncoder CreateLame([NotNull] Channel channel)
-        {
-            return new LameEncoder(channel);
-        }
-
         private AudioEncoder _encoder;
         private bool _isRecording;
 

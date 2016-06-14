@@ -43,7 +43,7 @@ namespace Tauron.Application.BassLib.Channels
             }
             set
             {
-                if (_equalizer != null) _equalizer.Free();
+                _equalizer?.Free();
 
                 _equalizer = value;
                 _equalizer.Init(Handle);
@@ -57,7 +57,7 @@ namespace Tauron.Application.BassLib.Channels
 
         public void Attach([NotNull] Channel channel)
         {
-            if (channel == null) throw new ArgumentNullException("channel");
+            if (channel == null) throw new ArgumentNullException(nameof(channel));
 
             channel.Mix = this;
         }
@@ -71,7 +71,7 @@ namespace Tauron.Application.BassLib.Channels
 
         public void DeAttach([NotNull] Channel channel)
         {
-            if (channel == null) throw new ArgumentNullException("channel");
+            if (channel == null) throw new ArgumentNullException(nameof(channel));
 
             channel.Mix = null;
         }

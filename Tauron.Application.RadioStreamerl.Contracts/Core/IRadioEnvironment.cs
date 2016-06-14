@@ -125,7 +125,8 @@ namespace Tauron.Application.RadioStreamer.Contracts.Core
         FileExisBehavior FileExisBehavior { get; set; }
 
         bool Delete90SecTitles { get; set; }
-    }
+        string DefaultDevice { get; set; }
+	}
 
     [PublicAPI]
 	public interface IRadioEnvironment

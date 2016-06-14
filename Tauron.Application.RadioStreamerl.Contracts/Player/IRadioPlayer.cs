@@ -1,8 +1,7 @@
 ﻿using System.ComponentModel;
-using System.Drawing;
-using Tauron.Application.BassLib.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Data;
 using Tauron.Application.RadioStreamer.Contracts.Data.Enttitis;
+using Tauron.Application.RadioStreamer.Contracts.Player.Misc;
 using Tauron.Application.RadioStreamer.Contracts.Scripts;
 using Tauron.JetBrains.Annotations;
 
@@ -11,6 +10,9 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
     [PublicAPI]
     public interface IRadioPlayer : INotifyPropertyChanged
 	{
+        [CanBeNull]
+        IDevice Device { get; set; }
+
 		void Activate();
 		void Deactivate();
 
@@ -22,9 +24,6 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
 		void StartRecording([NotNull] string location, [CanBeNull] CommonProfile profile);
 		void StopRecording();
 
-        [CanBeNull]
-        Bitmap CreateSprectrum(Spectrums playerCode, int width, int height);
-
         double BufferPercentage { get; }
 
         double Volume { set; get; }
@@ -32,6 +31,7 @@ namespace Tauron.Application.RadioStreamer.Contracts.Player
         bool Playing { get; }
 
         [NotNull]
-        IEqualizer Equalizer { get; }
+        Equalizer Equalizer { get; }
+        IPlayerStream PlayerStream { get; }
 	}
 }

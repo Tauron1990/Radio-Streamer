@@ -1,4 +1,6 @@
-﻿using Tauron.Application.Ioc;
+﻿using System.Globalization;
+using System.Threading;
+using Tauron.Application.Ioc;
 using Tauron.Application.RadioStreamer.Contracts.Core;
 using Tauron.Application.RadioStreamer.Properties;
 using Tauron.Application.Views;
@@ -9,6 +11,23 @@ namespace Tauron.Application.RadioStreamer
     public sealed class ProgrammManager : IProgramManager
     {
         public IWindow MainWindow => CommonApplication.Current.MainWindow;
+
+        public CultureInfo CultureInfo
+        {
+            get
+            {
+                var cul = Settings.Default.Language;
+                if (cul == null || cul.Equals(CultureInfo.InvariantCulture))
+                    return Thread.CurrentThread.CurrentCulture;
+
+                return cul;
+            }
+            set
+            {
+                Settings.Default.Language = value;
+                Settings.Default.Save();
+            }
+        }
 
         public bool AutoUpdate
         {

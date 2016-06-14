@@ -37,7 +37,7 @@ namespace Tauron.Application.RadioStreamer
             Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
 		    BugSense.DetachHandler();
 #else
-            Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app));
+            Run<App>(app => SingleInstance<App>.InitializeAsFirstInstance(mutex, channelName, app), Properties.Settings.Default.Language);
             #endif
         }
 

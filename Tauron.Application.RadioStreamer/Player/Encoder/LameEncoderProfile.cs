@@ -1,6 +1,5 @@
-﻿using Tauron.Application.BassLib.Encoder;
+﻿using Tauron.Application.RadioStreamer.Contracts;
 using Tauron.Application.RadioStreamer.Contracts.Data;
-using Tauron.Application.RadioStreamer.Contracts.Player.Recording;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.Misc;
 
@@ -8,9 +7,7 @@ namespace Tauron.Application.RadioStreamer.Player.Encoder
 {
     public sealed class LameEncoderProfile : AudioEncoderFactoryBase
     {
-        public const string LameId = "LameEncoder";
-
-        public LameEncoderProfile([CanBeNull] CommonProfile profile) : base(LameId, profile)
+        public LameEncoderProfile([CanBeNull] CommonProfile profile) : base(AppConstants.LameId, profile)
         {
             CreateMapping(ch => new LameEncoder(ch))
                 .CreateProperty(() => AbrBitrate, (encoder, i) => encoder.AbrBitrate = i)

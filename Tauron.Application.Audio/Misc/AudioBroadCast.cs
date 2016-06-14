@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Diagnostics.CodeAnalysis;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.AddOn.Tags;
 using Un4seen.Bass.Misc;

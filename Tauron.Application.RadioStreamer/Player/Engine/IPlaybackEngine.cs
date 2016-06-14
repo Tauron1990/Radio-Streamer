@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Tauron.Application.BassLib;
+using Tauron.Application.RadioStreamer.Contracts.Scripts.Tags;
 using Tauron.JetBrains.Annotations;
 using Un4seen.Bass.AddOn.Tags;
 

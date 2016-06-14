@@ -2,7 +2,6 @@
 
 using System.Collections.Generic;
 using System.Linq;
-using Tauron.Application.BassLib.Misc;
 using Tauron.Application.Ioc;
 using Tauron.Application.Models;
 using Tauron.Application.RadioStreamer.Contracts;
@@ -116,7 +115,7 @@ namespace Tauron.Application.RadioStreamer.Views.RadioPlayer.Equalizer
         }
 
         [NotNull]
-        public IEqualizer Equalizer { get; private set; }
+        public Contracts.Player.Misc.Equalizer Equalizer { get; private set; }
 
         [NotNull]
         public string CurrentPresentName

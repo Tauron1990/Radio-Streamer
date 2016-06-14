@@ -12,13 +12,7 @@ namespace Tauron.Application.RadioStreamer.Player.Engine.Impl
         private BassEngine _engine;
         private WebStream _stream;
 
-        public override double BufferPercentage
-        {
-            get
-            {
-                return _stream.BufferPercentage;
-            }
-        }
+        public override double BufferPercentage => _stream.BufferPercentage;
 
         public override void Initialize(BassEngine engine, Dictionary<int, string> plugins)
         {

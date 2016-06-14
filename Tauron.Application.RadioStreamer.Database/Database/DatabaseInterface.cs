@@ -179,8 +179,25 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 
 			public IQualityDatabaseInterface GetQuality(string name)
 			{
+                if(!_quality.Keys.Any(s => s.StartsWith(name)))
+                    throw new KeyNotFoundException(name);
 				return new QualityDatabaseInterface(name, _quality);
 			}
+
+		    public IQualityDatabaseInterface CreateQuality(string name, string url)
+		    {
+		        var inter = !_quality.Keys.Any(s => s.StartsWith(name)) ? new QualityDatabaseInterface(name, _quality) : GetQuality(name);
+
+		        new RadioQuality(new Metadatascope(inter))
+		        {
+		            Name = name,
+		            Url = url
+		        };
+
+                OnQualityChanged();
+
+		        return inter;
+		    }
 		}
 		private class QualityDatabaseInterface : DatabaseInterface, IQualityDatabaseInterface
 		{
@@ -215,7 +232,7 @@ namespace Tauron.Application.RadioStreamer.Database.Database
 	    [NotNull]
 	    internal static string GetFullname([NotNull] string qualityName, [NotNull] string key)
 	    {
-	        return String.Concat(qualityName, QualitySplitter[0], key);
+	        return string.Concat(qualityName, QualitySplitter[0], key);
 	    }
 
 	    [InjectRadioEnviroment]

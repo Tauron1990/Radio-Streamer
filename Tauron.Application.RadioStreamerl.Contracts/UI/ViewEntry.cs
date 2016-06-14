@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using Tauron.JetBrains.Annotations;
 
 namespace Tauron.Application.RadioStreamer.Contracts.UI
@@ -35,15 +31,15 @@ namespace Tauron.Application.RadioStreamer.Contracts.UI
         public bool IsDefault { get; private set; }
 
         [NotNull]
-        public string Id { get; private set; }
+        public string Id { get; }
 
         [NotNull]
         public string DisplayName { get; private set; }
 
         public ViewEntry([NotNull] string id, [NotNull] string displayName, bool isDefault = false)
         {
-            if (id == null) throw new ArgumentNullException("id");
-            if (displayName == null) throw new ArgumentNullException("displayName");
+            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (displayName == null) throw new ArgumentNullException(nameof(displayName));
 
             Id = id;
             DisplayName = displayName;
